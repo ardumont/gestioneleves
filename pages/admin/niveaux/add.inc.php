@@ -78,7 +78,7 @@ $aNiveaux = Database::fetchArray($sQuery);
 	</table>
 </form>
 
-<table class="formulaire">
+<table class="list_tree">
 	<thead>
 		<tr>
 			<th>Cycles</th>
@@ -89,7 +89,7 @@ $aNiveaux = Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody>
 		<?php foreach($aNiveaux as $nRowNum => $aNiveau): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td><?php echo($aNiveau['CYCLE_NOM']); ?></td>
 			<td><?php echo($aNiveau['NIVEAU_NOM']); ?></td>
 		</tr>

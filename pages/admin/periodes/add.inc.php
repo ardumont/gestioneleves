@@ -74,7 +74,7 @@ $aPeriodes = Database::fetchArray($sQuery);
 	</table>
 </form>
 
-<table>
+<table class="list_tree">
 	<thead>
 		<tr>
 			<th>P&eacute;riodes</th>
@@ -86,7 +86,7 @@ $aPeriodes = Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody>
 		<?php foreach($aPeriodes as $nRowNum => $aPeriode): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td><?php echo($aPeriode['PERIODE_NOM']); ?></td>
 			<td><?php echo($aPeriode['PERIODE_DATE_DEBUT']); ?></td>
 			<td><?php echo($aPeriode['PERIODE_DATE_FIN']); ?></td>

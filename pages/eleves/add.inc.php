@@ -90,7 +90,7 @@ if ($nClasseId != null)
 			  " AND CLASSES.CLASSE_ID = {$nClasseId} " .
 			  " ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC";
 	$aClasseRow = Database::fetchOneRow($sQuery);
-	
+
 	// ===== La liste des eleves de la classe =====
 	$sQuery = "SELECT " .
 			  "  ELEVE_ID," .
@@ -130,15 +130,15 @@ if ($nClasseId != null)
 		<td>
 Pour &eacute;viter de saisir un &eacute;l&egrave;ve qui existe d&eacute;j&agrave;
 dans la base.<br />
-Vous pouvez toujours saisir le d&eacute;but de son nom dans la zone de texte 
+Vous pouvez toujours saisir le d&eacute;but de son nom dans la zone de texte
 ci-dessous puis cliquer sur le bouton <i>Rechercher</i>.<br />
 La page va alors se recharger.<br />
-S'il existe des noms qui correspondent &agrave; vos crit&egrave;res de 
+S'il existe des noms qui correspondent &agrave; vos crit&egrave;res de
 recherche, vous pourrez alors s&eacute;lectionner un &eacute;l&egrave;ve dans la
  liste d'&eacute;l&egrave;ves trouv&eacute;s pour l'ajouter dans la classe voulue.
  <br />
-Si vous ne le trouvez pas, vous pouvez toujours saisir un nouveau nom dans la 
-zone de texte <i>Nom de l'&eacute;l&egrave;ve</i> situ&eacute;e dans 
+Si vous ne le trouvez pas, vous pouvez toujours saisir un nouveau nom dans la
+zone de texte <i>Nom de l'&eacute;l&egrave;ve</i> situ&eacute;e dans
 l'encadr&eacute; intitul&eacute; <i>Ajouter un &eacute;l&egrave;ve</i>.<br />
 La date de naissance est obligatoire car cela permet de distinguer les homonymes.
 Si vous n'avez pas de date de naissance, laisser le champ initialis&eacute; &agrave; <i>jj/mm/aaaa</i> et penser &agrave; r&eacute;&eacute;diter les dates de naissance plus-tard.
@@ -236,7 +236,7 @@ Si vous n'avez pas de date de naissance, laisser le champ initialis&eacute; &agr
 	</tbody>
 </table>
 <br />
-<table>
+<table class="list_tree">
 	<thead>
 		<tr>
 			<th>El&egrave;ves</th>
@@ -248,7 +248,7 @@ Si vous n'avez pas de date de naissance, laisser le champ initialis&eacute; &agr
 	</tfoot>
 	<tbody>
 		<?php foreach($aEleves as $nRowNum => $aEleve): ?>
-		<tr class="ligne<?php echo(($nRowNum)%2); ?>">
+		<tr class="level0_row<?php echo(($nRowNum)%2); ?>">
 			<td><?php echo($aEleve['ELEVE_NOM']); ?></td>
 			<td><?php echo($aEleve['ELEVE_DATE_NAISSANCE']); ?></td>
 			<td><?php echo($aEleve['ELEVE_ACTIF']); ?></td>

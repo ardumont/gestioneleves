@@ -74,7 +74,7 @@ $aNotes = Database::fetchArray($sQuery);
 	</table>
 </form>
 
-<table>
+<table class="list_tree">
 	<thead>
 		<tr>
 			<th>Notes</th>
@@ -86,7 +86,7 @@ $aNotes = Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody>
 		<?php foreach($aNotes as $nRowNum => $aNote): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td><?php echo($aNote['NOTE_NOM']); ?></td>
 			<td><?php echo($aNote['NOTE_LABEL']); ?></td>
 			<td><?php echo($aNote['NOTE_NOTE']); ?></td>

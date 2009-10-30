@@ -73,7 +73,7 @@ $aEvalCols= Database::fetchArray($sQuery);
 <?php endif; ?>
 
 <?php if(count($aClasses) <= 0 && count($aPeriodes <= 0) ): ?>
-	Vous devez d'abord cr&eacute;er au moins une classe et au moins une p&eacute;riode auxquelles vous pourrez alors rattacher votre &eacute;valuation collective. 
+	Vous devez d'abord cr&eacute;er au moins une classe et au moins une p&eacute;riode auxquelles vous pourrez alors rattacher votre &eacute;valuation collective.
 <?php else: ?>
 <form method="post" action="?page=evaluations_collectives&amp;mode=add_do">
 	<table class="formulaire">
@@ -122,7 +122,7 @@ $aEvalCols= Database::fetchArray($sQuery);
 <?php if(count($aEvalCols) <= 0): ?>
 	Aucune &eacute;valuation collective n'a &eacute;t&eacute; saisie &agrave; ce jour.
 <?php else: ?>
-<table>
+<table class="list_tree">
 	<caption>Liste des &eacute;valuations</caption>
 	<thead>
 		<tr>
@@ -138,7 +138,7 @@ $aEvalCols= Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody>
 		<?php foreach($aEvalCols as $nRowNum => $aEvalCol): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td><?php echo($aEvalCol['PERIODE_NOM']); ?></td>
 			<td><?php echo($aEvalCol['CLASSE_NOM']); ?></td>
 			<td><?php echo($aEvalCol['CLASSE_ANNEE_SCOLAIRE']); ?></td>

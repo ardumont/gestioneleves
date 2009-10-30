@@ -47,7 +47,7 @@ $aMatieres = Database::fetchArray($sQuery);
 </ul>
 <?php endif; ?>
 
-<table>
+<table class="list_tree">
 	<thead>
 		<tr>
 			<th>Editer</th>
@@ -61,7 +61,7 @@ $aMatieres = Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody>
 		<?php foreach($aMatieres as $nRowNum => $aMatiere): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td>
 				<a href="?page=matieres&amp;mode=edit&amp;matiere_id=<?php echo($aMatiere['MATIERE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
 			</td>

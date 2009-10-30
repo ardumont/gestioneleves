@@ -45,7 +45,7 @@ $aDomaines = Database::fetchArray($sQuery);
 </ul>
 <?php endif; ?>
 
-<table>
+<table class="list_tree">
 	<thead>
 		<tr>
 			<th>Editer</th>
@@ -58,7 +58,7 @@ $aDomaines = Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody>
 		<?php foreach($aDomaines as $nRowNum => $aDomaine): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td>
 				<a href="?page=domaines&amp;mode=edit&amp;domaine_id=<?php echo($aDomaine['DOMAINE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
 			</td>

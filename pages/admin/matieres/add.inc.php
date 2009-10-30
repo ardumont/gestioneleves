@@ -83,7 +83,7 @@ $aMatieres = Database::fetchArray($sQuery);
 	</table>
 </form>
 
-<table>
+<table class="list_tree">
 	<caption>Liste des mati&egrave;res</caption>
 	<thead>
 		<tr>
@@ -96,7 +96,7 @@ $aMatieres = Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody>
 	<?php foreach($aMatieres as $nRowNum => $aMatiere): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td><?php echo($aMatiere['CYCLE_NOM']); ?></td>
 			<td><?php echo($aMatiere['DOMAINE_NOM']); ?></td>
 			<td><?php echo($aMatiere['MATIERE_NOM']); ?></td>

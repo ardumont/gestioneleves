@@ -167,7 +167,7 @@ body.popup_stop_scroll
 || Le menu et les entetes de fenetre
 ==============================================================================*/
 
-/* h1 : ent�te de menu et de page */
+/* h1 : entete de menu et de page */
 
 #struct_main h1
 {
@@ -198,7 +198,7 @@ body.popup_stop_scroll
 	text-align : center;
 }
 
-/* h2/h3 : ent�te de sous-menu */
+/* h2/h3 : entete de sous-menu */
 #struct_menu h2
 {
 	margin: -5px -5px 0px -5px;
@@ -220,7 +220,7 @@ body.popup_stop_scroll
 	color: white;
 }
 
-/* h4 : entr�e de menu */
+/* h4 : entree de menu */
 #struct_identity h4,
 #struct_menu h4
 {
@@ -231,7 +231,7 @@ body.popup_stop_scroll
 	background-image: url(images/bckgrd/separateur.png);
 }
 
-/* h5 : s�parateur */
+/* h5 : separateur */
 #struct_menu h5
 {
 	margin: 0px 0px 0px 0px;
@@ -288,7 +288,7 @@ body.popup_stop_scroll
 /* Voir "Le menu" */
 
 /*======================================
-|| Les �l�ments de formulaire.
+|| Les elements de formulaire.
 ======================================*/
 
 #struct_identity select,
@@ -500,7 +500,7 @@ body.popup_stop_scroll
 	background-color: #205bb3;
 }
 
-/* Alternance des couleurs entre les t�ches */
+/* Alternance des couleurs entre les taches */
 #struct_main table.calendar tr.row0,
 #struct_main table.calendar tr.row0 select,
 #struct_main table.calendar tr.row0 input
@@ -511,7 +511,7 @@ body.popup_stop_scroll
 
 }
 
-/* Alternance des couleurs entre les t�ches */
+/* Alternance des couleurs entre les taches */
 #struct_main table.calendar tr.row1,
 #struct_main table.calendar tr.row1 select,
 #struct_main table.calendar tr.row1 input
@@ -532,7 +532,7 @@ body.popup_stop_scroll
 	color: #666666;
 }
 
-/* Onglet ajout �l�ment */
+/* Onglet ajout element */
 #struct_main table.calendar   th.tab_top_left
 {
 	background-image: url(images/bckgrd/tab_top_r.png);
@@ -548,14 +548,14 @@ body.popup_stop_scroll
 	padding: 0px 0px 0px 20px;
 }
 
-#struct_main table.calendar  th.tab_bottom_left
+#struct_main table.calendar th.tab_bottom_left
 {
 	background-image: url(images/bckgrd/tab_bottom_r.png);
 	background-repeat: no-repeat;
 	background-position: bottom left;
 }
 
-#struct_main table.list_tree  th.tab_bottom_left
+#struct_main table.list_tree th.tab_bottom_left
 {
 	background-image: url(images/bckgrd/tab_bottom_r.png);
 	background-repeat: no-repeat;
@@ -601,8 +601,8 @@ body.popup_stop_scroll
     white-space: nowrap;
 }
 
-/* Alternance des couleurs entre les t�ches par type de colonne */
-/* Alternance des couleurs entre les t�ches (application) */
+/* Alternance des couleurs entre les taches par type de colonne */
+/* Alternance des couleurs entre les taches (application) */
 #struct_main table.calendar th.app0
 {
 	background-color: #3b85cc;
@@ -610,7 +610,7 @@ body.popup_stop_scroll
 	background-repeat: repeat-x;
 }
 
-/* Alternance des couleurs entre les t�ches (application) */
+/* Alternance des couleurs entre les taches (application) */
 #struct_main table.calendar th.app1
 {
 	background-color: #307bc3;
@@ -618,7 +618,7 @@ body.popup_stop_scroll
 	background-repeat: repeat-x;	
 }
 
-/* Alternance des couleurs entre les t�ches (projet) */
+/* Alternance des couleurs entre les taches (projet) */
 #struct_main table.calendar th.proj0
 {
 	background-color: #3b9dcc;
@@ -626,7 +626,7 @@ body.popup_stop_scroll
 	background-repeat: repeat-x;
 }
 
-/* Alternance des couleurs entre les t�ches (projet) */
+/* Alternance des couleurs entre les taches (projet) */
 #struct_main table.calendar th.proj1
 {
 	background-color: #3092c4;

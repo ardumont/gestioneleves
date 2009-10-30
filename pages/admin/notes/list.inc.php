@@ -45,7 +45,7 @@ $aNotes = Database::fetchArray($sQuery);
 </ul>
 <?php endif; ?>
 
-<table>
+<table class="list_tree">
 	<thead>
 		<tr>
 			<th>Editer</th>
@@ -59,7 +59,7 @@ $aNotes = Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody>
 		<?php foreach($aNotes as $nRowNum => $aNote): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td>
 				<a href="?page=notes&amp;mode=edit&amp;note_id=<?php echo($aNote['NOTE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
 			</td>

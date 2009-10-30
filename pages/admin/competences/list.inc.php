@@ -50,7 +50,7 @@ $aCompetences = Database::fetchArray($sQuery);
 </ul>
 <?php endif; ?>
 
-<table>
+<table class="list_tree">
 	<thead>
 		<tr>
 			<th>Editer</th>
@@ -65,7 +65,7 @@ $aCompetences = Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody>
 		<?php foreach($aCompetences as $nRowNum => $aCompetence): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td>
 				<a href="?page=competences&amp;mode=edit&amp;competence_id=<?php echo($aCompetence['COMPETENCE_ID']); ?>&amp;matiere_id=<?php echo($aCompetence['MATIERE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
 			</td>

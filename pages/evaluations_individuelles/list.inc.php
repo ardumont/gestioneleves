@@ -93,7 +93,7 @@ $sQuery = "SELECT" .
 		  " {$sFiltres} " .
 		  " ORDER BY DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC";
 $aEvalInds= Database::fetchArray($sQuery);
-// $aEvalInds[][COLONNE] = VALEUR	
+// $aEvalInds[][COLONNE] = VALEUR
 
 //==============================================================================
 // Preparation de l'affichage
@@ -123,7 +123,7 @@ Vous pouvez toutefois ne filtrer que par classe ou par &eacute;l&egrave;ve.<br /
 Pour cela, s&eacute;lectionner une classe ou un &eacute;l&egrave;ve puis cliquer
  sur le bouton <i>Rechercher</i>.<br />
 Vous pouvez &eacute;galement filtrer sur la classe et l'&eacute;l&egrave;ve.<br />
-Attention, toutefois, si l'&eacute;l&egrave;ve n'appartient pas &agrave; la 
+Attention, toutefois, si l'&eacute;l&egrave;ve n'appartient pas &agrave; la
 classe, aucun r&eacute;sultat ne s'affichera.
 		</td>
 	</tr>
@@ -166,7 +166,7 @@ classe, aucun r&eacute;sultat ne s'affichera.
 <?php if(count($aEvalInds) <= 0): ?>
 	Aucune &eacute;valuation individuelle n'a &eacute;t&eacute; saisie &agrave; ce jour pour ces crit&egrave;res.
 <?php else: ?>
-	<table>
+	<table class="list_tree">
 		<caption>Liste des &eacute;valuations individuelles</caption>
 		<thead>
 			<tr>
@@ -185,7 +185,7 @@ classe, aucun r&eacute;sultat ne s'affichera.
 		</tfoot>
 		<tbody>
 			<?php foreach($aEvalInds as $nRowNum => $aEvalInd): ?>
-			<tr class="ligne<?php echo($nRowNum%2); ?>">
+			<tr class="level0_row<?php echo($nRowNum%2); ?>">
 				<td>
 					<a href="?page=evaluations_individuelles&amp;mode=edit&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
 				</td>

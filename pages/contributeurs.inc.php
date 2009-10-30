@@ -27,7 +27,7 @@ $aConstributeurs = array(
 <h1>Liste des contributeurs</h1>
 <br />
 
-<table class="list" style="text-align:center;">
+<table class="list_tree" style="text-align:center;">
     <caption>Tableau des mainteneurs (ordre alphabétique)</caption>
     <thead>
         <tr><!-- Titre -->
@@ -39,7 +39,7 @@ $aConstributeurs = array(
     <tbody>
     	<?php $n = 0; ?>
     	<?php foreach($aMainteneurs as $sNom => $sValue): ?>
-		<tr class="row<?php echo(($n++)%2); ?>">
+		<tr class="level0_row<?php echo(($n++)%2); ?>">
 			<th style="text-align:left;"><?php echo $sNom; ?></th>
 			<?php $aRes = explode(",", $sValue); ?>
 			<?php foreach($aRes as $b): ?>
@@ -50,7 +50,7 @@ $aConstributeurs = array(
     </tbody>
 </table>
 <br />
-<table class="list" style="text-align:center;">
+<table class="list_tree" style="text-align:center;">
     <caption>Tableau des contributeurs (ordre alphabétique)</caption>
     <thead>
         <tr><!-- Titre -->
@@ -62,7 +62,7 @@ $aConstributeurs = array(
     <tbody>
     	<?php $n = 0; ?>
     	<?php foreach($aConstributeurs as $sNom => $sValue): ?>
-		<tr class="row<?php echo(($n++)%2); ?>">
+		<tr class="level0_row<?php echo(($n++)%2); ?>">
 			<th style="text-align:left;"><?php echo $sNom; ?></th>
 			<?php $aRes = explode(",", $sValue); ?>
 			<?php foreach($aRes as $b): ?>

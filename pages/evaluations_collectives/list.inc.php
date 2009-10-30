@@ -147,7 +147,7 @@ Vous pouvez &eacute;galement filtrer sur la classe et la p&eacute;riode.
 <?php if(count($aEvalCols) <= 0): ?>
 	Aucune &eacute;valuation collective n'a &eacute;t&eacute; saisie &agrave; ce jour.
 <?php else: ?>
-<table>
+<table class="list_tree">
 	<caption>Liste des &eacute;valuations</caption>
 	<thead>
 		<tr>
@@ -165,7 +165,7 @@ Vous pouvez &eacute;galement filtrer sur la classe et la p&eacute;riode.
 	</tfoot>
 	<tbody>
 		<?php foreach($aEvalCols as $nRowNum => $aEvalCol): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td>
 				<a href="?page=evaluations_collectives&amp;mode=edit&amp;eval_col_id=<?php echo($aEvalCol['EVAL_COL_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
 			</td>

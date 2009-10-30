@@ -60,7 +60,7 @@ $aCycles = Database::fetchArray($sQuery);
 	</table>
 </form>
 
-<table>
+<table class="list_tree">
 	<thead>
 		<tr>
 			<th>Cycles</th>
@@ -70,7 +70,7 @@ $aCycles = Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody>
 		<?php foreach($aCycles as $nRowNum => $aCycle): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td><?php echo($aCycle['CYCLE_NOM']); ?></td>
 		</tr>
 		<?php endforeach; ?>

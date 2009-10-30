@@ -90,7 +90,7 @@ if($nEvalColId != null)
 			  "  ELEVE_ID," .
 			  "  ELEVE_NOM " .
 			  " FROM EVALUATIONS_COLLECTIVES, CLASSES, ELEVE_CLASSE, ELEVES  " .
-			  " WHERE EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID " . 
+			  " WHERE EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID " .
 			  " AND CLASSES.CLASSE_ID = ELEVE_CLASSE.ID_CLASSE " .
 			  " AND ELEVE_CLASSE.ID_ELEVE = ELEVES.ELEVE_ID " .
 			  " AND EVALUATIONS_COLLECTIVES.EVAL_COL_ID = {$nEvalColId}" .
@@ -106,7 +106,7 @@ if($nEvalColId != null)
 			  " ORDER BY NOTE_NOTE DESC";
 	$aNotes = Database::fetchColumnWithKey($sQuery);
 	// $aNotes[NOTE_ID] = NOTE_NOM
-	
+
 	// ===== liste des eval. ind. attachees a cette eval. coll. =====
 	$sQuery = "SELECT" .
 			  "  ELEVE_NOM, " .
@@ -252,7 +252,7 @@ if($nEvalColId != null)
 	<?php if(count($aEvalInds) <= 0): ?>
 		Aucune &eacute;valuation individuelle n'a &eacute;t&eacute; saisie &agrave; ce jour.
 	<?php else: ?>
-	<table>
+	<table class="list_tree">
 		<caption>Liste des &eacute;valuations individuelles</caption>
 		<thead>
 			<tr>
@@ -269,7 +269,7 @@ if($nEvalColId != null)
 		</tfoot>
 		<tbody>
 			<?php foreach($aEvalInds as $nRowNum => $aEvalInd): ?>
-			<tr class="ligne<?php echo($nRowNum%2); ?>">
+			<tr class="level0_row<?php echo($nRowNum%2); ?>">
 				<td><?php echo($aEvalInd['ELEVE_NOM']); ?></td>
 				<td><?php echo($aEvalInd['CLASSE_NOM']); ?></td>
 				<td><?php echo($aEvalInd['DOMAINE_NOM']); ?></td>

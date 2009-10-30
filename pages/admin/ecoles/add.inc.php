@@ -68,7 +68,7 @@ $aEcoles = Database::fetchArray($sQuery);
 	</table>
 </form>
 
-<table>
+<table class="list_tree">
 	<caption>Liste des &eacute;coles</caption>
 	<thead>
 		<tr>
@@ -81,7 +81,7 @@ $aEcoles = Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody>
 		<?php foreach($aEcoles as $nRowNum => $aEcole): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td><?php echo($aEcole['ECOLE_NOM']); ?></td>
 			<td><?php echo($aEcole['ECOLE_VILLE']); ?></td>
 			<td><?php echo($aEcole['ECOLE_DEPARTEMENT']); ?></td>

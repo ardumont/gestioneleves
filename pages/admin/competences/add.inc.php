@@ -87,7 +87,7 @@ $aCompetences = Database::fetchArray($sQuery);
 	</table>
 </form>
 
-<table class="formulaire">
+<table class="list_tree">
 	<thead>
 		<tr>
 			<th>Cycles</th>
@@ -100,7 +100,7 @@ $aCompetences = Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody>
 	<?php foreach($aCompetences as $nRowNum => $aCompetence): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td><?php echo($aCompetence['CYCLE_NOM']); ?></td>
 			<td><?php echo($aCompetence['DOMAINE_NOM']); ?></td>
 			<td><?php echo($aCompetence['MATIERE_NOM']); ?></td>

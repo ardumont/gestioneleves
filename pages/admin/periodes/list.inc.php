@@ -45,7 +45,7 @@ $aPeriodes = Database::fetchArray($sQuery);
 </ul>
 <?php endif; ?>
 
-<table>
+<table class="list_tree">
 	<thead>
 		<tr>
 			<th>Editer</th>
@@ -59,7 +59,7 @@ $aPeriodes = Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody>
 		<?php foreach($aPeriodes as $nRowNum => $aPeriode): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td>
 				<a href="?page=periodes&amp;mode=edit&amp;periode_id=<?php echo($aPeriode['PERIODE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
 			</td>

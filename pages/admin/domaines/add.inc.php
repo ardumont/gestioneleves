@@ -78,7 +78,7 @@ $aDomaines = Database::fetchArray($sQuery);
 	</table>
 </form>
 
-<table class="formulaire">
+<table class="list_tree">
 	<thead>
 		<tr>
 			<th>Cycles</th>
@@ -89,7 +89,7 @@ $aDomaines = Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody>
 		<?php foreach($aDomaines as $nRowNum => $aDomaine): ?>
-		<tr class="ligne<?php echo($nRowNum%2); ?>">
+		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td><?php echo($aDomaine['CYCLE_NOM']); ?></td>
 			<td><?php echo($aDomaine['DOMAINE_NOM']); ?></td>
 		</tr>

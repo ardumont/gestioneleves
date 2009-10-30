@@ -64,7 +64,7 @@ if(count($aClasses) > 0)
 			  " AND CLASSES.CLASSE_ID = {$nClasseId} " .
 			  " ORDER BY CLASSE_NOM ASC";
 	$aClasseRow = Database::fetchOneRow($sQuery);
-	
+
 	// ===== La liste des eleves de la classe =====
 	$sQuery = "SELECT " .
 			  "  ELEVE_ID," .
@@ -156,9 +156,9 @@ if(count($aClasses) > 0)
 	</table>
 	<br />
 	<?php if(count($aEleves) > 0): ?>
-		<table>
+		<table class="list_tree">
 			<thead>
-				<tr>	
+				<tr>
 					<th>Editer</th>
 					<th>El&egrave;ves</th>
 					<th>Dates de naissance</th>
