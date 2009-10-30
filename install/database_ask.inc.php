@@ -81,7 +81,7 @@ else // Il y a déjà des tables
 	if($sCurrentVersion !== false)
 	{
 		$bReInstall = true;
-		
+
 		if($sCurrentVersion == "0.0.0")
 		{
 			$bNewInstall = true;
@@ -95,7 +95,7 @@ else // Il y a déjà des tables
 	{
 		// Récupération de la version courante
 		$sCurrentVersion = Database::fetchOneValue("SELECT VERSION FROM PARAMETRES");
-		
+
 		if($sCurrentVersion === false)
 		{
 			// Gestion des vielles versions... en temps normal on devrai considéré qu'il n'y a pas d'install
@@ -153,7 +153,7 @@ if($bTooOldVersion == true)
 {
 	$bCanUpgrade  = false;
 	$bNothingToDo = false;
-	
+
 	// Sauf si on donwgrade => c'est normale de ne pas avoir trouver la version
 	if($bDowngrade == true)
 	{
@@ -184,10 +184,10 @@ if(($bNewInstall == false) || ($bReInstall == true))
 {
 	$sGuiNewInstallInformation = "<em>(Attention : Perte des données déjà présentes)</em>";
 }
- 
+
 $sGuiUpgradeInformation = "";
 if($bCanUpgrade == true)
-{	
+{
 	if(count($aStepVersions) > 3)
 	{
 		$sGuiUpgradeInformation = sprintf("(v%s -> v%s -> ...%d versions intermédiaires ... -> v%s)", $sCurrentVersion, $aStepVersions[1], (count($aStepVersions) - 3), $sInstallVersion);
@@ -206,10 +206,10 @@ $sGuiReInstallInformation = "";
 if($bReInstall == true)
 {
 	$aTemp = Database::fetchOneRow("SELECT * FROM INSTALL");
-	
+
 	$nScriptStep = (int)$aTemp['SCRIPT_STEP'] + 1;
 	$sReInstallType = $aTemp['INSTALL_TYPE'];
-	
+
 	if($sReInstallType == 'NEW_INSTALL')
 	{
 		$sGuiReInstallInformation = sprintf("(Installation complète v%s étape %d)", $sInstallVersion, $nScriptStep);
@@ -237,7 +237,7 @@ if($bReInstall == true)
 <?php if($bTooOldVersion == true): ?>
 	<p>Votre base de données est en version v<?php echo($sCurrentVersion); ?>.<br />
 	Ce script ne peut traiter une mise à jour qu'à partir de la version v<?php echo($aStepVersions[0]); ?>.<br />
-	<strong>Contactez l'équipe chargé du developpement pour avoir la procédure permettant d'effectuer une mise à jour.</strong></p>
+	<strong>Contactez l'équipe chargée du developpement pour avoir la procédure permettant d'effectuer une mise à jour.</strong></p>
 <?php elseif($bReInstall == true): ?>
 	<p>Il y a eu une erreur lors de l'installation de la version <?php echo($sInstallVersion); ?>.<br />
 	Vous pouvez essayer de <em>reprendre l'installation</em> là où elle s'est arretée.</p>
@@ -269,10 +269,10 @@ if($bReInstall == true)
 			<label for="form_database_re_install">Reprendre l'installation</label> <?php echo($sGuiReInstallInformation); ?><br />
 		<?php endif; ?>
 	</fieldset>
-	
+
 	<div>
 		<input type="hidden" name="current_version" value="<?php echo($sCurrentVersion); ?>" />
-		
+
 		<a href="?step=3">Précédent</a>
 		<input type="submit" value="Installer" />
 	</div>

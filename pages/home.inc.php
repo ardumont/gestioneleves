@@ -55,7 +55,7 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 <dl>
 	<dt>
 		<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
-		Version v1.3.0
+		Version v1
 	</dt>
 	<dd>
 		<a href="javascript:" onclick="showOrHideAllSubVersion(this);">Tout cacher/montrer</a>

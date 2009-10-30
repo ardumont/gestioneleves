@@ -150,7 +150,7 @@ if($nEvalColId != null)
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
-
+<br />
 <?php if(count($aEvalCols) <= 0): ?>
 	Aucune &eacute;valuation collective saisie &agrave; ce jour.<br />
 	Si vous voulez saisir une &eacute;valuation individuelle, vous devez d'abord saisir au moins une &eacute;valuation collective &agrave; laquelle vous pourrez alors rattacher votre &eacute;valution individuelle.

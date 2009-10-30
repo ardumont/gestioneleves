@@ -528,4 +528,3 @@ session_write_close();
 
 // ===== Bufferisation de sortie =====
 ob_end_flush();
-?>

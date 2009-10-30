@@ -97,7 +97,7 @@ if($aClasses != false)
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
-
+<br />
 <?php if($aClasses != false): ?>
 	<form method="post" action="?page=eleves">
 		<table class="formulaire">
