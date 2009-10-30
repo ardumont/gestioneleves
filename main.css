@@ -9,55 +9,60 @@ html
 body
 {
 	color: #666666;
-	font: 0.8em Helvetica, Bitstream Vera, Verdana, Arial, Helvetica, sans-serif;
+	font: 0.8em Tahoma, Helvetica, Bitstream Vera, Verdana, Arial, Helvetica, sans-serif;
 }
 
 #struct_left_panel
 {
-    position: absolute;
-    width: 220px;
+	position: fixed;
+	width: 200px;
 }
 
 #struct_identity,
-#struct_menu,
-#struct_licence
+#struct_menu
 {
-    border: 1px solid #025AA9;
-    padding: 5px;
-    margin-bottom: 10px;
+	border: 1px solid #666;
+	padding: 5px;
+	margin-bottom: 10px;
+	-moz-border-radius-bottomleft: 8px;  
+	-webkit-border-bottom-left-radius: 8px;
+	-moz-border-radius-bottomright: 8px;
+	-webkit-border-bottom-right-radius: 8px;
 }
 
 #struct_licence
 {
-    text-align: center; 
+	border: 1px solid #666;
+	padding: 5px;
+	margin-bottom: 10px;
+	background-color: #EEE;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	text-align : center;
+}
+
+#struct_licence table
+{
+	width: 100%;
+	padding: 0px;
+}
+
+#struct_licence img
+{
+	border: 0px;
+	height: 15px;
+	width: 80px;
 }
 
 #struct_main
 {
-    margin-left: 230px; /* = width de struct_left_panel + 10px */
-    border: 1px solid #025AA9;
-    padding: 5px;
-    width: 80%;
-}
-
-/* Ne pas mettre de bordure sur les images servant de liens */
-a img
-{
-    border: 0;
-}
-
-#struct_left_panel
-{
-    position: absolute;
-    width: 220px;
-}
-
-#struct_main
-{
-    margin-left: 230px; /* = width de struct_left_panel + 10px */
-    border: 1px solid #025AA9;
-    padding: 5px;
-    width: 80%;
+	margin-left: 210px; /* = width de struct_left_panel + 10px */
+	border: 1px solid #666;
+	padding: 5px;
+	-moz-border-radius-topleft: 8px;  
+	-webkit-border-top-left-radius: 8px;
+	-moz-border-radius-topright: 8px;
+	-webkit-border-top-right-radius: 8px;
 }
 
 /* Ne pas mettre de bordure sur les images servant de liens */
@@ -67,117 +72,52 @@ a img
 }
 
 /*==============================================================================
+|| Les messages d'erreur et d'avertissement.
+==============================================================================*/
+
+#struct_popup_mask
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 1000;
+	background-color: #000000;
+	opacity: 0.6;
+	overflow: hidden;
+}
+
+#struct_popup
+{
+	position: absolute;
+	top: 20%;
+	left: 30%;
+	right: 30%;
+	z-index: 1001;
+	background-color: #FFFFFF;
+	border: 2px solid #777;
+	padding: 5px;
+}
+
+body.popup_stop_scroll
+{
+	overflow:hidden;
+}
+
+/*==============================================================================
 || La boite d'identification.
 ==============================================================================*/
 
-#struct_identity h1,
-#struct_menu h1,
-#struct_main h1
+#struct_popup h1
 {
-    margin: -5px -5px 0 -5px;
-    padding: 0 5px 0 5px;
-    font-size: 1.5em;
-    background-color: #025AA9;
-    font-weight: bold;
-    color: white;
-}
-
-/*==============================================================================
-|| Le menu.
-==============================================================================*/
-
-/* #struct_menu h1 */ /* Voir La boite d'identification. */
-
-#struct_menu ul
-{
-    margin: 5px 0 0 0;
-    padding: 0;
-}
-
-#struct_menu ul li
-{
-    list-style-type: none;
-    margin-bottom: 5px;
-}
-
-#struct_menu ul li ul li
-{
-    list-style-type: none;
-    margin-left: 30px;
-    margin-bottom: 5px;
-}
-
-#struct_menu a,
-#struct_main a
-{
-    color: #025AA9;
-}
-
-#struct_menu a:hover,
-#struct_main a:hover
-{
-    color: #0000ff;
-}
-
-/*==============================================================================
-|| Le corps du site.
-==============================================================================*/
-
-#struct_main table
-{
-	border-collapse: collapse;
-	border:1px solid black;
-}
-
-#struct_main h1
-{
+	margin: -5px -5px 0 -5px;
+	padding: 0 5px 0 5px;
 	font-size: 1.5em;
-	margin: -5px -5px auto -5px;
-	padding-left: 5px;
-	padding-right: 5px;
-	background-color: #025AA9;
+	background-color: #777;
+	background-image: url(images/icons/16x16/hghead.png);
 	font-weight: bold;
 	color: white;
-}
-
-#struct_main a
-{
-	color: #025AA9;
-}
-
-#struct_main a:hover
-{
-	color: #0000ff;
-}
-
-#struct_main table a
-{
-	color: white;
-}
-
-#struct_main table a:hover
-{
-	color: white;
-}
-
-/*======================================
-|| ????????????.
-======================================*/
-
-#struct_header select,
-#struct_header input,
-#struct_main select,
-#struct_main input,
-#struct_main textarea
-{
-	border: 1px solid #025AA9;
-	color: #666666;
-	font-size: 1em;
-}
-
-textarea
-{
-	font-size:1.2em;
 }
 /*======================================
 || Alternance entre les lignes d'un tableau.
@@ -223,21 +163,499 @@ textarea
 	color: black;
 }
 
+/*==============================================================================
+|| Le menu et les entetes de fenetre
+==============================================================================*/
+
+/* h1 : ent�te de menu et de page */
+
+#struct_main h1
+{
+	margin: -5px 2px -5px 2px;
+	padding: 0 5px 2px 5px;
+	font-size: 1.5em;
+	background-color: #666;
+	background-image: url(images/bckgrd/h_gloss.png);
+	font-weight: bold;
+	color: white;
+}
+
+#struct_identity h1,
+#struct_menu h1
+{
+	margin: -5px -5px -5px -5px;
+	padding: 0 5px 6px 5px;
+	font-size: 1.5em;
+	background-color: #666;
+	background-image: url(images/bckgrd/h_gloss.png);
+	font-weight: bold;
+	color: white;
+}
+
+#struct_identity h1,
+#struct_menu h1
+{
+	text-align : center;
+}
+
+/* h2/h3 : ent�te de sous-menu */
+#struct_menu h2
+{
+	margin: -5px -5px 0px -5px;
+	padding: 2px 5px 7px 5px;
+	font-size: 1.1em;
+	background-color: #666;
+	font-weight: bold;
+	text-align : center;
+	color: white;
+}
+
+#struct_menu h3
+{
+	margin: -5px -5px 0px -5px;
+	padding: 0px 5px 5px 5px;
+	font-size: 1em;
+	background-color: #999;
+	font-weight: bold;
+	color: white;
+}
+
+/* h4 : entr�e de menu */
+#struct_identity h4,
+#struct_menu h4
+{
+	margin: -5px -5px 2px -5px;
+	padding: 3px 5px 5px 5px;
+	font-size: 1em;
+	background-color: #fff;
+	background-image: url(images/bckgrd/separateur.png);
+}
+
+/* h5 : s�parateur */
+#struct_menu h5
+{
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	font-size: 0.2em;
+	background-color: #fff;
+}
+
+#struct_identity img,
+#struct_menu  img
+{
+	vertical-align : text-top;
+	padding: 0px 7px 0px 0px;
+}
+
+#struct_main img
+{
+	text-align: left;
+	vertical-align: middle;
+	padding: 0px 7px 0px 0px;
+}
+
+#struct_identity a,
+#struct_menu a
+{
+	color: #113;
+	text-decoration:none; 
+}
+
+#struct_identity a:hover,
+#struct_menu a:hover
+{
+	color: #557;
+	text-decoration:none; 	
+}
+
+#struct_main a
+{
+	color: #025AA9;
+}
+
+#struct_main a:hover
+{
+	color: #0000ff;
+}
+
+/*==============================================================================
+|| Les mises en forme generales pour le corps du site.
+==============================================================================*/
+
+/* #struct_main h1 */ /* Voir "La boite d'identification" */
+
+/*========== Les liens ==========*/
+/* Voir "Le menu" */
+
+/*======================================
+|| Les �l�ments de formulaire.
+======================================*/
+
+#struct_identity select,
+#struct_identity input,
+/* ----- */
+#struct_main select,
+#struct_main input,
+#struct_main button
+{
+	border: 1px solid #555;
+	color: #666666;
+	font-size: 0.9em;
+}
+
+#struct_main textarea
+{
+	border: 1px solid #555;
+	color: #666666;
+	font-size: 1.3em;
+}
+
+/* Attention les input de type hidden ne doivent pas en faire partie sinon on aura des '.' dans l'affichage */
+#struct_identity input[type=hidden],
+#struct_main input[type=hidden]
+{
+    border:0;
+}
+
+/*======================================
+|| Tableaux de type "list" : 1 seul niveau.
+======================================*/
+
+#struct_main table.list
+{
+	border-collapse: collapse;
+	color: white;
+}
+
+#struct_main table.list a
+{
+	color: inherit;
+}
+
+#struct_main table.list caption
+{
+	background-color: #205bb3;
+}
+
+#struct_main table.list thead tr
+{
+	background-color: #205bb3;
+}
+
+#struct_main table.list tfoot
+{
+	color: black;
+}
+#struct_main table.list tr.row0 {background-color: #0066FF;}
+#struct_main table.list tr.row1 {background-color: #0099FF;}
+#struct_main table.list tr.row_total {background-color: #8AABFF;}
+
+/* Colonne application */
+#struct_main table.list tr.app0 {background-color: #3b85cc;}
+#struct_main table.list tr.app1 {background-color: #307bc3;}
+
+
+/*======================================
+|| Tableau de type "information".
+======================================*/
+
+#struct_main table.info
+{
+	border-collapse: collapse;
+	background-color: #0066FF;
+	color: white;
+}
+
+#struct_main table.info a
+{
+	color: inherit;
+}
+
+#struct_main table.info caption
+{
+	background-color: #025AA9;
+}
+
+#struct_main table.info th
+{
+	background-color: #025AA9;
+	text-align: left;
+}
+
+/*======================================
+|| Tableau de type "list_tree" : liste a plusieurs niveaux.
+======================================*/
+
+#struct_main table.list_tree
+{
+	border-collapse: collapse;
+	color: white;
+}
+
+#struct_main table.list_tree a
+{
+	color: inherit;
+}
+
+#struct_main table.list_tree caption
+{
+	background-color: #025AA9;
+}
+
+#struct_main table.list_tree thead tr
+{
+	background-color: #025AA9;
+}
+
+#struct_main table.list_tree tbody tr.caption
+{
+	background-color: #307bc3;
+	background-image: url(images/bckgrd/separateur_app.png);
+	background-repeat: repeat-x;
+	font-size: 1.1em;
+}
+
+#struct_main table.list_tree tfoot tr
+{
+	color: black;
+}
+
+#struct_main table.list_tree tr th
+{
+	text-align:left;
+}
+
+#struct_main table.list_tree tr td
+{
+	white-space: nowrap;
+}
+
+#struct_main table.list_tree tr.level0_row0 {background-color: #3092c4;}
+#struct_main table.list_tree tr.level0_row1 {background-color: #3b9dcc;}
+#struct_main table.list_tree tr.level1_row0 {background-color: #4169E1;}
+#struct_main table.list_tree tr.level1_row1 {background-color: #4682B4;}
+#struct_main table.list_tree tr.level2_row0 {background-color: #6495ED;}
+#struct_main table.list_tree tr.level2_row1 {background-color: #00BFFF;}
+
+#struct_main table.list_tree tr.level3_row0 {background-color: #9966FF; color: black;}
+#struct_main table.list_tree tr.level3_row1 {background-color: #0099FF; color: black;}
+#struct_main table.list_tree tr.level4_row0 {background-color: #99CCFF; color: black;}
+#struct_main table.list_tree tr.level4_row1 {background-color: #CCCCFF; color: black;}
+
+#struct_main table.list_tree tr.level5_row0 {background-color: #FF99FF; color: black;}
+#struct_main table.list_tree tr.level5_row1 {background-color: #FFCCFF; color: black;}
+#struct_main table.list_tree tr.level6_row0 {background-color: #FFFFFF; color: black;}
+#struct_main table.list_tree tr.level6_row1 {background-color: #FFFFCC; color: black;}
+#struct_main table.list_tree tr.level7_row0 {background-color: #FFFFFF; color: black;}
+#struct_main table.list_tree tr.level7_row1 {background-color: #FFFFFF; color: black;}
+
+/*======================================
+|| Tableau special calendrier.
+======================================*/
+
+#struct_main table.calendar
+{
+	border-collapse: collapse;
+	color: white;
+}
+
+#struct_main table.calendar a,
+#struct_main table.calendar input, 
+#struct_main table.calendar select
+{
+	color: inherit;
+}
+
+/* Enleve le decalage a gauche du au border-collapse : Firefox respecte les specifications, mais c'est moche : IE ne respecte rien */
+#struct_main table.calendar caption
+{
+	background-color: #205bb3;
+	margin-left: -1px;
+}
+
+#struct_main table.calendar caption img
+{
+	vertical-align: middle;
+}
+
+#struct_main table.calendar caption a.today { }
+
+#struct_main table.calendar tr
+{
+	font-size: 0.9em;	
+}
+
+#struct_main table.calendar tfoot tr
+{
+	font-size: 1.1em;	
+}
+
+#struct_main table.calendar tr select
+{
+	font-size: 1.0em;	
+}
+
+#struct_main table.calendar thead tr
+{
+	background-color: #205bb3;
+}
+
+/* Alternance des couleurs entre les t�ches */
+#struct_main table.calendar tr.row0,
+#struct_main table.calendar tr.row0 select,
+#struct_main table.calendar tr.row0 input
+{
+	background-color: #3ba0c3;
+	background-image: url(images/bckgrd/separateur_tache.png);
+	background-repeat: repeat-x;
+
+}
+
+/* Alternance des couleurs entre les t�ches */
+#struct_main table.calendar tr.row1,
+#struct_main table.calendar tr.row1 select,
+#struct_main table.calendar tr.row1 input
+{
+	background-color: #3295b5;
+	background-image: url(images/bckgrd/separateur_tache.png);
+	background-repeat: repeat-x;
+}
+
+#struct_main table.calendar tbody th
+{
+	text-align: left;
+	font-weight: normal;
+}
+
+#struct_main table.calendar tfoot
+{
+	color: #666666;
+}
+
+/* Onglet ajout �l�ment */
+#struct_main table.calendar   th.tab_top_left
+{
+	background-image: url(images/bckgrd/tab_top_r.png);
+	background-repeat: no-repeat;
+	background-position: bottom left;
+}
+
+#struct_main table.list_tree  th.tab_top_left
+{
+	background-image: url(images/bckgrd/tab_top_r.png);
+	background-repeat: no-repeat;
+	background-position: bottom left;
+	padding: 0px 0px 0px 20px;
+}
+
+#struct_main table.calendar  th.tab_bottom_left
+{
+	background-image: url(images/bckgrd/tab_bottom_r.png);
+	background-repeat: no-repeat;
+	background-position: bottom left;
+}
+
+#struct_main table.list_tree  th.tab_bottom_left
+{
+	background-image: url(images/bckgrd/tab_bottom_r.png);
+	background-repeat: no-repeat;
+	background-position: bottom left;
+	padding: 0px 0px 0px 20px;
+}
+
+#struct_main table.calendar  th.tab_top_right,
+#struct_main table.list_tree  th.tab_top_right
+{
+	background-image: url(images/bckgrd/tab_top_l.png);
+	background-repeat: no-repeat;
+	background-position: bottom left;
+}
+
+#struct_main table.calendar  th.tab_bottom_right,
+#struct_main table.list_tree  th.tab_bottom_right
+{
+	background-image: url(images/bckgrd/tab_bottom_l.png);
+	background-repeat: no-repeat;
+	background-position: bottom left;	
+}
+
+/* Barre de navigation par semaine */
+#struct_main table.calendar th.navigation
+{
+	text-align: left;
+	vertical-align: middle;
+}
+
+#struct_main table.calendar th.navigation img
+{
+	padding: 0px 0px 0px 0px;
+}
+
+#struct_main table.calendar th.navigation a
+{
+	text-decoration:none; 
+}
+
+#struct_main table.calendar tr
+{
+    white-space: nowrap;
+}
+
+/* Alternance des couleurs entre les t�ches par type de colonne */
+/* Alternance des couleurs entre les t�ches (application) */
+#struct_main table.calendar th.app0
+{
+	background-color: #3b85cc;
+	background-image: url(images/bckgrd/separateur_app.png);
+	background-repeat: repeat-x;
+}
+
+/* Alternance des couleurs entre les t�ches (application) */
+#struct_main table.calendar th.app1
+{
+	background-color: #307bc3;
+	background-image: url(images/bckgrd/separateur_app.png);
+	background-repeat: repeat-x;	
+}
+
+/* Alternance des couleurs entre les t�ches (projet) */
+#struct_main table.calendar th.proj0
+{
+	background-color: #3b9dcc;
+	background-image: url(images/bckgrd/separateur_projet.png);
+	background-repeat: repeat-x;
+}
+
+/* Alternance des couleurs entre les t�ches (projet) */
+#struct_main table.calendar th.proj1
+{
+	background-color: #3092c4;
+	background-image: url(images/bckgrd/separateur_projet.png);
+	background-repeat: repeat-x;	
+}
+
+/* >V2| -----------------------------*/
+
+/*========== On met en couleur Samedi=6 et Dimanche=0 ==========*/
+
+#struct_main table.calendar tr th.day_6,
+#struct_main table.calendar tr th.day_0,
+#struct_main table.calendar tr td.day_6,
+#struct_main table.calendar tr td.day_6 input[type=text],
+#struct_main table.calendar tr td.day_0,
+#struct_main table.calendar tr td.day_0 input[type=text],
+#struct_main table.calendar tr td.day_6:hover,
+#struct_main table.calendar tr td.day_0:hover
+#struct_main table.calendar tr td.day_6 input:hover,
+#struct_main table.calendar tr td.day_0 input:hover
+{
+	background-color: #DDDDDD;
+	color: black;
+}
+
 /*======================================
 || Tableau pour les formulaires.
 ======================================*/
-
-#struct_main ul,
-#struct_main li,
-#struct_main dl,
-#struct_main dt,
-#struct_main dd
-{
-	list-style-type: circle;/* decimal, upper-roman, lower-latin, disc, circle, square ou none */
-	margin-top: 0;
-	margin-bottom: 0;
-	margin-right: 0;
-}
 
 #struct_main table.formulaire
 {
@@ -249,99 +667,109 @@ textarea
 {
 	display: inline;
 	position: relative;
-	top: -0.8em;
+	top: -1em;
 	left: 0.5em;
-	background-color: #fff;
+	background-color: #FFFFFF;
 	vertical-align: middle;
 }
 
 #struct_main table.formulaire th 
 {
 	text-align: left;
-	border: 0;
-}
-
-#struct_main table.formulaire tr,
-#struct_main table.formulaire td
-{
-	border: 0;
-	padding: 5px;
-}
-
-/*======================================
-|| Tableau de resume d'informations.
-======================================*/
-
-#struct_main table.resume_info caption,
-#struct_main table.resume_info th,
-#struct_main table.resume_info td
-{
-	background-color: #0195f8;
-	color: white;
-	text-align: left;
-}
-
-#struct_main table.resume_info a
-{
-	color: white;
-}
-
-#struct_main table.resume_info
-{
-	border: 1px solid black;
+	font-weight: normal;
 }
 
 /*==============================================================================
-|| Pour la gestion des evolutions.
+|| Ecran "home" : pour la gestion des evolutions.
 ==============================================================================*/
 
-#struct_main li.bug_majeur
+#struct_main.home li.bug_majeur {list-style-image: url(images/icons/16x16/puce_rouge.png);}
+#struct_main.home li.bug_mineur {list-style-image: url(images/icons/16x16/puce_terredesienne.png);}
+#struct_main.home li.bug_faible {list-style-image: url(images/icons/16x16/puce_jaune.png);}
+
+#struct_main.home li.evolution_majeure {list-style-image: url(images/icons/16x16/puce_verte.png);}
+#struct_main.home li.evolution_mineure {list-style-image: url(images/icons/16x16/puce_vertclair.png);}
+#struct_main.home li.evolution_faible   {list-style-image: url(images/icons/16x16/puce_jaunecitron.png);}
+
+/*==============================================================================
+|| Ecran "activity".
+==============================================================================*/
+
+#struct_main.activities table.calendar input[type=text]
 {
-	list-style-image: url(images/icons/16x16/puce_rouge.png);
+	width: 1em;
 }
 
-#struct_main li.bug_mineur
+.display_value
 {
-	list-style-image: url(images/icons/16x16/puce_terredesienne.png);
-}
-
-#struct_main li.bug_faible
-{
-	list-style-image: url(images/icons/16x16/puce_jaune.png);
-}
-
-#struct_main li.evolution_majeure
-{
-	list-style-image: url(images/icons/16x16/puce_verte.png);
-}
-
-#struct_main .evolution_mineure
-{
-	list-style-image: url(images/icons/16x16/puce_vertclair.png);
-}
-
-#struct_main .evolution_faible
-{
-	list-style-image: url(images/icons/16x16/puce_jaunecitron.png);
+	text-align: center;
 }
 
 /*==============================================================================
-|| partie speciale -- ajout divers et varies
+|| Ecran "holidays".
 ==============================================================================*/
 
-.en_construction
+#struct_main.holidays table.calendar thead .solde
 {
-	color:red;
+	background-color: #666666;
+	color: white;
 }
 
-/* ul pour menu*/
-#struct_menu ul.puce_menu > li
+#struct_main.holidays table.calendar tbody tr.row0 .solde
 {
-	margin-left:5px;
+	background-color: #DDDDDD;
+	color: black;
+	text-align: center;
 }
 
-/* ul pour sous menu*/
-#struct_menu ul.puce_sous_menu > li
+#struct_main.holidays table.calendar tbody tr.row1 .solde
 {
-	margin-left:15px;
+	background-color: #999999;
+	color: black;
+	text-align: center;
+}
+
+.nowrap
+{
+    white-space: nowrap;
+}
+
+/*==============================================================================
+|| Barre de défilement vertical sur certains ecrans
+==============================================================================*/
+
+.div_scrollable_small
+{
+	height:400px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+.div_scrollable_medium
+{
+	height:500px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+.div_scrollable_large
+{
+	height:608px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+/*==============================================================================
+|| Suivi du curseur sur les tableaux
+==============================================================================*/
+
+#struct_main table.calendar tbody tr:hover,
+#struct_main table.calendar tbody tr:hover select,
+#struct_main table.calendar tbody tr:hover input,
+#struct_main table.list_tree tbody tr:hover,
+#struct_main table.list tr.row0:hover,
+#struct_main table.list tr.row1:hover,
+#struct_main table.list tr.row_total:hover
+{
+	background-color: #9999FF;
 }

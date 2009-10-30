@@ -12,37 +12,37 @@
 /**
  * Le gestionnaire d'erreur pour la classe base de donnees.
  * Cette fonction remplace la fonction par defaut contenue dans la classe "Database".
- * 
+ *
  * Le tableau recu en parametre :
  * - $aError['code']    = Le numero d'erreur Mysql.
  * - $aError['message'] = Le message d'erreur.
  * - $aError['sqltext'] = La requete ayant declenche l'erreur.
- * 
+ *
  * @author Lionel SAURON
- * 
+ *
  * @param $aError(array) Tableau decrivant l'erreur.
  */
 function globalDatabaseErrorHandler($aError)
 {
 	// Pour eviter de reboucler s'il y a une erreur le en dessous.
 	static $s_StopErrorHandler = false;
-	
+
 	if($s_StopErrorHandler == true) return;
 	$s_StopErrorHandler = true;
-	
+
 	// ===== Le message pour l'ecran =====
 	Message::addError(trim($aError['message']));
 	Message::addError(trim($aError['sqltext']));
-	
+
 	$s_StopErrorHandler = false;
 }
 
 /**
  * Le gestionnaire d'erreur pour le script.
  * Cette fonction remplace la fonction par defaut.
- * 
+ *
  * @author Lionel SAURON
- * 
+ *
  * @param $nErrorNo(int) Le niveau d'erreur.
  * @param $sErrorMsg(string) Le message d'erreur.
  * @param $sErrorFile(string) Le nom du fichier dans lequel l'erreur a ete identifiee.
@@ -53,10 +53,10 @@ function globalScriptErrorHandler($nErrorNo, $sErrorMsg, $sErrorFile, $nErrorLin
 {
 	// Pour eviter de reboucler s'il y a une erreur la en dessous.
 	static $s_StopErrorHandler = false;
-	
+
 	if($s_StopErrorHandler == true) return;
 	$s_StopErrorHandler = true;
-	
+
 	// ===== On filtre les messages d'erreur =====
 	// On supprime les erreurs de php 4.
 	if(strpos($sErrorMsg, "Non-static method Database::") >= 0)
@@ -64,11 +64,11 @@ function globalScriptErrorHandler($nErrorNo, $sErrorMsg, $sErrorFile, $nErrorLin
 		$s_StopErrorHandler = false;
 		return;
 	}
-	
+
 	// ===== Le message pour l'ecran =====
 	Message::addError($sErrorMsg);
 	Message::addError("Ligne {$nErrorLine} dans le fichier {$sErrorFile}");
-	
+
 	$s_StopErrorHandler = false;
 }
 
@@ -99,7 +99,7 @@ require_once(PATH_PHP_LIB."/message.class.php");
 //require_once(PATH_ROOT."/libraries/metier/task.class.php");
 
 // ===== Les gestionnaires d'erreurs =====
-set_error_handler("globalScriptErrorHandler"); 
+set_error_handler("globalScriptErrorHandler");
 Database::setErrorHandler("globalDatabaseErrorHandler");
 
 // ===== Format et timezone =====
@@ -253,7 +253,7 @@ $sPageName = "error404.inc.php";
 if(array_key_exists($sPageId, $aMenuPage) == true)
 {
 	$aSubMenuPage = $aMenuPage[$sPageId];
-	
+
 	// ===== Y a t'il des modes pour cette page ? =====
 	if(is_array($aSubMenuPage) == true)
 	{
@@ -264,8 +264,8 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 	} else {
 		$sPageName = $aSubMenuPage;
 	}
-	
-	// ===== Le fichier existe ? =====	
+
+	// ===== Le fichier existe ? =====
 	if((file_exists(PATH_PAGES."/".$sPageName) == false)
 	|| (is_file(PATH_PAGES."/".$sPageName) == false))
 	{
@@ -310,28 +310,28 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 		function showOrHide(id)
 		{
 			var objElement = document.getElementById(id);
-			
+
 			objElement.style.display = (objElement.style.display != 'none') ? 'none' : '';
 		}
-	
+
 		/**
 		 * Montre l'objet d'id 'id'.
 		 */
 		function showId(id)
 		{
 			var objElement = document.getElementById(id);
-			objElement.style.display = '';	
+			objElement.style.display = '';
 		}
-		
+
 		/**
 		 * Cache l'objet d'id id.
 		 */
 		function hideId(id)
 		{
 			var objElement = document.getElementById(id);
-			objElement.style.display = 'none';	
+			objElement.style.display = 'none';
 		}
-	
+
 		/**
 		 * Affiche les ids du tableau aIds.
 		 */
@@ -342,7 +342,7 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 				showId(aIds[i]);
 			}
 		}
-	
+
 		/**
 		 * Cache les ids du tableau aIds.
 		 */
@@ -358,72 +358,40 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 		<div id="struct_identity">
 			<h1>Retour</h1>
 			<br />
-			<a href="index.php?page=home">Retour &agrave; l'accueil principal</a>
+			<a href="index.php?page=home"><img src="<?php echo(URL_ICONS_16X16); ?>/home.png"/>Retour &agrave; l'accueil principal</a>
 		</div>
 		<div id="struct_menu">
 			<h1>Menu</h1>
-			<ul>
-				<li><a href="?page=home">La page d'accueil</a></li>
-				<li><u>Comp&eacute;tences</u>
-					<ul class="puce_sous_menu">
-						<li><a href="?page=competences">Lister</a></li>
-						<li><a href="?page=competences&amp;mode=add">Ajouter</a></li>
-					</ul>
-				</li>
-				<li><u>Classes</u>
-					<ul class="puce_sous_menu">
-						<li><a href="?page=classes">Lister</a></li>
-						<li><a href="?page=classes&amp;mode=add">Ajouter</a></li>
-					</ul>
-				</li>
-				<li><u>Cycles</u>
-					<ul class="puce_sous_menu">
-						<li><a href="?page=cycles">Lister</a></li>
-						<li><a href="?page=cycles&amp;mode=add">Ajouter</a></li>
-					</ul>
-				</li>
-				<li><u>Domaines</u>
-					<ul class="puce_sous_menu">
-						<li><a href="?page=domaines">Lister</a></li>
-						<li><a href="?page=domaines&amp;mode=add">Ajouter</a></li>
-					</ul>
-				</li>
-				<li><u>Ecoles</u>
-					<ul class="puce_sous_menu">
-						<li><a href="?page=ecoles">Lister</a></li>
-						<li><a href="?page=ecoles&amp;mode=add">Ajouter</a></li>
-					</ul>
-				</li>
-				<li><u>Mati&egrave;res</u>
-					<ul class="puce_sous_menu">
-						<li><a href="?page=matieres">Lister</a></li>
-						<li><a href="?page=matieres&amp;mode=add">Ajouter</a></li>
-					</ul>
-				</li>
-				<li><u>Niveaux</u>
-					<ul class="puce_sous_menu">
-						<li><a href="?page=niveaux">Lister</a></li>
-						<li><a href="?page=niveaux&amp;mode=add">Ajouter</a></li>
-					</ul>
-				</li>
-				<li><u>Notes</u>
-					<ul class="puce_sous_menu">
-						<li><a href="?page=notes">Lister</a></li>
-						<li><a href="?page=notes&amp;mode=add">Ajouter</a></li>
-					</ul>
-				</li>
-				<li><u>P&eacute;riodes</u>
-					<ul class="puce_sous_menu">
-						<li><a href="?page=periodes">Lister</a></li>
-						<li><a href="?page=periodes&amp;mode=add">Ajouter</a></li>
-					</ul>
-				</li>
-				<li><u>Import</u>
-					<ul class="puce_sous_menu">
-						<li><a href="?page=imports&amp;mode=imp">Importer</a></li>
-					</ul>
-				</li>
-			</ul>
+			<h4><a href="?page=home"><img src="<?php echo(URL_ICONS_16X16); ?>/home.png"/>La page d'accueil</a></h4>
+			<h3>Comp&eacute;tences</h3>
+				<h4><a href="?page=competences"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h4><a href="?page=competences&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
+			<h3>Classes</h3>
+				<h4><a href="?page=classes"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h4><a href="?page=classes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
+			<h3>Cycles</h3>
+				<h4><a href="?page=cycles"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h4><a href="?page=cycles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
+			<h3>Domaines</h3>
+				<h4><a href="?page=domaines"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h4><a href="?page=domaines&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
+			<h3>Ecoles</h3>
+				<h4><a href="?page=ecoles"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h4><a href="?page=ecoles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
+			<h3>Mati&egrave;res</h3>
+				<h4><a href="?page=matieres"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h4><a href="?page=matieres&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
+			<h3>Niveaux</h3>
+				<h4><a href="?page=niveaux"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h4><a href="?page=niveaux&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
+			<h3>Notes</h3>
+				<h4><a href="?page=notes"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h4><a href="?page=notes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
+			<h3>P&eacute;riodes</h3>
+				<h4><a href="?page=periodes"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h4><a href="?page=periodes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
+			<h3>Import</h3>
+				<h4><a href="?page=imports&amp;mode=imp"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Importer</a></h4>
 		</div>
 	</div>
 	<div id="struct_main" class="<?php echo($sPageId); ?>">

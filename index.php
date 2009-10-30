@@ -13,37 +13,37 @@
 /**
  * Le gestionnaire d'erreur pour la classe base de donnée.
  * Cette fonction remplace la fonction par défaut contenue dans la classe "Database".
- * 
+ *
  * Le tableau passé en paramétre :
  * - $aError['code']    = Le numéro d'erreur Mysql.
  * - $aError['message'] = Le message d'erreur.
  * - $aError['sqltext'] = La requéte ayant déclenché l'erreur.
- * 
+ *
  * @author Lionel SAURON
- * 
+ *
  * @param $aError(array) Tableau décrivant l'erreur.
  */
 function globalDatabaseErrorHandler($aError)
 {
 	// Pour eviter de reboucler s'il y a une erreur lé en dessous.
 	static $s_StopErrorHandler = false;
-	
+
 	if($s_StopErrorHandler == true) return;
 	$s_StopErrorHandler = true;
-	
+
 	// ===== Le message pour l'écran =====
 	Message::addError(trim($aError['message']));
 	Message::addError(trim($aError['sqltext']));
-	
+
 	$s_StopErrorHandler = false;
 }
 
 /**
  * Le gestionnaire d'erreur pour le script.
  * Cette fonction remplace la fonction par défaut.
- * 
+ *
  * @author Lionel SAURON
- * 
+ *
  * @param $nErrorNo(int) Le niveau d'erreur.
  * @param $sErrorMsg(string) Le message d'erreur.
  * @param $sErrorFile(string) Le nom du fichier dans lequel l'erreur a été identifiée.
@@ -54,10 +54,10 @@ function globalScriptErrorHandler($nErrorNo, $sErrorMsg, $sErrorFile, $nErrorLin
 {
 	// Pour eviter de reboucler s'il y a une erreur lé en dessous.
 	static $s_StopErrorHandler = false;
-	
+
 	if($s_StopErrorHandler == true) return;
 	$s_StopErrorHandler = true;
-	
+
 	// ===== On filtre les messages d'erreur =====
 	// On supprime les erreurs de php 4.
 	if(strpos($sErrorMsg, "Non-static method Database::") >= 0)
@@ -65,11 +65,11 @@ function globalScriptErrorHandler($nErrorNo, $sErrorMsg, $sErrorFile, $nErrorLin
 		$s_StopErrorHandler = false;
 		return;
 	}
-	
+
 	// ===== Le message pour l'écran =====
 	Message::addError($sErrorMsg);
 	Message::addError("Ligne {$nErrorLine} dans le fichier {$sErrorFile}");
-	
+
 	$s_StopErrorHandler = false;
 }
 
@@ -96,7 +96,7 @@ require_once(PATH_PHP_LIB."/formvalidation.class.php");
 require_once(PATH_PHP_LIB."/message.class.php");
 
 // ===== Les gestionnaires d'erreurs =====
-set_error_handler("globalScriptErrorHandler"); 
+set_error_handler("globalScriptErrorHandler");
 Database::setErrorHandler("globalDatabaseErrorHandler");
 
 // ===== Format et timezone =====
@@ -201,9 +201,9 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 	{
 		$sPageId = "home";
 	}
-	
+
 	$aSubMenuPage = $aMenuPage[$sPageId];
-	
+
 	// ===== Y a t'il des modes pour cette page ? =====
 	if(is_array($aSubMenuPage) == true)
 	{
@@ -216,8 +216,8 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 	{
 		$sPageName = $aSubMenuPage;
 	}
-	
-	// ===== Le fichier existe ? =====	
+
+	// ===== Le fichier existe ? =====
 	if((file_exists(PATH_PAGES."/".$sPageName) == false)
 	|| (is_file(PATH_PAGES."/".$sPageName) == false))
 	{
@@ -279,28 +279,28 @@ $aUsers = Database::fetchColumnWithKey($sQuery);
 		function showOrHide(id)
 		{
 			var objElement = document.getElementById(id);
-			
+
 			objElement.style.display = (objElement.style.display != 'none') ? 'none' : '';
 		}
-	
+
 		/**
 		 * Montre l'objet d'id 'id'.
 		 */
 		function showId(id)
 		{
 			var objElement = document.getElementById(id);
-			objElement.style.display = '';	
+			objElement.style.display = '';
 		}
-		
+
 		/**
 		 * Cache l'objet d'id id.
 		 */
 		function hideId(id)
 		{
 			var objElement = document.getElementById(id);
-			objElement.style.display = 'none';	
+			objElement.style.display = 'none';
 		}
-	
+
 		/**
 		 * Affiche les ids du tableau aIds.
 		 */
@@ -311,7 +311,7 @@ $aUsers = Database::fetchColumnWithKey($sQuery);
 				showId(aIds[i]);
 			}
 		}
-	
+
 		/**
 		 * Cache les ids du tableau aIds.
 		 */
@@ -332,7 +332,7 @@ $aUsers = Database::fetchColumnWithKey($sQuery);
 			if(document.getElementById(select_id).value != 0)
 			{
 				hideId(to_hide_id);
-			} else {// sinon on le montre 
+			} else {// sinon on le montre
 				showId(to_hide_id);
 			}
 		}
@@ -341,6 +341,7 @@ $aUsers = Database::fetchColumnWithKey($sQuery);
 		<div id="struct_identity">
 			<?php if(!isset($_SESSION['PROFESSEUR_ID'])): /* utilisateur non connecté */ ?>
 			<h1>Identification</h1>
+			<h4>
 			<form method="post" action="?page=login_do">
 				<table>
 					<tr>
@@ -358,56 +359,93 @@ $aUsers = Database::fetchColumnWithKey($sQuery);
 						<td><input type="password" size="15" maxlength="15" name="professeur_password" /></td>
 					</tr>
 				</table>
-				<br />
-				<input type="submit" name="action" value="Valider" />
+				<div>
+					<!-- pour le trou du cul d'ie qui sinon n'integre pas le champ action dans le formulaire -->
+					<input type="hidden" name="action" value="Valider" />
+					<input type="submit" name="action" value="Valider" />
+				</div>
 			</form>
-			<?php else: ?>
-				<h1>Connecté</h1><br />
-					<b><u>Professeur :</u></b> <?php echo $_SESSION['PROFESSEUR_NOM']; ?><br />
-					<br />
-					<a href="?page=logout_do">Se d&eacute;connecter</a><br />
-					<br />
-					<a href="admin.php">Administration</a>
+			</h4>
+			<?php else: /* Utilisateur connecté */ ?>
+				<h1><?php echo $_SESSION['PROFESSEUR_NOM']; ?></h1>
+					<h4><a href="?page=profils&amp;mode=edit&amp;user_id=<?php echo $_SESSION['PROFESSEUR_ID']; ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/user.png"/>Modification du profil</a></h4>
+					<h4><a href="?page=logout_do"><img src="<?php echo(URL_ICONS_16X16); ?>/out.png"/>Se d&eacute;connecter</a></h4>
 			<?php endif; ?>
 		</div>
 		<div id="struct_menu">
 			<h1>Menu</h1>
 			<?php if(isset($_SESSION['PROFESSEUR_ID'])): /* utilisateur non connecté */?>
-			<ul class="puce_menu">
-				<li><a href="?page=home">La page d'accueil</a></li>
-				<li><u>Elèves</u>
-					<ul>
-						<li><a href="?page=eleves">Lister</a></li>
-						<li><a href="?page=eleves&amp;mode=add">Ajouter</a></li>
-					</ul>
-				</li>
-				<li><u>Evaluations collectives</u>
-					<ul>
-						<li><a href="?page=evaluations_collectives">Lister</a></li>
-						<li><a href="?page=evaluations_collectives&amp;mode=add">Ajouter</a></li>
-					</ul>
-				</li>
-				<li><u>Evaluations individuelles</u>
-					<ul>
-						<li><a href="?page=evaluations_individuelles">Lister</a></li>
-						<li><a href="?page=evaluations_individuelles&amp;mode=add">Ajouter</a></li>
-					</ul>
-				</li>
-				<li><u>Modification du profil</u>
-					<ul>
-						<li><a href="?page=profils&amp;mode=edit&amp;user_id=<?php echo $_SESSION['PROFESSEUR_ID']; ?>">Mon profil</a></li>
-					</ul>
-				</li>
-			</ul>
+			<h4><a href="?page=home"><img src="<?php echo(URL_ICONS_16X16); ?>/home.png"/>Accueil</a></h4>
+			<h5>&nbsp;</h5>
+			<h3>Elèves</h3>
+				<h4><a href="?page=eleves"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h4><a href="?page=eleves&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
+			<h3>Evaluations collectives</h3>
+				<h4><a href="?page=evaluations_collectives"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h4><a href="?page=evaluations_collectives&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
+			<h3>Evaluations individuelles</h3>
+				<h4><a href="?page=evaluations_individuelles"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h4><a href="?page=evaluations_individuelles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
+			<h3>Aide/Info</h3>
+				<h4><a href="?page=contributeurs"><img src="<?php echo(URL_ICONS_16X16); ?>/contributeur.png"/>Contributeurs</a></h4>
+				<h4><a href="admin.php"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Page d'administration</a></h4>
 			<?php else: ?>
-				Identification requise 
+				Identification requise
 			<?php endif; ?>
 		</div>
 		<div id="struct_licence">
-			<!--
-				<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a>
-			-->
+			<table>
+				<tr>
+					<td colspan="2">
+						<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+							<img src="./images/pub/button-cc.gif" alt="Creative Commons License"/>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="http://validator.w3.org/check?uri=referer" rel="nofollow">
+							<img src="./images/pub/button-xhtml.png" alt="Valid XHTML 1.0"/>
+						</a>
+					</td>
+					<td>
+						<a href="http://jigsaw.w3.org/css-validator/">
+							<img src="./images/pub/button-css.png" alt="Valid CSS"/>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="http://httpd.apache.org/">
+							<img src="./images/pub/button-apache.png" alt="Powered By Apache"/>
+						</a>
+					</td>
+					<td>
+						<a href="http://www.php.net/">
+							<img src="./images/pub/button-php.png" alt="Powered By PHP"/>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="http://www.mysql.com/">
+							<img src="./images/pub/button-mysql.png" alt="Powered By Mysql"/>
+						</a>
+					</td>
+					<td>
+						<a href="http://www.mozilla-europe.org/fr/firefox/">
+							<img src="./images/pub/button-firefox.png" alt="Developped for Firefox"/>
+						</a>
+					</td>
+				</tr>
+			</table>
 		</div>
+		<?php if(preg_match("/microsoft internet explorer/i", $sAgent) || preg_match("/msie/i", $sAgent)): ?>
+			<div style="text-align:left;color:red;">
+				Ce site est optimisé pour Mozilla Firefox ou tout navigateur respectant <a href="http://www.w3c.org/">les standards web</a> (chromium, chrome, epiphany, icecat, konqueror, opera, seamonkey, etc...).<br />
+				Votre navigateur étant Microsoft Internet Explorer ou l'une de ses moutures, vous risquez de perdre en ergonomie d'utilisation avec cette application.<br />
+			</div>
+		<?php endif; ?>
 	</div>
 	<div id="struct_main" class="<?php echo($sPageId); ?>">
 		<?php include(PATH_PAGES."/".$sPageName); ?>

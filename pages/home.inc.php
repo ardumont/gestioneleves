@@ -51,91 +51,185 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 <h1><?php echo($sGuiTitle); ?></h1>
 <p>Voil&agrave; le gestionnaire d'&eacute;valuations de vos joyeux diablotins.</p>
 
-<h2>TODO</h2>
+<h2>Release notes</h2>
 <dl>
+	<dt>
+		<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+		Version v1.3.0
+	</dt>
 	<dd>
-		<dt><h3><a href="javascript:showOrHide('_legende');">LEGENDE</a></h3></dt>
-		<div id="_legende" style="display:none;">
-			<table style="border:0;">
-				<tr>
-					<td>
-						<ul>
-							<li class="bug_majeur" title="Bug majeur">Bug majeur</li>
-							<li class="bug_mineur" title="Bug mineur">Bug mineur</li>
-							<li class="bug_faible" title="Bug faible">Bug faible</li>
-						</ul>
-					</td>
-					<td>
-						<ul>
-							<li class="evolution_majeure" title="Evolution majeure">Evolution majeure</li>
-							<li class="evolution_mineure" title="Evolution mineure">Evolution mineure</li>
-							<li class="evolution_faible" title="Evolution faible">Evolution faible</li>
-						</ul>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<dt><h3><a href="javascript:showOrHide('_documentations');">DOCUMENTATIONS</a></h3></dt>
-		<div id="_documentations" style="display:block;">
-			<ul>
-				<li class="evolution_majeure" title="Evolution majeure">Ecriture des "Sp&eacute;cifications fonctionnelles".</li>
-				<li class="evolution_majeure" title="Evolution majeure">Ecriture du "Manuel d'installation".</li>
-				<li class="evolution_majeure" title="Evolution majeure">Ecriture du "Manuel Utilisateur".</li>
-			</ul>
-		</div>
-		<dt><h3><a href="javascript:showOrHide('_projets');">PROJETS</a></h3></dt>
-		<div id="_projets" style="display:block;">
-			<ul>
-				<li class="evolution_majeure" title="Evolution majeure">Ajout de tests de v&eacute;rifications plus approfondies lors de la saisie de donn&eacute;es pour les divers ajouts.</li>
-				<li class="evolution_mineure" title="Evolution mineure">Retravailler la charge graphique de l'ihm.</li>
-				<li class="evolution_mineure" title="Evolution mineure">Charte graphique des tableaux (alternance de couleurs par ligne).</li>
-			</ul>
-		</div>
+		<a href="javascript:" onclick="showOrHideAllSubVersion(this);">Tout cacher/montrer</a>
+		<dl>
+			<dt>
+				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+				v1.3.0
+			</dt>
+			<dd>
+				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Migration vers utf-8 (sources + bdd).</li>
+					<li class="evolution_mineure" title="Evolution mineure">Module de connexion du professeur.</li>
+				</ul>
+			</dd>
+			<dt>
+				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+				v1.2.0
+			</dt>
+			<dd>
+				<ul>
+					<li class="evolution_mineure" title="Evolution mineure">Ihm de listing des p&eacute;riodes.</li>
+					<li class="evolution_mineure" title="Evolution mineure">Ihm de listing des domaines.</li>
+					<li class="evolution_mineure" title="Evolution mineure">Ihm de listing des mati&eacute;res.</li>
+					<li class="evolution_mineure" title="Evolution mineure">Ihm de listing des comp&eacute;tences.</li>
+					<li class="evolution_mineure" title="Evolution mineure">D&eacute;placement des modules d'administration dans le r&eacute;pertoire /admin.</li>
+				</ul>
+			</dd>
+			<dt>
+				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+				v1.1.0
+			</dt>
+			<dd>
+				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Ihm de listing et ajout d'&eacute;l&egrave;ves.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ihm de listing et ajout d'&eacute;coles.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ihm de listing et ajout de classes.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ihm de listing des cycles et niveaux.</li>
+				</ul>
+			</dd>
+			<dt>
+				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+				v1.1.0
+			</dt>
+			<dd>
+				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Mise en place des plateformes (apache, php, mysql, phpmyadmin, subversion, trac, testlink).</li>
+					<li class="evolution_majeure" title="Evolution majeure">Cr&eacute;ation du MCD - MLD de la base de donn&eacute;es.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Cr&eacute;ation d'un script sql d'installation de la base de donn&eacute;es.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Cr&eacute;ation d'un script sql de donn&eacute;es invariables.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Mise en place de la base de donn&eacute;es.</li>
+				</ul>
+			</dd>
+		</dl>
 	</dd>
 </dl>
 
-<h2>Versions et modifications</h2>
-<dl>
-	<dt><h3><a href="javascript:showOrHide('V1');">V1</a></h3></dt>
-	<div id="V1">
-		<h4><a href="javascript:showIds(new Array('v100','v110','v120','v130'));">Tout montrer</a>
-		<a href="javascript:hideIds(new Array('v100','v110','v120','v130'));">Tout cacher</a></h4>
-		<dt><a href="javascript:showOrHide('v130');">v1.3.0</a></dt>
-		<dd id="v130">
-			<ul>
-				<li class="evolution_majeure" title="Evolution majeure">Migration vers utf-8 (sources + bdd).</li>
-				<li class="evolution_mineure" title="Evolution mineure">Module de connexion du professeur.</li>
-			</ul>
-		</dt>
-		<dt><a href="javascript:showOrHide('v120');">v1.2.0</a></dt>
-		<dd id="v120">
-			<ul>
-				<li class="evolution_mineure" title="Evolution mineure">Ihm de listing des p&eacute;riodes.</li>
-				<li class="evolution_mineure" title="Evolution mineure">Ihm de listing des domaines.</li>
-				<li class="evolution_mineure" title="Evolution mineure">Ihm de listing des mati&eacute;res.</li>
-				<li class="evolution_mineure" title="Evolution mineure">Ihm de listing des comp&eacute;tences.</li>
-				<li class="evolution_mineure" title="Evolution mineure">D&eacute;placement des modules d'administration dans le r&eacute;pertoire /admin.</li>
-			</ul>
-		</dd>
-		<dt><a href="javascript:showOrHide('v110');">v1.1.0</a></dt>
-		<dd id="v110">
-			<ul>
-				<li class="evolution_majeure" title="Evolution majeure">Ihm de listing et ajout d'&eacute;l&egrave;ves.</li>
-				<li class="evolution_majeure" title="Evolution majeure">Ihm de listing et ajout d'&eacute;coles.</li>
-				<li class="evolution_majeure" title="Evolution majeure">Ihm de listing et ajout de classes.</li>
-				<li class="evolution_majeure" title="Evolution majeure">Ihm de listing des cycles et niveaux.</li>
-			</ul>
-		</dd>
-		<dt><a href="javascript:showOrHide('v100');">v1.0.0</a></dt>
-		<dd id="v100">
-			<ul>
-				<li class="evolution_majeure" title="Evolution majeure">Mise en place des plateformes (apache, php, mysql, phpmyadmin, subversion, trac, testlink).</li>
-				<li class="evolution_majeure" title="Evolution majeure">Cr&eacute;ation du MCD - MLD de la base de donn&eacute;es.</li>
-				<li class="evolution_majeure" title="Evolution majeure">Cr&eacute;ation d'un script sql d'installation de la base de donn&eacute;es.</li>
-				<li class="evolution_majeure" title="Evolution majeure">Cr&eacute;ation d'un script sql de donn&eacute;es invariables.</li>
-				<li class="evolution_majeure" title="Evolution majeure">Mise en place de la base de donn&eacute;es.</li>
-			</ul>
-		</dd>
-	</div>
-</dl>
+<h2>LEGENDE</h2>
+<ul>
+	<li class="bug_majeur">Bug majeur</li>
+	<li class="bug_mineur">Bug mineur</li>
+	<li class="bug_faible">Bug faible</li>
+	<li class="evolution_majeure">Evolution majeure</li>
+	<li class="evolution_mineure">Evolution mineure</li>
+	<li class="evolution_faible">Evolution faible</li>
+</ul>
 
+<script type="text/javascript">
+// <![CDATA[
+	/**
+	 * Cache ou affiche la description d'une version
+	 */
+	function showOrHideVersion(objThis, bShow)
+	{
+		// Le titre de la version est dans un "dt"
+		var objVersionHead = null;
+		if(objThis.tagName == 'DT')
+		{
+			objVersionHead = objThis;
+		}
+		else
+		{
+			// Si objThis n'est un "dt" alors on est appelé par l'image, il faut remonter au parent
+			objVersionHead = objThis.parentNode;
+		}
+
+		// La description de la version est dans le "dd" juste à côté (noeud frère)
+		var objVersionBody = objVersionHead.nextSibling;
+
+		// Mais il faut faire attention au texte entre les 2 balises (le retour à la ligne)
+		while(objVersionBody.nodeType != Node.ELEMENT_NODE)
+		{
+			objVersionBody = objVersionBody.nextSibling;
+		}
+
+		// On affiche ou on cache
+		if(typeof(bShow) == 'undefined')
+		{
+			bShow = (objVersionBody.style.display == 'none') ? true : false;
+		}
+
+		objVersionBody.style.display = (bShow == false) ? 'none' : '';
+
+		// On change la source de l'image
+		var objImg = objVersionHead.firstChild;
+
+		// Mais il faut faire attention au texte entre les 2 balises (le retour à la ligne)
+		while(objImg.nodeType != Node.ELEMENT_NODE)
+		{
+			objImg = objImg.nextSibling;
+		}
+
+		if(bShow == true) // Attention on a déjà fait le changement d'affichage
+		{
+			objImg.src   = objImg.src.replace(/_on\./, "_off.");
+			objImg.alt   = "[-]";
+			objImg.title = "Cacher";
+		}
+		else
+		{
+			objImg.src   = objImg.src.replace(/_off\./, "_on.");
+			objImg.alt   = "[+]";
+			objImg.title = "Afficher";
+		}
+
+		return bShow;
+	}
+
+	/**
+	 * Cache ou affiche toutes les sous-versions d'une version
+	 */
+	function showOrHideAllSubVersion(objThis, bShow)
+	{
+		// La description de la version principale est dans un "dd" parent au "a" ou l'on est
+		var objVersionBody = objThis.parentNode;
+
+		var aVersionHeadList = objVersionBody.getElementsByTagName('dt');
+
+		for(i=0; i<aVersionHeadList.length; i++)
+		{
+			objVersionHead = aVersionHeadList[i];
+
+			// Cache ou affiche la version
+			// On recupére l'opération fait à la première version pour appliquer la même autre version
+			bShow = showOrHideVersion(objVersionHead, bShow);
+		}
+	}
+
+	/**
+	 * Cache toutes les versions sauf la dernière
+	 */
+	function hideAllVersionsExceptLast()
+	{
+		var objVersionBlock = document.getElementById('version_block');
+
+		var aVersionHeadList = document.getElementsByTagName('dt', objVersionBlock);
+
+		showOrHideVersion(aVersionHeadList[0], true);
+		showOrHideVersion(aVersionHeadList[0], true);
+
+		for(i=2 ;i<aVersionHeadList.length; i++)
+		{
+			objVersionHead = aVersionHeadList[i];
+
+			showOrHideVersion(objVersionHead, false);
+		}
+	}
+// ]]>
+</script>
+
+<script type="text/javascript">
+// <![CDATA[
+	// ===== Main =====
+
+	// Cache toutes les versions sauf la dernière
+	hideAllVersionsExceptLast();
+// ]]>
+</script>

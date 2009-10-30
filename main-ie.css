@@ -1,17 +1,86 @@
 /*==============================================================================
-|| Correctifs pour IE 6.
+|| Correctifs pour Internet Explorer.
 ==============================================================================*/
 
 /*==============================================================================
 || Les mises en forme principales.
 ==============================================================================*/
 
-#struct_header
+#struct_left_panel
 {
-	left: 5px;
+	/* menu non figé sous ie */
+	position: absolute;
+	/* Sinon le panneau de gauche n'est pas vraiment à  gauche */
+	left: 8px;
 }
 
-#struct_menu
+/*==============================================================================
+|| Les messages d'erreur et d'avertissement.
+==============================================================================*/
+
+#struct_popup_mask
 {
-	left: 5px;
+	filter: alpha(opacity = 60);
+}
+
+/*==============================================================================
+|| La boite d'identification.
+==============================================================================*/
+
+#struct_identity h1,
+#struct_menu h1,
+#struct_main h1
+{
+	/* IE ne comprend pas margin-top -5px */
+	margin-top: 0;
+	position: relative;
+	background-image: url(images/bckgrd/h_gloss_ie.png);
+	background-repeat: repeat-x;
+	top: -5px;
+}
+
+/*==============================================================================
+|| Les mises en forme generales pour le corps du site.
+==============================================================================*/
+
+/*======================================
+|| Tableaux de type "list" : 1 seul niveau.
+======================================*/
+
+#struct_main table.list a
+{
+	/* IE ne comprend pas le color: inherit; */
+	color: white;
+}
+
+/*======================================
+|| Tableau de type "list_tree" : liste a plusieurs niveaux.
+======================================*/
+
+#struct_main table.list_tree a
+{
+	/* IE ne comprend pas le color: inherit; */
+	color: white;
+}
+
+/*======================================
+|| Tableau special calendrier.
+======================================*/
+
+#struct_main table.calendar a,
+#struct_main table.calendar input, 
+#struct_main table.calendar select
+{
+	color: white;
+}
+
+/*==============================================================================
+|| page avec scrollbar sur la zone de texte (desactive car ie ne comprend pas)
+==============================================================================*/
+
+/* Impossible de faire un scroll vertical sous IE sans devoir rajouter un div autour de la table.... Tant pis pour lui. */
+.div_scrollable_small, .div_scrollable_medium, .div_scrollable_large 
+{
+	height: auto;
+	overflow: none;
 }
