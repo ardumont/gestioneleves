@@ -202,6 +202,6 @@ if(count($aClasses) > 0)
 		Aucun &eacute;l&egrave;ve affect&eacute; &agrave; cette classe.
 	<?php endif; ?>
 <?php else: ?>
-	Aucune classe n'a &eacute;t&eacute; affect&eacute; &agrave; ce professeur.<br />
+	Aucune classe n'a &eacute;t&eacute; affect&eacute;e &agrave; ce professeur.<br />
 	Vous devez d'abord cr&eacute;er une classe puis l'affecter &agrave; ce professeur.
 <?php endif; ?>
