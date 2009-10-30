@@ -109,7 +109,7 @@ if(($bDatabaseReady == true) && ($bNeedMoreUpgrade == true))
 ?>
 <h2>Etape 4 - La base de données MYSQL</h2>
 
-<table>
+<table class="list_tree">
 	<caption>base de données pour la version <?php echo($sInstallVersion); ?></caption>
 	<thead>
 		<tr>
@@ -119,8 +119,8 @@ if(($bDatabaseReady == true) && ($bNeedMoreUpgrade == true))
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach($aInstallResults as $aOneRow): ?>
-		<tr>
+		<?php foreach($aInstallResults as $n => $aOneRow): ?>
+		<tr class="level0_row<?php echo $n%2?>">
 			<td><?php echo($aOneRow['TITLE']); ?></td>
 			<td><?php echo($aOneRow['GUI_STATUS']); ?></td>
 			<td><?php echo($aOneRow['STEP_DONE']+$aOneRow['STEP_IGNORED']); ?>/<?php echo($aOneRow['STEP_COUNT']); ?></td>

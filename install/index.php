@@ -165,7 +165,7 @@ $sAgent = $_SERVER['HTTP_USER_AGENT'];
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
 <head>
-	<title>Installation de ProjectSion</title>
+	<title>Installation du gestionnaire d'élèves</title>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<meta content="Lionel SAURON" name="author" />
 
@@ -237,7 +237,7 @@ $sAgent = $_SERVER['HTTP_USER_AGENT'];
 		<?php endif; ?>
 	</div>
 	<div id="struct_main">
-		<h1>Installation de ProjectSion</h1>
+		<h1>Installation du Gestionnaire d'élèves</h1>
 		<?php if($sPageName !== null): ?>
 			<?php include($sPageName); ?>
 		<?php endif; ?>
