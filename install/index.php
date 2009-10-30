@@ -179,7 +179,7 @@ $sAgent = $_SERVER['HTTP_USER_AGENT'];
 <body>
 	<div id="struct_left_panel">
 		<div id="struct_identity">
-			<h1>Installeur</h1>
+			<h1>Installeur</h1><br />
 			Installation en cours
 		</div>
 		<div id="struct_licence">

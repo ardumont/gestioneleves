@@ -62,6 +62,21 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 		<dl>
 			<dt>
 				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+				v1.4.0
+			</dt>
+			<dd>
+				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Mise en place de l'installeur.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Refonte de la charte graphique.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Remise en place du projet sous subversion pour faciliter les développements.</li>
+					<li class="evolution_mineure" title="Evolution mineure">Mise en place du module de déconnexion d'un professeur.</li>
+					<li class="evolution_mineure" title="Evolution mineure">Mise en place d'une page des contributeurs.</li>
+					<li class="evolution_mineure" title="Evolution mineure">Mise en place d'un bloc de référencement des outils utilisés.</li>
+					<li class="evolution_mineure" title="Evolution mineure">Refonte de la page d'accueil.</li>
+				</ul>
+			</dd>
+			<dt>
+				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
 				v1.3.0
 			</dt>
 			<dd>
