@@ -218,6 +218,7 @@ Si vous n'avez pas de date de naissance, laisser le champ initialis&eacute; &agr
 
 <?php if($nClasseId != null && $aClasseRow != false): ?>
 <table class="list_tree">
+	<caption>D&eacute;tails de la classe</caption>
 	<thead>
 	</thead>
 	<tfoot>

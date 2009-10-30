@@ -122,6 +122,7 @@ if($aClasses != false)
 		</table>
 	</form>
 	<table class="list_tree">
+		<caption>D&eacute;tails de la classe</caption>
 		<thead>
 		</thead>
 		<tfoot>

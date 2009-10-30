@@ -94,6 +94,43 @@ function conjunctionFrench($sMois)
 }//fin conjunctionFrench
 
 /**
+ * Fonction qui en fonction du mois et de l'annee courante, renvoie la restriction
+ * sql pour des champs de type annee_scolaire_debut-annee_scolaire_fin
+ * Par exemple : 2007-2008 (X-X+1)
+ * @return string	restriction sur l'annee scolaire courante
+ */
+function sql_annee_scolaire_courante($currentTime = null)
+{
+	// morceau de requete sql
+	$sReq = "";
+	// date courante
+	if($currentTime == null)
+	{
+		// si non passe en parametre on l'initialise a la date courante du serveur
+		$currentTime = time();
+	}
+	// mois courant au format numerique (plus facile pour des comparaisons)
+	$nMonth = (int) strftime("%m", $currentTime);
+	// annee courante au format numerique sur 4 chiffres
+	$nYear = (int) strftime("%Y", $currentTime);
+	// debut d'annee donc fin d'annee scolaire X-1-X
+	if(1 <= $nMonth && $nMonth <= 6)
+	{
+		// il nous faut l'annee courante -1
+		$nYearPrec = $nYear-1;
+		// on cree le morceau de requete qui va bien
+		$sReq .= "'{$nYearPrec}-{$nYear}'";
+	} else if(7 <= $nMonth && $nMonth <= 12) {
+		// fin d'annee donc debut d'annee scolaire X--X+1
+		// il nous faut l'annee courante +1
+		$nYearSucc = $nYear+1;
+		// on cree le morceau de requete qui va bien
+		$sReq .= "'{$nYear}-{$nYearSucc}'";
+	}
+	return $sReq;
+}// fin sql_annee_scolaire_courante
+
+/**
  * Parse a time/date generated with strftime().
  *
  * This function is the same as the original one defined by PHP (Linux/Unix only),

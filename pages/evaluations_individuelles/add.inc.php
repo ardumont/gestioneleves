@@ -179,26 +179,26 @@ if($nEvalColId != null)
 
 <?php if($nEvalColId != null): ?>
 	<form method="post" action="?page=evaluations_individuelles&amp;mode=add_do">
-		<table class="resume_info" width="300px">
+		<table class="list_tree" width="300px">
 			<caption>D&eacute;tail de l'&eacute;valuation collective</caption>
 			<thead>
 			</thead>
 			<tfoot>
 			</tfoot>
 			<tbody>
-				<tr>
+				<tr class="level0_row0">
 					<td>Evaluation collective</td>
 					<td><?php echo($aEvalCollective['EVAL_COL_NOM']); ?></td>
 				</tr>
-				<tr>
+				<tr class="level0_row1">
 					<td>Description</td>
 					<td><?php echo($aEvalCollective['EVAL_COL_DESCRIPTION']); ?></td>
 				</tr>
-				<tr>
+				<tr class="level0_row0">
 					<td>Classe</td>
 					<td><?php echo($aEvalCollective['CLASSE_NOM']); ?></td>
 				</tr>
-				<tr>
+				<tr class="level0_row1">
 					<td>Ann&eacute;e scolaire</td>
 					<td><?php echo($aEvalCollective['CLASSE_ANNEE_SCOLAIRE']); ?></td>
 				</tr>
