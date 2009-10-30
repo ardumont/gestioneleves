@@ -121,33 +121,33 @@ if($aClasses != false)
 			</tbody>
 		</table>
 	</form>
-	<table class="resume_info">
+	<table class="list_tree">
 		<thead>
 		</thead>
 		<tfoot>
 		</tfoot>
 		<tbody>
-			<tr>
+			<tr class="level0_row0">
 				<td>Classe</td>
 				<td><?php echo($aClasseRow['CLASSE_NOM']); ?></td>
 			</tr>
-			<tr>
+			<tr class="level0_row1">
 				<td>Ann&eacute;e scolaire</td>
 				<td><?php echo($aClasseRow['CLASSE_ANNEE_SCOLAIRE']); ?></td>
 			</tr>
-			<tr>
+			<tr class="level0_row0">
 				<td>Professeur</td>
 				<td><?php echo($aClasseRow['PROFESSEUR_NOM']); ?></td>
 			</tr>
-			<tr>
+			<tr class="level0_row1">
 				<td>Ecole</td>
 				<td><?php echo($aClasseRow['ECOLE_NOM']); ?></td>
 			</tr>
-			<tr>
+			<tr class="level0_row0">
 				<td>Ville</td>
 				<td><?php echo($aClasseRow['ECOLE_VILLE']); ?></td>
 			</tr>
-			<tr>
+			<tr class="level0_row1">
 				<td>D&eacute;partement</td>
 				<td><?php echo($aClasseRow['ECOLE_DEPARTEMENT']); ?></td>
 			</tr>
