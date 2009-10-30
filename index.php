@@ -1,23 +1,16 @@
 <?php
-/**
- * Page d'indexation.
- * Point d'entree de tout le site (sauf partie administration).
- * @author $Author$
- * @version $Version$
- */
-
 //=============================================================================
 // Déclarations des gestionnaires d'erreurs
 //=============================================================================
 
 /**
- * Le gestionnaire d'erreur pour la classe base de donnée.
+ * Le gestionnaire d'erreurs pour la classe base de données.
  * Cette fonction remplace la fonction par défaut contenue dans la classe "Database".
  *
- * Le tableau passé en paramétre :
+ * Le tableau reçu en paramètre :
  * - $aError['code']    = Le numéro d'erreur Mysql.
  * - $aError['message'] = Le message d'erreur.
- * - $aError['sqltext'] = La requéte ayant déclenché l'erreur.
+ * - $aError['sqltext'] = La requête ayant déclenché l'erreur.
  *
  * @author Lionel SAURON
  *
@@ -25,7 +18,7 @@
  */
 function globalDatabaseErrorHandler($aError)
 {
-	// Pour eviter de reboucler s'il y a une erreur lé en dessous.
+	// Pour eviter de reboucler s'il y a une erreur là en dessous.
 	static $s_StopErrorHandler = false;
 
 	if($s_StopErrorHandler == true) return;
@@ -39,32 +32,46 @@ function globalDatabaseErrorHandler($aError)
 }
 
 /**
- * Le gestionnaire d'erreur pour le script.
- * Cette fonction remplace la fonction par défaut.
+ * Le gestionnaire d'erreurs pour PHP remplaçant la fonction par défaut.
+ * Traite les erreurs de configuration pouvant résulter d'une mauvaise installation de l'application.
  *
  * @author Lionel SAURON
  *
  * @param $nErrorNo(int) Le niveau d'erreur.
  * @param $sErrorMsg(string) Le message d'erreur.
  * @param $sErrorFile(string) Le nom du fichier dans lequel l'erreur a été identifiée.
- * @param $nErrorLine(int) Le numéro de ligne é laquelle l'erreur a été identifiée.
+ * @param $nErrorLine(int) Le numéro de ligne à laquelle l'erreur a été identifiée.
+ * @param $aErrorContext(array) Toutes les variables qui existaient lorsque l'erreur a été déclenchée.
+ */
+function installScriptErrorHandler($nErrorNo, $sErrorMsg, $sErrorFile, $nErrorLine, $aErrorContext)
+{
+	// ===== On filtre les messages d'erreur =====
+	// On supprime les erreurs de php 4.
+	if(($nErrorNo == E_STRICT) && (strpos($sErrorMsg, "var: Deprecated") !== false)) return;
+
+	include("pages/error-install.inc.php");
+	die();
+}
+
+/**
+ * Le gestionnaire d'erreurs pour PHP remplaçant la fonction par défaut.
+ * Traite les erreurs lors de l'exécution normal du site.
+ *
+ * @author Lionel SAURON
+ *
+ * @param $nErrorNo(int) Le niveau d'erreur.
+ * @param $sErrorMsg(string) Le message d'erreur.
+ * @param $sErrorFile(string) Le nom du fichier dans lequel l'erreur a été identifiée.
+ * @param $nErrorLine(int) Le numéro de ligne à laquelle l'erreur a été identifiée.
  * @param $aErrorContext(array) Toutes les variables qui existaient lorsque l'erreur a été déclenchée.
  */
 function globalScriptErrorHandler($nErrorNo, $sErrorMsg, $sErrorFile, $nErrorLine, $aErrorContext)
 {
-	// Pour eviter de reboucler s'il y a une erreur lé en dessous.
+	// Pour eviter de reboucler s'il y a une erreur là en dessous.
 	static $s_StopErrorHandler = false;
 
 	if($s_StopErrorHandler == true) return;
 	$s_StopErrorHandler = true;
-
-	// ===== On filtre les messages d'erreur =====
-	// On supprime les erreurs de php 4.
-	if(strpos($sErrorMsg, "Non-static method Database::") >= 0)
-	{
-		$s_StopErrorHandler = false;
-		return;
-	}
 
 	// ===== Le message pour l'écran =====
 	Message::addError($sErrorMsg);
@@ -78,43 +85,63 @@ function globalScriptErrorHandler($nErrorNo, $sErrorMsg, $sErrorFile, $nErrorLin
 //==============================================================================
 
 // ===== Bufferisation de sortie =====
+
 ob_start('ob_gzhandler');
 
-// ===== Fichier de configuration principal =====
+// Le gestionnaire d'erreurs d'install pour PHP
+set_error_handler("installScriptErrorHandler");
+
+// ===== Les fichiers de configuration =====
+
+// Le fichier principal
 require_once("config/main.conf.php");
 require_once("config/constantes.conf.php");
 
-// ===== Les autres fichiers de configurations =====
+// Les autres fichiers de configurations
 require_once(PATH_CONFIG."/database.conf.php");
 require_once(PATH_CONFIG."/export.conf.php");
 
 // ===== Les librairies et les classes =====
+
 require_once(PATH_PHP_LIB."/utils.lib.php");
-require_once(PATH_PHP_LIB."/prettyprint.class.php");
 require_once(PATH_PHP_LIB."/database.class.php");
 require_once(PATH_PHP_LIB."/formvalidation.class.php");
 require_once(PATH_PHP_LIB."/message.class.php");
 
-// ===== Les gestionnaires d'erreurs =====
+//require_once(PATH_APP_LIB."/profilmanager.class.php");
+
+// Le gestionnaire d'erreurs global pour PHP
 set_error_handler("globalScriptErrorHandler");
-Database::setErrorHandler("globalDatabaseErrorHandler");
 
 // ===== Format et timezone =====
-setlocale(LC_TIME, 'french', 'fr');
 
+// bcp de locales différentes car selon l'os, c'est géré différemment
+setlocale(LC_TIME, 'french', 'fr', 'fr_FR', 'fr_FR.UTF8', 'fra', 'fra_fra');
+// timezone
 date_default_timezone_set('Europe/Paris');
 
-// ===== Session =====
+// ===== La session =====
+
 session_name('MAIN_PAGE');
 session_start();
 
-// ===== Connection é la base =====
+// Chargement des erreurs sauvegardés
+Message::loadFromSession($_SESSION['ERROR_MESSAGE']);
+
+// ===== La base de données =====
+
+// Le gestionnaire d'erreurs de la base
+Database::setErrorHandler("globalDatabaseErrorHandler");
+
+// Connexion à la base
 Database::openConnection(DATABASE_LOGIN, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_SERVER);
-// précise à la base qu'on travaille en UTF-8
+
+// On précise à la base qu'on travaille en UTF-8
 Database::execute("SET NAMES UTF8");
 
-// ===== Chargement des erreurs sauvegardés =====
-Message::loadFromSession($_SESSION['ERROR_MESSAGE']);
+//// ===== Le gestionnaire de profil =====
+//
+//ProfilManager::loadRights();
 
 //==============================================================================
 // Préparation des données
@@ -243,6 +270,39 @@ $aUsers = Database::fetchColumnWithKey($sQuery);
 // Préparation de l'affichage
 //==============================================================================
 
+// Récupère le navigateur pour discriminer l'utilisation d'ie
+$sAgent = $_SERVER['HTTP_USER_AGENT'];
+
+// ===== Lancer l'install ? =====
+
+// TODO : Enlever le test de l'existence de la colonne dès que l'on enlève
+// la compatibilité avec la v3.2.0
+
+$bNeedInstall = false;
+
+// Si la version présente en BDD est égale ou inférieure à la v3.2.0
+// alors la BDD ne contient pas la colonne DATE_VERSION donc on test.
+
+$aTemp = Database::fetchOneRow("SHOW COLUMNS FROM PARAMETRES LIKE 'DATE_VERSION'");
+if($aTemp !== false)
+{
+	$nDateVersion = Database::fetchOneValue("SELECT UNIX_TIMESTAMP(DATE_VERSION) FROM PARAMETRES");
+	$nDateFileHome = filemtime(PATH_PAGES."/home.inc.php");
+
+	if($nDateVersion != $nDateFileHome)
+	{
+		$bNeedInstall = true;
+	}
+}
+else
+{
+	$bNeedInstall = true;
+}
+
+// ===== Mise en forme pour la popup =====
+
+$sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
+
 //==============================================================================
 // Affichage de la page
 //==============================================================================
@@ -269,7 +329,7 @@ $aUsers = Database::fetchColumnWithKey($sQuery);
 	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/jscalendar-1.0/calendar-setup.js"></script>
 </head>
 <!-- ================================================== -->
-<body>
+<body class="<?php echo($sGuiBodyCssClass); ?>">
 	<!-- pour ameliorer l'affichage. -->
 	<script type="text/javascript">
 		/**

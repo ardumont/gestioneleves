@@ -66,7 +66,7 @@ $aClasses = Database::fetchArray($sQuery);
 
 // ===== Affichage des informations =====
 // classe par defaut est la premiere de la liste
-if ($nClasseId == null)
+if ($nClasseId == null && $aClasses != false)
 {
 	// on affiche les donnees de la premiere classe
 	$nClasseId = $aClasses[0]['CLASSE_ID'];
@@ -123,7 +123,7 @@ if ($nClasseId != null)
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
-
+<br />
 <table class="formulaire">
 	<caption>Fonctionnement</caption>
 	<tr>
@@ -203,6 +203,7 @@ Si vous n'avez pas de date de naissance, laisser le champ initialis&eacute; &agr
 	</table>
 </form>
 
+<?php if($nClasseId != null && $aClasseRow != false): ?>
 <table class="resume_info">
 	<thead>
 	</thead>
@@ -256,3 +257,6 @@ Si vous n'avez pas de date de naissance, laisser le champ initialis&eacute; &agr
 		<?php endforeach; ?>
 	</tbody>
 </table>
+<?php else: ?>
+	Aucune classe ne correspondant aux critères de sélection n'a été trouvée.
+<?php endif; ?>

@@ -112,7 +112,7 @@ $aEvalInds= Database::fetchArray($sQuery);
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
-
+<br />
 <table class="formulaire">
 	<caption>Fonctionnement</caption>
 	<tr>

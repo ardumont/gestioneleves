@@ -82,7 +82,7 @@ $aPeriodes = Database::fetchArray($sQuery);
 		<tr>
 			<td>Description</td>
 			<td>
-				<textarea name="EVAL_COL_DESCRIPTION" rows="10" cols="50" maxlength="<?php echo(EVAL_COL_DESCRIPTION); ?>" /><?php echo($aEvalCol['EVAL_COL_DESCRIPTION']); ?></textarea>
+				<textarea name="EVAL_COL_DESCRIPTION" rows="10" cols="50" /><?php echo($aEvalCol['EVAL_COL_DESCRIPTION']); ?></textarea>
 			</td>
 		</tr>
 		<tr>

@@ -1,8 +1,8 @@
 <?php
 //==============================================================================
-// Les informations pour la connexion a la base de donnees.
+// Les informations pour la connexion à la base de données.
 //==============================================================================
 define('DATABASE_SERVER',   "localhost");
-define('DATABASE_NAME',     "projectsion_dev");
-define('DATABASE_LOGIN',    "projectsion");
-define('DATABASE_PASSWORD', "projectsion");
+define('DATABASE_NAME',     "baseeval");
+define('DATABASE_LOGIN',    "XXXXXXXXXX");
+define('DATABASE_PASSWORD', "XXXXXXXXXX");

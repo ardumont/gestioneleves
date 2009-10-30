@@ -41,12 +41,12 @@ $sQuery = "SELECT" .
 		  " FROM EVALUATIONS_COLLECTIVES, CLASSES " .
 		  " WHERE EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID " .
 		  " ORDER BY EVAL_COL_DATE ASC";
-$aEvalCols= Database::fetchArray($sQuery);
+$aEvalCols = Database::fetchArray($sQuery);
 // $aEvalCols[][COLONNE] = VALEUR
 
 // si l'id de l'eval n'est pas remplie (typiquement au premier chargement de la page)
 // on prend la premiere valeur resultat de la requete precedente
-if($nEvalColId == null)
+if($nEvalColId == null && $aEvalCols != false)
 {
 	$nEvalColId = $aEvalCols[0][EVAL_COL_ID];
 }

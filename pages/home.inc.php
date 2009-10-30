@@ -66,7 +66,7 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 			</dt>
 			<dd>
 				<ul>
-					<li class="evolution_majeure" title="Evolution majeure">Mise en place de l'installeur.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Mise en place de l'installeur graphique.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Refonte de la charte graphique.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Remise en place du projet sous subversion pour faciliter les développements.</li>
 					<li class="evolution_mineure" title="Evolution mineure">Mise en place du module de déconnexion d'un professeur.</li>

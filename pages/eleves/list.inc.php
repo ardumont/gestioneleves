@@ -42,12 +42,12 @@ $aClasses = Database::fetchArray($sQuery);
 // $aClasses[][COLONNE] = VALEUR
 
 // classe par defaut est la premiere de la liste
-if($nClasseId == null)
+if($nClasseId == null && $aClasses != false)
 {
 	$nClasseId = $aClasses[0]['CLASSE_ID'];
 }
 
-if(count($aClasses) > 0)
+if($aClasses != false)
 {
 	// ===== Les informations de la classe =====
 	$sQuery = "SELECT" .
@@ -90,7 +90,6 @@ if(count($aClasses) > 0)
 ?>
 <h1>Liste des &eacute;l&egrave;ves</h1>
 
-<br />
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
@@ -99,7 +98,7 @@ if(count($aClasses) > 0)
 </ul>
 <?php endif; ?>
 
-<?php if(count($aClasses) > 0): ?>
+<?php if($aClasses != false): ?>
 	<form method="post" action="?page=eleves">
 		<table class="formulaire">
 			<caption>Crit&eacute;res de recherche</caption>
@@ -159,21 +158,17 @@ if(count($aClasses) > 0)
 		<table class="list_tree">
 			<thead>
 				<tr>
-					<th>Editer</th>
 					<th>El&egrave;ves</th>
 					<th>Dates de naissance</th>
 					<th>Activit&eacute;s</th>
-					<th>Supprimer</th>
+					<th colspan="2">Actions</th>
 				</tr>
 			</thead>
 			<tfoot>
 			</tfoot>
 			<tbody>
 				<?php foreach($aEleves as $nRowNum => $aEleve): ?>
-				<tr class="ligne<?php echo(($nRowNum)%2); ?>">
-					<td>
-						<a href="?page=eleves&amp;mode=edit&amp;eleve_id=<?php echo($aEleve['ELEVE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-					</td>
+				<tr class="level0_row<?php echo(($nRowNum)%2); ?>">
 					<td>
 						<a href="?page=eleves&amp;mode=edit&amp;eleve_id=<?php echo($aEleve['ELEVE_ID']); ?>">
 							<?php echo($aEleve['ELEVE_NOM']); ?>
@@ -191,6 +186,11 @@ if(count($aClasses) > 0)
 							</a>
 						<?php endif; ?>
 					</td>
+					<!-- Edition -->
+					<td>
+						<a href="?page=eleves&amp;mode=edit&amp;eleve_id=<?php echo($aEleve['ELEVE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
+					</td>
+					<!-- Suppression -->
 					<td>
 						<a href="?page=eleves&amp;mode=delete&amp;eleve_id=<?php echo($aEleve['ELEVE_ID']); ?>&amp;classe_id=<?php echo($aEleve['ID_CLASSE']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.gif" alt="Supprimer" title="Supprimer" /></a>
 					</td>

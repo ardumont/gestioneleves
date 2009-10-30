@@ -1,16 +1,20 @@
 <?php
 //==============================================================================
-// Constantes diverses et variees concernant les exports vers des fichiers
+// Constantes diverses et variées concernant les exports vers des fichiers
 //==============================================================================
 
-// Separateur des fichiers CSV
+// Séparateur des fichiers CSV
 define('CSV_SEPARATOR', ";");
 
-// Separateur des noms a l'interieur d'un nom de fichier
+// Séparateur des noms a l'interieur d'un nom de fichier
 define('FILE_SEPARATOR', "_");
 
-// Separateur des noms a l'interieur d'un nom de fichier
+// Séparateur des noms a l'interieur d'un nom de fichier
 define('CSV_EXTENSION', ".csv");
 
-// Separateur des sauts de ligne
+// Séparateur des sauts de ligne
 define('END_LINE',      "\n");
+
+// Séparateur décimaux
+define('SEPARATOR_DECIMAL_DOT', ".");
+define('SEPARATOR_DECIMAL_COMMA', ",");
