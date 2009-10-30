@@ -141,7 +141,7 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 						<!-- Nom de la matiere -->
 						<th></th>
 						<!-- Nom de la compétence -->
-						<td><?php echo($sCompetenceNom); ?></a></td>
+						<td><?php echo($sCompetenceNom); ?></td>
 					</tr>
 					<?php endforeach; ?>
 				<?php endforeach; ?>
