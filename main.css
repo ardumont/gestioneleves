@@ -427,7 +427,6 @@ body.popup_stop_scroll
 
 #struct_main table.list_tree tr td
 {
-	white-space: nowrap;
 }
 
 #struct_main table.list_tree tr.level0_row0 {background-color: #3092c4;}

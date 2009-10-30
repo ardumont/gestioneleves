@@ -28,19 +28,20 @@ $sQuery = "SELECT" .
 $aMatieres = Database::fetchArray($sQuery);
 // $aMatieres[][COLONNE] = VALEUR
 
-// ===== La liste des competences pour l'affichage de toutes les competences =====
+// ===== La liste des competences =====
 $sQuery = "SELECT" .
-		  "  COMPETENCE_ID," .
+		  "  COMPETENCE_ID, " .
 		  "  COMPETENCE_NOM, " .
+		  "  MATIERE_ID, " .
 		  "  MATIERE_NOM, " .
 		  "  DOMAINE_NOM, " .
-		  "  CYCLE_NOM" .
+		  "  CYCLE_NOM " .
 		  " FROM COMPETENCES, MATIERES, DOMAINES, CYCLES " .
-		  " WHERE COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID ".
+		  " WHERE COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID " .
 		  " AND MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID " .
 		  " AND DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID " .
-		  " ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC";
-$aCompetences = Database::fetchArray($sQuery);
+		  " ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC";
+$aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAINE_NOM', 'MATIERE_NOM', 'COMPETENCE_NOM'));
 // $aCompetences[][COLONNE] = VALEUR
 
 //==============================================================================
@@ -99,13 +100,52 @@ $aCompetences = Database::fetchArray($sQuery);
 	<tfoot>
 	</tfoot>
 	<tbody>
-	<?php foreach($aCompetences as $nRowNum => $aCompetence): ?>
-		<tr class="level0_row<?php echo($nRowNum%2); ?>">
-			<td><?php echo($aCompetence['CYCLE_NOM']); ?></td>
-			<td><?php echo($aCompetence['DOMAINE_NOM']); ?></td>
-			<td><?php echo($aCompetence['MATIERE_NOM']); ?></td>
-			<td><?php echo($aCompetence['COMPETENCE_NOM']); ?></td>
+		<?php $i = 0; ?>
+		<?php foreach($aCompetences as $sCycle => $aCycle): ?>
+		<!-- Ligne du cycle -->
+		<tr class="level0_row<?php echo ($i++)%2; ?>">
+			<!-- Nom du cycle -->
+			<th><?php echo($sCycle); ?></th>
+			<!-- Le reste -->
+			<td colspan="3"></td>
 		</tr>
-	<?php endforeach; ?>
+			<?php foreach($aCycle as $sDomaineNom => $aDomaineNom): ?>
+			<!-- Ligne du nom de domaine -->
+			<tr class="level0_row<?php echo ($i++)%2; ?>">
+				<!-- Nom du cycle -->
+				<th></th>
+				<!-- Nom du domaine -->
+				<th><?php echo($sDomaineNom); ?></th>
+				<!-- Le reste -->
+				<td colspan="2"></td>
+			</tr>
+				<?php foreach($aDomaineNom as $sMatiereNom => $aMatiereNom): ?>
+				<!-- Ligne de la matiere -->
+				<tr class="level0_row<?php echo ($i++)%2; ?>">
+					<!-- Nom du cycle -->
+					<th></th>
+					<!-- Nom du domaine -->
+					<th></th>
+					<!-- Nom de la matiere -->
+					<th><?php echo($sMatiereNom); ?></th>
+					<!-- Le reste -->
+					<td></td>
+				</tr>
+					<?php foreach($aMatiereNom as $sCompetenceNom => $aCompetence): ?>
+					<!-- Ligne de la competence -->
+					<tr class="level0_row<?php echo ($i++)%2; ?>">
+						<!-- Nom du cycle -->
+						<th></th>
+						<!-- Nom du domaine -->
+						<th></th>
+						<!-- Nom de la matiere -->
+						<th></th>
+						<!-- Nom de la compétence -->
+						<td><?php echo($sCompetenceNom); ?></a></td>
+					</tr>
+					<?php endforeach; ?>
+				<?php endforeach; ?>
+			<?php endforeach; ?>
+		<?php endforeach; ?>
 	</tbody>
 </table>
