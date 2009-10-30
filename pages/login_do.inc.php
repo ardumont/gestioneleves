@@ -37,7 +37,7 @@ if($objFormAuth->hasError() == false)
 
 	if($nOk === false)
 	{
-		Message::addError("L'identifiant et/ou le mot de passe de l'utilisateur ne sont pas correct(s) !");		
+		Message::addError("L'identifiant et/ou le mot de passe de l'utilisateur ne sont pas correct(s) !");
 	}
 
 	if(Message::hasError() == true)
@@ -66,7 +66,7 @@ switch(strtolower($sAction))
 		// stocke les donnees en session
 		$_SESSION['PROFESSEUR_ID'] = $nProfesseurId;
 		$_SESSION['PROFESSEUR_NOM'] = $sProfesseurNom;
-		 
+
 		// Rechargement
 		header("Location: ".SITE_URL."/");
 		return;
@@ -100,4 +100,3 @@ Message::addErrorFromFormValidation($objFormAuth->getError());
 // Rechargement
 header("Location: ".SITE_URL."/");
 return;
-?>

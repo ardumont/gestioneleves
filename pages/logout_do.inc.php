@@ -7,4 +7,3 @@ session_destroy();
 Message::addError("Vous &eacirc;tes maintenant d&eacute;connect&eacute;.");
 // Redirection vers la page d'accueil du site
 header("Location: ".SITE_URL);
-?>
