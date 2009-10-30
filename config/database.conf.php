@@ -3,9 +3,9 @@
 // Les informations pour la connexion a la base de donnees.
 //==============================================================================
 define('DATABASE_SERVER',   "localhost");
-define('DATABASE_NAME',     "gestion_eleves");
-define('DATABASE_LOGIN',    "gestion_eleves");
-define('DATABASE_PASSWORD', "gestion_eleves");
+define('DATABASE_NAME',     "baseeval");
+define('DATABASE_LOGIN',    "baseeval");
+define('DATABASE_PASSWORD', "baseeval");
 
 //=============================================================================
 // mode debug des requetes sql
