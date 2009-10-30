@@ -357,8 +357,7 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 	<div id="struct_left_panel">
 		<div id="struct_identity">
 			<h1>Retour</h1>
-			<br />
-			<a href="index.php?page=home"><img src="<?php echo(URL_ICONS_16X16); ?>/home.png"/>Retour &agrave; l'accueil principal</a>
+			<h4><a href="index.php?page=home"><img src="<?php echo(URL_ICONS_16X16); ?>/home.png"/>Accueil principal</a></h4>
 		</div>
 		<div id="struct_menu">
 			<h1>Menu</h1>
