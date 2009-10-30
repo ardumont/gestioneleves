@@ -9,7 +9,8 @@ html
 body
 {
 	color: #666666;
-	font: 0.8em Tahoma, Helvetica, Bitstream Vera, Verdana, Arial, Helvetica, sans-serif;
+	font: Tahoma, Helvetica, Bitstream Vera, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.7em;
 }
 
 #struct_left_panel
@@ -39,6 +40,11 @@ body
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	text-align : center;
+}
+
+#struct_main
+{
+	font-size: 1em;
 }
 
 #struct_licence table
@@ -291,6 +297,8 @@ body.popup_stop_scroll
 || Les elements de formulaire.
 ======================================*/
 
+#struct_left_panel #struct_identity table tr td select,
+#struct_left_panel #struct_identity table tr td input,
 #struct_identity select,
 #struct_identity input,
 /* ----- */
