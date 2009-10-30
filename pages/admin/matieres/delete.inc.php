@@ -1,0 +1,78 @@
+<?php
+//==============================================================================
+// Preparation des donnees
+//==============================================================================
+
+//==============================================================================
+// Validation du formulaire
+//==============================================================================
+
+//==============================================================================
+// Action du formulaire
+//==============================================================================
+
+$objForm = new FormValidation();
+
+// recupere l'id de la matiere du formulaire $_GET
+$nMatiereId = $objForm->getValue('matiere_id', $_GET, 'convert_int');
+
+//==============================================================================
+// Traitement des donnees
+//==============================================================================
+
+// ===== La matiere =====
+$sQuery = "SELECT" .
+		  "  MATIERE_ID," .
+		  "  MATIERE_NOM, " .
+		  "  DOMAINE_ID, " .
+		  "  DOMAINE_NOM, " .
+		  "  CYCLE_NOM" .
+		  " FROM MATIERES, DOMAINES, CYCLES " .
+		  " WHERE MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID " .
+		  " AND DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID " .
+		  " AND MATIERES.MATIERE_ID = {$nMatiereId} ";
+$aMatiere = Database::fetchOneRow($sQuery);
+// $aMatiere[COLONNE] = VALEUR
+
+//==============================================================================
+// Preparation de l'affichage
+//==============================================================================
+
+//==============================================================================
+// Affichage de la page
+//==============================================================================
+?>
+<h1>Suppression de la mati&egrave;re</h1>
+<?php if(Message::hasError() == true): ?>
+<ul class="form_error">
+	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
+	<li><?php echo($sErrorMessage); ?></li>
+	<?php endforeach; ?>
+</ul>
+<?php endif; ?>
+
+<form method="post" action="?page=matieres&amp;mode=delete_do">
+	<table class="resume_info">
+		<caption>D&eacute;tail de la classe</caption>
+		<tr>
+			<td>Domaine</td>
+			<td><?php echo($aMatiere['DOMAINE_NOM']); ?></td>
+		</tr>
+		<tr>
+			<td>Nom de la mati&egrave;re</td>
+			<td><?php echo($aMatiere['MATIERE_NOM']); ?></td>
+		</tr>
+	</table>
+	<fieldset><legend>Confirmation</legend>
+		<p>Etes-vous s&ucirc;r de vouloir supprimer cette mati&egrave;re ?</p>
+		<p>
+			Ceci supprimera toutes les comp&eacute;tences rattach&eacute;es &agrave; cette mati&egrave;re.
+		</p>		
+	</fieldset>
+	<p>
+		<input type="hidden" name="MATIERE_ID" value="<?php echo($aMatiere['MATIERE_ID']) ?>" />
+
+		<input type="submit" name="action" value="Supprimer" />
+		<input type="submit" name="action" value="Annuler" />
+	</p>
+</form>
