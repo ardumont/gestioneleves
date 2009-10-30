@@ -28,15 +28,15 @@ $aDomaines = Database::fetchArray($sQuery);
 
 // ===== La liste des matieres pour l'affichage de toutes les matieres =====
 $sQuery = "SELECT" .
-		  "  MATIERE_ID," .
-		  "  MATIERE_NOM, " .
+		  "  CYCLE_NOM, " .
 		  "  DOMAINE_NOM, " .
-		  "  CYCLE_NOM" .
+		  "  MATIERE_ID, " .
+		  "  MATIERE_NOM " .
 		  " FROM MATIERES, DOMAINES, CYCLES " .
 		  " WHERE MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID " .
 		  " AND DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID " .
 		  " ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC";
-$aMatieres = Database::fetchArray($sQuery);
+$aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAINE_NOM', 'MATIERE_NOM'));
 // $aMatieres[][COLONNE] = VALEUR
 
 //==============================================================================
@@ -83,8 +83,8 @@ $aMatieres = Database::fetchArray($sQuery);
 	</table>
 </form>
 
+
 <table class="list_tree">
-	<caption>Liste des mati&egrave;res</caption>
 	<thead>
 		<tr>
 			<th>Cycles</th>
@@ -95,12 +95,35 @@ $aMatieres = Database::fetchArray($sQuery);
 	<tfoot>
 	</tfoot>
 	<tbody>
-	<?php foreach($aMatieres as $nRowNum => $aMatiere): ?>
-		<tr class="level0_row<?php echo($nRowNum%2); ?>">
-			<td><?php echo($aMatiere['CYCLE_NOM']); ?></td>
-			<td><?php echo($aMatiere['DOMAINE_NOM']); ?></td>
-			<td><?php echo($aMatiere['MATIERE_NOM']); ?></td>
+		<?php $nRowNum = 0; ?>
+		<?php foreach($aMatieres as $sCycle => $aCycle): ?>
+		<!-- Ligne du cycle -->
+		<tr class="level0_row<?php echo(($nRowNum++)%2); ?>">
+			<!-- Le cycle -->
+			<td><?php echo($sCycle); ?></td>
+			<!-- Le reste -->
+			<td colspan="3"></td>
 		</tr>
-	<?php endforeach; ?>
+			<?php foreach($aCycle as $sDomaine => $aDomaine): ?>
+			<tr class="level0_row<?php echo(($nRowNum++)%2); ?>">
+				<!-- Le cycle -->
+				<td></td>
+				<!-- Le nom du domaine -->
+				<td><?php echo($sDomaine); ?></td>
+				<!-- Le reste -->
+				<td></td>
+			</tr>
+				<?php foreach($aDomaine as $sMatiere => $aMatiere): ?>
+				<tr class="level0_row<?php echo(($nRowNum++)%2); ?>">
+					<!-- Le cycle -->
+					<td></td>
+					<!-- Le nom du domaine -->
+					<td></td>
+					<!-- La matière -->
+					<td><?php echo $sMatiere; ?></td>
+				</tr>
+				<?php endforeach; ?>
+			<?php endforeach; ?>
+		<?php endforeach; ?>
 	</tbody>
 </table>
