@@ -48,7 +48,7 @@ $aEvalCols = Database::fetchArray($sQuery);
 // on prend la premiere valeur resultat de la requete precedente
 if($nEvalColId == null && $aEvalCols != false)
 {
-	$nEvalColId = $aEvalCols[0][EVAL_COL_ID];
+	$nEvalColId = $aEvalCols[0]['EVAL_COL_ID'];
 }
 
 if($nEvalColId != null)

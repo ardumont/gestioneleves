@@ -27,3 +27,4 @@ define('COMPETENCE_NOM',		200);
 define('NOTE_NOM',				50);
 define('NOTE_LABEL',			3);
 define('EVAL_IND_COMMENTAIRE',	200);
+define('EVAL_COL_DATE',			10);

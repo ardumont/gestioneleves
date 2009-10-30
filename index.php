@@ -312,7 +312,7 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 <head>
 	<title>Gestionnaire d'&eacute;valuations</title>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<meta content="Antoine DUMONT" name="author" />
+	<meta content="Antoine Romain DUMONT" name="author" />
 
 	<link rel="stylesheet" type="text/css" href="default.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="main.css" media="all" />
@@ -450,7 +450,7 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 				<h4><a href="?page=contributeurs"><img src="<?php echo(URL_ICONS_16X16); ?>/contributeur.png"/>Contributeurs</a></h4>
 				<h4><a href="admin.php"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Page d'administration</a></h4>
 			<?php else: ?>
-				Identification requise
+				<br />Identification requise
 			<?php endif; ?>
 		</div>
 		<div id="struct_licence">

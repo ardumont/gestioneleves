@@ -110,7 +110,20 @@ $aEvalCols= Database::fetchArray($sQuery);
 			</tr>
 			<tr>
 				<td>Date (format : jj/mm/AAAA)</td>
-				<td><input type="text" size="10" maxlength="<?php echo(EVAL_COL_DATE); ?>" name="EVAL_COL_DATE" /></td>
+				<td>
+					<input type="text" size="10" maxlength="<?php echo(EVAL_COL_DATE); ?>" id="EVAL_COL_DATE" name="EVAL_COL_DATE"  value="jj/mm/aaaa" onfocus="document.getElementById('EVAL_COL_DATE').value='';" />
+					<button id="f_trigger_b1" type="reset">...</button>
+					<script type="text/javascript">
+					    Calendar.setup({
+					        inputField     :    "EVAL_COL_DATE",	// id of the input field
+					        ifFormat       :    "%d/%m/%Y",      	// format of the input field
+					        showsTime      :    false,           	// will display a time selector
+					        button         :    "f_trigger_b1",  	// trigger for the calendar (button ID)
+					        singleClick    :    true,           	// single-click mode
+					        step           :    1                	// show all years in drop-down boxes (instead of every other year as default)
+					    });
+					</script>
+				</td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Ajouter" name="action" /></td>

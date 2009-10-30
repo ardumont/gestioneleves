@@ -39,7 +39,7 @@ $aEleve = Database::fetchOneRow($sQuery);
 //==============================================================================
 ?>
 
-<h1>Edition de l'&eacute;l&egrave;ve <?php echo($aEleve[ELEVE_NOM]); ?></h1>
+<h1>Edition de l'&eacute;l&egrave;ve <?php echo($aEleve['ELEVE_NOM']); ?></h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
@@ -58,7 +58,20 @@ $aEleve = Database::fetchOneRow($sQuery);
 		</tr>
 		<tr>
 			<th>Date de naissance (dd/MM/YYYY)</th>
-			<td><input type="text" size="<?php echo(ELEVE_DATE_NAISSANCE); ?>" maxlength="<?php echo(ELEVE_DATE_NAISSANCE); ?>" name="ELEVE_DATE_NAISSANCE" value="<?php echo($aEleve['ELEVE_DATE_NAISSANCE']); ?>" /></td>
+			<td>
+				<input type="text" size="<?php echo(ELEVE_DATE_NAISSANCE); ?>" maxlength="<?php echo(ELEVE_DATE_NAISSANCE); ?>" name="ELEVE_DATE_NAISSANCE" value="<?php echo($aEleve['ELEVE_DATE_NAISSANCE']); ?>" />
+				<button id="f_trigger_b1" type="reset">...</button>
+				<script type="text/javascript">
+				    Calendar.setup({
+				        inputField     :    "ELEVE_DATE_NAISSANCE",	// id of the input field
+				        ifFormat       :    "%d/%m/%Y",      		// format of the input field
+				        showsTime      :    false,           		// will display a time selector
+				        button         :    "f_trigger_b1",  		// trigger for the calendar (button ID)
+				        singleClick    :    true,           		// single-click mode
+				        step           :    1                		// show all years in drop-down boxes (instead of every other year as default)
+				    });
+				</script>
+			</td>
 		</tr>
 		<tr>
 			<th>Actif</th>

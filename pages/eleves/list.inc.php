@@ -128,27 +128,27 @@ if($aClasses != false)
 		</tfoot>
 		<tbody>
 			<tr class="level0_row0">
-				<td>Classe</td>
+				<th>Classe</th>
 				<td><?php echo($aClasseRow['CLASSE_NOM']); ?></td>
 			</tr>
 			<tr class="level0_row1">
-				<td>Ann&eacute;e scolaire</td>
+				<th>Ann&eacute;e scolaire</th>
 				<td><?php echo($aClasseRow['CLASSE_ANNEE_SCOLAIRE']); ?></td>
 			</tr>
 			<tr class="level0_row0">
-				<td>Professeur</td>
+				<th>Professeur</th>
 				<td><?php echo($aClasseRow['PROFESSEUR_NOM']); ?></td>
 			</tr>
 			<tr class="level0_row1">
-				<td>Ecole</td>
+				<th>Ecole</th>
 				<td><?php echo($aClasseRow['ECOLE_NOM']); ?></td>
 			</tr>
 			<tr class="level0_row0">
-				<td>Ville</td>
+				<th>Ville</th>
 				<td><?php echo($aClasseRow['ECOLE_VILLE']); ?></td>
 			</tr>
 			<tr class="level0_row1">
-				<td>D&eacute;partement</td>
+				<th>D&eacute;partement</th>
 				<td><?php echo($aClasseRow['ECOLE_DEPARTEMENT']); ?></td>
 			</tr>
 		</tbody>
