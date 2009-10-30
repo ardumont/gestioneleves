@@ -17,13 +17,13 @@
 
 // ===== La liste des domaines =====
 $sQuery = "SELECT" .
+		  "  CYCLE_NOM, " .
 		  "  DOMAINE_ID, " .
-		  "  DOMAINE_NOM, " .
-		  "  CYCLE_NOM " .
+		  "  DOMAINE_NOM " .
 		  " FROM DOMAINES, CYCLES " .
 		  " WHERE DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID " .
 		  " ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC";
-$aDomaines = Database::fetchArray($sQuery);
+$aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 // $aDomaines[][COLONNE] = VALEUR
 
 //==============================================================================
@@ -56,19 +56,31 @@ $aDomaines = Database::fetchArray($sQuery);
 	<tfoot>
 	</tfoot>
 	<tbody>
-		<?php foreach($aDomaines as $nRowNum => $aDomaine): ?>
-		<tr class="level0_row<?php echo($nRowNum%2); ?>">
-			<td><?php echo($aDomaine['CYCLE_NOM']); ?></td>
-			<td><?php echo($aDomaine['DOMAINE_NOM']); ?></td>
-			<!-- Edition -->
-			<td>
-				<a href="?page=domaines&amp;mode=edit&amp;domaine_id=<?php echo($aDomaine['DOMAINE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-			</td>
-			<!-- Suppression -->
-			<td>
-				<a href="?page=domaines&amp;mode=delete&amp;domaine_id=<?php echo($aDomaine['DOMAINE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
-			</td>
+		<?php $nRowNum = 0; ?>
+		<?php foreach($aDomaines as $sCycleNom => $aCycleNom): ?>
+		<!-- Ligne du cycle -->
+		<tr class="level0_row<?php echo(($nRowNum++)%2); ?>">
+			<!-- Nom du cycle -->
+			<th><?php echo($sCycleNom); ?></th>
+			<!-- Le reste -->
+			<td colspan="3"></td>
 		</tr>
+			<?php foreach($aCycleNom as $aDomaine): ?>
+			<tr class="level0_row<?php echo(($nRowNum++)%2); ?>">
+				<!-- Nom du cycle -->
+				<td></td>
+				<!-- Nom de domaine -->
+				<td><?php echo($aDomaine['DOMAINE_NOM']); ?></td>
+				<!-- Edition -->
+				<td>
+					<a href="?page=domaines&amp;mode=edit&amp;domaine_id=<?php echo($aDomaine['DOMAINE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
+				</td>
+				<!-- Suppression -->
+				<td>
+					<a href="?page=domaines&amp;mode=delete&amp;domaine_id=<?php echo($aDomaine['DOMAINE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
+				</td>
+			</tr>
+			<?php endforeach; ?>
 		<?php endforeach; ?>
 	</tbody>
 </table>

@@ -24,14 +24,15 @@ $sQuery = "SELECT" .
 $aCycles = Database::fetchColumnWithKey($sQuery);
 // $aCycles[CYCLE_ID] = CYCLE_NOM
 
-// ===== La liste des domaines pour l'affichage de tous les domaines =====
+// ===== La liste des domaines =====
 $sQuery = "SELECT" .
-		  "  DOMAINE_NOM, " .
-		  "  CYCLE_NOM " .
+		  "  CYCLE_NOM, " .
+		  "  DOMAINE_ID, " .
+		  "  DOMAINE_NOM " .
 		  " FROM DOMAINES, CYCLES " .
 		  " WHERE DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID " .
 		  " ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC";
-$aDomaines = Database::fetchArray($sQuery);
+$aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 // $aDomaines[][COLONNE] = VALEUR
 
 //==============================================================================
@@ -88,11 +89,23 @@ $aDomaines = Database::fetchArray($sQuery);
 	<tfoot>
 	</tfoot>
 	<tbody>
-		<?php foreach($aDomaines as $nRowNum => $aDomaine): ?>
-		<tr class="level0_row<?php echo($nRowNum%2); ?>">
-			<td><?php echo($aDomaine['CYCLE_NOM']); ?></td>
-			<td><?php echo($aDomaine['DOMAINE_NOM']); ?></td>
+		<?php $nRowNum = 0; ?>
+		<?php foreach($aDomaines as $sCycleNom => $aCycleNom): ?>
+		<!-- Ligne du cycle -->
+		<tr class="level0_row<?php echo(($nRowNum++)%2); ?>">
+			<!-- Nom du cycle -->
+			<th><?php echo($sCycleNom); ?></th>
+			<!-- Le reste -->
+			<td></td>
 		</tr>
-	<?php endforeach; ?>
+			<?php foreach($aCycleNom as $aDomaine): ?>
+			<tr class="level0_row<?php echo(($nRowNum++)%2); ?>">
+				<!-- Nom du cycle -->
+				<td></td>
+				<!-- Nom de domaine -->
+				<td><?php echo($aDomaine['DOMAINE_NOM']); ?></td>
+			</tr>
+			<?php endforeach; ?>
+		<?php endforeach; ?>
 	</tbody>
 </table>
