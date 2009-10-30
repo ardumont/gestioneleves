@@ -90,7 +90,7 @@ $aMatieres = Database::fetchArray($sQuery);
 			<tr>
 				<td>Comp&eacute;tence</td>
 				<td>
-					<textarea cols="50" rows="10" name="COMPETENCE_NOM" maxlength="<?php echo(COMPETENCE_NOM); ?>"><?php echo($aCompetence['COMPETENCE_NOM']); ?></textarea>
+					<textarea cols="50" rows="10" name="COMPETENCE_NOM"><?php echo($aCompetence['COMPETENCE_NOM']); ?></textarea>
 				</td>
 			</tr>
 			<tr>

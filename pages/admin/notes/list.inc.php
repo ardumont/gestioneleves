@@ -48,11 +48,10 @@ $aNotes = Database::fetchArray($sQuery);
 <table class="list_tree">
 	<thead>
 		<tr>
-			<th>Editer</th>
 			<th>Notes</th>
 			<th>Labels</th>
 			<th>Coefficients</th>
-			<th>Supprimer</th>
+			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
@@ -60,14 +59,16 @@ $aNotes = Database::fetchArray($sQuery);
 	<tbody>
 		<?php foreach($aNotes as $nRowNum => $aNote): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
-			<td>
-				<a href="?page=notes&amp;mode=edit&amp;note_id=<?php echo($aNote['NOTE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-			</td>
 			<td><?php echo($aNote['NOTE_NOM']); ?></td>
 			<td><?php echo($aNote['NOTE_LABEL']); ?></td>
 			<td><?php echo($aNote['NOTE_NOTE']); ?></td>
+			<!-- Edition -->
 			<td>
-				<a href="?page=notes&amp;mode=delete&amp;note_id=<?php echo($aNote['NOTE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.gif" alt="Supprimer" title="Supprimer" /></a>
+				<a href="?page=notes&amp;mode=edit&amp;note_id=<?php echo($aNote['NOTE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
+			</td>
+			<!-- Suppression -->
+			<td>
+				<a href="?page=notes&amp;mode=delete&amp;note_id=<?php echo($aNote['NOTE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
 			</td>
 		</tr>
 		<?php endforeach; ?>

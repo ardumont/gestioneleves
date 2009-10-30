@@ -239,7 +239,7 @@ if($nEvalColId != null)
 			</tr>
 			<tr>
 				<td>Commentaire</td>
-				<td><textarea cols="50" rows="10" size="200" name="EVAL_IND_COMMENTAIRE"></textarea></td>
+				<td><textarea cols="50" rows="10" name="EVAL_IND_COMMENTAIRE"></textarea></td>
 			</tr>
 			<tr>
 				<td>

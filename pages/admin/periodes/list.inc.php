@@ -48,11 +48,10 @@ $aPeriodes = Database::fetchArray($sQuery);
 <table class="list_tree">
 	<thead>
 		<tr>
-			<th>Editer</th>
 			<th>P&eacute;riode</th>
 			<th>Dates de d&eacute;but</th>
 			<th>Dates de fin</th>
-			<th>Supprimer</th>
+			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
@@ -60,14 +59,16 @@ $aPeriodes = Database::fetchArray($sQuery);
 	<tbody>
 		<?php foreach($aPeriodes as $nRowNum => $aPeriode): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
-			<td>
-				<a href="?page=periodes&amp;mode=edit&amp;periode_id=<?php echo($aPeriode['PERIODE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-			</td>
 			<td><?php echo($aPeriode['PERIODE_NOM']); ?></td>
 			<td><?php echo($aPeriode['PERIODE_DATE_DEBUT']); ?></td>
 			<td><?php echo($aPeriode['PERIODE_DATE_FIN']); ?></td>
+			<!-- Edition -->
 			<td>
-				<a href="?page=periodes&amp;mode=delete&amp;periode_id=<?php echo($aPeriode['PERIODE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.gif" alt="Supprimer" title="Supprimer" /></a>
+				<a href="?page=periodes&amp;mode=edit&amp;periode_id=<?php echo($aPeriode['PERIODE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
+			</td>
+			<!-- Suppression -->
+			<td>
+				<a href="?page=periodes&amp;mode=delete&amp;periode_id=<?php echo($aPeriode['PERIODE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
 			</td>
 		</tr>
 		<?php endforeach; ?>

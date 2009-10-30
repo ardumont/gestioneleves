@@ -48,11 +48,10 @@ $aEcoles = Database::fetchArray($sQuery);
 <table class="list_tree">
 	<thead>
 		<tr>
-			<th>Editer</th>
 			<th>Ecoles</th>
 			<th>Villes</th>
 			<th>D&eacute;partements</th>
-			<th>Supprimer</th>
+			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
@@ -60,14 +59,16 @@ $aEcoles = Database::fetchArray($sQuery);
 	<tbody>
 		<?php foreach($aEcoles as $nRowNum => $aEcole): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
-			<td>
-				<a href="?page=ecoles&amp;mode=edit&amp;ecole_id=<?php echo($aEcole['ECOLE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-			</td>
 			<td><?php echo($aEcole['ECOLE_NOM']); ?></td>
 			<td><?php echo($aEcole['ECOLE_VILLE']); ?></td>
 			<td><?php echo($aEcole['ECOLE_DEPARTEMENT']); ?></td>
+			<!-- Edition -->
 			<td>
-				<a href="?page=ecoles&amp;mode=delete&amp;ecole_id=<?php echo($aEcole['ECOLE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.gif" alt="Supprimer" title="Supprimer" /></a>
+				<a href="?page=ecoles&amp;mode=edit&amp;ecole_id=<?php echo($aEcole['ECOLE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
+			</td>
+			<!-- Suppression -->
+			<td>
+				<a href="?page=ecoles&amp;mode=delete&amp;ecole_id=<?php echo($aEcole['ECOLE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
 			</td>
 		</tr>
 		<?php endforeach; ?>

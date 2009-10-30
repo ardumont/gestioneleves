@@ -192,7 +192,7 @@ if($aClasses != false)
 					</td>
 					<!-- Suppression -->
 					<td>
-						<a href="?page=eleves&amp;mode=delete&amp;eleve_id=<?php echo($aEleve['ELEVE_ID']); ?>&amp;classe_id=<?php echo($aEleve['ID_CLASSE']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.gif" alt="Supprimer" title="Supprimer" /></a>
+						<a href="?page=eleves&amp;mode=delete&amp;eleve_id=<?php echo($aEleve['ELEVE_ID']); ?>&amp;classe_id=<?php echo($aEleve['ID_CLASSE']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
 					</td>
 				</tr>
 				<?php endforeach; ?>

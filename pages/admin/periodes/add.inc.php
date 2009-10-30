@@ -91,7 +91,6 @@ $aPeriodes = Database::fetchArray($sQuery);
 			<td><?php echo($aPeriode['PERIODE_DATE_DEBUT']); ?></td>
 			<td><?php echo($aPeriode['PERIODE_DATE_FIN']); ?></td>
 		</tr>
-		</tr>
 		<?php endforeach; ?>
 	</tbody>
 </table>

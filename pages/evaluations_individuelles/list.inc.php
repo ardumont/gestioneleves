@@ -170,7 +170,6 @@ classe, aucun r&eacute;sultat ne s'affichera.
 		<caption>Liste des &eacute;valuations individuelles</caption>
 		<thead>
 			<tr>
-				<th>Editer</th>
 				<th>El&egrave;ves</th>
 				<th>Classes</th>
 				<th>Domaines</th>
@@ -178,7 +177,7 @@ classe, aucun r&eacute;sultat ne s'affichera.
 				<th>Comp&eacute;tences</th>
 				<th>Notes</th>
 				<th>Commentaires</th>
-				<th>Supprimer</th>
+				<th colspan="2">Actions</th>
 			</tr>
 		</thead>
 		<tfoot>
@@ -186,9 +185,6 @@ classe, aucun r&eacute;sultat ne s'affichera.
 		<tbody>
 			<?php foreach($aEvalInds as $nRowNum => $aEvalInd): ?>
 			<tr class="level0_row<?php echo($nRowNum%2); ?>">
-				<td>
-					<a href="?page=evaluations_individuelles&amp;mode=edit&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-				</td>
 				<td><?php echo($aEvalInd['ELEVE_NOM']); ?></td>
 				<td><?php echo($aEvalInd['CLASSE_NOM']); ?></td>
 				<td><?php echo($aEvalInd['DOMAINE_NOM']); ?></td>
@@ -196,8 +192,13 @@ classe, aucun r&eacute;sultat ne s'affichera.
 				<td><?php echo($aEvalInd['COMPETENCE_NOM']); ?></td>
 				<td><?php echo($aEvalInd['NOTE_NOM']); ?></td>
 				<td><pre><?php echo($aEvalInd['EVAL_IND_COMMENTAIRE']); ?></pre></td>
+				<!-- Edition -->
 				<td>
-					<a href="?page=evaluations_individuelles&amp;mode=delete&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.gif" alt="Supprimer" title="Supprimer" /></a>
+					<a href="?page=evaluations_individuelles&amp;mode=edit&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
+				</td>
+				<!-- Suppression -->
+				<td>
+					<a href="?page=evaluations_individuelles&amp;mode=delete&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
 				</td>
 			</tr>
 			<?php endforeach; ?>

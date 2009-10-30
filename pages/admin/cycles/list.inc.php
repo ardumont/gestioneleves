@@ -46,9 +46,8 @@ $aCycles = Database::fetchArray($sQuery);
 <table class="list_tree">
 	<thead>
 		<tr>
-			<th>Editer</th>
 			<th>Cycles</th>
-			<th>Supprimer</th>
+			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
@@ -56,12 +55,14 @@ $aCycles = Database::fetchArray($sQuery);
 	<tbody>
 		<?php foreach($aCycles as $nRowNum => $aCycle): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
+			<td><?php echo($aCycle['CYCLE_NOM']); ?></td>
+			<!-- Edition -->
 			<td>
 				<a href="?page=cycles&amp;mode=edit&amp;cycle_id=<?php echo($aCycle['CYCLE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
 			</td>
-			<td><?php echo($aCycle['CYCLE_NOM']); ?></td>
+			<!-- Suppression -->
 			<td>
-				<a href="?page=cycles&amp;mode=delete&amp;cycle_id=<?php echo($aCycle['CYCLE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.gif" alt="Supprimer" title="Supprimer" /></a>
+				<a href="?page=cycles&amp;mode=delete&amp;cycle_id=<?php echo($aCycle['CYCLE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
 			</td>
 		</tr>
 		<?php endforeach; ?>

@@ -151,14 +151,13 @@ Vous pouvez &eacute;galement filtrer sur la classe et la p&eacute;riode.
 	<caption>Liste des &eacute;valuations</caption>
 	<thead>
 		<tr>
-			<th>Editer</th>
 			<th>P&eacute;riodes</th>
 			<th>Classes</th>
 			<th>Ann&eacute;es scolaires</th>
 			<th>Evaluations collectives</th>
 			<th>Descriptions</th>
 			<th>Dates</th>
-			<th>Supprimer</th>
+			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
@@ -166,17 +165,19 @@ Vous pouvez &eacute;galement filtrer sur la classe et la p&eacute;riode.
 	<tbody>
 		<?php foreach($aEvalCols as $nRowNum => $aEvalCol): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
-			<td>
-				<a href="?page=evaluations_collectives&amp;mode=edit&amp;eval_col_id=<?php echo($aEvalCol['EVAL_COL_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-			</td>
 			<td><?php echo($aEvalCol['PERIODE_NOM']); ?></td>
 			<td><?php echo($aEvalCol['CLASSE_NOM']); ?></td>
 			<td><?php echo($aEvalCol['CLASSE_ANNEE_SCOLAIRE']); ?></td>
 			<td><?php echo($aEvalCol['EVAL_COL_NOM']); ?></td>
 			<td><pre><?php echo($aEvalCol['EVAL_COL_DESCRIPTION']); ?></pre></td>
 			<td><?php echo($aEvalCol['EVAL_COL_DATE']); ?></td>
+			<!-- Edition -->
 			<td>
-				<a href="?page=evaluations_collectives&amp;mode=delete&amp;eval_col_id=<?php echo($aEvalCol['EVAL_COL_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.gif" alt="Supprimer" title="Supprimer" /></a>
+				<a href="?page=evaluations_collectives&amp;mode=edit&amp;eval_col_id=<?php echo($aEvalCol['EVAL_COL_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
+			</td>
+			<!-- Suppression -->
+			<td>
+				<a href="?page=evaluations_collectives&amp;mode=delete&amp;eval_col_id=<?php echo($aEvalCol['EVAL_COL_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
 			</td>
 		</tr>
 		<?php endforeach; ?>

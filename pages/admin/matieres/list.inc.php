@@ -50,11 +50,10 @@ $aMatieres = Database::fetchArray($sQuery);
 <table class="list_tree">
 	<thead>
 		<tr>
-			<th>Editer</th>
 			<th>Cycles</th>
 			<th>Domaines</th>
 			<th>Mati&egrave;res</th>
-			<th>Supprimer</th>
+			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
@@ -62,14 +61,16 @@ $aMatieres = Database::fetchArray($sQuery);
 	<tbody>
 		<?php foreach($aMatieres as $nRowNum => $aMatiere): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
-			<td>
-				<a href="?page=matieres&amp;mode=edit&amp;matiere_id=<?php echo($aMatiere['MATIERE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-			</td>
 			<td><?php echo($aMatiere['CYCLE_NOM']); ?></td>
 			<td><?php echo($aMatiere['DOMAINE_NOM']); ?></td>
 			<td><?php echo($aMatiere['MATIERE_NOM']); ?></td>
+			<!-- Edition -->
 			<td>
-				<a href="?page=matieres&amp;mode=delete&amp;matiere_id=<?php echo($aMatiere['MATIERE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.gif" alt="Supprimer" title="Supprimer" /></a>
+				<a href="?page=matieres&amp;mode=edit&amp;matiere_id=<?php echo($aMatiere['MATIERE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
+			</td>
+			<!-- Suppression -->
+			<td>
+				<a href="?page=matieres&amp;mode=delete&amp;matiere_id=<?php echo($aMatiere['MATIERE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
 			</td>
 		</tr>
 		<?php endforeach; ?>

@@ -54,14 +54,13 @@ $aClasses = Database::fetchArray($sQuery);
 <table class="list_tree">
 	<thead>
 		<tr>
-			<th>Editer</th>
 			<th>Professeurs</th>
 			<th>Classes</th>
 			<th>Ann&eacute;es scolaires</th>
 			<th>Ecoles</th>
 			<th>Villes</th>
 			<th>D&eacute;partements</th>
-			<th>Supprimer</th>
+			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
@@ -69,17 +68,19 @@ $aClasses = Database::fetchArray($sQuery);
 	<tbody>
 		<?php foreach($aClasses as $nRowNum => $aClasse): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
-			<td>
-				<a href="?page=classes&amp;mode=edit&amp;classe_id=<?php echo($aClasse['CLASSE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-			</td>
 			<td><?php echo($aClasse['PROFESSEUR_NOM']); ?></td>
 			<td><?php echo($aClasse['CLASSE_NOM']); ?></td>
 			<td><?php echo($aClasse['CLASSE_ANNEE_SCOLAIRE']); ?></td>
 			<td><?php echo($aClasse['ECOLE_NOM']); ?></td>
 			<td><?php echo($aClasse['ECOLE_VILLE']); ?></td>
 			<td><?php echo($aClasse['ECOLE_DEPARTEMENT']); ?></td>
+			<!-- Edition -->
 			<td>
-				<a href="?page=classes&amp;mode=delete&amp;classe_id=<?php echo($aClasse['CLASSE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.gif" alt="Supprimer" title="Supprimer" /></a>
+				<a href="?page=classes&amp;mode=edit&amp;classe_id=<?php echo($aClasse['CLASSE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
+			</td>
+			<!-- Suppression -->
+			<td>
+				<a href="?page=classes&amp;mode=delete&amp;classe_id=<?php echo($aClasse['CLASSE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
 			</td>
 		</tr>
 		<?php endforeach; ?>

@@ -53,12 +53,11 @@ $aCompetences = Database::fetchArray($sQuery);
 <table class="list_tree">
 	<thead>
 		<tr>
-			<th>Editer</th>
 			<th>Cycles</th>
 			<th>Domaines</th>
 			<th>Mati&egrave;res</th>
 			<th>Comp&eacute;tences</th>
-			<th>Supprimer</th>
+			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
@@ -66,18 +65,19 @@ $aCompetences = Database::fetchArray($sQuery);
 	<tbody>
 		<?php foreach($aCompetences as $nRowNum => $aCompetence): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
-			<td>
-				<a href="?page=competences&amp;mode=edit&amp;competence_id=<?php echo($aCompetence['COMPETENCE_ID']); ?>&amp;matiere_id=<?php echo($aCompetence['MATIERE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-			</td>
 			<td><?php echo($aCompetence['CYCLE_NOM']); ?></td>
 			<td><?php echo($aCompetence['DOMAINE_NOM']); ?></td>
 			<td><?php echo($aCompetence['MATIERE_NOM']); ?></td>
 			<td>
-				<a href="?page=competences&amp;mode=edit&amp;competence_id=<?php echo($aCompetence['COMPETENCE_ID']); ?>&amp;matiere_id=<?php echo($aCompetence['MATIERE_ID']); ?>">
-					<?php echo($aCompetence['COMPETENCE_NOM']); ?></td>
-				</a>
+				<a href="?page=competences&amp;mode=edit&amp;competence_id=<?php echo($aCompetence['COMPETENCE_ID']); ?>&amp;matiere_id=<?php echo($aCompetence['MATIERE_ID']); ?>"><?php echo($aCompetence['COMPETENCE_NOM']); ?></a>
+			</td>
+			<!-- Edition -->
 			<td>
-				<a href="?page=competences&amp;mode=delete&amp;competence_id=<?php echo($aCompetence['COMPETENCE_ID']); ?>&amp;matiere_id=<?php echo($aCompetence['MATIERE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.gif" alt="Supprimer" title="Supprimer" /></a>
+				<a href="?page=competences&amp;mode=edit&amp;competence_id=<?php echo($aCompetence['COMPETENCE_ID']); ?>&amp;matiere_id=<?php echo($aCompetence['MATIERE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
+			</td>
+			<!-- Suppression -->
+			<td>
+				<a href="?page=competences&amp;mode=delete&amp;competence_id=<?php echo($aCompetence['COMPETENCE_ID']); ?>&amp;matiere_id=<?php echo($aCompetence['MATIERE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
 			</td>
 		</tr>
 		<?php endforeach; ?>
