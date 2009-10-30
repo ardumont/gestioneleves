@@ -428,7 +428,9 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 			</h4>
 			<?php else: /* Utilisateur connecté */ ?>
 				<h1><?php echo $_SESSION['PROFESSEUR_NOM']; ?></h1>
+					<!--
 					<h4><a href="?page=profils&amp;mode=edit&amp;user_id=<?php echo $_SESSION['PROFESSEUR_ID']; ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/user.png"/>Modification du profil</a></h4>
+					-->
 					<h4><a href="?page=logout_do"><img src="<?php echo(URL_ICONS_16X16); ?>/out.png"/>Se d&eacute;connecter</a></h4>
 			<?php endif; ?>
 		</div>
