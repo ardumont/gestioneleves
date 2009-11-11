@@ -50,6 +50,7 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 </ul>
 <?php endif; ?>
 
+<?php if($aCompetences != false): ?>
 <table class="list_tree">
 	<thead>
 		<tr>
@@ -122,3 +123,6 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 		<?php endforeach; ?>
 	</tbody>
 </table>
+<?php else: ?>
+	Aucune compétence n'a été renseignée à ce jour.
+<?php endif; ?>

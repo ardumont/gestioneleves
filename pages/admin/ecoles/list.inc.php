@@ -45,6 +45,7 @@ $aEcoles = Database::fetchArray($sQuery);
 </ul>
 <?php endif; ?>
 
+<?php if($aEcoles != false): ?>
 <table class="list_tree">
 	<thead>
 		<tr>
@@ -74,3 +75,6 @@ $aEcoles = Database::fetchArray($sQuery);
 		<?php endforeach; ?>
 	</tbody>
 </table>
+<?php else: ?>
+	Aucune école n'a été renseignée à ce jour.
+<?php endif; ?>

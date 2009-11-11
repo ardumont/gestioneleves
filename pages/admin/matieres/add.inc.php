@@ -84,6 +84,7 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 </form>
 
 
+<?php if($aCycle != false): ?>
 <table class="list_tree">
 	<thead>
 		<tr>
@@ -127,3 +128,6 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 		<?php endforeach; ?>
 	</tbody>
 </table>
+<?php else: ?>
+	Aucun cycle n'a été renseigné à ce jour.
+<?php endif; ?>

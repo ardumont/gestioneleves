@@ -45,6 +45,7 @@ $aNiveaux = Database::fetchArray($sQuery);
 </ul>
 <?php endif; ?>
 
+<?php if($aNiveaux != false): ?>
 <table class="list_tree">
 	<thead>
 		<tr>
@@ -72,3 +73,6 @@ $aNiveaux = Database::fetchArray($sQuery);
 		<?php endforeach; ?>
 	</tbody>
 </table>
+<?php else: ?>
+	Aucun niveau n'a été renseigné à ce jour.
+<?php endif; ?>

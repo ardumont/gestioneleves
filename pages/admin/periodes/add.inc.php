@@ -74,6 +74,7 @@ $aPeriodes = Database::fetchArray($sQuery);
 	</table>
 </form>
 
+<?php if($aPeriodes != false): ?>
 <table class="list_tree">
 	<thead>
 		<tr>
@@ -94,4 +95,6 @@ $aPeriodes = Database::fetchArray($sQuery);
 		<?php endforeach; ?>
 	</tbody>
 </table>
-
+<?php else: ?>
+	Aucune période n'a été renseignée à ce jour.
+<?php endif; ?>

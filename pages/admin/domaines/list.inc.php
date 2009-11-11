@@ -45,6 +45,7 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 </ul>
 <?php endif; ?>
 
+<?php if($aDomaines != false): ?>
 <table class="list_tree">
 	<thead>
 		<tr>
@@ -84,3 +85,6 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 		<?php endforeach; ?>
 	</tbody>
 </table>
+<?php else: ?>
+	Aucun domaine n'a été renseigné à ce jour.
+<?php endif; ?>

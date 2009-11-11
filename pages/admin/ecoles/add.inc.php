@@ -68,6 +68,7 @@ $aEcoles = Database::fetchArray($sQuery);
 	</table>
 </form>
 
+<?php if($aEcoles != false): ?>
 <table class="list_tree">
 	<caption>Liste des &eacute;coles</caption>
 	<thead>
@@ -89,3 +90,6 @@ $aEcoles = Database::fetchArray($sQuery);
 		<?php endforeach; ?>
 	</tbody>
 </table>
+<?php else: ?>
+	Aucune école n'a été renseignée à ce jour.
+<?php endif; ?>

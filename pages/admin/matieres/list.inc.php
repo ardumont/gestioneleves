@@ -47,6 +47,7 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 </ul>
 <?php endif; ?>
 
+<?php if($aMatieres != false): ?>
 <table class="list_tree">
 	<thead>
 		<tr>
@@ -101,3 +102,6 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 		<?php endforeach; ?>
 	</tbody>
 </table>
+<?php else: ?>
+	Aucune matière n'a été renseignée à ce jour.
+<?php endif; ?>

@@ -74,6 +74,7 @@ $aNotes = Database::fetchArray($sQuery);
 	</table>
 </form>
 
+<?php if($aNotes != false): ?>
 <table class="list_tree">
 	<thead>
 		<tr>
@@ -94,4 +95,7 @@ $aNotes = Database::fetchArray($sQuery);
 		<?php endforeach; ?>
 	</tbody>
 </table>
+<?php else: ?>
+	Aucune note n'a été renseignée à ce jour.
+<?php endif; ?>
 

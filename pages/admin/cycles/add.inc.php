@@ -60,6 +60,7 @@ $aCycles = Database::fetchArray($sQuery);
 	</table>
 </form>
 
+<?php if($aCycles != false): ?>
 <table class="list_tree">
 	<thead>
 		<tr>
@@ -76,4 +77,6 @@ $aCycles = Database::fetchArray($sQuery);
 		<?php endforeach; ?>
 	</tbody>
 </table>
-
+<?php else: ?>
+	Aucun cycle n'a été renseigné à ce jour.
+<?php endif; ?>

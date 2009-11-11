@@ -51,6 +51,7 @@ $aClasses = Database::fetchArray($sQuery);
 </ul>
 <?php endif; ?>
 
+<?php if($aClasses != false): ?>
 <table class="list_tree">
 	<thead>
 		<tr>
@@ -86,3 +87,6 @@ $aClasses = Database::fetchArray($sQuery);
 		<?php endforeach; ?>
 	</tbody>
 </table>
+<?php else: ?>
+	Aucune classe n'a été renseignée à ce jour.
+<?php endif; ?>
