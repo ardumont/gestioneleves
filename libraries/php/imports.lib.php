@@ -73,7 +73,7 @@ function import_cndmcs($sNomFichier)
 		if($aDonnees[3] != null)
 		{
 			$nMatiereId = ajoute_matiere($nDomaineId, $aDonnees[3]);
-	
+
 			/////////////////
 			// COMPETENCES //
 			/////////////////
@@ -84,13 +84,67 @@ function import_cndmcs($sNomFichier)
 			// pour toutes les competences qui existent, ...
 			foreach($aCompetences as $sNomCompetence)
 			{
-				// ... on ajoute la competence $sNomCompetence pour la matiere d'id 
+				// ... on ajoute la competence $sNomCompetence pour la matiere d'id
 				// $nMatiereId
 				ajoute_competence($nMatiereId, $sNomCompetence);
 			}
 		}
 	}
-}
+}// fin import_cndmcs
+
+/**
+ * Importe le contenu du fichier $sNomFichier dans la base.<br />
+ * Ceci concerne uniquement l'import des cycles / niveaux / domaines / matieres / competences.<br />
+ * Les lignes du fichier sont de la forme :<br />
+ * cycle;niveau;domaine;matiere;competence_0;competence_1;...;competence_n<br />
+ * La premiere ligne du fichier contient cette ligne descriptive.<br />
+ * Il faut donc l'eviter lors du parsing.
+ * @param $sNomFichier	Nom du fichier a parser
+ */
+function import_xml($sNomFichier)
+{
+	// Charge le flux
+	$oXML = simplexml_load_file($sNomFichier, "SimpleXMLElement");
+
+	// Récupère les cycles
+	$aCycles = $oXML->xpath("/cycle");
+	foreach($aCycles as $oCycle)
+	{
+		// Récupère le nom du cycle
+		$sCycleName = (string) $oCycle['name'];
+		// Ajoute le cycle en bdd
+		$nIdCycle = ajoute_cycle($sCycleName);
+
+		// Récupère la liste des domaines du cycle
+		$aDomaines = $oXML->xpath("//cycle[@name='{$sCycleName}']/domaine");
+
+		foreach($aDomaines as $oDomaine)
+		{
+			// Récupère le nom du domaine
+			$sDomaineName = (string) $oDomaine['name'];
+			// Ajoute le domaine en bdd
+			$nIdDomaine = ajoute_domaine($nIdCycle, $sDomaineName);
+
+			// Récupère la liste des matières du domaine
+			$aMatieres = $oXML->xpath("/cycle[@name='{$sCycleName}']/domaine[@name='{$sDomaineName}']/matiere");
+			foreach($aMatieres as $oMatiere)
+			{
+				// Récupère le nom de la matière
+				$sMatiereName = (string) $oMatiere['name'];
+				// Ajoute la matière en bdd
+				$nIdMatiere = ajoute_matiere($nIdDomaine, $sMatiereName);
+
+				// Récupère la liste des compétences de la matière
+				$aCompetences = $oXML->xpath("/cycle[@name='{$sCycleName}']/domaine[@name='{$sDomaineName}']/matiere[@name='{$sMatiereName}']/competence");
+				foreach($aCompetences as $oCompetence)
+				{
+					$sCompetenceName = (string) $oCompetence['name'];
+					$nIdCompetence = ajoute_competence($nIdMatiere, $sCompetenceName);
+				}// fin itération sur les compétences
+			}// fin itération sur les matières
+		}// fin itération sur les domaines
+	}// fin itération sur les cycles
+}// fin import_xml
 
 /**
  * Fonction d'ajout d'un cycle dans la table CYCLES.<br />
@@ -115,7 +169,7 @@ function ajoute_cycle($sNomCycle)
 		// on l'ajoute
 		$sQuery = "INSERT INTO CYCLES(CYCLE_NOM) " .
 				  " VALUES(" . Database::prepareString($sNomCycle) .")";
-		Database::execute($sQuery);					
+		Database::execute($sQuery);
 		// puis on recupere son id
 		$sQuery = "SELECT " .
 				  "  CYCLE_ID " .
@@ -124,10 +178,10 @@ function ajoute_cycle($sNomCycle)
 		$nCycleId = Database::fetchOneValue($sQuery);
 	}
 	return $nCycleId;
-}
+}// fin ajoute_cycle
 
 /**
- * Ajoute un niveau $sNomNiveau pour le cycle d'id $nIdCycle si celui-ci 
+ * Ajoute un niveau $sNomNiveau pour le cycle d'id $nIdCycle si celui-ci
  * n'existe pas puis renvoie l'id du nouveau niveau.<br />
  * S'il existe, renvoie juste l'id de ce niveau.<br />
  * @param $nIdCycle		id du cycle auquel rattache le niveau
@@ -161,10 +215,10 @@ function ajoute_niveau($nIdCycle, $sNomNiveau)
 		$nNiveauId = Database::fetchOneValue($sQuery);
 	}
 	return $nNiveauId;
-}
+}// fin ajoute_niveau
 
 /**
- * Ajoute un domaine $sNomDomaine pour le cycle d'id $nIdCycle si celui-ci 
+ * Ajoute un domaine $sNomDomaine pour le cycle d'id $nIdCycle si celui-ci
  * n'existe pas puis renvoie l'id du nouveau domaine.<br />
  * S'il existe, renvoie juste l'id de ce domaine.<br />
  * @param $nIdCycle		id du cycle auquel rattache le niveau
@@ -198,10 +252,10 @@ function ajoute_domaine($nIdCycle, $sNomDomaine)
 		$nDomaineId = Database::fetchOneValue($sQuery);
 	}
 	return $nDomaineId;
-}
+}// fin ajoute_domaine
 
 /**
- * Ajoute une matiere $sNomMatiere pour le domaine d'id $nIdDomaine si celui-ci 
+ * Ajoute une matiere $sNomMatiere pour le domaine d'id $nIdDomaine si celui-ci
  * n'existe pas puis renvoie l'id de la nouvelle matiere.<br />
  * Si elle existe, renvoie juste l'id de cette matiere.<br />
  * @param $nIdDomaine	id du domaine auquel rattache lla matiere
@@ -235,10 +289,10 @@ function ajoute_matiere($nIdDomaine, $sNomMatiere)
 		$nMatiereId = Database::fetchOneValue($sQuery);
 	}
 	return $nMatiereId;
-}
+}// fin ajoute_matiere
 
 /**
- * Ajoute une competence $sNomCompetence pour la matiere d'id $nIdMatiere si 
+ * Ajoute une competence $sNomCompetence pour la matiere d'id $nIdMatiere si
  * celle-ci n'existe pas puis renvoie l'id de la nouvelle competence.<br />
  * Si elle existe, renvoie juste l'id de cette competence.<br />
  * @param $nIdMatiere		id de la matiere a laquel rattacher la competence
@@ -271,6 +325,4 @@ function ajoute_competence($nIdMatiere, $sNomCompetence)
 		$nCompetenceId = Database::fetchOneValue($sQuery);
 	}
 	return $nCompetenceId;
-}
-
-?>
+}// fin ajoute_competence

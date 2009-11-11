@@ -182,12 +182,6 @@ $aMenuPage = array
 		'delete_do'	=>	"admin/competences/delete_do.inc.php",
 	),
 
-	'imports' => array
-	(
-		'imp'		=>	"admin/imports/import.inc.php",
-		'imp_do'	=>	"admin/imports/import_do.inc.php",
-	),
-
 	'cycles' => array
 	(
 		''			=>	"admin/cycles/list.inc.php",
@@ -231,7 +225,15 @@ $aMenuPage = array
 		'delete'	=>	"admin/notes/delete.inc.php",
 		'delete_do'	=>	"admin/notes/delete_do.inc.php",
 	),
-);
+
+	'imports' => array
+	(
+		'imports_csv'		=>	"admin/imports/imports_csv.inc.php",
+		'imports_csv_do'	=>	"admin/imports/imports_csv_do.inc.php",
+		'imports_xml'		=>	"admin/imports/imports_xml.inc.php",
+		'imports_xml_do'	=>	"admin/imports/imports_xml_do.inc.php",
+	),
+	);
 
 //==============================================================================
 // Validation du formulaire
@@ -289,7 +291,7 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
 <head>
 	<title>Gestionnaire d'&eacute;l&eacute;ves (Administration)</title>
-	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-15" />
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<meta content="Antoine Dumont" name="author" />
 
 	<link rel="stylesheet" type="text/css" href="default.css" media="all" />
@@ -390,7 +392,8 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 				<h4><a href="?page=periodes"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
 				<h4><a href="?page=periodes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>Import</h3>
-				<h4><a href="?page=imports&amp;mode=imp"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Importer</a></h4>
+				<h4><a href="?page=imports&amp;mode=imports_csv"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Import CSV</a></h4>
+				<h4><a href="?page=imports&amp;mode=imports_xml"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Import XML</a></h4>
 		</div>
 	</div>
 	<div id="struct_main" class="<?php echo($sPageId); ?>">

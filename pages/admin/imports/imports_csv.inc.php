@@ -19,11 +19,35 @@
 // Preparation de l'affichage
 //==============================================================================
 
+$sCSVExemple = <<< EOCSV
+	cycle;niveau;domaine;matiere;competence_0;competence_1;...;competence_n
+	II;ce1;Instruction civique et morale;Instruction civique et morale;Prendre des responsabilités et être autonome;Respecter les adultes et les obéir;...;
+	II;ce1;Français;Lecture Ecriture;Repérer un son auditivement;Repérer la graphie d'un son;...;
+EOCSV;
+
 //==============================================================================
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Liste des &eacute;coles</h1>
+<h1>Imports CSV</h1>
+
+<table class="formulaire">
+	<caption>Fonctionnement</caption>
+	<tr>
+		<td>
+			Le but est de faciliter la cr&eacute;ation des Cycle/Domaine/Mati&egrave;re/Comp&eacute;tence.<br />
+			Pour cela, vous pouvez
+			<ul>
+				<li>soit saisir dans chacune des ihms dans cet ordre les cycles, domaines, mati&egrave;res et comp&eacute;tences.</li>
+				<li>soit importer un fichier csv &eacute;dit&eacute; &agrave; la main avec une structure similaire :
+					<pre style="font-size: 1.1em;"><?php echo htmlentities($sCSVExemple); ?></pre>
+					L'ordre dans le fichier est important, il montre la dépendance des cycles, niveaux, domaines, matières et compétences.
+					Attention à l'encodage du fichier qui doit être de l'UTF-8.
+				</li>
+			</ul>
+		</td>
+	</tr>
+</table>
 
 <br />
 <?php if(Message::hasError() == true): ?>
@@ -34,7 +58,7 @@
 </ul>
 <?php endif; ?>
 
-<form method="post" action="?page=imports&amp;mode=imp_do" enctype="multipart/form-data">
+<form method="post" action="?page=imports&amp;mode=imports_csv_do" enctype="multipart/form-data">
 	<table class="formulaire">
 		<caption>Importer Niveau/Cycle/Domaine/Mati&egrave;re/Comp&eacute;tence</caption>
 		<tr>

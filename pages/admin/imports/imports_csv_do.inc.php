@@ -26,18 +26,18 @@ switch(strtolower($sAction))
 	case 'importer':
 		if($objForm->hasError() == true) break;
 
-		// importe les cycles/niveaux/domaines/matieres/competences		
+		// importe les cycles/niveaux/domaines/matieres/competences
 		import_cndmcs($sNomFichier);
 		// Rechargement
-		header("Location: ?page=imports&mode=imp");
+		header("Location: ?page=imports&mode=imports_csv");
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
 
 		// Rechargement
-		header("Location: ?page=ecoles");
+		header("Location: ?page=imports&mode=imports_csv");
 		return;
 	break;
 
@@ -63,6 +63,6 @@ switch(strtolower($sAction))
 Message::addErrorFromFormValidation($objForm->getError());
 
 // Rechargement
-header("Location: ?page=imports&mode=imp");
+header("Location: ?page=imports&mode=imports_csv");
 return;
 ?>
