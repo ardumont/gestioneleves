@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cycle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cycle.xsd" name="II">
+	<domaine name="Instruction civique et morale">
+		<matiere name="Instruction civique et morale">
+			<competence name="Prendre des responsabilités et être autonome" />
+			<competence name="Respecter les adultes et les obéir" />
+			<competence name="Respecter les règles de la vie collective" />
+			<competence name="Connaître les règles élémentaires de politesse" />
+			<competence name="Connaître des règles simples de comportement en société" />
+			<competence name="Coopérer à la vie de la classe et rendre service" />
+			<competence name="Connaître les principaux symboles de la nation et de la République et les respecter" />
+		</matiere>
+	</domaine>
+	<domaine name="Français">
+		<matiere name="Lecture écriture">
+			<competence name="Repérer un son auditivement" />
+			<competence name="Repérer la graphie d'un son" />
+			<competence name="Repérer la graphie d'un son" />
+			<competence name="Lire une syllabe" />
+			<competence name="Lire un phonème" />
+			<competence name="Lire des mots" />
+			<competence name="Lire des phrases" />
+			<competence name="Lire à haute voix un texte et le comprendre" />
+			<competence name="Lire silencieusement une consigne, un texte et les comprendre" />
+			<competence name="Connaître le vocabulaire lié à la lecture d'un texte (auteur, éditeur...)" />
+			<competence name="Découper un mot en syllabes" />
+			<competence name="Découper une phrase en mots" />
+			<competence name="Découper un texte en phrases" />
+			<competence name="Utiliser des mots d'une même famille" />
+			<competence name="Comprendre un texte lu par l'adulte" />
+			<competence name="Retrouver, à l'écrit, des informations dans un texte" />
+			<competence name="Tenir correctement son outil" />
+			<competence name="Ecrire en minuscule de manière sûre et lisible" />
+			<competence name="Passer de l'écriture scripte à l'écriture cursive" />
+			<competence name="Connaître et savoir écrire les majuscules" />
+			<competence name="Ecrire sans faute des mots simples" />
+			<competence name="Ecrire sans faute des mots invariables courants" />
+			<competence name="Ecrire des syllabes sous la dictée" />
+			<competence name="Ecrire des mots sous la dictée" />
+			<competence name="Ecrire des phrases sous la dictée" />
+			<competence name="Copier une phrase sans faute" />
+			<competence name="Copier un court texte sans faute" />
+			<competence name="Ordonner des fragments de textes" />
+			<competence name="Ecrire la suite d'évènements d'un texte" />
+			<competence name="Ecrire spontanément des phrases" />
+			<competence name="Ecrire de manière autonome un court texte" />
+			<competence name="Relire sa production et la corriger" />
+		</matiere>
+		<matiere name="Orthographe">
+			<competence name="Utiliser la marque du pluriel des noms à l'écrit" />
+			<competence name="Utiliser les marques du genre dans le groupe nominal, à l'écrit" />
+			<competence name="Utiliser les marques du nombre dans le groupe nominal, à l'écrit" />
+			<competence name="Marquer les accords sujet / verbe dans la phrase" />
+			<competence name="Passer du singulier au pluriel et inversement dans le groupe nominal" />
+			<competence name="Passer du masculin au féminin et inversement dans le groupe nominal" />
+			<competence name="Distinguer quelques homonymes grammaticaux" />
+			<competence name="Utiliser à l'écrit, les marques du pluriel des verbes" />
+		</matiere>
+		<matiere name="Grammaire et conjugaison">
+			<competence name="Utiliser à l'oral les formes affirmatives, négatives et interrogatives" />
+			<competence name="Ordonner les mots d'une phrase" />
+			<competence name="Identifier et déplacer les groupes de mots dans la phrase" />
+			<competence name="Utiliser le point et la majuscule" />
+			<competence name="Distinguer les mots selon leur nature : verbe, nom, adjectif qualificatif, pronoms personnels sujets, articles" />
+			<competence name="Trouver le groupe sujet" />
+			<competence name="Savoir remplacer le sujet par un pronom personnel" />
+			<competence name="Trouver le groupe verbal et le verbe" />
+			<competence name="Faire correspondre actions présente, passée, future et le temps de la conjugaison" />
+			<competence name="Connaître et utiliser les pronoms de la conjugaison" />
+			<competence name="Remplacer le sujet par un pronom personnel" />
+			<competence name="Trouver les noms dans la phrase" />
+			<competence name="Distinguer nom commun et nom propre" />
+			<competence name="Reconnaître et utiliser les adjectifs qualificatifs" />
+			<competence name="Reconnaître et utiliser les articles" />
+			<competence name="Identifier présent, imparfait, futur, passé composé dans un texte" />
+			<competence name="Conjuguer au présent les verbes du 1° groupe" />
+			<competence name="Conjuguer au présent le verbe être" />
+			<competence name="Conjuguer au présent le verbe avoir" />
+			<competence name="Conjuguer au présent le verbe aller" />
+			<competence name="Conjuguer au présent le verbe faire" />
+			<competence name="Conjuguer au présent le verbe dire" />
+			<competence name="Conjuguer au présent le verbe venir" />
+			<competence name="Conjuguer au futur les verbes du 1° groupe" />
+			<competence name="Conjuguer au futur le verbe être" />
+			<competence name="Conjuguer au futur le verbe avoir" />
+			<competence name="Conjuguer au passé-composé les verbes du 1° groupe" />
+			<competence name="Conjuguer au passé-composé le verbe être" />
+			<competence name="Conjuguer au passé-composé le verbe avoir" />
+			<competence name="Trouver l'infinitif d'un verbe et son groupe" />
+		</matiere>
+		<matiere name="Vocabulaire">
+			<competence name="Connaître l'ordre alphabétique" />
+			<competence name="Utiliser le dictionnaire" />
+			<competence name="Distinguer les différents sens d'un mot" />
+			<competence name="Distinguer différents homonymes" />
+			<competence name="Trouver des synonymes d'un mot" />
+			<competence name="Trouver des contraires d'un mot" />
+			<competence name="Construire des mots en ajoutant des préfixes" />
+			<competence name="Construire des mots en ajoutant des suffixes" />
+			<competence name="Distinguer le radical et la terminaison d'un mot" />
+			<competence name="Distinguer sens propre et sens figuré" />
+			<competence name="Trouver des mots de la même famille" />
+		</matiere>
+		<matiere name="Langage oral">
+			<competence name="S'exprimer clairement à l'oral" />
+			<competence name="Savoir écouter les autres" />
+			<competence name="Savoir décrire des images" />
+			<competence name="Savoir reformuler une formule" />
+			<competence name="Savoir présenter à la classe un travail collectif ou individuel" />
+			<competence name="Etre capable de dire de mémoire un poême" />
+		</matiere>
+	</domaine>
+	<domaine name="Mathématiques">
+		<matiere name="Organisation et gestion des données">
+			<competence name="Savoir calculer une augmentation ou d'une diminution" />
+			<competence name="Savoir calculer le nombre de parts dans des situations de partage" />
+			<competence name="Choisir la bonne opération" />
+			<competence name="Savoir repérer les informations utiles" />
+			<competence name="Savoir rédiger clairement le résultat" />
+		</matiere>
+		<matiere name="Nombres">
+			<competence name="Savoir dénombrer de 0 à 99" />
+			<competence name="Savoir dénombrer de 0 à 999" />
+			<competence name="Connaître les doubles et les moitiés des nombres connus" />
+			<competence name="Savoir dénombrer en utilisant les groupements par dizaine" />
+			<competence name="Savoir dénombrer en utilisant les groupements par centaine" />
+			<competence name="Savoir déterminer la valeur d'un chiffre dans l'écriture d'un nombre" />
+			<competence name="Savoir décomposer un nombre en écritures additives et multiplicatives" />
+			<competence name="Produire des suites orales et écrites de nombres de 2 en 2, 5 en 5" />
+			<competence name="Produire des suites orales et écrites de nombres de 10 en 10" />
+			<competence name="Produire des suites orales et écrites de nombres de 100 en 100" />
+			<competence name="Etre capable de citer le nombre qui suit et celui qui précède" />
+			<competence name="Savoir ordonner des nombres en ordre croissant" />
+			<competence name="Savoir ordonner des nombres en ordre décroissant" />
+			<competence name="Savoir compléter une frise numérique" />
+			<competence name="Savoir écrire les nombres en chiffres" />
+			<competence name="Savoir écrire les nombres en lettres" />
+			<competence name="Savoir comparer et ranger les nombres" />
+			<competence name="Savoir encadrer les nombres appris entre deux dizaines" />
+			<competence name="Savoir encadrer les nombres appris entre deux centaines" />
+			<competence name="Savoir utiliser les signes &lt; &gt; et =" />
+			<competence name="Savoir situer des nombres sur une ligne graduée de 1 en 1" />
+			<competence name="Savoir situer des nombres sur une ligne graduée de 10 en 10" />
+			<competence name="Savoir situer des nombres sur une ligne graduée de 100 en 100" />
+		</matiere>
+		<matiere name="Calculs">
+			<competence name="Construire et utiliser des tables d'addition de 1 à 9" />
+			<competence name="Savoir trouver le complément d'un nombre à la dizaine supérieure" />
+			<competence name="Connaître le sens de la multiplication" />
+			<competence name="Utiliser les tables de multiplication par 2, 3, 4 et 5" />
+			<competence name="Savoir multiplier par 10" />
+			<competence name="Savoir calculer des additions en ligne" />
+			<competence name="Savoir calculer des additions posées en colonne sans retenue" />
+			<competence name="Savoir calculer des additions posées en colonne avec retenue" />
+			<competence name="Savoir calculer des soustractions en ligne" />
+			<competence name="Savoir calculer des soustractions posées en colonne sans retenue" />
+			<competence name="Savoir calculer des soustractions posées en colonne avec retenue" />
+			<competence name="Savoir calculer une multiplication à 1 chiffre" />
+			<competence name="Savoir organiser des calculs additifs" />
+			<competence name="Savoir organiser des calculs soustractifs" />
+			<competence name="Savoir organiser des calculs multiplicatifs" />
+			<competence name="Savoir utiliser une calculatrice" />
+			<competence name="Savoir multiplier mentalement par 10, 100, 1000..." />
+			<competence name="Savoir diviser par 2 et multiplier par 5 des nombres entiers inférieurs à 200" />
+		</matiere>
+		<matiere name="Géométrie">
+			<competence name="Comprendre et utiliser le vocabulaire lié à la situation dans l'espace" />
+			<competence name="Savoir repérer et coder des cases et des noeuds sur un quadrillage" />
+			<competence name="Reconnaître sur un objet ou un dessin les angles droits avec l'équerre" />
+			<competence name="Percevoir sur un objet ou un dessin les axes de symétrie" />
+			<competence name="Percevoir sur un objet ou un dessin les égalités de longueurs" />
+			<competence name="Savoir tracer un segment à l'aide de : gabarits, règle, pliage, calque, papier quadrillé" />
+			<competence name="Savoir distinguer les solides : cube, pavé droit" />
+			<competence name="Savoir distinguer les figures planes : triangle, carré, rectangle, cercle" />
+			<competence name="Savoir vérifier si une figure est un carré ou un rectangle" />
+			<competence name="Savoir reproduire, décrire et tracer une figure plane" />
+		</matiere>
+		<matiere name="Grandeurs et mesures">
+			<competence name="Savoir comparer des objets selon leur longueur" />
+			<competence name="Savoir comparer des objets selon leur masse" />
+			<competence name="Savoir utiliser une règle graduée en cm pour mesurer" />
+			<competence name="Savoir utiliser une règle graduée en cm pour tracer un segment" />
+			<competence name="Savoir utiliser une balance" />
+			<competence name="Savoir choisir l'unité appropriée à un mesurage (cm ou m)" />
+			<competence name="Savoir choisir l'unité appropriée à une pesée (g ou kg)" />
+			<competence name="Connaître les unités usuelles (cm et m ; g et kg)" />
+			<competence name="Connaître l'unité usuelle litre (l)" />
+			<competence name="Connaître et utiliser les euros et leurs centimes" />
+			<competence name="Savoir lire et utiliser les heure et 1/2 heure" />
+			<competence name="Comprendre et utiliser un tableau, un graphique" />
+		</matiere>
+	</domaine>
+	<domaine name="Découvertes du monde">
+		<matiere name="L'espace et le temps">
+			<competence name="Comprendre les représentations d'un espace familier : classe, école, quartier, ville" />
+			<competence name="Savoir construire et utiliser des plans simples" />
+			<competence name="Comparer un milieu familier avec d'autres milieux plus éloignés" />
+			<competence name="Connaître la position de sa région sur une carte" />
+			<competence name="Repérer l'alternance jours / nuits" />
+			<competence name="Repérer les semaines et les jours" />
+			<competence name="Connaître les mois" />
+			<competence name="Connaître les saisons" />
+			<competence name="Savoir se repérer sur un calendrier, une horloge" />
+			<competence name="Mémoriser quelques dates et personnages de l'histoire de France" />
+			<competence name="Prendre conscience de l'évolution des modes de vie" />
+		</matiere>
+		<matiere name="Le monde du vivant">
+			<competence name="Connaître quelques caractéristiques des végétaux (naissance, croissance, reproduction, nutrition)" />
+			<competence name="Connaître quelques caractéristiques des animaux (naissance, croissance, reproduction, régimes alimentaires" />
+			<competence name="Connaître quelques caractéristiques de la croissance de son corps" />
+			<competence name="Connaître quelques caractéristiques des mouvements" />
+			<competence name="Connaître quelques caractéristiques du squelette" />
+			<competence name="Connaître quelques caractéristiques de son alimentation" />
+			<competence name="Connaître quelques caractéristiques de la dentition" />
+			<competence name="Connaître les différentes caractéristiques des cinq sens" />
+			<competence name="Connaître quelques règles d'hygiène et de propreté" />
+			<competence name="Connaître quelques règles d'hygiène alimentaire" />
+			<competence name="Connaître quelques règles de sécurité individuelle et collective" />
+			<competence name="Connaître quelques règles de respect de l'environnement" />
+		</matiere>
+		<matiere name="Le monde de la matière et des objets">
+			<competence name="Savoir distinguer les solides et les liquides" />
+			<competence name="Savoir reconnaître les états solides et liquides de l'eau" />
+			<competence name="Savoir construire un circuit électrique simple" />
+			<competence name="Réaliser quelques maquettes élémentaires" />
+			<competence name="Savoir utiliser quelques fonctions de base d'un ordinateur" />
+		</matiere>
+	</domaine>
+	<domaine name="Langue vivante">
+		<matiere name="Langue vivante">
+			<competence name="Se présenter, présenter quelqu'un" />
+			<competence name="Se saluer, prendre congé" />
+			<competence name="Compter jusqu'à 10" />
+			<competence name="Les formules de politesse" />
+			<competence name="Dire ce qu'on aime ou n'aime pas" />
+			<competence name="Les jours de la semaine" />
+			<competence name="Les consignes de la classe" />
+			<competence name="La famille" />
+			<competence name="La météo" />
+			<competence name="Les fêtes du calendrier" />
+		</matiere>
+	</domaine>
+	<domaine name="Pratiques artistiques et histoire des arts">
+		<matiere name="Arts visuels">
+			<competence name="Pratiquer la peinture, le dessin" />
+			<competence name="Utiliser la photo, la vidéo, les arts numériques" />
+			<competence name="Travailler sur les volumes" />
+			<competence name="Utiliser différentes techniques : recouvrement, tracé, collage, montage" />
+			<competence name="Savoir reconnaître et nommer certaines oeuvres d'artistes" />
+		</matiere>
+		<matiere name="Education musical">
+			<competence name="Etre capable de chanter juste" />
+			<competence name="Etre capable d'interpréter de mémoire une dizaine de chansons ou comptines" />
+			<competence name="Savoir écouter les autres" />
+			<competence name="Savoir produire des rythmes simples" />
+			<competence name="Savoir reconnaître les grandes familles d'instruments" />
+		</matiere>
+	</domaine>
+	<domaine name="Education physique et sportive">
+		<matiere name="Education physique et sportive">
+			<competence name="Réaliser des performances dans des activités athlétiques : courir, sauter, lancer, franchir" />
+			<competence name="Adapter ses déplacements : grimper, nager, glisser, rouler" />
+			<competence name="S'orienter" />
+			<competence name="Coopérer et s'opposer dans des jeux de lutte, de raquette, des jeux traditionnels, des sports collectifs" />
+			<competence name="Respecter les règles de jeux" />
+			<competence name="Concevoir et réaliser des actions dansées, gymniques ou acrobatiques" />
+		</matiere>
+	</domaine>
+</cycle>
