@@ -93,6 +93,23 @@ function import_cndmcs($sNomFichier)
 }// fin import_cndmcs
 
 /**
+ * Valide le fichier $sXMLFile contenant le flux xml contre la xsd $sXSDFile
+ * @param $sXMLFile
+ * @param $sXSDFile
+ * @return bool
+ */
+function validate_xml($sXMLFile, $sXSDFile)
+{
+	// Création du DomDocument qui va nous permettre de valider le flux xml contre la XSD
+	$xdoc = new DomDocument;
+	// Charge le flux xml
+	$xdoc->Load($sXMLFile);
+	// Valide la xsd
+	$bRes = $xdoc->schemaValidate($sXSDFile);
+	return $bRes;
+}// fin validate_xml
+
+/**
  * Importe le contenu du fichier $sNomFichier dans la base.<br />
  * Ceci concerne uniquement l'import des cycles / niveaux / domaines / matieres / competences.<br />
  * Les lignes du fichier sont de la forme :<br />
@@ -103,11 +120,23 @@ function import_cndmcs($sNomFichier)
  */
 function import_xml($sNomFichier)
 {
+	$sFileXSD = PATH_XSD . "/cycle.xsd";
+	// On valide le flux contre sa xsd
+	$bRes = validate_xml($sNomFichier, $sFileXSD);
+
+	// Si le flux n'est pas valide
+	if($bRes == false)
+	{
+		// On arrête tout
+		return false;
+	}
+
 	// Charge le flux
 	$oXML = simplexml_load_file($sNomFichier, "SimpleXMLElement");
 
 	// Récupère les cycles
 	$aCycles = $oXML->xpath("/cycle");
+	// Itération sur les cycles
 	foreach($aCycles as $oCycle)
 	{
 		// Récupère le nom du cycle
@@ -118,6 +147,7 @@ function import_xml($sNomFichier)
 		// Récupère la liste des domaines du cycle
 		$aDomaines = $oXML->xpath("//cycle[@name='{$sCycleName}']/domaine");
 
+		// Itération sur les domaines
 		foreach($aDomaines as $oDomaine)
 		{
 			// Récupère le nom du domaine
@@ -127,6 +157,7 @@ function import_xml($sNomFichier)
 
 			// Récupère la liste des matières du domaine
 			$aMatieres = $oXML->xpath("/cycle[@name='{$sCycleName}']/domaine[@name='{$sDomaineName}']/matiere");
+			// Itération sur les matières
 			foreach($aMatieres as $oMatiere)
 			{
 				// Récupère le nom de la matière
@@ -136,14 +167,18 @@ function import_xml($sNomFichier)
 
 				// Récupère la liste des compétences de la matière
 				$aCompetences = $oXML->xpath("/cycle[@name='{$sCycleName}']/domaine[@name='{$sDomaineName}']/matiere[@name='{$sMatiereName}']/competence");
+				// Itération sur les compétences
 				foreach($aCompetences as $oCompetence)
 				{
+					// Récupère le nom de la compétence
 					$sCompetenceName = (string) $oCompetence['name'];
+					// L'ajoute en bdd
 					$nIdCompetence = ajoute_competence($nIdMatiere, $sCompetenceName);
 				}// fin itération sur les compétences
 			}// fin itération sur les matières
 		}// fin itération sur les domaines
 	}// fin itération sur les cycles
+	return true;
 }// fin import_xml
 
 /**

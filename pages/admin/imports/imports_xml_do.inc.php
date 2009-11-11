@@ -27,9 +27,9 @@ switch(strtolower($sAction))
 		if($objForm->hasError() == true) break;
 
 		// importe les cycles/niveaux/domaines/matieres/competences
-		import_xml($sNomFichier);
+		$bRes = import_xml($sNomFichier);
 		// Rechargement
-		header("Location: ?page=imports&mode=imports_xml");
+		header("Location: ?page=imports&mode=imports_xml&res=" . (bool) $bRes);
 	break;
 
 	// ----------
@@ -65,4 +65,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=imports&mode=imports_xml");
 return;
-?>

@@ -25,6 +25,8 @@ $sCSVExemple = <<< EOCSV
 	II;ce1;Français;Lecture Ecriture;Repérer un son auditivement;Repérer la graphie d'un son;...;
 EOCSV;
 
+$sCSVExemple = htmlentities(utf8_decode($sCSVExemple));
+
 //==============================================================================
 // Affichage de la page
 //==============================================================================

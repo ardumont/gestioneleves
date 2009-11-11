@@ -3,6 +3,11 @@
 // Preparation des donnees
 //==============================================================================
 
+$oForm = new FormValidation();
+
+// Récupère le résultat de l'import
+$bResImport =  $oForm->getValue('res', $_GET, 'convert_int', -1);
+
 //==============================================================================
 // Validation du formulaire
 //==============================================================================
@@ -21,7 +26,7 @@
 
 $sXMLExemple = <<< EOXML
 	<?xml version="1.0" encoding="UTF-8"?>
-	<cycle name="II">
+	<cycle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cycle.xsd" name="II">
 		<domaine name="Instruction civique et morale">
 			<matiere name="Instruction civique et morale">
 				<competence name="Prendre des responsabilités et être autonome" />
@@ -40,6 +45,8 @@ $sXMLExemple = <<< EOXML
 
 EOXML;
 
+$sXMLExemple = htmlentities(utf8_decode($sXMLExemple));
+
 //==============================================================================
 // Affichage de la page
 //==============================================================================
@@ -56,7 +63,7 @@ EOXML;
 			<ul>
 				<li>soit saisir dans chacune des ihms dans cet ordre les cycles, domaines, mati&egrave;res et comp&eacute;tences.</li>
 				<li>soit importer un fichier xml &eacute;dit&eacute; &agrave; la main avec une structure similaire :
-					<pre style="font-size: 1.1em;"><?php echo htmlentities($sXMLExemple); ?></pre>
+					<pre style="font-size: 1.1em;"><?php echo $sXMLExemple; ?></pre>
 					L'imbrication des tags montre bien la d&eacute;pendance de chacun des &eacute;l&eacute;ments.
 					Attention &agrave; l'encodage du fichier qui doit &ecirc;tre en UTF-8.
 				</li>
@@ -72,6 +79,10 @@ EOXML;
 	<li><?php echo($sErrorMessage); ?></li>
 	<?php endforeach; ?>
 </ul>
+<?php endif; ?>
+
+<?php if($bResImport != -1): ?>
+	L'import est un <?php echo $bResImport ? ' <span style="font-color:green;font-weight:bold;">succès</span>' : ' <span style="font-color:red;font-weight:bold;">échec</span>'; ?>.<br />
 <?php endif; ?>
 
 <form method="post" action="?page=imports&amp;mode=imports_xml_do" enctype="multipart/form-data">
