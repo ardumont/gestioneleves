@@ -228,10 +228,12 @@ $aMenuPage = array
 
 	'imports' => array
 	(
-		'imports_csv'		=>	"admin/imports/imports_csv.inc.php",
-		'imports_csv_do'	=>	"admin/imports/imports_csv_do.inc.php",
-		'imports_xml'		=>	"admin/imports/imports_xml.inc.php",
-		'imports_xml_do'	=>	"admin/imports/imports_xml_do.inc.php",
+		'imports_csv'           => "admin/imports/imports_csv.inc.php",
+		'imports_csv_do'        => "admin/imports/imports_csv_do.inc.php",
+		'imports_xml'           => "admin/imports/imports_xml.inc.php",
+		'imports_xml_do'        => "admin/imports/imports_xml_do.inc.php",
+		'imports_xml_classe'    => "admin/imports/imports_xml_classe.inc.php",
+		'imports_xml_classe_do' => "admin/imports/imports_xml_classe_do.inc.php",
 	),
 	);
 
@@ -391,9 +393,11 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 			<h3>P&eacute;riodes</h3>
 				<h4><a href="?page=periodes"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
 				<h4><a href="?page=periodes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
-			<h3>Import</h3>
+			<h3>Import Cycles</h3>
 				<h4><a href="?page=imports&amp;mode=imports_csv"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Import CSV</a></h4>
 				<h4><a href="?page=imports&amp;mode=imports_xml"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Import XML</a></h4>
+			<h3>Import Classe</h3>
+				<h4><a href="?page=imports&amp;mode=imports_xml_classe"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Import XML</a></h4>
 		</div>
 	</div>
 	<div id="struct_main" class="<?php echo($sPageId); ?>">
