@@ -14,3 +14,14 @@ CREATE TABLE PARAMETRES
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8;
+
+-- =============================================================================
+--#TITLE(Contenu des tables systèmes)
+
+--#STEP(TRANSACTION)
+
+-- La seul ligne de la table paramètre
+INSERT INTO PARAMETRES
+	(VERSION, DATE_VERSION)
+VALUES
+	('0.0.0', '0000-00-00 00:00:00');

@@ -272,6 +272,25 @@ ALTER TABLE `PROFESSEUR_CLASSE`
   ADD CONSTRAINT `PROFESSEUR_CLASSE_ibfk_2` FOREIGN KEY (`ID_PROFESSEUR`) REFERENCES `PROFESSEURS` (`PROFESSEUR_ID`) ON DELETE CASCADE;
 
 -- =============================================================================
+--#TITLE(Contenu des tables systèmes)
+
+--#STEP(TRANSACTION)
+
+-- La seul ligne de la table paramètre
+INSERT INTO PARAMETRES
+	(VERSION, DATE_VERSION)
+VALUES
+	('0.0.0', '0000-00-00 00:00:00');
+
+-- =============================================================================
+--#TITLE(Contenu "spéciales" de l'application)
+
+--#STEP(TRANSACTION)
+
+INSERT INTO `PROFESSEURS` (`PROFESSEUR_ID`, `PROFESSEUR_NOM`, `PROFESSEUR_PWD`) VALUES
+(1, 'Prof test', MD5('Prof test'));
+
+-- =============================================================================
 --#TITLE(Activation des contraintes)
 
 --#STEP(ALWAYS_RUN)
