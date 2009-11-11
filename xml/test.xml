@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cycle>
+	<name>I</name>
+	<domaine>
+		<name>nom du domaine</name>
+		<matiere>
+			<name>nom de la matière</name>
+			<competence>
+				<name>nom de la competence</name>
+			</competence>
+		</matiere>
+	</domaine>
+</cycle>
