@@ -7,8 +7,6 @@
 // Validation du formulaire
 //==============================================================================
 
-// ===== Vérification des valeurs =====
-
 //==============================================================================
 // Actions du formulaire
 //==============================================================================
@@ -35,4 +33,4 @@
 </ul>
 <?php endif;?>
 
-<p>Vous n’avez pas les droits suffisants pour accéder à cette page.</p>
+<p>Vous n'avez pas les droits suffisants pour accéder à cette page.</p>

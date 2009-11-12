@@ -6,36 +6,36 @@
 /**
  * Le gestionnaire d'erreur pour la classe base de donnee.
  * Cette fonction remplace la fonction par defaut contenue dans la classe "Database".
- * 
+ *
  * Le tableau recu en parametre :
  * - $aError['code']    = Le numero d'erreur Mysql.
  * - $aError['message'] = Le message d'erreur.
  * - $aError['sqltext'] = La requete ayant declenche l'erreur.
- * 
+ *
  * @author Lionel SAURON
- * 
+ *
  * @param $aError(array) Tableau decrivant l'erreur.
  */
 function globalDatabaseErrorHandler($aError)
 {
 	// Pour eviter de reboucler s'il y a une erreur le en dessous.
 	static $s_StopErrorHandler = false;
-	
+
 	if($s_StopErrorHandler == true) return;
 	$s_StopErrorHandler = true;
-	
+
 	// ===== Le message pour l'ecran =====
 
-	
+
 	$s_StopErrorHandler = false;
 }
 
 /**
  * Le gestionnaire d'erreur pour le script.
  * Cette fonction remplace la fonction par defaut.
- * 
+ *
  * @author Lionel SAURON
- * 
+ *
  * @param $nErrorNo(int) Le niveau d'erreur.
  * @param $sErrorMsg(string) Le message d'erreur.
  * @param $sErrorFile(string) Le nom du fichier dans lequel l'erreur a ete identifiee.
@@ -46,10 +46,10 @@ function globalScriptErrorHandler($nErrorNo, $sErrorMsg, $sErrorFile, $nErrorLin
 {
 	// Pour eviter de reboucler s'il y a une erreur le en dessous.
 	static $s_StopErrorHandler = false;
-	
+
 	if($s_StopErrorHandler == true) return;
 	$s_StopErrorHandler = true;
-	
+
 	// ===== On filtre les messages d'erreur =====
 	// On supprime les erreurs de php 4.
 	if(strpos($sErrorMsg, "Non-static method Database::") >= 0)
@@ -57,9 +57,9 @@ function globalScriptErrorHandler($nErrorNo, $sErrorMsg, $sErrorFile, $nErrorLin
 		$s_StopErrorHandler = false;
 		return;
 	}
-	
+
 	// ===== Le message pour l'ecran =====
-	
+
 	$s_StopErrorHandler = false;
 }
 
@@ -88,7 +88,7 @@ require_once(PATH_ROOT."/libraries/metier/project.class.php");
 require_once(PATH_ROOT."/libraries/metier/task.class.php");
 
 // ===== Les gestionnaires d'erreurs =====
-set_error_handler("globalScriptErrorHandler"); 
+set_error_handler("globalScriptErrorHandler");
 Database::setErrorHandler("globalDatabaseErrorHandler");
 
 // ===== Format et timezone =====
@@ -147,9 +147,9 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 	{
 		$sPageId = "home";
 	}
-	
+
 	$aSubMenuPage = $aMenuPage[$sPageId];
-	
+
 	// ===== Y a t'il des modes pour cette page ? =====
 	if(is_array($aSubMenuPage) == true)
 	{
@@ -162,8 +162,8 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 	{
 		$sPageName = $aSubMenuPage;
 	}
-	
-	// ===== Le fichier existe ? =====	
+
+	// ===== Le fichier existe ? =====
 	if((file_exists(PATH_PAGES."/".$sPageName) == false)
 	|| (is_file(PATH_PAGES."/".$sPageName) == false))
 	{
