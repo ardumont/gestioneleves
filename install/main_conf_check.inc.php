@@ -66,6 +66,7 @@ Ne modifiez les valeurs par défaut que si vous avez déjà eu un problème avec
 		</tbody>
 	</table>
 	<div>
+		<br />
 		<a href="?step=1">Précédent</a>
 		<input type="submit" name="action" value="Suivant" />
 	</div>

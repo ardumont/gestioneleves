@@ -84,6 +84,7 @@ else
 		</tbody>
 	</table>
 	<div>
+		<br />
 		<a href="?step=2">Précédent</a>
 		<input type="submit" name="action" value="Suivant" />
 	</div>

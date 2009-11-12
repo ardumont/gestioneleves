@@ -82,7 +82,7 @@ switch(strtoupper($sAction))
 		$sSqlFileName = PATH_ROOT."/install/v{$sScriptVersion}/install.sql";
 
 		// Si le fichier n'existe pas => version sans script => on fait avec le 1er script qui existe
-		//  mais on mettra à jour la table PARAMETRE avec le nÂ° initial
+		//  mais on mettra à jour la table PARAMETRE avec le n° initial
 		while(($sScriptVersion !== null) && (is_file($sSqlFileName) == false))
 		{
 			$sScriptVersion = array_pop($aAllVersions);
@@ -97,7 +97,7 @@ switch(strtoupper($sAction))
 		// On récupère la version courante (on fait pas confiance à l'IHM)
 		$sCurrentVersion = Database::fetchOneValue("SELECT VERSION FROM PARAMETRES");
 
-		// On filtre suivant leur NÂ° : version courante < les versions <= version à installer
+		// On filtre suivant leur N° : version courante < les versions <= version à installer
 		$aStepVersions = Install::filterLowHightVersions($aAllVersions, $sCurrentVersion, true, null, false);
 
 		// Si la version courante est une version release, on doit supprimer les versions de dev du début.
@@ -115,7 +115,7 @@ switch(strtoupper($sAction))
 
 		$sSqlFileName = PATH_ROOT."/install/v{$sScriptVersion}/upgrade.sql";
 
-		// Pas de script ? => Alors on doit juste faire une mise à jour du NÂ° de version
+		// Pas de script ? => Alors on doit juste faire une mise à jour du N° de version
 		if(is_file($sSqlFileName) == false)
 		{
 			$bUseScriptFile = false;
@@ -310,7 +310,7 @@ foreach($aInstallOperations as $nOpekey => &$pOperation)
 		$bStepResult = true;
 		$bStepForced = false; // Pour indiquer si l'éxecution de cette étape est forcée
 
-		// NÂ° de l'étape
+		// N° de l'étape
 		$nCurrentStep++;
 
 		// Existe-il des étapes de type ALWAYS_RUN ou TRANSACTION ?
@@ -377,7 +377,7 @@ foreach($aInstallOperations as $nOpekey => &$pOperation)
 			}
 			else
 			{
-				// On ne touche pas au nÂ° de l'étape installé
+				// On ne touche pas au n° de l'étape installé
 				// car on fait une reprise et que cette étape est forcée
 				$bOperationOk = true;
 				$nOperationStepDone++;

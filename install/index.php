@@ -19,7 +19,7 @@
 function nullDatabaseErrorHandler($aError)
 {
 	// C'est normal si on ne traite pas l'erreur ici.
-	// Ce handler est lÃ  pour les cas particuliers liés Ã  l'installation.
+	// Ce handler est là pour les cas particuliers liés à l'installation.
 }
 
 //==============================================================================
@@ -119,7 +119,7 @@ if(array_key_exists('mode', $_GET) == true)
 // Actions du formulaire
 //==============================================================================
 
-// ===== Recherche de la page Ã  afficher =====
+// ===== Recherche de la page à afficher =====
 $sPageName = null;
 
 if(array_key_exists($sPageId, $aNavigationPageData) == true)
@@ -237,7 +237,7 @@ $sAgent = $_SERVER['HTTP_USER_AGENT'];
 		<?php endif; ?>
 	</div>
 	<div id="struct_main">
-		<h1>Installation du Gestionnaire d'élèves</h1>
+		<h1>Installation du gestionnaire d'élèves</h1>
 		<?php if($sPageName !== null): ?>
 			<?php include($sPageName); ?>
 		<?php endif; ?>
