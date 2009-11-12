@@ -127,6 +127,17 @@ $aMenuPage = array
 	'home' => "home.inc.php",
 
 	// ----- Applications -----
+	'professeurs' => array
+	(
+		''			=>	"admin/professeurs/list.inc.php",
+		'add'		=>	"admin/professeurs/add.inc.php",
+		'add_do'	=>	"admin/professeurs/add_do.inc.php",
+		'delete'	=>	"admin/professeurs/delete.inc.php",
+		'delete_do'	=>	"admin/professeurs/delete_do.inc.php",
+		'edit'		=>	"admin/professeurs/edit.inc.php",
+		'edit_do'	=>	"admin/professeurs/edit_do.inc.php",
+	),
+
 	'classes' => array
 	(
 		''			=>	"admin/classes/list.inc.php",
@@ -235,7 +246,7 @@ $aMenuPage = array
 		'imports_xml_classe'    => "admin/imports/imports_xml_classe.inc.php",
 		'imports_xml_classe_do' => "admin/imports/imports_xml_classe_do.inc.php",
 	),
-	);
+);
 
 //==============================================================================
 // Validation du formulaire
@@ -366,6 +377,9 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 		<div id="struct_menu">
 			<h1>Menu</h1>
 			<h4><a href="?page=home"><img src="<?php echo(URL_ICONS_16X16); ?>/home.png"/>La page d'accueil</a></h4>
+			<h3>Professeurs</h3>
+				<h4><a href="?page=professeurs"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h4><a href="?page=professeurs&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>Comp&eacute;tences</h3>
 				<h4><a href="?page=competences"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
 				<h4><a href="?page=competences&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
