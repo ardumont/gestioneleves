@@ -26,22 +26,24 @@ $bResImport =  $oForm->getValue('res', $_GET, 'convert_int', -1);
 
 $sXMLExemple = <<< EOXML
 	<?xml version="1.0" encoding="UTF-8"?>
-	<cycle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cycle.xsd" name="II">
-		<domaine name="Instruction civique et morale">
-			<matiere name="Instruction civique et morale">
-				<competence name="Prendre des responsabilités et être autonome" />
-				<competence name="Respecter les adultes et les obéir" />
-				<competence name="Respecter les règles de la vie collective" />
-				<competence name="Connaître les règles élémentaires de politesse" />
-				<competence name="Connaître des règles simples de comportement en société" />
-				<competence name="Coopérer à la vie de la classe et rendre service" />
-				<competence name="Connaître les principaux symboles de la nation et de la République et les respecter" />
-			</matiere>
-		</domaine>
-		<domaine name="Français">
-			<matiere name="Lecture écriture">
-				<competence name="Repérer un son auditivement" />
-				<competence name="Repérer la graphie d'un son" />
+	<classe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="classe.xsd">
+		<nom>ce1a</nom>
+		<professeur>Christelle Héritier</professeur>
+		<niveau>ce1</niveau>
+		<annee_scolaire>2009-2010</annee_scolaire>
+		<ecole>
+			<nom>Edouard Vaillant</nom>
+			<ville>Blanc-Mesnil</ville>
+			<departement>93150</departement>
+		</ecole>
+		<eleve>
+			<nom>CARMEL Sally</nom>
+			<date_naissance>22/10/99</date_naissance>
+		</eleve>
+		<eleve>
+			<nom>CAUDRON Vivien</nom>
+			<date_naissance>26/07/01</date_naissance>
+		</eleve>
 
 EOXML;
 
@@ -58,10 +60,10 @@ $sXMLExemple = htmlentities(utf8_decode($sXMLExemple));
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-			Le but est de faciliter la cr&eacute;ation des Cycle/Domaine/Mati&egrave;re/Comp&eacute;tence.<br />
+			Le but est de faciliter la cr&eacute;ation des Classe/Ecole/Eleve.<br />
 			Pour cela, vous pouvez
 			<ul>
-				<li>soit saisir dans chacune des ihms dans cet ordre les cycles, domaines, mati&egrave;res et comp&eacute;tences.</li>
+				<li>soit saisir dans chacune des ihms dans cet ordre les classes, écoles, et élèves.</li>
 				<li>soit importer un fichier xml &eacute;dit&eacute; &agrave; la main avec une structure similaire :
 					<pre style="font-size: 1.1em;"><?php echo $sXMLExemple; ?></pre>
 					L'imbrication des tags montre bien la d&eacute;pendance de chacun des &eacute;l&eacute;ments.
@@ -85,9 +87,9 @@ $sXMLExemple = htmlentities(utf8_decode($sXMLExemple));
 	L'import est un <?php echo $bResImport ? ' <span style="font-color:green;font-weight:bold;">succès</span>' : ' <span style="font-color:red;font-weight:bold;">échec</span>'; ?>.<br />
 <?php endif; ?>
 
-<form method="post" action="?page=imports&amp;mode=imports_xml_do" enctype="multipart/form-data">
+<form method="post" action="?page=imports&amp;mode=imports_xml_classe_do" enctype="multipart/form-data">
 	<table class="formulaire">
-		<caption>Importer Cycle/Domaine/Mati&egrave;re/Comp&eacute;tence</caption>
+		<caption>Importer Classe/Ecole/Eleve</caption>
 		<tr>
 			<td>Fichier &agrave; importer</td>
 			<td>

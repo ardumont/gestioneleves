@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<!-- Cycle (constitué de domaines) -->
 	<xs:complexType name="CycleType">
 		<xs:sequence>
 			<xs:element name="domaine" type="DomaineType" minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" use="required" />
 	</xs:complexType>
+
+	<!-- Domaine (constitué de matières) -->
 	<xs:complexType name="DomaineType">
 		<xs:sequence>
 			<xs:element name="matiere" type="MatiereType" minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" use="required" />
 	</xs:complexType>
+
+	<!-- Matiere (constitué de compétences) -->
 	<xs:complexType name="MatiereType">
 		<xs:sequence>
 			<xs:element name="competence" type="CompetenceType" minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" use="required" />
 	</xs:complexType>
+
+	<!-- Competence (constitué de rien du tout) -->
 	<xs:complexType name="CompetenceType">
 		<xs:attribute name="name" type="xs:string" use="required" />
 	</xs:complexType>
+
+	<!-- Point d'entrée du flux : cycle -->
 	<xs:element name="cycle" type="CycleType" />
 </xs:schema>

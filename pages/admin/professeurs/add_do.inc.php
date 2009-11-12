@@ -28,19 +28,11 @@ switch(strtolower($sAction))
 	case 'ajouter':
 		if($oForm->hasError() == true) break;
 
-		// recupere l'id de la classe nouvellement inseree
-		$sQuery = <<< ________EOQ
-			SELECT MAX(PROFESSEUR_ID)
-			FROM PROFESSEURS
-________EOQ;
-		$nId = Database::fetchOneValue($sQuery);
-		$nId++;
-
 		$sQueryProfNom = Database::prepareString($sProfesseurNom);
 		// insertion de l'eleve dans la table
 		$sQuery = <<< ________EOQ
-			INSERT INTO PROFESSEURS(PROFESSEUR_NOM, PROFESSEUR_ID)
-			VALUES({$sQueryProfNom}, {$nId})
+			INSERT INTO PROFESSEURS(PROFESSEUR_NOM)
+			VALUES({$sQueryProfNom})
 ________EOQ;
 		Database::execute($sQuery);
 

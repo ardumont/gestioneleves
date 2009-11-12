@@ -112,13 +112,9 @@ function validate_xml($sXMLFile, $sXSDFile)
 /**
  * Importe le contenu du fichier $sNomFichier dans la base.<br />
  * Ceci concerne uniquement l'import des cycles / niveaux / domaines / matieres / competences.<br />
- * Les lignes du fichier sont de la forme :<br />
- * cycle;niveau;domaine;matiere;competence_0;competence_1;...;competence_n<br />
- * La premiere ligne du fichier contient cette ligne descriptive.<br />
- * Il faut donc l'eviter lors du parsing.
  * @param $sNomFichier	Nom du fichier a parser
  */
-function import_xml($sNomFichier)
+function import_xml_cycle($sNomFichier)
 {
 	$sFileXSD = PATH_XSD . "/cycle.xsd";
 	// On valide le flux contre sa xsd
@@ -179,7 +175,369 @@ function import_xml($sNomFichier)
 		}// fin itération sur les domaines
 	}// fin itération sur les cycles
 	return true;
-}// fin import_xml
+}// fin import_xml_cycle
+
+/**
+ * Importe le contenu du fichier $sNomFichier dans la base.<br />
+ * Ceci concerne uniquement l'import des classes / écoles / élèves.<br />
+ * @param $sNomFichier	Nom du fichier a parser
+ */
+function import_xml_classe($sNomFichier)
+{
+	$sFileXSD = PATH_XSD . "/cycle.xsd";
+//	// On valide le flux contre sa xsd
+//	$bRes = validate_xml($sNomFichier, $sFileXSD);
+//
+//	// Si le flux n'est pas valide
+//	if($bRes == false)
+//	{
+//		// On arrête tout
+//		return false;
+//	}
+
+	// Charge le flux
+	$oXML = simplexml_load_file($sNomFichier, "SimpleXMLElement");
+
+	// Récupère les cycles
+	$aClasses = $oXML->xpath("/classe");
+	// Itération sur les classes
+	foreach($aClasses as $oClasse)
+	{
+		// Récupère le cycle
+		$sCycleNom = (string) $oClasse['cycle'];
+		// Récupère le niveau de la classe
+		$sNiveau = (string) $oClasse['niveau'];
+		// Récupère la classe
+		$sClasseNom = (string) $oClasse['nom'];
+		// Récupère l'année scolaire de la classe
+		$sAnneeScolaire = (string) $oClasse['annee_scolaire'];
+		// Récupère le nom du professeur
+		$sProfesseurNom = (string) $oClasse['professeur'];
+
+		// Récupère le nom de l'école
+		$aEcole = $oXML->xpath("/classe[@nom='{$sClasseNom}']/ecole");
+
+		// Récupère l'information sur l'école
+		$sNomEcole = (string) $aEcole[0]['nom'];
+		$sNomVille = (string) $aEcole[0]['ville'];
+		$sDepartement = (string) $aEcole[0]['departement'];
+
+		// Ajoute le cycle (si besoin)
+		$nIdCycle = ajoute_cycle($sCycleNom);
+
+		// Ajoute le niveau (si besoin)
+		$nIdNiveau = ajoute_niveau($nIdCycle, $sNiveau);
+
+		// On ajoute l'école
+		$nIdEcole = ajoute_ecole($sNomEcole, $sNomVille, $sDepartement);
+
+		// On ajoute le professeur (si besoin)
+		$nIdProf = ajoute_professeur($sProfesseurNom);
+
+		// Ajoute la classe (si besoin)
+		$nIdClasse = ajoute_classe($nIdEcole, $sClasseNom, $sNiveau, $sAnneeScolaire);
+
+		// Rattache la classe au niveau
+		ajoute_relation_classe_niveau($nIdClasse, $nIdNiveau);
+
+		// Rattache la classe au professeur (si besoin)
+		ajoute_relation_classe_professeur($nIdClasse, $nIdProf);
+
+		// Récupère la liste des élèves
+		$aEleves = $oXML->xpath("/classe[@nom='{$sClasseNom}']/eleve");
+		// Itération sur les élèves
+		foreach($aEleves as $oEleve)
+		{
+			$sNomEleve = (string) $oEleve['nom'];
+			$sDateNaissance = (string) $oEleve['date_naissance'];
+			// On ajoute l'élève (si besoin)
+			$nIdEleve = ajoute_eleve($nIdClasse, $sNomEleve, $sDateNaissance);
+			// Ajoute la relation eleve - classe (si besoin)
+			ajoute_relation_eleve_classe($nIdClasse, $nIdEleve);
+		}// fin itération sur les élèves
+	}// fin itération sur les classes
+	return true;
+}// fin import_xml_classe
+
+/**
+ * Fonction d'ajout d'un élève.
+ * @param $nIdClasse
+ * @param $sNomEleve
+ * @param $sDateNaissance
+ * @return int
+ */
+function ajoute_eleve($nIdClasse, $sNomEleve, $sDateNaissance)
+{
+	$sQueryNomEleve = Database::prepareString($sNomEleve);
+	$sQueryDateNaissance = Database::prepareString($sDateNaissance);
+
+	// ===== verifie si l'eleve existe deja =====
+	$sQuery = <<< ____EOQ
+		SELECT
+			ELEVE_ID
+		FROM ELEVES
+		WHERE ELEVE_NOM = {$sQueryNomEleve}
+		AND ELEVE_DATE_NAISSANCE = {$sQueryDateNaissance}
+____EOQ;
+	$nEleveId = Database::fetchOneValue($sQuery);
+	// $nEleveId = ELEVE_ID or false
+
+	// si l'eleve n'existe pas
+	if($nEleveId === false)
+	{
+		// on l'ajoute
+		$sQuery = <<< ________EOQ
+			INSERT INTO ELEVES(ELEVE_NOM, ELEVE_DATE_NAISSANCE)
+			VALUES( {$sQueryNomEleve}, {$sQueryDateNaissance})
+________EOQ;
+		Database::execute($sQuery);
+
+		// puis on recupere son id
+		$sQuery = <<< ________EOQ
+			SELECT
+				ELEVE_ID
+			FROM ELEVES
+			WHERE ELEVE_NOM = {$sQueryNomEleve}
+________EOQ;
+		$nEleveId = Database::fetchOneValue($sQuery);
+	}
+	return $nEleveId;
+}// fin ajoute_eleve
+
+/**
+ * Ajoute la relation entre le professeur et la classe.
+ * @param $nIdClasse
+ * @param $nIdNiveau
+ */
+function ajoute_relation_classe_niveau($nIdClasse, $nIdNiveau)
+{
+	// ===== verifie si la classe existe deja =====
+	$sQuery = <<< ____EOQ
+		SELECT
+			ID_NIVEAU
+		FROM NIVEAU_CLASSE
+		WHERE ID_NIVEAU = {$nIdNiveau}
+		AND ID_CLASSE = {$nIdClasse}
+____EOQ;
+	$nNiveauClasseId = Database::fetchOneValue($sQuery);
+	// $nNiveauClasseId = ID_PROFESSEUR or false
+
+	// Si la relation n'existe pas, on la créé
+	if($nNiveauClasseId === false)
+	{
+		// on l'ajoute
+		$sQuery = <<< ________EOQ
+			INSERT INTO NIVEAU_CLASSE(ID_NIVEAU, ID_CLASSE)
+			VALUES({$nIdNiveau}, {$nIdClasse})
+________EOQ;
+		Database::execute($sQuery);
+	}
+}// fin ajoute_relation_classe_niveau
+
+/**
+ * Fonction d'ajout d'une ecole.
+ * Si l'école existe dejà, renverra uniquement son id.
+ * Si l'école n'existe pas, l'ajoute en bdd et renvoie son id.
+ * @param $sNomEcole
+ * @param $sNomVille
+ * @param $sDepartement
+ * @return int
+ */
+function ajoute_ecole($sNomEcole, $sNomVille, $sDepartement)
+{
+	$sQueryNomEcole = Database::prepareString($sNomEcole);
+	$sQueryNomVille = Database::prepareString($sNomVille);
+	$sQueryNomDept = Database::prepareString($sDepartement);
+
+	// On récupère l'id du professeur
+	$sQuery = <<< ____EOQ
+		SELECT
+			ECOLE_ID
+		FROM ECOLES
+		WHERE ECOLE_NOM = {$sQueryNomEcole}
+		AND ECOLE_VILLE = {$sQueryNomVille}
+		AND ECOLE_DEPARTEMENT = {$sQueryNomDept}
+____EOQ;
+	$nEcoleId = Database::fetchOneValue($sQuery);
+	// $nEcoleId = ECOLE_ID or false
+
+	// Si l'ecole n'existe pas, on la créé
+	if($nEcoleId === false)
+	{
+		// on l'ajoute
+		$sQuery = <<< ________EOQ
+			INSERT INTO ECOLES(ECOLE_NOM, ECOLE_VILLE, ECOLE_DEPARTEMENT)
+			VALUES({$sQueryNomEcole}, {$sQueryNomVille}, {$sQueryNomDept})
+________EOQ;
+		Database::execute($sQuery);
+
+		// On récupère l'id
+		$sQuery = <<< ________EOQ
+			SELECT
+				ECOLE_ID
+			FROM ECOLES
+			WHERE ECOLE_NOM = {$sQueryNomEcole}
+			AND ECOLE_VILLE = {$sQueryNomVille}
+			AND ECOLE_DEPARTEMENT = {$sQueryNomDept}
+________EOQ;
+		$nEcoleId = Database::fetchOneValue($sQuery);
+	}
+
+	return $nEcoleId;
+}// fin ajoute_ecole
+
+/**
+ * Ajoute le nouveau professeur s'il n'existe pas.
+ * @param $sProfesseurNom
+ * @return int
+ */
+function ajoute_professeur($sProfesseurNom)
+{
+	$sQueryNomProf = Database::prepareString($sProfesseurNom);
+
+	// On récupère l'id du professeur
+	$sQuery = <<< ____EOQ
+		SELECT
+			PROFESSEUR_ID
+		FROM PROFESSEURS
+		WHERE PROFESSEUR_NOM = {$sQueryNomProf}
+____EOQ;
+	$nIdProf = Database::fetchOneValue($sQuery);
+	// $nIdProf = ID_PROFESSEUR or false
+
+	// Si la relation n'existe pas, on la créé
+	if($nIdProf === false)
+	{
+		// on l'ajoute
+		$sQuery = <<< ________EOQ
+			INSERT INTO PROFESSEURS(PROFESSEUR_NOM, PROFESSEUR_PWD)
+			VALUES({$sQueryNomProf}, MD5('$sProfesseurNom'))
+________EOQ;
+		Database::execute($sQuery);
+
+		// Récupère le nouvel id
+		$sQuery = <<< ________EOQ
+			SELECT
+				PROFESSEUR_ID
+			FROM PROFESSEURS
+			WHERE PROFESSEUR_NOM = {$sQueryNomProf}
+________EOQ;
+		$nIdProf = Database::fetchOneValue($sQuery);
+	}
+
+	return $nIdProf;
+}// fin ajoute_professeur
+
+/**
+ * Ajoute la relation entre le professeur et la classe.
+ * @param $nIdClasse
+ * @param $nIdProf
+ */
+function ajoute_relation_classe_professeur($nIdClasse, $nIdProf)
+{
+	// ===== verifie si la classe existe deja =====
+	$sQuery = <<< ____EOQ
+		SELECT
+			ID_PROFESSEUR
+		FROM PROFESSEUR_CLASSE
+		WHERE ID_PROFESSEUR = {$nIdProf}
+		AND ID_CLASSE = {$nIdClasse}
+____EOQ;
+	$nProfClasseId = Database::fetchOneValue($sQuery);
+	// $nProfClasseId = ID_PROFESSEUR or false
+
+	// Si la relation n'existe pas, on la créé
+	if($nProfClasseId === false)
+	{
+		// on l'ajoute
+		$sQuery = <<< ________EOQ
+			INSERT INTO PROFESSEUR_CLASSE(ID_PROFESSEUR, ID_CLASSE)
+			VALUES({$nIdProf}, {$nIdClasse})
+________EOQ;
+		Database::execute($sQuery);
+	}
+}// fin ajoute_relation_classe_professeur
+
+/**
+ * Ajoute la relation entre le professeur et la classe.
+ * @param $nIdClasse
+ * @param $nEleveId
+ */
+function ajoute_relation_eleve_classe($nIdClasse, $nIdEleve)
+{
+	// ===== verifie si la classe existe deja =====
+	$sQuery = <<< ____EOQ
+		SELECT
+			ID_ELEVE
+		FROM ELEVE_CLASSE
+		WHERE ID_ELEVE = {$nIdEleve}
+		AND ID_CLASSE = {$nIdClasse}
+____EOQ;
+	$nEleveClasseId = Database::fetchOneValue($sQuery);
+	// $nEleveClasseId = ID_ELEVE or false
+
+	// Si la relation n'existe pas, on la créé
+	if($nEleveClasseId === false)
+	{
+		// on l'ajoute
+		$sQuery = <<< ________EOQ
+			INSERT INTO ELEVE_CLASSE(ID_ELEVE, ID_CLASSE)
+			VALUES({$nIdEleve}, {$nIdClasse})
+________EOQ;
+		Database::execute($sQuery);
+	}
+}// fin ajoute_relation_classe_professeur
+
+/**
+ * Fonction d'ajout d'une classe si celle-ci n'existe pas.
+ * Cette methode renvoie l'id de la classe nouvellement integree si celle-ci n'existait
+ * pas. Sinon renvoie l'id de la classe déjà existante.
+ * @param $nIdEcole
+ * @param $sClasseNom
+ * @param $sNiveau
+ * @param $sAnneeScolaire
+ * @return int
+ */
+function ajoute_classe($nIdEcole, $sClasseNom, $sNiveau, $sAnneeScolaire)
+{
+	$sQueryNomClasse = Database::prepareString($sClasseNom);
+	$sQueryAnneeScol = Database::prepareString($sAnneeScolaire);
+
+	// ===== verifie si la classe existe deja =====
+	$sQuery = <<< ____EOQ
+		SELECT
+			CLASSE_ID
+		FROM CLASSES
+		WHERE CLASSE_NOM = {$sQueryNomClasse}
+		AND CLASSE_ANNEE_SCOLAIRE = {$sQueryAnneeScol}
+		AND ID_ECOLE = {$nIdEcole}
+____EOQ;
+	$nClasseId = Database::fetchOneValue($sQuery);
+	// $nClasseId = CLASSE_ID or false
+
+	// si la classe n'existe pas
+	if($nClasseId === false)
+	{
+		// on l'ajoute
+		$sQuery = <<< ________EOQ
+			INSERT INTO CLASSES(CLASSE_NOM, CLASSE_ANNEE_SCOLAIRE, ID_ECOLE)
+			VALUES( {$sQueryNomClasse}, {$sQueryAnneeScol}, $nIdEcole)
+________EOQ;
+		Database::execute($sQuery);
+
+		// puis on recupere son id
+		$sQuery = <<< ________EOQ
+			SELECT
+				CLASSE_ID
+			FROM CLASSES
+			WHERE CLASSE_NOM = {$sQueryNomClasse}
+			AND CLASSE_ANNEE_SCOLAIRE = {$sQueryAnneeScol}
+			AND ID_ECOLE = {$nIdEcole}
+________EOQ;
+		$nClasseId = Database::fetchOneValue($sQuery);
+	}
+	return $nClasseId;
+}// fin ajoute_classe
 
 /**
  * Fonction d'ajout d'un cycle dans la table CYCLES.<br />

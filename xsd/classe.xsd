@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<!-- Type précis pour le format de l'année scolaire (format YYYY-YYYY) -->
+	<xs:simpleType name="AnneeScolaireType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{4}-[0-9]{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Type précis pour le code postal (format 5 chiffres qui se suivent) -->
+	<xs:simpleType name="CodePostalType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{5}"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Type précis pour les dates de naissance (format dd/mm/YYYY)-->
+	<xs:simpleType name="DateNaissanceType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{2}/[0-9]{2}/[0-9]{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Classe -->
+	<xs:complexType name="ClasseType">
+		<xs:choice>
+			<xs:element name="ecole" type="EcoleType" minOccurs="1" maxOccurs="1" />
+			<xs:sequence>
+				<xs:element name="eleve" type="EleveType" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:choice>
+		<xs:attribute name="nom" type="xs:string" use="required" />
+		<xs:attribute name="professeur" type="xs:string" use="required" />
+		<xs:attribute name="niveau" type="xs:string" use="required" />
+		<xs:attribute name="annee_scolaire" type="AnneeScolaireType" use="required" />
+	</xs:complexType>
+
+	<!-- Ecole -->
+	<xs:complexType name="EcoleType">
+		<xs:attribute name="nom" type="xs:string" use="required" />
+		<xs:attribute name="ville" type="xs:string" use="required" />
+		<xs:attribute name="departement" type="CodePostalType" use="required" />
+	</xs:complexType>
+
+	<!-- Eleve -->
+	<xs:complexType name="EleveType">
+		<xs:attribute name="nom" type="xs:string" use="required" />
+		<xs:attribute name="date_naissance" type="DateNaissanceType" use="required" />
+	</xs:complexType>
+
+	<!-- L'élément classe -->
+	<xs:element name="classe" type="ClasseType" />
+</xs:schema>

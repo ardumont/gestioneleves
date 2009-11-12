@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classe cycle="II" niveau="ce1" nom="ce1a" professeur="Christelle Héritier" annee_scolaire="2009-2010">
+	<ecole nom="Edouard Vaillant" ville="Blanc-Mesnil" departement="93150" />
+
+	<eleve nom="CARMEL Sally" date_naissance="10/01/1999" />
+	<eleve nom="CAUDRON Vivien" date_naissance="10/01/1999" />
+	<eleve nom="CEKIC Nazlican" date_naissance="10/01/1999" />
+	<eleve nom="CHAIB Maria" date_naissance="10/01/1999" />
+	<eleve nom="CHERIF Yasmine" date_naissance="10/01/1999" />
+	<eleve nom="DUMARTIN Mélany" date_naissance="10/01/1999" />
+	<eleve nom="EJIDO SIERRA Maxime" date_naissance="10/01/1999" />
+	<eleve nom="GOUDEAGBE Océane" date_naissance="10/01/1999" />
+	<eleve nom="JANAKOVIC Léa" date_naissance="10/01/1999" />
+	<eleve nom="KAHOUADJI Adam" date_naissance="10/01/1999" />
+	<eleve nom="KHATTOU Sarah" date_naissance="10/01/1999" />
+	<eleve nom="KULARAJASINGAM Kosakan" date_naissance="10/01/1999" />
+	<eleve nom="LEFRANC Manon" date_naissance="10/01/1999" />
+	<eleve nom="NACER Kenza" date_naissance="10/01/1999" />
+	<eleve nom="ROMAIN Otis" date_naissance="10/01/1999" />
+	<eleve nom="SATURNE Tyron" date_naissance="10/01/1999" />
+	<eleve nom="SINGH Harkamalpreet" date_naissance="10/01/1999" />
+	<eleve nom="SIRITHARAN Midhurshika" date_naissance="10/01/1999" />
+	<eleve nom="SOKHONA Bintou" date_naissance="10/01/1999" />
+	<eleve nom="SUTHAKARAN Illakiya" date_naissance="10/01/1999" />
+	<eleve nom="THAVARAJAH Roshani" date_naissance="10/01/1999" />
+	<eleve nom="YOUSSEF Salma" date_naissance="10/01/1999" />
+	<eleve nom="ZHENG Flora" date_naissance="10/01/1999" />
+</classe>
