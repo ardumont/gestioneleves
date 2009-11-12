@@ -19,7 +19,7 @@
 function nullDatabaseErrorHandler($aError)
 {
 	// C'est normal si on ne traite pas l'erreur ici.
-	// Ce handler est là pour les cas particuliers liés à l'installation.
+	// Ce handler est lÃ  pour les cas particuliers liés Ã  l'installation.
 }
 
 //==============================================================================
@@ -119,7 +119,7 @@ if(array_key_exists('mode', $_GET) == true)
 // Actions du formulaire
 //==============================================================================
 
-// ===== Recherche de la page à afficher =====
+// ===== Recherche de la page Ã  afficher =====
 $sPageName = null;
 
 if(array_key_exists($sPageId, $aNavigationPageData) == true)

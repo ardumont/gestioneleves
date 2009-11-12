@@ -58,7 +58,7 @@ $bDatabaseReady = $objFormInstall->getValue('database_ready', $_GET, 'convert_bo
 
 $aAllVersions = Install::getAllVersions(PATH_ROOT."/install");
 
-// On filtre suivant leur N° : version que l'on vient d'installer <= les versions <= version final à installer
+// On filtre suivant leur N° : version que l'on vient d'installer <= les versions <= version finale à installer
 $aStepVersions = Install::filterLowHightVersions($aAllVersions, $sInstallVersion, false, null, false);
 
 // on force la renumérotation des clefs
@@ -135,7 +135,7 @@ if(($bDatabaseReady == true) && ($bNeedMoreUpgrade == true))
 	<br />
 	<em>L'utilisation de l'application est fortement déconseillée sans ces mises à jour.</em><br />
 	<br />
-	 Cependant, si vous ne souhaitez pas réaliser maintenant ces mises à jour, vous pouvez arrêter ici<br />
+	 Cependant, si vous ne souhaitez pas réaliser maintenant ces mises à jour, vous pouvez arrÃªter ici<br />
 	 et reprendre plus tard en relançant l'installation.<br />
 <?php endif; ?>
 

@@ -104,7 +104,7 @@ else // Il y a déjà des tables
 		}
 		else // On a une version correcte
 		{
-			// La version en cours doit être dans les étapes
+			// La version en cours doit Ãªtre dans les étapes
 			$bTooOldVersion = (in_array($sCurrentVersion, $aAllVersions) == true) ? false : true;
 		}
 	} // END Pas d'install raté
@@ -124,7 +124,7 @@ else
 
 // ===== Filtre les étapes =====
 
-// On filtre suivant leur N° : version courante <= les versions <= version à installer
+// On filtre suivant leur NÂ° : version courante <= les versions <= version à installer
 $aStepVersions = Install::filterLowHightVersions($aAllVersions, $sCurrentVersion, false, $sInstallVersion, false);
 
 // On filtre les étapes suivant leur état (release ou développement (dev, alpha, beta, RC))
@@ -242,13 +242,13 @@ if($bReInstall == true)
 	<p>Il y a eu une erreur lors de l'installation de la version <?php echo($sInstallVersion); ?>.<br />
 	Vous pouvez essayer de <em>reprendre l'installation</em> là où elle s'est arretée.</p>
 <?php elseif($bDowngrade == true): ?>
-	<p>Vous essayez de <em>descendre de version</em>, aucune modification à la base de données ne va être apportée.<br />
+	<p>Vous essayez de <em>descendre de version</em>, aucune modification à la base de données ne va Ãªtre apportée.<br />
 	Nous n'avons pas prévu ce cas, des erreurs pourraient avoir lieu dans l'application.<br />
 	<strong>Nous vous déconseillons de continuer.</strong></p>
 <?php elseif($bNothingToDo == true): ?>
 	<p>Votre base de données <em>est à jour</em>.</p>
 <?php elseif($bNewInstall == true): ?>
-	<p>Il n'y a <em>pas de base de données existante</em>. La base de données va être <em>créée</em>.</p>
+	<p>Il n'y a <em>pas de base de données existante</em>. La base de données va Ãªtre <em>créée</em>.</p>
 <?php else: ?>
 	<p>Vous avez le choix entre <em>mettre à jour</em> votre base existante ou <em>Réinstaller</em> la base.</p>
 <?php endif; ?>
@@ -290,5 +290,3 @@ Database::closeConnection();
 
 // ===== Session =====
 session_write_close();
-
-?>

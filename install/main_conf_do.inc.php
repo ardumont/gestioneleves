@@ -51,9 +51,9 @@ switch(strtolower($sAction))
 	// ----------
 	case 'suivant':
 		// ===== Ecriture du fichier de configuration =====
-		
+
 		$bConfigFileReady = copy($sSampleConfigFileName, $sConfigFileName);
-		
+
 		if($bConfigFileReady == true)
 		{
 			$sFileContent = file_get_contents($sConfigFileName);
@@ -64,17 +64,17 @@ switch(strtolower($sAction))
 					'/^\s*define\s*\(\s*\'PATH_ROOT\'\s*,\s*"[^"]*"\s*\)\s*;/m',
 					'/^\s*define\s*\(\s*\'URL_ROOT\'\s*,\s*"[^"]*"\s*\)\s*;/m'
 				);
-				
+
 				$aReplace = array
 				(
 					'define(\'PATH_ROOT\', "'.$sPathRoot.'");',
 					'define(\'URL_ROOT\', "'.$sUrlRoot.'");'
 				);
-				
+
 				$sFileContent = preg_replace($aPattern, $aReplace, $sFileContent);
-				
+
 				$nByteWrited = file_put_contents($sConfigFileName, $sFileContent);
-				
+
 				$bConfigFileReady = ($nByteWrited !== false) ? true : false;
 			}
 			else
@@ -86,9 +86,9 @@ switch(strtolower($sAction))
 		{
 			$bConfigFileReady = false;
 		}
-		
+
 	break;
-	
+
 	// ----------
 	default:
 		// Rechargement
@@ -111,5 +111,3 @@ switch(strtolower($sAction))
 // Rechargement
 header("Location: ?step=2&mode=end&ready={$bConfigFileReady}");
 return;
-
-?>

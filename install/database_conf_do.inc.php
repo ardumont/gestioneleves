@@ -62,17 +62,17 @@ switch(strtolower($sAction))
 	// ----------
 	case 'suivant':
 		if($objFormInstall->hasError() == true) break;
-		
+
 		Database::setErrorHandler("nullDatabaseErrorHandler"); // Le gestionnaires d'erreurs (cf index.php)
-		
+
 		$bConnectionOk = Database::openConnection($sDatabaseLogin, $sDatabasePassword, $sDatabaseName, $sDatabaseServer);
 
 		if($bConnectionOk != true) break;
-		
+
 		// ===== Ecriture du fichier de configuration =====
 
 		$bConfigFileReady = copy($sSampleConfigFileName, $sConfigFileName);
-		
+
 		if($bConfigFileReady == true)
 		{
 			$sFileContent = file_get_contents($sConfigFileName);
@@ -85,7 +85,7 @@ switch(strtolower($sAction))
 					'/^\s*define\s*\(\s*\'DATABASE_LOGIN\'\s*,\s*"[^"]*"\s*\)\s*;/m',
 					'/^\s*define\s*\(\s*\'DATABASE_PASSWORD\'\s*,\s*"[^"]*"\s*\)\s*;/m',
 				);
-				
+
 				$aReplace = array
 				(
 					'define(\'DATABASE_SERVER\', "'.$sDatabaseServer.'");',
@@ -93,11 +93,11 @@ switch(strtolower($sAction))
 					'define(\'DATABASE_LOGIN\', "'.$sDatabaseLogin.'");',
 					'define(\'DATABASE_PASSWORD\', "'.$sDatabasePassword.'");',
 				);
-				
+
 				$sFileContent = preg_replace($aPattern, $aReplace, $sFileContent);
-				
+
 				$nByteWrited = file_put_contents($sConfigFileName, $sFileContent);
-				
+
 				$bConfigFileReady = ($nByteWrited !== false) ? true : false;
 			}
 			else
@@ -109,9 +109,9 @@ switch(strtolower($sAction))
 		{
 			$bConfigFileReady = false;
 		}
-		
+
 	break;
-	
+
 	// ----------
 	default:
 		// Rechargement
@@ -134,5 +134,3 @@ switch(strtolower($sAction))
 // Rechargement
 header("Location: ?step=3&mode=end&connection={$bConnectionOk}&ready={$bConfigFileReady}");
 return;
-
-?>

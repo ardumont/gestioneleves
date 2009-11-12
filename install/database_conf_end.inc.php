@@ -58,7 +58,7 @@ $bConfigFileReady = $objFormInstall->getValue('ready',      $_GET, 'convert_bool
 <?php elseif($bConnectionOk == true): ?>
 	<p>La connexion a réussi, mais Il y a eu une erreur lors de la création du fichier de configuration.</p>
 <?php else: ?>
-	<p>La connexion a echoué, veuillez vérifier les paramètres de connexion.</p>
+	<p>La connexion a echoué, veuillez vérifier les paramÃ¨tres de connexion.</p>
 <?php endif; ?>
 
 <div>

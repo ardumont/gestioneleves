@@ -38,7 +38,7 @@ if(array_key_exists('ready', $_GET) == true)
 <h2>Etape 2 - Fichier de configuration principale</h2>
 
 <?php if($bConfigFileReady == true): ?>
-	<p>Le fichier a été écrit avec succès.</p>
+	<p>Le fichier a été écrit avec succÃ¨s.</p>
 <?php else: ?>
 	<p>Il y a eu une erreur lors de la création du fichier.</p>
 <?php endif; ?>

@@ -8,13 +8,13 @@
  *
  * Le tableau retourné contient 2 valeurs :
  * - 'EXIST'    => Pour indiquer si le fichier existe
- * - 'WRITABLE' => Pour indiquer si le fichier pourra être créer/modifier
+ * - 'WRITABLE' => Pour indiquer si le fichier pourra Ãªtre créer/modifier
  *
  * @author Lionel SAURON
  * @version 1.0
  * @public
  *
- * @param $sConfigFileName(string) Le nom du fichier à tester
+ * @param $sConfigFileName(string) Le nom du fichier Ã  tester
  * @return (array) Tableau résultat
  */
 function testConfigFile($sConfigFileName)
@@ -137,8 +137,8 @@ $bAllTestOk = ($aDatabaseConfigResult['WRITABLE'] == true) ? $bAllTestOk : false
 	</p>
 <?php endif; ?>
 <?php if($bMagicQuotesRuntime == true): ?>
-	<p>Les "Magic quotes" sont une nuissance. Elles sont <a href="http://fr.php.net/manual/fr/security.magicquotes.php">condamnées à disparaître</a>.<br />
-	Nous vous encourageons donc à les <a href="http://fr.php.net/manual/fr/security.magicquotes.disabling.php">désactiver</a>.
+	<p>Les "Magic quotes" sont une nuissance. Elles sont <a href="http://fr.php.net/manual/fr/security.magicquotes.php">condamnées Ã  disparaÃ®tre</a>.<br />
+	Nous vous encourageons donc Ã  les <a href="http://fr.php.net/manual/fr/security.magicquotes.disabling.php">désactiver</a>.
 	</p>
 <?php endif; ?>
 
