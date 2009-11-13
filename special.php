@@ -103,7 +103,7 @@ session_start();
 // ===== Connection e la base =====
 Database::openConnection(DATABASE_LOGIN, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_SERVER);
 // précise à la base qu'on travaille en UTF-8
-Database::execute("SET NAMES UTF8");
+//Database::execute("SET NAMES UTF8");
 
 // ===== Chargement des erreurs sauvegardes =====
 Message::loadFromSession($_SESSION['ERROR_MESSAGE']);
@@ -200,5 +200,3 @@ session_write_close();
 
 // ===== Bufferisation de sortie =====
 ob_end_flush();
-
-?>

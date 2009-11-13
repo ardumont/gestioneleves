@@ -117,6 +117,9 @@ Database::openConnection(DATABASE_LOGIN, DATABASE_PASSWORD, DATABASE_NAME, DATAB
 // ===== Chargement des erreurs sauvegardes =====
 Message::loadFromSession($_SESSION['ERROR_MESSAGE']);
 
+// On précise à la base qu'on travaille en UTF-8
+//Database::execute("SET NAMES UTF8");
+
 //==============================================================================
 // Preparation des donnees
 //==============================================================================
@@ -127,6 +130,11 @@ $aMenuPage = array
 	'home' => "home.inc.php",
 
 	// ----- Applications -----
+	'eleves' => array
+	(
+		''			=>	"admin/eleves/list.inc.php",
+	),
+
 	'professeurs' => array
 	(
 		''			=>	"admin/professeurs/list.inc.php",
@@ -380,6 +388,8 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 			<h3>Professeurs</h3>
 				<h4><a href="?page=professeurs"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
 				<h4><a href="?page=professeurs&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
+			<h3>Elèves</h3>
+				<h4><a href="?page=eleves"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
 			<h3>Comp&eacute;tences</h3>
 				<h4><a href="?page=competences"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
 				<h4><a href="?page=competences&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
@@ -435,5 +445,3 @@ session_write_close();
 
 // ===== Bufferisation de sortie =====
 ob_end_flush();
-
-?>

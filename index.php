@@ -137,7 +137,7 @@ Database::setErrorHandler("globalDatabaseErrorHandler");
 Database::openConnection(DATABASE_LOGIN, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_SERVER);
 
 // On précise à la base qu'on travaille en UTF-8
-Database::execute("SET NAMES UTF8");
+//Database::execute("SET NAMES UTF8");
 
 //// ===== Le gestionnaire de profil =====
 //
@@ -258,7 +258,6 @@ $sQuery = "SELECT" .
 		  "  PROFESSEUR_NOM" .
 		  " FROM PROFESSEURS" .
 		  " ORDER BY PROFESSEUR_NOM";
-
 $aUsers = Database::fetchColumnWithKey($sQuery);
 // $aUsers[Id] = Nom
 

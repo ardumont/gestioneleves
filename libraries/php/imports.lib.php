@@ -185,7 +185,7 @@ function import_xml_cycle($sNomFichier)
 function import_xml_classe($sNomFichier)
 {
 	$sFileXSD = PATH_XSD . "/cycle.xsd";
-//	// On valide le flux contre sa xsd
+	// On valide le flux contre sa xsd
 //	$bRes = validate_xml($sNomFichier, $sFileXSD);
 //
 //	// Si le flux n'est pas valide
@@ -288,7 +288,7 @@ ____EOQ;
 		// on l'ajoute
 		$sQuery = <<< ________EOQ
 			INSERT INTO ELEVES(ELEVE_NOM, ELEVE_DATE_NAISSANCE)
-			VALUES( {$sQueryNomEleve}, {$sQueryDateNaissance})
+			VALUES( {$sQueryNomEleve}, STR_TO_DATE({$sQueryDateNaissance}, '%d/%m/%Y'))
 ________EOQ;
 		Database::execute($sQuery);
 
@@ -408,10 +408,12 @@ ____EOQ;
 	// Si la relation n'existe pas, on la créé
 	if($nIdProf === false)
 	{
+		// Prend seulement les 3 premiers caractères
+		$sSubProf = substr($sProfesseurNom, 0, 3);
 		// on l'ajoute
 		$sQuery = <<< ________EOQ
 			INSERT INTO PROFESSEURS(PROFESSEUR_NOM, PROFESSEUR_PWD)
-			VALUES({$sQueryNomProf}, MD5('$sProfesseurNom'))
+			VALUES({$sQueryNomProf}, MD5('{$sSubProf}'))
 ________EOQ;
 		Database::execute($sQuery);
 

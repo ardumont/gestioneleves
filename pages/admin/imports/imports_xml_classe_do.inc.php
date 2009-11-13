@@ -26,10 +26,10 @@ switch(strtolower($sAction))
 	case 'importer':
 		if($objForm->hasError() == true) break;
 
-		// importe les cycles/niveaux/domaines/matieres/competences
-		$bRes = import_xml_classe($sNomFichier);
+		// importe les classes/ecoles/eleves
+		$bRes = (int) import_xml_classe($sNomFichier);
 		// Rechargement
-		header("Location: ?page=imports&mode=imports_xml_classe&res=" . (bool) $bRes);
+		header("Location: ?page=imports&mode=imports_xml_classe&res={$bRes}");
 	break;
 
 	// ----------
