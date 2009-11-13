@@ -118,7 +118,7 @@ Database::openConnection(DATABASE_LOGIN, DATABASE_PASSWORD, DATABASE_NAME, DATAB
 Message::loadFromSession($_SESSION['ERROR_MESSAGE']);
 
 // On précise à la base qu'on travaille en UTF-8
-//Database::execute("SET NAMES UTF8");
+Database::execute("SET NAMES UTF8");
 
 //==============================================================================
 // Preparation des donnees
