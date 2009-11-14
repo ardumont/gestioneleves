@@ -21,7 +21,7 @@ $nCycleId = $oForm->getValue('cycle_id', $_POST, 'convert_int', -1);
 // Traitement des donnees
 //==============================================================================
 
-// ===== La liste des domaines =====
+// ===== La liste des cycles =====
 $sQuery = <<< EOQ
 	SELECT
 		CYCLE_NOM,
@@ -82,6 +82,7 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 					<td>Cycle</td>
 					<td>
 						<select name="cycle_id">
+							<option value="-1">-- Sélectionnez un cycle --</option>
 							<?php foreach($aCycles as $aCycle): ?>
 								<option value="<?php echo($aCycle['CYCLE_ID']); ?>"<?php echo ($nCycleId == $aCycle['CYCLE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aCycle['CYCLE_NOM']); ?></option>
 							<?php endforeach; ?>
