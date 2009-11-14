@@ -157,14 +157,14 @@ if($nEvalColId != null)
 	<a href="?page=evaluations_collectives&amp;mode=add">saisir au moins une &eacute;valuation collective</a>
 	&agrave; laquelle vous pourrez alors rattacher votre &eacute;valuation individuelle.
 <?php else: ?>
-<form method="post" action="?page=evaluations_individuelles&amp;mode=add">
+<form method="post" action="?page=evaluations_individuelles&amp;mode=add" name="recherche_eval_coll" id="recherche_eval_coll">
 	<table class="formulaire">
 		<caption>Rechercher une &eacute;valuation collective</caption>
 		<tbody>
 			<tr>
 				<td>Evaluation Collective</td>
 				<td>
-					<select name="EVAL_COL_ID">
+					<select name="EVAL_COL_ID" onchange="document.getElementById('recherche_eval_coll').submit();">
 						<?php foreach($aEvalCols as $aEvalCol): ?>
 							<option value="<?php echo($aEvalCol['EVAL_COL_ID']); ?>"<?php echo($aEvalCol['EVAL_COL_ID'] == $nEvalColId ? ' selected="selected"':''); ?>><?php echo($aEvalCol['CLASSE_NOM'] . " - " . $aEvalCol['EVAL_COL_NOM']); ?></option>
 						<?php endforeach; ?>
