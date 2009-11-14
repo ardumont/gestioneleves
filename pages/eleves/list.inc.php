@@ -8,15 +8,15 @@
 //==============================================================================
 
 // ===== Modification de la date =====
-$objFormEleves = new FormValidation();
+$oForm = new FormValidation();
 
 // soumission via post, typiquement une fois le bouton rechercher appuye.
-$nClasseId = $objFormEleves->getValue('CLASSE_ID', $_POST, 'convert_int');
+$nClasseId = $oForm->getValue('CLASSE_ID', $_POST, 'convert_int');
 
 // soumission via get, typiquement apres l'activation ou desactivation d'un eleve
 if($nClasseId == null)
 {
-	$nClasseId = $objFormEleves->getValue('classe_id', $_GET, 'convert_int');
+	$nClasseId = $oForm->getValue('classe_id', $_GET, 'convert_int');
 }
 
 //==============================================================================
