@@ -16,14 +16,17 @@
 //==============================================================================
 
 // ===== La liste des niveaux =====
-$sQuery = "SELECT" .
-		  "  NIVEAU_ID," .
-		  "  NIVEAU_NOM, " .
-		  "  CYCLE_NOM " .
-		  " FROM NIVEAUX, CYCLES " .
-		  " WHERE NIVEAUX.ID_CYCLE = CYCLES.CYCLE_ID " .
-		  " ORDER BY CYCLE_NOM ASC";
-$aNiveaux = Database::fetchArray($sQuery);
+$sQuery = <<< EOQ
+	SELECT
+		NIVEAU_ID,
+		NIVEAU_NOM,
+		CYCLE_NOM
+	FROM NIVEAUX
+		INNER JOIN CYCLES
+			ON NIVEAUX.ID_CYCLE = CYCLES.CYCLE_ID
+	ORDER BY CYCLE_NOM ASC
+EOQ;
+$aNiveaux = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 // $aNiveaux[][COLONNE] = VALEUR
 
 //==============================================================================
@@ -50,8 +53,8 @@ $aNiveaux = Database::fetchArray($sQuery);
 	<thead>
 		<tr>
 			<th><a href="?page=niveaux&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
-			<th>Niveaux</th>
 			<th>Cycles</th>
+			<th>Niveaux</th>
 			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
@@ -62,20 +65,36 @@ $aNiveaux = Database::fetchArray($sQuery);
 		</tr>
 	</tfoot>
 	<tbody>
-		<?php foreach($aNiveaux as $nRowNum => $aNiveau): ?>
-		<tr class="level0_row<?php echo($nRowNum%2); ?>">
-			<td></td>
-			<td><?php echo($aNiveau['NIVEAU_NOM']); ?></td>
-			<td><?php echo($aNiveau['CYCLE_NOM']); ?></td>
-			<!-- Edition -->
-			<td>
-				<a href="?page=niveaux&amp;mode=edit&amp;niveau_id=<?php echo($aNiveau['NIVEAU_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-			</td>
-			<!-- Suppression -->
-			<td>
-				<a href="?page=niveaux&amp;mode=delete&amp;niveau_id=<?php echo($aNiveau['NIVEAU_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
-			</td>
-		</tr>
+		<?php $nRowNum = 0; ?>
+		<?php foreach($aNiveaux as $sCycleNom => $aNiveaux): ?>
+			<!-- ligne du cycle -->
+			<tr class="level0_row<?php echo(($nRowNum++)%2); ?>">
+				<!-- ligne vide pour l'ajout -->
+				<th></th>
+				<!-- Nom du cycle -->
+				<th><?php echo($sCycleNom); ?></th>
+				<!-- Le reste -->
+				<th colspan="3"></th>
+			</tr>
+			<?php foreach($aNiveaux as $aNiveau): ?>
+				<!-- Ligne du niveau -->
+				<tr class="level0_row<?php echo(($nRowNum++)%2); ?>">
+					<!-- ligne vide pour l'ajout -->
+					<td></td>
+					<!-- Nom du cycle -->
+					<td></td>
+					<!-- Niveau -->
+					<td><?php echo($aNiveau['NIVEAU_NOM']); ?></td>
+					<!-- Edition du niveau -->
+					<td>
+						<a href="?page=niveaux&amp;mode=edit&amp;niveau_id=<?php echo($aNiveau['NIVEAU_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
+					</td>
+					<!-- Suppression du niveau-->
+					<td>
+						<a href="?page=niveaux&amp;mode=delete&amp;niveau_id=<?php echo($aNiveau['NIVEAU_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
+					</td>
+				</tr>
+			<?php endforeach;?>
 		<?php endforeach; ?>
 	</tbody>
 </table>
