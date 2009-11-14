@@ -49,26 +49,30 @@ $aEcole = Database::fetchOneRow($sQuery);
 <?php endif; ?>
 
 <form method="post" action="?page=ecoles&amp;mode=delete_do">
-	<table class="resume_info">
+	<table class="list_tree">
 		<caption>D&eacute;tail de l'&eacute;cole</caption>
-		<tr>
-			<td>Ecole</td>
-			<td><?php echo($aEcole['ECOLE_NOM']); ?></td>
-		</tr>
-		<tr>
-			<td>Ville</td>
-			<td><?php echo($aEcole['ECOLE_VILLE']); ?></td>
-		</tr>
-		<tr>
-			<td>D&eacute;partement</td>
-			<td><?php echo($aEcole['ECOLE_DEPARTEMENT']); ?></td>
-		</tr>
+		<thead></thead>
+		<tfoot></tfoot>
+		<tbody>
+			<tr class="level0_row0">
+				<td>Ecole</td>
+				<td><?php echo($aEcole['ECOLE_NOM']); ?></td>
+			</tr>
+			<tr class="level0_row1">
+				<td>Ville</td>
+				<td><?php echo($aEcole['ECOLE_VILLE']); ?></td>
+			</tr>
+			<tr class="level0_row0">
+				<td>D&eacute;partement</td>
+				<td><?php echo($aEcole['ECOLE_DEPARTEMENT']); ?></td>
+			</tr>
+		</tbody>
 	</table>
 	<fieldset><legend>Confirmation</legend>
 		<p>Etes-vous s&ucirc;r de vouloir supprimer cette &eacute;cole ?</p>
 		<p>
 			Ceci supprimera toutes les classes li&eacute;es &agrave; cette &eacute;cole.<br />
-		</p>		
+		</p>
 	</fieldset>
 	<p>
 		<input type="hidden" name="ECOLE_ID" value="<?php echo($aEcole['ECOLE_ID']) ?>" />

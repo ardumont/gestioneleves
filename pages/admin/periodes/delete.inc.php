@@ -41,20 +41,24 @@ $aPeriode = Database::fetchOneRow($sQuery);
 <?php endif; ?>
 
 <form method="post" action="?page=periodes&amp;mode=delete_do">
-	<table class="resume_info">
-		<caption>D&eacute;tail du cycle</caption>
-		<tr>
-			<td>Cycle</td>
-			<td><?php echo($aPeriode['PERIODE_NOM']); ?></td>
-		</tr>
-		<tr>
-			<td>Cycle</td>
-			<td><?php echo($aPeriode['PERIODE_DATE_DEBUT']); ?></td>
-		</tr>
-		<tr>
-			<td>Cycle</td>
-			<td><?php echo($aPeriode['PERIODE_DATE_FIN']); ?></td>
-		</tr>
+	<table class="list_tree">
+		<caption>D&eacute;tail de la p&eacute;riode</caption>
+		<thead></thead>
+		<tfoot></tfoot>
+		<thead>
+			<tr class="level0_row0">
+				<td>Cycle</td>
+				<td><?php echo($aPeriode['PERIODE_NOM']); ?></td>
+			</tr>
+			<tr class="level0_row1">
+				<td>Cycle</td>
+				<td><?php echo($aPeriode['PERIODE_DATE_DEBUT']); ?></td>
+			</tr>
+			<tr class="level0_row0">
+				<td>Cycle</td>
+				<td><?php echo($aPeriode['PERIODE_DATE_FIN']); ?></td>
+			</tr>
+		</thead>
 	</table>
 	<fieldset><legend>Confirmation</legend>
 		<p>Etes-vous s&ucirc;r de vouloir supprimer cette p&eacute;riode ?</p>

@@ -56,38 +56,42 @@ $aClasse = Database::fetchOneRow($sQuery);
 <?php endif; ?>
 
 <form method="post" action="?page=classes&amp;mode=delete_do">
-	<table class="resume_info">
+	<table class="list_tree">
 		<caption>D&eacute;tail de la classe</caption>
-		<tr>
-			<td>Professeur</td>
-			<td><?php echo($aClasse['PROFESSEUR_NOM']); ?></td>
-		</tr>
-		<tr>
-			<td>Nom de la classe</td>
-			<td><?php echo($aClasse['CLASSE_NOM']); ?></td>
-		</tr>
-		<tr>
-			<td>Ann&eacute;e scolaire</td>
-			<td><?php echo($aClasse['CLASSE_ANNEE_SCOLAIRE']); ?></td>
-		</tr>
-		<tr>
-			<td>Ecole</td>
-			<td><?php echo($aClasse['ECOLE_NOM']); ?></td>
-		</tr>
-		<tr>
-			<td>Ville</td>
-			<td><?php echo($aClasse['ECOLE_VILLE']); ?></td>
-		</tr>
-		<tr>
-			<td>D&eacute;partement</td>
-			<td><?php echo($aClasse['ECOLE_DEPARTEMENT']); ?></td>
-		</tr>
+		<thead></thead>
+		<tfoot></tfoot>
+		<tbody>
+			<tr class="level0_row0">
+				<td>Professeur</td>
+				<td><?php echo($aClasse['PROFESSEUR_NOM']); ?></td>
+			</tr>
+			<tr class="level0_row1">
+				<td>Nom de la classe</td>
+				<td><?php echo($aClasse['CLASSE_NOM']); ?></td>
+			</tr>
+			<tr class="level0_row0">
+				<td>Ann&eacute;e scolaire</td>
+				<td><?php echo($aClasse['CLASSE_ANNEE_SCOLAIRE']); ?></td>
+			</tr>
+			<tr class="level0_row1">
+				<td>Ecole</td>
+				<td><?php echo($aClasse['ECOLE_NOM']); ?></td>
+			</tr>
+			<tr class="level0_row0">
+				<td>Ville</td>
+				<td><?php echo($aClasse['ECOLE_VILLE']); ?></td>
+			</tr>
+			<tr class="level0_row1">
+				<td>D&eacute;partement</td>
+				<td><?php echo($aClasse['ECOLE_DEPARTEMENT']); ?></td>
+			</tr>
+		</tbody>
 	</table>
 	<fieldset><legend>Confirmation</legend>
 		<p>Etes-vous s&ucirc;r de vouloir supprimer cette classe ?</p>
 		<p>
 			Ceci supprimera tous les liens des &eacute;l&egrave;ve de cette classe et la classe.<br />
-		</p>		
+		</p>
 	</fieldset>
 	<p>
 		<input type="hidden" name="CLASSE_ID" value="<?php echo($aClasse['CLASSE_ID']) ?>" />

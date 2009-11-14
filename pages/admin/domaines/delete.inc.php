@@ -58,23 +58,27 @@ $aDomaine = Database::fetchOneRow($sQuery);
 <?php endif; ?>
 
 <form method="post" action="?page=domaines&amp;mode=delete_do">
-	<table class="resume_info" width="200px">
+	<table class="list_tree" width="200px">
 		<caption>D&eacute;tail du domaine</caption>
-		<tr>
-			<td>Cycle</td>
-			<td><?php echo($aDomaine['CYCLE_NOM']); ?></td>
-		</tr>
-		<tr>
-			<td>Domaine</td>
-			<td><?php echo($aDomaine['DOMAINE_NOM']); ?></td>
-		</tr>
+		<thead></thead>
+		<tfoot></tfoot>
+		<tbody>
+			<tr class="level0_row0">
+				<td>Cycle</td>
+				<td><?php echo($aDomaine['CYCLE_NOM']); ?></td>
+			</tr>
+			<tr class="level0_row1">
+				<td>Domaine</td>
+				<td><?php echo($aDomaine['DOMAINE_NOM']); ?></td>
+			</tr>
+		</tbody>
 	</table>
 	<fieldset><legend>Confirmation</legend>
 		<p>Etes-vous s&ucirc;r de vouloir supprimer ce domaine ?</p>
 		<p>
 			Ceci supprimera toutes les mati&egrave;res qui sont rattach&eacute;es &agrave; ce domaine.<br />
-			Ceci supprimera &eacute;galement en cons&eacute;quence toutes comp&eacute;tences rattach&eacute;s aux mati&egrave;res concern&eacute;es.
-		</p>		
+			Ceci supprimera &eacute;galement en cons&eacute;quence toutes comp&eacute;tences rattach&eacute;es aux mati&egrave;res concern&eacute;es.
+		</p>
 	</fieldset>
 	<p>
 		<input type="hidden" name="DOMAINE_ID" value="<?php echo($aDomaine['DOMAINE_ID']) ?>" />

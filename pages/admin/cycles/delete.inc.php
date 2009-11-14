@@ -39,15 +39,8 @@ $aCycle = Database::fetchOneRow($sQuery);
 <?php endif; ?>
 
 <form method="post" action="?page=cycles&amp;mode=delete_do">
-	<table class="resume_info">
-		<caption>D&eacute;tail du cycle</caption>
-		<tr>
-			<td>Cycle</td>
-			<td><?php echo($aCycle['CYCLE_NOM']); ?></td>
-		</tr>
-	</table>
 	<fieldset><legend>Confirmation</legend>
-		<p>Etes-vous s&ucirc;r de vouloir supprimer ce cycle ?</p>
+		<p>Etes-vous s&ucirc;r de vouloir supprimer le cycle '<?php echo($aCycle['CYCLE_NOM']); ?>' ?</p>
 		<p>
 			Ceci supprimera tous les niveaux rattach&eacute;s &agrave; ce cycle ainsi que tous les domaines.<br />
 		</p>

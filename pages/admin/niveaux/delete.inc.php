@@ -49,19 +49,8 @@ $aNiveau = Database::fetchOneRow($sQuery);
 <?php endif; ?>
 
 <form method="post" action="?page=niveaux&amp;mode=delete_do">
-	<table class="resume_info" width="200px">
-		<caption>D&eacute;tail du domaine</caption>
-		<tr>
-			<td>Cycle</td>
-			<td><?php echo($aNiveau['CYCLE_NOM']); ?></td>
-		</tr>
-		<tr>
-			<td>Domaine</td>
-			<td><?php echo($aNiveau['NIVEAU_NOM']); ?></td>
-		</tr>
-	</table>
 	<fieldset><legend>Confirmation</legend>
-		<p>Etes-vous s&ucirc;r de vouloir supprimer ce niveau ?</p>
+		<p>Etes-vous s&ucirc;r de vouloir supprimer le niveau '<?php echo($aNiveau['NIVEAU_NOM']) ?>' ?</p>
 	</fieldset>
 	<p>
 		<input type="hidden" name="NIVEAU_ID" value="<?php echo($aNiveau['NIVEAU_ID']) ?>" />

@@ -52,22 +52,26 @@ $aMatiere = Database::fetchOneRow($sQuery);
 <?php endif; ?>
 
 <form method="post" action="?page=matieres&amp;mode=delete_do">
-	<table class="resume_info">
-		<caption>D&eacute;tail de la classe</caption>
-		<tr>
-			<td>Domaine</td>
-			<td><?php echo($aMatiere['DOMAINE_NOM']); ?></td>
-		</tr>
-		<tr>
-			<td>Nom de la mati&egrave;re</td>
-			<td><?php echo($aMatiere['MATIERE_NOM']); ?></td>
-		</tr>
+	<table class="list_tree">
+		<caption>D&eacute;tail de la mati&egrave;re</caption>
+		<thead></thead>
+		<tfoot></tfoot>
+		<thead>
+			<tr class="level0_row0">
+				<td>Domaine</td>
+				<td><?php echo($aMatiere['DOMAINE_NOM']); ?></td>
+			</tr>
+			<tr class="level0_row0">
+				<td>Nom de la mati&egrave;re</td>
+				<td><?php echo($aMatiere['MATIERE_NOM']); ?></td>
+			</tr>
+		</thead>
 	</table>
 	<fieldset><legend>Confirmation</legend>
 		<p>Etes-vous s&ucirc;r de vouloir supprimer cette mati&egrave;re ?</p>
 		<p>
 			Ceci supprimera toutes les comp&eacute;tences rattach&eacute;es &agrave; cette mati&egrave;re.
-		</p>		
+		</p>
 	</fieldset>
 	<p>
 		<input type="hidden" name="MATIERE_ID" value="<?php echo($aMatiere['MATIERE_ID']) ?>" />

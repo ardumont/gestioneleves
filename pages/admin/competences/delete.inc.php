@@ -58,26 +58,26 @@ $aCompetence = Database::fetchOneRow($sQuery);
 <?php endif; ?>
 
 <form method="post" action="?page=competences&amp;mode=delete_do">
-	<table class="resume_info">
+	<table class="list_tree">
 		<caption>D&eacute;tail de la comp&eacute;tence</caption>
 		<thead>
 		</thead>
 		<tfoot>
 		</tfoot>
 		<tbody>
-			<tr>
+			<tr class="level0_row0">
 				<td>Cycle</td>
 				<td><?php echo($aCompetence['CYCLE_NOM']); ?></td>
 			</tr>
-			<tr>
+			<tr class="level0_row1">
 				<td>Domaine</td>
 				<td><?php echo($aCompetence['DOMAINE_NOM']); ?></td>
 			</tr>
-			<tr>
+			<tr class="level0_row0">
 				<td>Mati&egrave;re</td>
 				<td><?php echo($aCompetence['MATIERE_NOM']); ?></td>
 			</tr>
-			<tr>
+			<tr class="level0_row1">
 				<td>Comp&eacute;tence</td>
 				<td><?php echo($aCompetence['COMPETENCE_NOM']); ?></td>
 			</tr>

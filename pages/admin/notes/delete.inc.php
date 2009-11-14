@@ -49,23 +49,27 @@ $aNote = Database::fetchOneRow($sQuery);
 <?php endif; ?>
 
 <form method="post" action="?page=notes&amp;mode=delete_do">
-	<table class="resume_info">
-		<caption>D&eacute;tail du cycle</caption>
-		<tr>
-			<td>Note</td>
-			<td><?php echo($aNote['NOTE_NOM']); ?></td>
-		</tr>
-		<tr>
-			<td>Label</td>
-			<td><?php echo($aNote['NOTE_LABEL']); ?></td>
-		</tr>
-		<tr>
-			<td>Coefficient</td>
-			<td><?php echo($aNote['NOTE_NOTE']); ?></td>
-		</tr>
+	<table class="list_tree">
+		<caption>D&eacute;tail de la note</caption>
+		<thead></thead>
+		<tfoot></tfoot>
+		<thead>
+			<tr class="level0_row0">
+				<td>Note</td>
+				<td><?php echo($aNote['NOTE_NOM']); ?></td>
+			</tr>
+			<tr class="level0_row1">
+				<td>Label</td>
+				<td><?php echo($aNote['NOTE_LABEL']); ?></td>
+			</tr>
+			<tr class="level0_row0">
+				<td>Coefficient</td>
+				<td><?php echo($aNote['NOTE_NOTE']); ?></td>
+			</tr>
+		</thead>
 	</table>
 	<fieldset><legend>Confirmation</legend>
-		<p>Etes-vous s&ucirc;r de vouloir supprimer cette notes ?</p>
+		<p>Etes-vous s&ucirc;r de vouloir supprimer cette note ?</p>
 	</fieldset>
 	<p>
 		<input type="hidden" name="NOTE_ID" value="<?php echo($aNote['NOTE_ID']) ?>" />

@@ -63,38 +63,38 @@ $aEvalInd = Database::fetchOneRow($sQuery);
 <?php endif; ?>
 
 <form method="post" action="?page=evaluations_individuelles&amp;mode=delete_do">
-	<table class="resume_info" width="300px">
+	<table class="list_tree" width="300px">
 		<caption>D&eacute;tail de l'&eacute;valuation individuelle</caption>
 		<thead>
 		</thead>
 		<tfoot>
 		</tfoot>
 		<tbody>
-			<tr>
+			<tr class="level0_row0">
 				<td>El&egrave;ve</td>
 				<td><?php echo($aEvalInd['ELEVE_NOM']); ?></td>
 			</tr>
-			<tr>
+			<tr class="level0_row1">
 				<td>Classe</td>
 				<td><?php echo($aEvalInd['CLASSE_NOM']); ?></td>
 			</tr>
-			<tr>
+			<tr class="level0_row0">
 				<td>Note</td>
 				<td><?php echo($aEvalInd['NOTE_NOM']); ?></td>
 			</tr>
-			<tr>
+			<tr class="level0_row1">
 				<td>Commentaire</td>
 				<td><?php echo($aEvalInd['EVAL_IND_COMMENTAIRE']); ?></td>
 			</tr>
-			<tr>
+			<tr class="level0_row0">
 				<td>Comp&eacute;tence &eacute;valu&eacute;e</td>
 				<td><?php echo($aEvalInd['COMPETENCE_NOM']); ?></td>
 			</tr>
-			<tr>
+			<tr class="level0_row1">
 				<td>Mati&egrave;re</td>
 				<td><?php echo($aEvalInd['MATIERE_NOM']); ?></td>
 			</tr>
-			<tr>
+			<tr class="level0_row0">
 				<td>Domaine</td>
 				<td><?php echo($aEvalInd['DOMAINE_NOM']); ?></td>
 			</tr>
