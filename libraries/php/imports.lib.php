@@ -184,7 +184,7 @@ function import_xml_cycle($sNomFichier)
  */
 function import_xml_classe($sNomFichier)
 {
-	$sFileXSD = PATH_XSD . "/cycle.xsd";
+	$sFileXSD = PATH_XSD . "/classe.xsd";
 	// On valide le flux contre sa xsd
 	$bRes = validate_xml($sNomFichier, $sFileXSD);
 
