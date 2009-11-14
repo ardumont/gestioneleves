@@ -30,9 +30,10 @@
 				<xs:element name="eleve" type="EleveType" minOccurs="0" maxOccurs="unbounded" />
 			</xs:sequence>
 		</xs:choice>
+		<xs:attribute name="cycle" type="xs:string" use="required" />
+		<xs:attribute name="niveau" type="xs:string" use="required" />
 		<xs:attribute name="nom" type="xs:string" use="required" />
 		<xs:attribute name="professeur" type="xs:string" use="required" />
-		<xs:attribute name="niveau" type="xs:string" use="required" />
 		<xs:attribute name="annee_scolaire" type="AnneeScolaireType" use="required" />
 	</xs:complexType>
 
