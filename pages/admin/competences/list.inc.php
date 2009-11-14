@@ -7,6 +7,17 @@
 // Validation du formulaire
 //==============================================================================
 
+// ===== Modification de la date =====
+$oForm = new FormValidation();
+
+// soumission via post, typiquement une fois le bouton rechercher appuye.
+$nCycleId = $oForm->getValue('cycle_id', $_POST, 'convert_int', -1);
+
+// soumission via post, typiquement une fois le bouton rechercher appuye.
+$nDomaineId = $oForm->getValue('domaine_id', $_POST, 'convert_int', -1);
+
+$nMatiereId = $oForm->getValue('matiere_id', $_POST, 'convert_int', -1);
+
 //==============================================================================
 // Actions du formulaire
 //==============================================================================
@@ -15,19 +26,76 @@
 // Traitement des donnees
 //==============================================================================
 
+// ===== La liste des cycles =====
+$sQuery = <<< EOQ
+	SELECT
+		CYCLE_NOM,
+		CYCLE_ID
+	FROM CYCLES
+	ORDER BY CYCLE_NOM ASC
+EOQ;
+$aCycles = Database::fetchArray($sQuery);
+// $aCycles[][COLONNE] = VALEUR
+
+// ===== La liste des domaines =====
+$sQuery = <<< EOQ
+	SELECT
+		DOMAINE_ID,
+		DOMAINE_NOM
+	FROM DOMAINES
+	ORDER BY DOMAINE_NOM ASC
+EOQ;
+$aDomaines = Database::fetchArray($sQuery);
+// $aDomaines[][COLONNE] = VALEUR
+
+// ===== La liste des matieres =====
+$sQuery = <<< EOQ
+	SELECT
+		MATIERE_ID,
+		MATIERE_NOM
+	FROM MATIERES
+	ORDER BY MATIERE_NOM ASC
+EOQ;
+$aMatieres = Database::fetchArray($sQuery);
+// $aMatieres[][COLONNE] = VALEUR
+
+$sQueryCycleId = "";
+if($nCycleId != -1)
+{
+	$sQueryCycleId = " AND CYCLE_ID = {$nCycleId}";
+}
+
+$sQueryDomaineId = "";
+if($nDomaineId != -1)
+{
+	$sQueryDomaineId = " AND DOMAINE_ID = {$nDomaineId}";
+}
+
+$sQueryMatiereId = "";
+if($nMatiereId != -1)
+{
+	$sQueryMatiereId = " AND MATIERE_ID = {$nMatiereId}";
+}
+
 // ===== La liste des competences =====
-$sQuery = "SELECT" .
-		  "  COMPETENCE_ID, " .
-		  "  COMPETENCE_NOM, " .
-		  "  MATIERE_ID, " .
-		  "  MATIERE_NOM, " .
-		  "  DOMAINE_NOM, " .
-		  "  CYCLE_NOM " .
-		  " FROM COMPETENCES, MATIERES, DOMAINES, CYCLES " .
-		  " WHERE COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID " .
-		  " AND MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID " .
-		  " AND DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID " .
-		  " ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC";
+$sQuery = <<< EOQ
+	SELECT
+		COMPETENCE_ID,
+		COMPETENCE_NOM,
+		MATIERE_ID,
+		MATIERE_NOM,
+		DOMAINE_NOM,
+		CYCLE_NOM
+	FROM COMPETENCES, MATIERES, DOMAINES, CYCLES
+	WHERE COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
+	AND MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
+	AND DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
+	{$sQueryDomaineId}
+	{$sQueryCycleId}
+	{$sQueryMatiereId}
+	ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
+EOQ;
+
 $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAINE_NOM', 'MATIERE_NOM', 'COMPETENCE_NOM'));
 // $aCompetences[][COLONNE] = VALEUR
 
@@ -51,60 +119,92 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 <?php endif; ?>
 
 <?php if($aCompetences != false): ?>
-<table class="list_tree">
-	<thead>
-		<tr>
-			<th><a href="?page=competences&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
-			<th>Cycles</th>
-			<th>Domaines</th>
-			<th>Mati&egrave;res</th>
-			<th>Comp&eacute;tences</th>
-			<th colspan="2">Actions</th>
-		</tr>
-	</thead>
-	<tfoot>
-		<tr>
-			<th><a href="?page=competences&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
-			<td colspan="6"></td>
-		</tr>
-	</tfoot>
-	<tbody>
-		<?php $i = 0; ?>
-		<?php foreach($aCompetences as $sCycle => $aCycle): ?>
-		<!-- Ligne du cycle -->
-		<tr class="level0_row<?php echo ($i++)%2; ?>">
-			<td></td>
-			<!-- Nom du cycle -->
-			<th><?php echo($sCycle); ?></th>
-			<!-- Le reste -->
-			<td colspan="5"></td>
-		</tr>
-			<?php foreach($aCycle as $sDomaineNom => $aDomaineNom): ?>
-			<!-- Ligne du nom de domaine -->
+	<form method="post" action="?page=competences">
+		<table class="formulaire">
+			<caption>Crit&eacute;res de recherche</caption>
+			<tfoot>
+			</tfoot>
+			<tbody>
+				<tr>
+					<td>Cycle</td>
+					<td>
+						<select name="cycle_id">
+							<option value="-1">-- Sélectionnez un cycle --</option>
+							<?php foreach($aCycles as $aCycle): ?>
+								<option value="<?php echo($aCycle['CYCLE_ID']); ?>"<?php echo ($nCycleId == $aCycle['CYCLE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aCycle['CYCLE_NOM']); ?></option>
+							<?php endforeach; ?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Domaines</td>
+					<td>
+						<select name="domaine_id">
+							<option value="-1">-- Sélectionnez un domaine --</option>
+							<?php foreach($aDomaines as $aDomaine): ?>
+								<option value="<?php echo($aDomaine['DOMAINE_ID']); ?>"<?php echo ($nDomaineId == $aDomaine['DOMAINE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aDomaine['DOMAINE_NOM']); ?></option>
+							<?php endforeach; ?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Domaines</td>
+					<td>
+						<select name="matiere_id">
+							<option value="-1">-- Sélectionnez un domaine --</option>
+							<?php foreach($aMatieres as $aMatiere): ?>
+								<option value="<?php echo($aMatiere['MATIERE_ID']); ?>"<?php echo ($nMatiereId == $aMatiere['MATIERE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aMatiere['MATIERE_NOM']); ?></option>
+							<?php endforeach; ?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><input type="submit" name="action" value="Rechercher" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+	<table class="list_tree">
+		<thead>
+			<tr>
+				<th><a href="?page=competences&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+				<th>Cycles</th>
+				<th>Domaines</th>
+				<th>Mati&egrave;res</th>
+				<th>Comp&eacute;tences</th>
+				<th colspan="2">Actions</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th><a href="?page=competences&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+				<td colspan="6"></td>
+			</tr>
+		</tfoot>
+		<tbody>
+			<?php $i = 0; ?>
+			<?php foreach($aCompetences as $sCycle => $aCycle): ?>
+			<!-- Ligne du cycle -->
 			<tr class="level0_row<?php echo ($i++)%2; ?>">
 				<td></td>
 				<!-- Nom du cycle -->
-				<th></th>
-				<!-- Nom du domaine -->
-				<th><?php echo($sDomaineNom); ?></th>
+				<th><?php echo($sCycle); ?></th>
 				<!-- Le reste -->
-				<td colspan="4"></td>
+				<td colspan="5"></td>
 			</tr>
-				<?php foreach($aDomaineNom as $sMatiereNom => $aMatiereNom): ?>
-				<!-- Ligne de la matiere -->
+				<?php foreach($aCycle as $sDomaineNom => $aDomaineNom): ?>
+				<!-- Ligne du nom de domaine -->
 				<tr class="level0_row<?php echo ($i++)%2; ?>">
 					<td></td>
 					<!-- Nom du cycle -->
 					<th></th>
 					<!-- Nom du domaine -->
-					<th></th>
-					<!-- Nom de la matiere -->
-					<th><?php echo($sMatiereNom); ?></th>
+					<th><?php echo($sDomaineNom); ?></th>
 					<!-- Le reste -->
-					<td colspan="3"></td>
+					<td colspan="4"></td>
 				</tr>
-					<?php foreach($aMatiereNom as $sCompetenceNom => $aCompetence): ?>
-					<!-- Ligne de la competence -->
+					<?php foreach($aDomaineNom as $sMatiereNom => $aMatiereNom): ?>
+					<!-- Ligne de la matiere -->
 					<tr class="level0_row<?php echo ($i++)%2; ?>">
 						<td></td>
 						<!-- Nom du cycle -->
@@ -112,27 +212,44 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 						<!-- Nom du domaine -->
 						<th></th>
 						<!-- Nom de la matiere -->
-						<th></th>
-						<!-- Nom de la compétence -->
-						<td>
-							<a href="?page=competences&amp;mode=edit&amp;competence_id=<?php echo($aCompetence['COMPETENCE_ID']); ?>&amp;matiere_id=<?php echo($aCompetence['MATIERE_ID']); ?>"><?php echo($sCompetenceNom); ?></a>
-						</td>
-						<!-- Edition -->
-						<td>
-							<a href="?page=competences&amp;mode=edit&amp;competence_id=<?php echo($aCompetence['COMPETENCE_ID']); ?>&amp;matiere_id=<?php echo($aCompetence['MATIERE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-						</td>
-						<!-- Suppression -->
-						<td>
-							<a href="?page=competences&amp;mode=delete&amp;competence_id=<?php echo($aCompetence['COMPETENCE_ID']); ?>&amp;matiere_id=<?php echo($aCompetence['MATIERE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
-						</td>
+						<th><?php echo($sMatiereNom); ?></th>
+						<!-- Le reste -->
+						<td colspan="3"></td>
 					</tr>
+						<?php foreach($aMatiereNom as $sCompetenceNom => $aCompetence): ?>
+						<!-- Ligne de la competence -->
+						<tr class="level0_row<?php echo ($i++)%2; ?>">
+							<td></td>
+							<!-- Nom du cycle -->
+							<th></th>
+							<!-- Nom du domaine -->
+							<th></th>
+							<!-- Nom de la matiere -->
+							<th></th>
+							<!-- Nom de la compétence -->
+							<td>
+								<a href="?page=competences&amp;mode=edit&amp;competence_id=<?php echo($aCompetence['COMPETENCE_ID']); ?>&amp;matiere_id=<?php echo($aCompetence['MATIERE_ID']); ?>"><?php echo($sCompetenceNom); ?></a>
+							</td>
+							<!-- Edition -->
+							<td>
+								<a href="?page=competences&amp;mode=edit&amp;competence_id=<?php echo($aCompetence['COMPETENCE_ID']); ?>&amp;matiere_id=<?php echo($aCompetence['MATIERE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
+							</td>
+							<!-- Suppression -->
+							<td>
+								<a href="?page=competences&amp;mode=delete&amp;competence_id=<?php echo($aCompetence['COMPETENCE_ID']); ?>&amp;matiere_id=<?php echo($aCompetence['MATIERE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
+							</td>
+						</tr>
+						<?php endforeach; ?>
 					<?php endforeach; ?>
 				<?php endforeach; ?>
 			<?php endforeach; ?>
-		<?php endforeach; ?>
-	</tbody>
-</table>
+		</tbody>
+	</table>
 <?php else: ?>
-	Aucune compétence n'a été renseignée à ce jour.<br />
-	<a href="?page=competences&amp;mode=add">Ajouter une compétence</a>
+	<?php if($nCycleId != -1 || $nMatiereId != -1 || $nDomaineId != -1): ?>
+		Aucune compétence n'a été renseignée pour ces critères de recherche.<br />
+	<?php else:?>
+		Aucune compétence n'a été renseignée à ce jour.<br />
+		<a href="?page=competences&amp;mode=add">Ajouter une compétence</a>
+	<?php endif; ?>
 <?php endif; ?>
