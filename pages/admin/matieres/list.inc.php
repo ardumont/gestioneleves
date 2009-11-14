@@ -41,10 +41,9 @@ $sQuery = <<< EOQ
 		DOMAINE_ID,
 		DOMAINE_NOM
 	FROM DOMAINES
-	{$sQueryCycleId}
 	ORDER BY DOMAINE_NOM ASC
 EOQ;
-$aDomaines = Database::fetchArraY($sQuery);
+$aDomaines = Database::fetchArray($sQuery);
 // $aDomaines[][COLONNE] = VALEUR
 
 $sQueryCycleId = "";
