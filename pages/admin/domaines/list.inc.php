@@ -7,6 +7,12 @@
 // Validation du formulaire
 //==============================================================================
 
+// ===== Modification de la date =====
+$oForm = new FormValidation();
+
+// soumission via post, typiquement une fois le bouton rechercher appuye.
+$nCycleId = $oForm->getValue('cycle_id', $_POST, 'convert_int', -1);
+
 //==============================================================================
 // Actions du formulaire
 //==============================================================================
@@ -16,13 +22,33 @@
 //==============================================================================
 
 // ===== La liste des domaines =====
-$sQuery = "SELECT" .
-		  "  CYCLE_NOM, " .
-		  "  DOMAINE_ID, " .
-		  "  DOMAINE_NOM " .
-		  " FROM DOMAINES, CYCLES " .
-		  " WHERE DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID " .
-		  " ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC";
+$sQuery = <<< EOQ
+	SELECT
+		CYCLE_NOM,
+		CYCLE_ID
+	FROM CYCLES
+	ORDER BY CYCLE_NOM ASC
+EOQ;
+$aCycles = Database::fetchArray($sQuery);
+// $aCycles[][COLONNE] = VALEUR
+
+$sQueryCycleId = "";
+if($nCycleId != -1)
+{
+	$sQueryCycleId = " AND CYCLE_ID = {$nCycleId}";
+}
+
+// ===== La liste des domaines =====
+$sQuery = <<< EOQ
+	SELECT
+		CYCLE_NOM,
+		DOMAINE_ID,
+		DOMAINE_NOM
+	FROM DOMAINES, CYCLES
+	WHERE DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
+	{$sQueryCycleId}
+	ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC
+EOQ;
 $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 // $aDomaines[][COLONNE] = VALEUR
 
@@ -46,7 +72,29 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 <?php endif; ?>
 
 <?php if($aDomaines != false): ?>
-<table class="list_tree">
+	<form method="post" action="?page=domaines">
+		<table class="formulaire">
+			<caption>Crit&eacute;res de recherche</caption>
+			<tfoot>
+			</tfoot>
+			<tbody>
+				<tr>
+					<td>Cycle</td>
+					<td>
+						<select name="cycle_id">
+							<?php foreach($aCycles as $aCycle): ?>
+								<option value="<?php echo($aCycle['CYCLE_ID']); ?>"<?php echo ($nCycleId == $aCycle['CYCLE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aCycle['CYCLE_NOM']); ?></option>
+							<?php endforeach; ?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><input type="submit" name="action" value="Rechercher" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+	<table class="list_tree">
 	<thead>
 		<tr>
 			<th><a href="?page=domaines&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
@@ -93,6 +141,10 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 	</tbody>
 </table>
 <?php else: ?>
+	<?php if($nCycleId != -1): ?>
+	Aucun domaine n'a été renseigné pour le cycle sélectionné.<br />
+	<?php else: ?>
 	Aucun domaine n'a été renseigné à ce jour.<br />
 	<a href="?page=domaines&amp;mode=add">Ajouter un domaine</a>
+	<?php endif; ?>
 <?php endif; ?>
