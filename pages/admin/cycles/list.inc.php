@@ -47,15 +47,21 @@ $aCycles = Database::fetchArray($sQuery);
 <table class="list_tree">
 	<thead>
 		<tr>
+			<th><a href="?page=cycles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 			<th>Cycles</th>
 			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
+		<tr>
+			<th><a href="?page=cycles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+			<th colspan="3"></th>
+		</tr>
 	</tfoot>
 	<tbody>
 		<?php foreach($aCycles as $nRowNum => $aCycle): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
+			<td></td>
 			<td><?php echo($aCycle['CYCLE_NOM']); ?></td>
 			<!-- Edition -->
 			<td>

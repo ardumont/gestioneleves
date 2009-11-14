@@ -387,40 +387,30 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 			<h4><a href="?page=home"><img src="<?php echo(URL_ICONS_16X16); ?>/home.png"/>La page d'accueil</a></h4>
 			<h3>Professeurs</h3>
 				<h4><a href="?page=professeurs"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-				<h4><a href="?page=professeurs&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>Elèves</h3>
 				<h4><a href="?page=eleves"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
 			<h3>Comp&eacute;tences</h3>
 				<h4><a href="?page=competences"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-				<h4><a href="?page=competences&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>Classes</h3>
 				<h4><a href="?page=classes"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-				<h4><a href="?page=classes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>Cycles</h3>
 				<h4><a href="?page=cycles"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-				<h4><a href="?page=cycles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>Domaines</h3>
 				<h4><a href="?page=domaines"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-				<h4><a href="?page=domaines&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>Ecoles</h3>
 				<h4><a href="?page=ecoles"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-				<h4><a href="?page=ecoles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>Mati&egrave;res</h3>
 				<h4><a href="?page=matieres"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-				<h4><a href="?page=matieres&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>Niveaux</h3>
 				<h4><a href="?page=niveaux"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-				<h4><a href="?page=niveaux&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>Notes</h3>
 				<h4><a href="?page=notes"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-				<h4><a href="?page=notes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>P&eacute;riodes</h3>
 				<h4><a href="?page=periodes"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-				<h4><a href="?page=periodes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>Import Cycles</h3>
 				<h4><a href="?page=imports&amp;mode=imports_csv"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Import CSV</a></h4>
 				<h4><a href="?page=imports&amp;mode=imports_xml"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Import XML</a></h4>
-			<h3>Import Classe</h3>
+			<h3>Import Classes</h3>
 				<h4><a href="?page=imports&amp;mode=imports_xml_classe"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Import XML</a></h4>
 		</div>
 	</div>

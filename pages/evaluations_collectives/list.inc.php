@@ -145,12 +145,14 @@ Vous pouvez &eacute;galement filtrer sur la classe et la p&eacute;riode.
 </form>
 <br />
 <?php if(count($aEvalCols) <= 0): ?>
-	Aucune &eacute;valuation collective n'a &eacute;t&eacute; saisie &agrave; ce jour.
+	Aucune &eacute;valuation collective n'a &eacute;t&eacute; saisie &agrave; ce jour.<br />
+	<a href="?page=evaluations_collectives&amp;mode=add">Ajouter une évaluation collective</a>
 <?php else: ?>
 <table class="list_tree">
 	<caption>Liste des &eacute;valuations</caption>
 	<thead>
 		<tr>
+			<th><a href="?page=evaluations_collectives&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 			<th>P&eacute;riodes</th>
 			<th>Classes</th>
 			<th>Ann&eacute;es scolaires</th>
@@ -161,10 +163,15 @@ Vous pouvez &eacute;galement filtrer sur la classe et la p&eacute;riode.
 		</tr>
 	</thead>
 	<tfoot>
+		<tr>
+			<th><a href="?page=evaluations_collectives&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+			<th colspan="8"></th>
+		</tr>
 	</tfoot>
 	<tbody>
 		<?php foreach($aEvalCols as $nRowNum => $aEvalCol): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
+			<td></td>
 			<td><?php echo($aEvalCol['PERIODE_NOM']); ?></td>
 			<td><?php echo($aEvalCol['CLASSE_NOM']); ?></td>
 			<td><?php echo($aEvalCol['CLASSE_ANNEE_SCOLAIRE']); ?></td>

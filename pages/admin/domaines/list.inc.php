@@ -49,18 +49,24 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 <table class="list_tree">
 	<thead>
 		<tr>
+			<th><a href="?page=domaines&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 			<th>Cycles</th>
 			<th>Domaines</th>
 			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
+		<tr>
+			<th><a href="?page=domaines&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+			<th colspan="4"></th>
+		</tr>
 	</tfoot>
 	<tbody>
 		<?php $nRowNum = 0; ?>
 		<?php foreach($aDomaines as $sCycleNom => $aCycleNom): ?>
 		<!-- Ligne du cycle -->
 		<tr class="level0_row<?php echo(($nRowNum++)%2); ?>">
+			<td></td>
 			<!-- Nom du cycle -->
 			<th><?php echo($sCycleNom); ?></th>
 			<!-- Le reste -->
@@ -68,6 +74,7 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 		</tr>
 			<?php foreach($aCycleNom as $aDomaine): ?>
 			<tr class="level0_row<?php echo(($nRowNum++)%2); ?>">
+				<td></td>
 				<!-- Nom du cycle -->
 				<td></td>
 				<!-- Nom de domaine -->

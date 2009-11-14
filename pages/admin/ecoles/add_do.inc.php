@@ -7,33 +7,33 @@
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
-// si le champ ECOLE_NOM est specifie alors 
+// si le champ ECOLE_NOM est specifie alors
 // il s'agit d'un ajout d'un nouvel eleve
-$objForm->read('ECOLE_NOM', $_POST);
-$objForm->testError0(null, 'exist',     "Il manque le champ ECOLE_NOM !");
-$objForm->testError0(null, 'blank',     "Il manque le nom de la nouvelle &eacute;cole !");
-$objForm->testError0(null, 'is_string', "Le nom de l'&eacute;cole doit &ecirc;tre une cha&icirc;ene de caract&egrave;res !");
-$sEcoleNom = $objForm->get(null);
+$oForm->read('ECOLE_NOM', $_POST);
+$oForm->testError0(null, 'exist',     "Il manque le champ ECOLE_NOM !");
+$oForm->testError0(null, 'blank',     "Il manque le nom de la nouvelle &eacute;cole !");
+$oForm->testError0(null, 'is_string', "Le nom de l'&eacute;cole doit &ecirc;tre une cha&icirc;ene de caract&egrave;res !");
+$sEcoleNom = $oForm->get(null);
 
-// si le champ ECOLE_VILLE est specifie alors 
+// si le champ ECOLE_VILLE est specifie alors
 // il s'agit d'un ajout d'un nouvel eleve
-$objForm->read('ECOLE_VILLE', $_POST);
-$objForm->testError0(null, 'exist',     "Il manque le champ ECOLE_VILLE !");
-$objForm->testError0(null, 'blank',     "Il manque la ville la nouvelle &eacute;cole !");
-$objForm->testError0(null, 'is_string', "Le nom de la ville doit &ecirc;tre une cha&icirc;ene de caract&egrave;res !");
-$sEcoleVille = $objForm->get(null);
+$oForm->read('ECOLE_VILLE', $_POST);
+$oForm->testError0(null, 'exist',     "Il manque le champ ECOLE_VILLE !");
+$oForm->testError0(null, 'blank',     "Il manque la ville de la nouvelle &eacute;cole !");
+$oForm->testError0(null, 'is_string', "Le nom de la ville doit &ecirc;tre une cha&icirc;ene de caract&egrave;res !");
+$sEcoleVille = $oForm->get(null);
 
-// si le champ ECOLE_DEPARTEMENT est specifie alors 
+// si le champ ECOLE_DEPARTEMENT est specifie alors
 // il s'agit d'un ajout d'un nouvel eleve
-$objForm->read('ECOLE_DEPARTEMENT', $_POST);
-$objForm->testError0(null, 'exist',     "Il manque le champ ECOLE_DEPARTEMENT !");
-$objForm->testError0(null, 'blank',     "Il manque le d&eacute;partement de la nouvelle &eacute;cole !");
-$objForm->testError0(null, 'is_int', 	"Le d&eacute;partement de l'&eacute;cole doit &ecirc;tre un entier !");
-$sEcoleDep = $objForm->get(null);
+$oForm->read('ECOLE_DEPARTEMENT', $_POST);
+$oForm->testError0(null, 'exist',     "Il manque le champ ECOLE_DEPARTEMENT !");
+$oForm->testError0(null, 'blank',     "Il manque le d&eacute;partement de la nouvelle &eacute;cole !");
+$oForm->testError0(null, 'is_int', 	"Le d&eacute;partement de l'&eacute;cole doit &ecirc;tre un entier !");
+$sEcoleDep = $oForm->get(null);
 
 //==============================================================================
 // Action du formulaire
@@ -43,8 +43,8 @@ switch(strtolower($sAction))
 {
 	// ajoute l'eleve
 	case 'ajouter':
-		if($objForm->hasError() == true) break;
-		// insertion de l'eleve dans la table		
+		if($oForm->hasError() == true) break;
+		// insertion de l'eleve dans la table
 		$sQuery =
 			"INSERT INTO ECOLES (ECOLE_NOM, ECOLE_VILLE, ECOLE_DEPARTEMENT)" .
 			"VALUES(".
@@ -58,10 +58,10 @@ switch(strtolower($sAction))
 		header("Location: ?page=ecoles");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
-		$objForm->clearError();
+		$oForm->clearError();
 
 		// Rechargement
 		header("Location: ?page=ecoles");
@@ -70,8 +70,8 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:
-		$objForm->clearError();
-		
+		$oForm->clearError();
+
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
 
@@ -88,10 +88,8 @@ switch(strtolower($sAction))
 //==============================================================================
 
 // On stocke toutes les erreurs de formulaire.
-Message::addErrorFromFormValidation($objForm->getError());
+Message::addErrorFromFormValidation($oForm->getError());
 
 // Rechargement
 header("Location: ?page=ecoles&mode=add");
 return;
-
-?>

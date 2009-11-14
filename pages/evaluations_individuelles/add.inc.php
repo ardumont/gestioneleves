@@ -153,7 +153,9 @@ if($nEvalColId != null)
 <br />
 <?php if(count($aEvalCols) <= 0): ?>
 	Aucune &eacute;valuation collective saisie &agrave; ce jour.<br />
-	Si vous voulez saisir une &eacute;valuation individuelle, vous devez d'abord saisir au moins une &eacute;valuation collective &agrave; laquelle vous pourrez alors rattacher votre &eacute;valution individuelle.
+	Si vous voulez saisir une &eacute;valuation individuelle, vous devez d'abord
+	<a href="?page=evaluations_collectives&amp;mode=add">saisir au moins une &eacute;valuation collective</a>
+	&agrave; laquelle vous pourrez alors rattacher votre &eacute;valuation individuelle.
 <?php else: ?>
 <form method="post" action="?page=evaluations_individuelles&amp;mode=add">
 	<table class="formulaire">

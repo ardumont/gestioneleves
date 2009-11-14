@@ -51,6 +51,7 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 <table class="list_tree">
 	<thead>
 		<tr>
+			<th><a href="?page=matieres&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 			<th>Cycles</th>
 			<th>Domaines</th>
 			<th>Mati&egrave;res</th>
@@ -58,12 +59,17 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 		</tr>
 	</thead>
 	<tfoot>
+		<tr>
+			<th><a href="?page=matieres&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+			<th colspan="5"></th>
+		</tr>
 	</tfoot>
 	<tbody>
 		<?php $nRowNum = 0; ?>
 		<?php foreach($aMatieres as $sCycle => $aCycle): ?>
 		<!-- Ligne du cycle -->
 		<tr class="level0_row<?php echo(($nRowNum++)%2); ?>">
+			<td></td>
 			<!-- Le cycle -->
 			<td><?php echo($sCycle); ?></td>
 			<!-- Le reste -->
@@ -71,6 +77,7 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 		</tr>
 			<?php foreach($aCycle as $sDomaine => $aDomaine): ?>
 			<tr class="level0_row<?php echo(($nRowNum++)%2); ?>">
+				<td></td>
 				<!-- Le cycle -->
 				<td></td>
 				<!-- Le nom du domaine -->
@@ -80,6 +87,7 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 			</tr>
 				<?php foreach($aDomaine as $sMatiere => $aMatiere): ?>
 				<tr class="level0_row<?php echo(($nRowNum++)%2); ?>">
+					<td></td>
 					<!-- Le cycle -->
 					<td></td>
 					<!-- Le nom du domaine -->

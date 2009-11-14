@@ -49,16 +49,22 @@ $aNiveaux = Database::fetchArray($sQuery);
 <table class="list_tree">
 	<thead>
 		<tr>
+			<th><a href="?page=niveaux&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 			<th>Niveaux</th>
 			<th>Cycles</th>
 			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
+		<tr>
+			<th><a href="?page=niveaux&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+			<th colspan="4"></th>
+		</tr>
 	</tfoot>
 	<tbody>
 		<?php foreach($aNiveaux as $nRowNum => $aNiveau): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
+			<td></td>
 			<td><?php echo($aNiveau['NIVEAU_NOM']); ?></td>
 			<td><?php echo($aNiveau['CYCLE_NOM']); ?></td>
 			<!-- Edition -->

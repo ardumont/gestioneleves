@@ -49,6 +49,7 @@ $aPeriodes = Database::fetchArray($sQuery);
 <table class="list_tree">
 	<thead>
 		<tr>
+			<th><a href="?page=periodes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 			<th>P&eacute;riode</th>
 			<th>Dates de d&eacute;but</th>
 			<th>Dates de fin</th>
@@ -56,10 +57,15 @@ $aPeriodes = Database::fetchArray($sQuery);
 		</tr>
 	</thead>
 	<tfoot>
+		<tr>
+			<th><a href="?page=periodes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+			<th colspan="5"></th>
+		</tr>
 	</tfoot>
 	<tbody>
 		<?php foreach($aPeriodes as $nRowNum => $aPeriode): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
+			<td></td>
 			<td><?php echo($aPeriode['PERIODE_NOM']); ?></td>
 			<td><?php echo($aPeriode['PERIODE_DATE_DEBUT']); ?></td>
 			<td><?php echo($aPeriode['PERIODE_DATE_FIN']); ?></td>

@@ -438,13 +438,10 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 			<h5>&nbsp;</h5>
 			<h3>Elèves</h3>
 				<h4><a href="?page=eleves"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-				<h4><a href="?page=eleves&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>Evaluations collectives</h3>
 				<h4><a href="?page=evaluations_collectives"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-				<h4><a href="?page=evaluations_collectives&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>Evaluations individuelles</h3>
 				<h4><a href="?page=evaluations_individuelles"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-				<h4><a href="?page=evaluations_individuelles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Ajouter</a></h4>
 			<h3>Aide/Info</h3>
 				<h4><a href="?page=contributeurs"><img src="<?php echo(URL_ICONS_16X16); ?>/contributeur.png"/>Contributeurs</a></h4>
 				<h4><a href="admin.php"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Page d'administration</a></h4>

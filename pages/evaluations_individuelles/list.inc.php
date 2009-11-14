@@ -164,12 +164,14 @@ classe, aucun r&eacute;sultat ne s'affichera.
 </form>
 <br />
 <?php if(count($aEvalInds) <= 0): ?>
-	Aucune &eacute;valuation individuelle n'a &eacute;t&eacute; saisie &agrave; ce jour pour ces crit&egrave;res.
+	Aucune &eacute;valuation individuelle n'a &eacute;t&eacute; saisie &agrave; ce jour pour ces crit&egrave;res.<br />
+	<a href="?page=evaluations_individuelles&amp;mode=add">Ajouter une évaluation individuelle</a>
 <?php else: ?>
 	<table class="list_tree">
 		<caption>Liste des &eacute;valuations individuelles</caption>
 		<thead>
 			<tr>
+				<th><a href="?page=evaluations_individuelles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 				<th>El&egrave;ves</th>
 				<th>Classes</th>
 				<th>Domaines</th>
@@ -181,10 +183,15 @@ classe, aucun r&eacute;sultat ne s'affichera.
 			</tr>
 		</thead>
 		<tfoot>
+			<tr>
+				<th><a href="?page=evaluations_individuelles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+				<th colspan="9"></th>
+			</tr>
 		</tfoot>
 		<tbody>
 			<?php foreach($aEvalInds as $nRowNum => $aEvalInd): ?>
 			<tr class="level0_row<?php echo($nRowNum%2); ?>">
+				<td></td>
 				<td><?php echo($aEvalInd['ELEVE_NOM']); ?></td>
 				<td><?php echo($aEvalInd['CLASSE_NOM']); ?></td>
 				<td><?php echo($aEvalInd['DOMAINE_NOM']); ?></td>

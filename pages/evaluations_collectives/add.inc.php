@@ -73,8 +73,10 @@ $aEvalCols= Database::fetchArray($sQuery);
 <?php endif; ?>
 <br />
 <?php if(count($aClasses) <= 0 && count($aPeriodes <= 0) ): ?>
-	Vous devez d'abord cr&eacute;er au moins une classe et au moins une p&eacute;riode auxquelles vous pourrez alors
-	rattacher votre &eacute;valuation collective.
+	Vous devez d'abord <a href="admin.php?page=classes&amp;mode=add">cr&eacute;er au moins une classe</a>
+	et <a href="admin.php?page=periodes&amp;mode=add">au moins une p&eacute;riode</a> auxquelles vous pourrez alors
+	rattacher votre &eacute;valuation collective.<br />
+	<?php die;?>
 <?php else: ?>
 <form method="post" action="?page=evaluations_collectives&amp;mode=add_do">
 	<table class="formulaire">

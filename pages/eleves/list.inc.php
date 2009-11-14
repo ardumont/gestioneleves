@@ -159,6 +159,7 @@ if($aClasses != false)
 		<table class="list_tree">
 			<thead>
 				<tr>
+					<th><a href="?page=eleves&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 					<th>El&egrave;ves</th>
 					<th>Dates de naissance</th>
 					<th>Activit&eacute;s</th>
@@ -166,10 +167,15 @@ if($aClasses != false)
 				</tr>
 			</thead>
 			<tfoot>
+				<tr>
+					<th><a href="?page=eleves&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+					<th colspan="5"></th>
+				</tr>
 			</tfoot>
 			<tbody>
 				<?php foreach($aEleves as $nRowNum => $aEleve): ?>
 				<tr class="level0_row<?php echo(($nRowNum)%2); ?>">
+					<td></td>
 					<td>
 						<a href="?page=eleves&amp;mode=edit&amp;eleve_id=<?php echo($aEleve['ELEVE_ID']); ?>">
 							<?php echo($aEleve['ELEVE_NOM']); ?>
@@ -204,5 +210,5 @@ if($aClasses != false)
 	<?php endif; ?>
 <?php else: ?>
 	Aucune classe n'a &eacute;t&eacute; affect&eacute;e &agrave; ce professeur.<br />
-	Vous devez d'abord cr&eacute;er une classe puis l'affecter &agrave; ce professeur.
+	Vous devez d'abord <a href="admin.php?page=classes&amp;mode=add">cr&eacute;er une classe</a> puis l'affecter &agrave; ce professeur.
 <?php endif; ?>

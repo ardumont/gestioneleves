@@ -54,6 +54,7 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 <table class="list_tree">
 	<thead>
 		<tr>
+			<th><a href="?page=competences&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 			<th>Cycles</th>
 			<th>Domaines</th>
 			<th>Mati&egrave;res</th>
@@ -62,12 +63,17 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 		</tr>
 	</thead>
 	<tfoot>
+		<tr>
+			<th><a href="?page=competences&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+			<td colspan="6"></td>
+		</tr>
 	</tfoot>
 	<tbody>
 		<?php $i = 0; ?>
 		<?php foreach($aCompetences as $sCycle => $aCycle): ?>
 		<!-- Ligne du cycle -->
 		<tr class="level0_row<?php echo ($i++)%2; ?>">
+			<td></td>
 			<!-- Nom du cycle -->
 			<th><?php echo($sCycle); ?></th>
 			<!-- Le reste -->
@@ -76,6 +82,7 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 			<?php foreach($aCycle as $sDomaineNom => $aDomaineNom): ?>
 			<!-- Ligne du nom de domaine -->
 			<tr class="level0_row<?php echo ($i++)%2; ?>">
+				<td></td>
 				<!-- Nom du cycle -->
 				<th></th>
 				<!-- Nom du domaine -->
@@ -86,6 +93,7 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 				<?php foreach($aDomaineNom as $sMatiereNom => $aMatiereNom): ?>
 				<!-- Ligne de la matiere -->
 				<tr class="level0_row<?php echo ($i++)%2; ?>">
+					<td></td>
 					<!-- Nom du cycle -->
 					<th></th>
 					<!-- Nom du domaine -->
@@ -98,6 +106,7 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 					<?php foreach($aMatiereNom as $sCompetenceNom => $aCompetence): ?>
 					<!-- Ligne de la competence -->
 					<tr class="level0_row<?php echo ($i++)%2; ?>">
+						<td></td>
 						<!-- Nom du cycle -->
 						<th></th>
 						<!-- Nom du domaine -->

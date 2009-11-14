@@ -49,6 +49,7 @@ $aEcoles = Database::fetchArray($sQuery);
 <table class="list_tree">
 	<thead>
 		<tr>
+			<th><a href="?page=ecoles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 			<th>Ecoles</th>
 			<th>Villes</th>
 			<th>D&eacute;partements</th>
@@ -56,10 +57,15 @@ $aEcoles = Database::fetchArray($sQuery);
 		</tr>
 	</thead>
 	<tfoot>
+		<tr>
+			<th><a href="?page=ecoles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+			<th colspan="5"></th>
+		</tr>
 	</tfoot>
 	<tbody>
 		<?php foreach($aEcoles as $nRowNum => $aEcole): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
+			<td></td>
 			<td><?php echo($aEcole['ECOLE_NOM']); ?></td>
 			<td><?php echo($aEcole['ECOLE_VILLE']); ?></td>
 			<td><?php echo($aEcole['ECOLE_DEPARTEMENT']); ?></td>
