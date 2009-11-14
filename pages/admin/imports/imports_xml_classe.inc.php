@@ -26,25 +26,12 @@ $bResImport =  $oForm->getValue('res', $_GET, 'convert_int', -1);
 
 $sXMLExemple = <<< EOXML
 	<?xml version="1.0" encoding="UTF-8"?>
-	<classe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="classe.xsd">
-		<nom>ce1a</nom>
-		<professeur>Christelle Héritier</professeur>
-		<niveau>ce1</niveau>
-		<annee_scolaire>2009-2010</annee_scolaire>
-		<ecole>
-			<nom>Edouard Vaillant</nom>
-			<ville>Blanc-Mesnil</ville>
-			<departement>93150</departement>
-		</ecole>
-		<eleve>
-			<nom>CARMEL Sally</nom>
-			<date_naissance>22/10/99</date_naissance>
-		</eleve>
-		<eleve>
-			<nom>CAUDRON Vivien</nom>
-			<date_naissance>26/07/01</date_naissance>
-		</eleve>
-
+	<classe cycle="II" niveau="ce1" nom="ce1a" professeur="Christelle Héritier" annee_scolaire="2009-2010">
+		<ecole nom="Edouard Vaillant" ville="Blanc-Mesnil" departement="93150" />
+		<eleve nom="CARMEL Sally" date_naissance="07/10/2002" />
+		<eleve nom="CAUDRON Vivien" date_naissance="12/04/2002" />
+		...
+	</classe>
 EOXML;
 
 $sXMLExemple = htmlentities(utf8_decode($sXMLExemple));

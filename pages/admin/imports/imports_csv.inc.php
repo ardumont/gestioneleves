@@ -25,7 +25,7 @@ $sCSVExemple = <<< EOCSV
 	II;ce1;Français;Lecture Ecriture;Repérer un son auditivement;Repérer la graphie d'un son;...;
 EOCSV;
 
-$sCSVExemple = htmlentities(utf8_decode($sCSVExemple));
+$sCSVExemple = utf8_decode($sCSVExemple);
 
 //==============================================================================
 // Affichage de la page
@@ -44,7 +44,7 @@ $sCSVExemple = htmlentities(utf8_decode($sCSVExemple));
 				<li>soit importer un fichier csv &eacute;dit&eacute; &agrave; la main avec une structure similaire :
 					<pre style="font-size: 1.1em;"><?php echo htmlentities($sCSVExemple); ?></pre>
 					L'ordre dans le fichier est important, il montre la dépendance des cycles, niveaux, domaines, matières et compétences.
-					Attention à l'encodage du fichier qui doit être de l'UTF-8.
+					Attention à l'encodage du fichier qui doit être en UTF-8.
 				</li>
 			</ul>
 		</td>

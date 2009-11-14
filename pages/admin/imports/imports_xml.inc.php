@@ -42,7 +42,10 @@ $sXMLExemple = <<< EOXML
 			<matiere name="Lecture écriture">
 				<competence name="Repérer un son auditivement" />
 				<competence name="Repérer la graphie d'un son" />
-
+				...
+			</matiere>
+		</domaine>
+	</cycle>
 EOXML;
 
 $sXMLExemple = htmlentities(utf8_decode($sXMLExemple));
