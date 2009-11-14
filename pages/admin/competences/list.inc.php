@@ -26,12 +26,31 @@ $nMatiereId = $oForm->getValue('matiere_id', $_POST, 'convert_int', -1);
 // Traitement des donnees
 //==============================================================================
 
+$sQueryCycleId = "";
+if($nCycleId != -1)
+{
+	$sQueryCycleId = " AND ID_CYCLE = {$nCycleId}";
+}
+
+$sQueryDomaineId = "";
+if($nDomaineId != -1)
+{
+	$sQueryDomaineId = " AND ID_DOMAINE = {$nDomaineId}";
+}
+
+$sQueryMatiereId = "";
+if($nMatiereId != -1)
+{
+	$sQueryMatiereId = " AND ID_MATIERE = {$nMatiereId}";
+}
+
 // ===== La liste des cycles =====
 $sQuery = <<< EOQ
 	SELECT
 		CYCLE_NOM,
 		CYCLE_ID
 	FROM CYCLES
+	WHERE 1=1
 	ORDER BY CYCLE_NOM ASC
 EOQ;
 $aCycles = Database::fetchArray($sQuery);
@@ -43,6 +62,8 @@ $sQuery = <<< EOQ
 		DOMAINE_ID,
 		DOMAINE_NOM
 	FROM DOMAINES
+	WHERE 1=1
+	{$sQueryCycleId}
 	ORDER BY DOMAINE_NOM ASC
 EOQ;
 $aDomaines = Database::fetchArray($sQuery);
@@ -54,28 +75,12 @@ $sQuery = <<< EOQ
 		MATIERE_ID,
 		MATIERE_NOM
 	FROM MATIERES
+	WHERE 1=1
+	{$sQueryDomaineId}
 	ORDER BY MATIERE_NOM ASC
 EOQ;
 $aMatieres = Database::fetchArray($sQuery);
 // $aMatieres[][COLONNE] = VALEUR
-
-$sQueryCycleId = "";
-if($nCycleId != -1)
-{
-	$sQueryCycleId = " AND CYCLE_ID = {$nCycleId}";
-}
-
-$sQueryDomaineId = "";
-if($nDomaineId != -1)
-{
-	$sQueryDomaineId = " AND DOMAINE_ID = {$nDomaineId}";
-}
-
-$sQueryMatiereId = "";
-if($nMatiereId != -1)
-{
-	$sQueryMatiereId = " AND MATIERE_ID = {$nMatiereId}";
-}
 
 // ===== La liste des competences =====
 $sQuery = <<< EOQ
@@ -86,10 +91,14 @@ $sQuery = <<< EOQ
 		MATIERE_NOM,
 		DOMAINE_NOM,
 		CYCLE_NOM
-	FROM COMPETENCES, MATIERES, DOMAINES, CYCLES
-	WHERE COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
-	AND MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
-	AND DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
+	FROM COMPETENCES
+		INNER JOIN MATIERES
+			ON COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
+		INNER JOIN DOMAINES
+			ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
+		INNER JOIN CYCLES
+			ON DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
+	WHERE 1=1
 	{$sQueryDomaineId}
 	{$sQueryCycleId}
 	{$sQueryMatiereId}
@@ -119,7 +128,7 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 <?php endif; ?>
 
 <?php if($aCompetences != false): ?>
-	<form method="post" action="?page=competences">
+	<form method="post" action="?page=competences" name="formulaire_competence" id="formulaire_competence">
 		<table class="formulaire">
 			<caption>Crit&eacute;res de recherche</caption>
 			<tfoot>
@@ -128,7 +137,7 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 				<tr>
 					<td>Cycle</td>
 					<td>
-						<select name="cycle_id">
+						<select name="cycle_id" onchange="document.getElementById('formulaire_competence').submit();">
 							<option value="-1">-- Sélectionnez un cycle --</option>
 							<?php foreach($aCycles as $aCycle): ?>
 								<option value="<?php echo($aCycle['CYCLE_ID']); ?>"<?php echo ($nCycleId == $aCycle['CYCLE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aCycle['CYCLE_NOM']); ?></option>
@@ -139,7 +148,7 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 				<tr>
 					<td>Domaines</td>
 					<td>
-						<select name="domaine_id">
+						<select name="domaine_id" onchange="document.getElementById('formulaire_competence').submit();">
 							<option value="-1">-- Sélectionnez un domaine --</option>
 							<?php foreach($aDomaines as $aDomaine): ?>
 								<option value="<?php echo($aDomaine['DOMAINE_ID']); ?>"<?php echo ($nDomaineId == $aDomaine['DOMAINE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aDomaine['DOMAINE_NOM']); ?></option>
@@ -148,10 +157,10 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 					</td>
 				</tr>
 				<tr>
-					<td>Domaines</td>
+					<td>Matières</td>
 					<td>
-						<select name="matiere_id">
-							<option value="-1">-- Sélectionnez un domaine --</option>
+						<select name="matiere_id" onchange="document.getElementById('formulaire_competence').submit();">
+							<option value="-1">-- Sélectionnez une matière --</option>
 							<?php foreach($aMatieres as $aMatiere): ?>
 								<option value="<?php echo($aMatiere['MATIERE_ID']); ?>"<?php echo ($nMatiereId == $aMatiere['MATIERE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aMatiere['MATIERE_NOM']); ?></option>
 							<?php endforeach; ?>
