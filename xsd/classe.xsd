@@ -24,12 +24,12 @@
 
 	<!-- Classe -->
 	<xs:complexType name="ClasseType">
-		<xs:choice>
+		<xs:sequence>
 			<xs:element name="ecole" type="EcoleType" minOccurs="1" maxOccurs="1" />
 			<xs:sequence>
 				<xs:element name="eleve" type="EleveType" minOccurs="0" maxOccurs="unbounded" />
 			</xs:sequence>
-		</xs:choice>
+		</xs:sequence>
 		<xs:attribute name="cycle" type="xs:string" use="required" />
 		<xs:attribute name="niveau" type="xs:string" use="required" />
 		<xs:attribute name="nom" type="xs:string" use="required" />
