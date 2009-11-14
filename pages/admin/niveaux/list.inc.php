@@ -74,5 +74,6 @@ $aNiveaux = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucun niveau n'a été renseigné à ce jour.
+	Aucun niveau n'a été renseigné à ce jour.<br />
+	<a href="?page=niveaux&amp;mode=add">Ajouter un niveau</a>
 <?php endif; ?>

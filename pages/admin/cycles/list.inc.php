@@ -70,5 +70,6 @@ $aCycles = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucun cycle n'a été renseigné à ce jour.
+	Aucun cycle n'a été renseigné à ce jour.<br />
+	<a href="?page=cycles&amp;mode=add">Ajouter un cycle</a>
 <?php endif; ?>

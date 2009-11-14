@@ -86,5 +86,6 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucun domaine n'a été renseigné à ce jour.
+	Aucun domaine n'a été renseigné à ce jour.<br />
+	<a href="?page=domaines&amp;mode=add">Ajouter une domaine</a>
 <?php endif; ?>

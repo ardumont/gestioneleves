@@ -71,5 +71,6 @@ $aProfesseurs = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucun professeur n'a été renseigné à ce jour.
+	Aucun professeur n'a été renseigné à ce jour.<br />
+	<a href="?page=professeurs&amp;mode=add">Ajouter un professeur</a>
 <?php endif; ?>

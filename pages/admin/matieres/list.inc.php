@@ -103,5 +103,6 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 	</tbody>
 </table>
 <?php else: ?>
-	Aucune matière n'a été renseignée à ce jour.
+	Aucune matière n'a été renseignée à ce jour.<br />
+	<a href="?page=matieres&amp;mode=add">Ajouter une matière</a>
 <?php endif; ?>

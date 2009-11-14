@@ -124,5 +124,6 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 	</tbody>
 </table>
 <?php else: ?>
-	Aucune compétence n'a été renseignée à ce jour.
+	Aucune compétence n'a été renseignée à ce jour.<br />
+	<a href="?page=competences&amp;mode=add">Ajouter une compétence</a>
 <?php endif; ?>

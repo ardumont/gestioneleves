@@ -55,6 +55,7 @@ $aClasses = Database::fetchArray($sQuery);
 <table class="list_tree">
 	<thead>
 		<tr>
+			<th><a href="?page=classes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 			<th>Professeurs</th>
 			<th>Classes</th>
 			<th>Ann&eacute;es scolaires</th>
@@ -65,10 +66,15 @@ $aClasses = Database::fetchArray($sQuery);
 		</tr>
 	</thead>
 	<tfoot>
+		<tr>
+			<th><a href="?page=classes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+			<td colspan="8"></td>
+		</tr>
 	</tfoot>
 	<tbody>
 		<?php foreach($aClasses as $nRowNum => $aClasse): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
+			<td></td>
 			<td><?php echo($aClasse['PROFESSEUR_NOM']); ?></td>
 			<td><?php echo($aClasse['CLASSE_NOM']); ?></td>
 			<td><?php echo($aClasse['CLASSE_ANNEE_SCOLAIRE']); ?></td>
@@ -88,5 +94,6 @@ $aClasses = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucune classe n'a été renseignée à ce jour.
+	Aucune classe n'a été renseignée à ce jour.<br />
+	<a href="?page=classes&amp;mode=add">Ajouter une classe</a>
 <?php endif; ?>
