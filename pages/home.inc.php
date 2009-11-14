@@ -66,11 +66,18 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 			</dt>
 			<dd>
 				<ul>
-					<li class="evolution_majeure" title="Evolution majeure">Mise en place de l'installeur graphique.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Amélioration de l'ergonomie des pages.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de manuels sur certaines pages pour expliquer comment fonctionne la page.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout d'un menu d'administration d'import xml pour faciliter l'intégration des compétences (cycle, domaine, matières, compétences).</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout d'un menu d'administration d'import xml pour faciliter l'intégration des classes (classe, cycle, niveau, école, élèves).</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout d'un menu d'administration de listing des professeurs présents en bdd.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout d'un menu d'administration de listing des élèves par classe présents en bdd.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Mise en place du module de profil d'un professeur.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Mise en place d'un installeur graphique.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Refonte de la charte graphique.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Remise en place du projet sous subversion pour faciliter les développements.</li>
 					<li class="evolution_mineure" title="Evolution mineure">Mise en place du module de déconnexion d'un professeur.</li>
-					<li class="evolution_mineure" title="Evolution mineure">Mise en place d'une page des contributeurs.</li>
+					<li class="evolution_majeure" title="Evolution mineure">Mise en place d'une page des contributeurs.</li>
 					<li class="evolution_mineure" title="Evolution mineure">Mise en place d'un bloc de référencement des outils utilisés.</li>
 					<li class="evolution_mineure" title="Evolution mineure">Refonte de la page d'accueil.</li>
 				</ul>
