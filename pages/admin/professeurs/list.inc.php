@@ -47,12 +47,16 @@ $aProfesseurs = Database::fetchArray($sQuery);
 <table class="list_tree">
 	<thead>
 		<tr>
-			<th><a href="?page=classes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+			<th><a href="?page=professeurs&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 			<th>Professeurs</th>
 			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
+		<tr>
+			<th><a href="?page=professeurs&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+			<th colspan="3"></th>
+		</tr>
 	</tfoot>
 	<tbody>
 		<?php foreach($aProfesseurs as $nRowNum => $aProfesseur): ?>
