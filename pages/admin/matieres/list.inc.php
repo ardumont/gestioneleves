@@ -95,7 +95,7 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 <?php endif; ?>
 
 <?php if($aMatieres != false): ?>
-	<form method="post" action="?page=matieres">
+	<form method="post" action="?page=matieres" name="formulaire_matiere" id="formulaire_matiere">
 		<table class="formulaire">
 			<caption>Crit&eacute;res de recherche</caption>
 			<tfoot>
@@ -104,7 +104,7 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 				<tr>
 					<td>Cycle</td>
 					<td>
-						<select name="cycle_id">
+						<select name="cycle_id" onchange="document.getElementById('formulaire_matiere').submit();">
 							<option value="-1">-- Sélectionnez un cycle --</option>
 							<?php foreach($aCycles as $aCycle): ?>
 								<option value="<?php echo($aCycle['CYCLE_ID']); ?>"<?php echo ($nCycleId == $aCycle['CYCLE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aCycle['CYCLE_NOM']); ?></option>
@@ -115,7 +115,7 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 				<tr>
 					<td>Domaines</td>
 					<td>
-						<select name="domaine_id">
+						<select name="domaine_id" onchange="document.getElementById('formulaire_matiere').submit();">
 							<option value="-1">-- Sélectionnez un domaine --</option>
 							<?php foreach($aDomaines as $aDomaine): ?>
 								<option value="<?php echo($aDomaine['DOMAINE_ID']); ?>"<?php echo ($nDomaineId == $aDomaine['DOMAINE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aDomaine['DOMAINE_NOM']); ?></option>

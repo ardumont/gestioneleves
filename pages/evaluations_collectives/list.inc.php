@@ -109,7 +109,7 @@ Vous pouvez &eacute;galement filtrer sur la classe et la p&eacute;riode.
 		</td>
 	</tr>
 </table>
-<form method="post" action="?page=evaluations_collectives">
+<form method="post" action="?page=evaluations_collectives" name="formulaire_eval_col" id="formulaire_eval_col">
 	<table class="formulaire">
 		<caption>Crit&eacute;res de recherche</caption>
 		<tfoot>
@@ -118,7 +118,7 @@ Vous pouvez &eacute;galement filtrer sur la classe et la p&eacute;riode.
 			<tr>
 				<td>Liste des classes de l'ann&eacute;e courante</td>
 				<td>
-					<select name="CLASSE_ID">
+					<select name="CLASSE_ID" onchange="document.getElementById('formulaire_eval_col').submit();">
 						<option value="0">-- S&eacute;lectionner une classe --</option>
 						<?php foreach($aClasses as $aClasse): ?>
 							<option value="<?php echo($aClasse['CLASSE_ID']); ?>"<?php echo($aClasse['CLASSE_ID'] == $nClasseId ? ' selected="selected"' :''); ?>><?php echo($aClasse['CLASSE_ANNEE_SCOLAIRE']. " - " . $aClasse['CLASSE_NOM']); ?></option>
@@ -129,7 +129,7 @@ Vous pouvez &eacute;galement filtrer sur la classe et la p&eacute;riode.
 			<tr>
 				<td>Liste des p&eacute;riodes</td>
 				<td>
-					<select name="PERIODE_ID">
+					<select name="PERIODE_ID" onchange="document.getElementById('formulaire_eval_col').submit();">
 						<option value="0">-- S&eacute;lectionner une p&eacute;riode --</option>
 						<?php foreach($aPeriodes as $aPeriode): ?>
 							<option value="<?php echo($aPeriode['PERIODE_ID']); ?>"<?php echo($aPeriode['PERIODE_ID'] == $nPeriodeId ? ' selected="selected"' :''); ?>><?php echo($aPeriode['PERIODE_NOM']); ?></option>

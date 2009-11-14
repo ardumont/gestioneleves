@@ -128,7 +128,7 @@ classe, aucun r&eacute;sultat ne s'affichera.
 		</td>
 	</tr>
 </table>
-<form method="post" action="?page=evaluations_individuelles">
+<form method="post" action="?page=evaluations_individuelles" name="formulaire_eval_ind" id="formulaire_eval_ind">
 	<table class="formulaire">
 		<caption>Crit&eacute;res de recherche</caption>
 		<tfoot>
@@ -137,7 +137,7 @@ classe, aucun r&eacute;sultat ne s'affichera.
 			<tr>
 				<td>Liste des classes de l'ann&eacute;e courante</td>
 				<td>
-					<select name="CLASSE_ID">
+					<select name="CLASSE_ID" onchange="document.getElementById('formulaire_eval_ind').submit();">
 						<option value="0">-- S&eacute;lectionner une classe --</option>
 						<?php foreach($aClasses as $aClasse): ?>
 							<option value="<?php echo($aClasse['CLASSE_ID']); ?>"<?php echo($aClasse['CLASSE_ID'] == $nClasseId ? ' selected="selected"' :''); ?>><?php echo($aClasse['CLASSE_ANNEE_SCOLAIRE']. " - " . $aClasse['CLASSE_NOM']); ?></option>
@@ -148,7 +148,7 @@ classe, aucun r&eacute;sultat ne s'affichera.
 			<tr>
 				<td>Liste des &eacute;l&egrave;ves de l'ann&eacute;e courante</td>
 				<td>
-					<select name="ELEVE_ID">
+					<select name="ELEVE_ID" onchange="document.getElementById('formulaire_eval_ind').submit();">
 						<option value="0">-- S&eacute;lectionner un &eacute;l&egrave;ve --</option>
 						<?php foreach($aEleves as $aEleve): ?>
 							<option value="<?php echo($aEleve['ELEVE_ID']); ?>"<?php echo($aEleve['ELEVE_ID'] == $nEleveId ? ' selected="selected"' :''); ?>><?php echo($aEleve['CLASSE_ANNEE_SCOLAIRE']. " - " . $aEleve['CLASSE_NOM'] . " - " . $aEleve['ELEVE_NOM']); ?></option>

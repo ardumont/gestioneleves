@@ -72,7 +72,7 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 <?php endif; ?>
 
 <?php if($aDomaines != false): ?>
-	<form method="post" action="?page=domaines">
+	<form method="post" action="?page=domaines" name="formulaire_domaine" id="formulaire_domaine">
 		<table class="formulaire">
 			<caption>Crit&eacute;res de recherche</caption>
 			<tfoot>
@@ -81,7 +81,7 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 				<tr>
 					<td>Cycle</td>
 					<td>
-						<select name="cycle_id">
+						<select name="cycle_id" onchange="document.getElementById('formulaire_domaine').submit();">
 							<option value="-1">-- Sélectionnez un cycle --</option>
 							<?php foreach($aCycles as $aCycle): ?>
 								<option value="<?php echo($aCycle['CYCLE_ID']); ?>"<?php echo ($nCycleId == $aCycle['CYCLE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aCycle['CYCLE_NOM']); ?></option>

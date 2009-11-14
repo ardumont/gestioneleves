@@ -98,7 +98,7 @@ if($aClasses != false)
 <?php endif; ?>
 <br />
 <?php if($aClasses != false): ?>
-	<form method="post" action="?page=eleves">
+	<form method="post" action="?page=eleves" name="formulaire_eleve" id="formulaire_eleve">
 		<table class="formulaire">
 			<caption>Crit&eacute;res de recherche</caption>
 			<tfoot>
@@ -107,7 +107,7 @@ if($aClasses != false)
 				<tr>
 					<td>Classe</td>
 					<td>
-						<select name="CLASSE_ID">
+						<select name="CLASSE_ID" onchange="document.getElementById('formulaire_eleve').submit();">
 							<?php foreach($aClasses as $aClasse): ?>
 								<option value="<?php echo($aClasse['CLASSE_ID']); ?>"<?php echo($aClasse['CLASSE_ID'] == $nClasseId ? ' selected="selected"' :''); ?>><?php echo($aClasse['PROFESSEUR_NOM'] . " - " .$aClasse['CLASSE_ANNEE_SCOLAIRE']. " - " . $aClasse['CLASSE_NOM']); ?></option>
 							<?php endforeach; ?>
