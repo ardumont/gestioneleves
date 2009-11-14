@@ -186,14 +186,14 @@ function import_xml_classe($sNomFichier)
 {
 	$sFileXSD = PATH_XSD . "/cycle.xsd";
 	// On valide le flux contre sa xsd
-//	$bRes = validate_xml($sNomFichier, $sFileXSD);
-//
-//	// Si le flux n'est pas valide
-//	if($bRes == false)
-//	{
-//		// On arrête tout
-//		return false;
-//	}
+	$bRes = validate_xml($sNomFichier, $sFileXSD);
+
+	// Si le flux n'est pas valide
+	if($bRes == false)
+	{
+		// On arrête tout
+		return false;
+	}
 
 	// Charge le flux
 	$oXML = simplexml_load_file($sNomFichier, "SimpleXMLElement");

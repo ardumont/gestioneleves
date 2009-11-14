@@ -13,7 +13,6 @@ $objForm = new FormValidation();
 $sAction = $objForm->getValue('action', $_POST, 'is_string', "");
 
 // nom du fichier a importer
-//$sNomFichier = $objForm->getValue('nom_fichier', $_FILES['nom_fichier'], 'is_string', "");
 $sNomFichier = $_FILES['nom_fichier']['tmp_name'];
 
 //==============================================================================
@@ -27,9 +26,10 @@ switch(strtolower($sAction))
 		if($objForm->hasError() == true) break;
 
 		// importe les classes/ecoles/eleves
-		$bRes = (int) import_xml_classe($sNomFichier);
+		$bRes = import_xml_classe($sNomFichier);
 		// Rechargement
-		header("Location: ?page=imports&mode=imports_xml_classe&res={$bRes}");
+		header("Location: ?page=imports&mode=imports_xml_classe&res=" . ($bRes ? "ok" : "ko"));
+		return;
 	break;
 
 	// ----------

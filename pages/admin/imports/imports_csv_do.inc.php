@@ -27,9 +27,10 @@ switch(strtolower($sAction))
 		if($objForm->hasError() == true) break;
 
 		// importe les cycles/niveaux/domaines/matieres/competences
-		import_cndmcs($sNomFichier);
+		$bRes = import_cndmcs($sNomFichier);
 		// Rechargement
-		header("Location: ?page=imports&mode=imports_csv");
+		header("Location: ?page=imports&mode=imports_csv&res=" . ($bRes ? "ok" : "ko"));
+		return;
 	break;
 
 	// ----------
@@ -65,4 +66,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=imports&mode=imports_csv");
 return;
-?>

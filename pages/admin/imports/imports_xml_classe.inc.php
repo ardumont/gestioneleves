@@ -6,7 +6,7 @@
 $oForm = new FormValidation();
 
 // Récupère le résultat de l'import
-$bResImport =  $oForm->getValue('res', $_GET, 'convert_int', -1);
+$bResImport =  $oForm->getValue('res', $_GET, 'convert_string', -1);
 
 //==============================================================================
 // Validation du formulaire
@@ -42,6 +42,7 @@ $sXMLExemple = htmlentities(utf8_decode($sXMLExemple));
 
 ?>
 <h1>Imports XML</h1>
+<br />
 
 <table class="formulaire">
 	<caption>Fonctionnement</caption>
@@ -70,10 +71,6 @@ $sXMLExemple = htmlentities(utf8_decode($sXMLExemple));
 </ul>
 <?php endif; ?>
 
-<?php if($bResImport != -1): ?>
-	L'import est un <?php echo $bResImport ? ' <span style="font-color:green;font-weight:bold;">succès</span>' : ' <span style="font-color:red;font-weight:bold;">échec</span>'; ?>.<br />
-<?php endif; ?>
-
 <form method="post" action="?page=imports&amp;mode=imports_xml_classe_do" enctype="multipart/form-data">
 	<table class="formulaire">
 		<caption>Importer Classe/Ecole/Eleve</caption>
@@ -90,3 +87,7 @@ $sXMLExemple = htmlentities(utf8_decode($sXMLExemple));
 		</tr>
 	</table>
 </form>
+
+<?php if($bResImport != -1): ?>
+	L'import est un <?php echo ($bResImport == "ok") ? ' <span style="color:green;font-weight:bold;">succès</span>' : ' <span style="color:red;font-weight:bold;">échec</span>'; ?>.<br />
+<?php endif; ?>

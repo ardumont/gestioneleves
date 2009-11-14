@@ -29,7 +29,8 @@ switch(strtolower($sAction))
 		// importe les cycles/niveaux/domaines/matieres/competences
 		$bRes = import_xml_cycle($sNomFichier);
 		// Rechargement
-		header("Location: ?page=imports&mode=imports_xml&res=" . (bool) $bRes);
+		header("Location: ?page=imports&mode=imports_xml&res=" . ($bRes ? "ok" : "ko"));
+		return;
 	break;
 
 	// ----------
