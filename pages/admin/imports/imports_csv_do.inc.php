@@ -7,13 +7,13 @@
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
 // action du formulaire
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
 // nom du fichier a importer
-//$sNomFichier = $objForm->getValue('nom_fichier', $_FILES['nom_fichier'], 'is_string', "");
+//$sNomFichier = $oForm->getValue('nom_fichier', $_FILES['nom_fichier'], 'is_string', "");
 $sNomFichier = $_FILES['nom_fichier']['tmp_name'];
 
 //==============================================================================
@@ -24,7 +24,7 @@ switch(strtolower($sAction))
 {
 	// ajoute l'eleve
 	case 'importer':
-		if($objForm->hasError() == true) break;
+		if($oForm->hasError() == true) break;
 
 		// importe les cycles/niveaux/domaines/matieres/competences
 		$bRes = import_cndmcs($sNomFichier);
@@ -35,7 +35,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	case 'annuler':
-		$objForm->clearError();
+		$oForm->clearError();
 
 		// Rechargement
 		header("Location: ?page=imports&mode=imports_csv");
@@ -44,7 +44,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:
-		$objForm->clearError();
+		$oForm->clearError();
 
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
@@ -61,7 +61,7 @@ switch(strtolower($sAction))
 //==============================================================================
 
 // On stocke toutes les erreurs de formulaire.
-Message::addErrorFromFormValidation($objForm->getError());
+Message::addErrorFromFormValidation($oForm->getError());
 
 // Rechargement
 header("Location: ?page=imports&mode=imports_csv");
