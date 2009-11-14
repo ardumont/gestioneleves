@@ -34,7 +34,7 @@ $aNotes = Database::fetchArray($sQuery);
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Liste des niveaux</h1>
+<h1>Liste des notes</h1>
 
 <br />
 <?php if(Message::hasError() == true): ?>
