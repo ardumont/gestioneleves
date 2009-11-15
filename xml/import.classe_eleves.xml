@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<classe cycle="II" niveau="ce1" nom="ce1a" professeur="Christelle Héritier" annee_scolaire="2009-2010">
+<classe cycle="II" niveau="CE1" nom="ce1a" professeur="Christelle Héritier" annee_scolaire="2009-2010">
 	<ecole nom="Edouard Vaillant" ville="Blanc-Mesnil" departement="93150" />
 	<eleve nom="CARMEL Sally" date_naissance="07/10/2002" />
 	<eleve nom="CAUDRON Vivien" date_naissance="12/04/2002" />
