@@ -283,12 +283,47 @@ VALUES
 	('0.0.0', '0000-00-00 00:00:00');
 
 -- =============================================================================
---#TITLE(Contenu "spéciales" de l'application)
+--#TITLE(Contenu "spécial" de l'application)
 
 --#STEP(TRANSACTION)
-
 INSERT INTO `PROFESSEURS` (`PROFESSEUR_ID`, `PROFESSEUR_NOM`, `PROFESSEUR_PWD`) VALUES
-(1, 'Prof test', MD5('Prof test'));
+(1, 'test', MD5('test'));
+
+--#STEP(TRANSACTION)
+-- Contenu de la table `NIVEAUX`
+INSERT INTO `CYCLES` (`CYCLE_ID`, `CYCLE_NOM`) VALUES
+(1, 'I'),
+(2, 'II'),
+(3, 'III');
+
+-- Contenu de la table `NIVEAUX`
+--#STEP(TRANSACTION)
+INSERT INTO `NIVEAUX` (`NIVEAU_ID`, `NIVEAU_NOM`, `ID_CYCLE`) VALUES
+(1, 'PS', 1),
+(2, 'MS', 1),
+(3, 'GS', 2),
+(4, 'CP', 2),
+(5, 'CE1', 2),
+(6, 'CE2', 3),
+(7, 'CM1', 3),
+(8, 'CM2', 3);
+
+-- Contenu de la table `NOTES`
+--#STEP(TRANSACTION)
+INSERT INTO `NOTES` (`NOTE_ID`, `NOTE_NOM`, `NOTE_LABEL`, `NOTE_NOTE`) VALUES
+(1, 'Acquis', 'A', 20),
+(2, 'A Renforcer', 'AR', 15),
+(3, 'En cours d''acquisition', 'ECA', 10),
+(4, 'Non Acquis', 'NA', 5);
+
+-- Contenu de la table `PERIODES`
+--#STEP(TRANSACTION)
+INSERT INTO `PERIODES` (`PERIODE_ID`, `PERIODE_NOM`, `PERIODE_DATE_DEBUT`, `PERIODE_DATE_FIN`) VALUES
+(1, 'p1', 'rentrée', 'toussaint'),
+(2, 'p2', 'toussaint', 'noël'),
+(3, 'p3', 'noël', 'février'),
+(4, 'p4', 'février', 'pâques'),
+(5, 'p5', 'pâques', 'été');
 
 -- =============================================================================
 --#TITLE(Activation des contraintes)
