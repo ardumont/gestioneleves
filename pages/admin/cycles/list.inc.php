@@ -43,6 +43,7 @@ $aCycles = Database::fetchArray($sQuery);
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
+
 <br />
 <table class="formulaire">
 	<caption>Fonctionnement</caption>
@@ -90,6 +91,13 @@ $aCycles = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucun cycle n'a été renseigné à ce jour.<br />
-	<a href="?page=cycles&amp;mode=add">Ajouter un cycle</a>
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucun cycle n'a été renseigné à ce jour.<br />
+			<a href="?page=cycles&amp;mode=add">Ajouter un cycle</a>
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

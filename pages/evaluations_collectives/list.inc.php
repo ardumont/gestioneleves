@@ -10,10 +10,10 @@ $sRestrictionAnneeScolaire =
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$nPeriodeId = $objForm->getValue('PERIODE_ID', $_POST, 'convert_int');
-$nClasseId = $objForm->getValue('CLASSE_ID', $_POST, 'convert_int');
+$nPeriodeId = $oForm->getValue('PERIODE_ID', $_POST, 'convert_int', -1);
+$nClasseId = $oForm->getValue('CLASSE_ID', $_POST, 'convert_int', -1);
 
 //==============================================================================
 // Actions du formulaire
@@ -53,17 +53,8 @@ $aClasses = Database::fetchArray($sQuery);
 // $aClasses[][COLONNE] = VALEUR
 
 // criteres de recherche
-$sFiltres = "";
-if($nPeriodeId != null && $nClasseId != null) {// eleve + classe
-	// cette recherche peux ne rien donner
-	// dans le cas ou l'eleve n'appartient pas a la classe selectionnee
-	$sFiltres = " AND ID_PERIODE = {$nPeriodeId} " .
-				" AND CLASSES.CLASSE_ID = {$nClasseId} ";
-} else if($nClasseId != null) {//juste la classe
-	$sFiltres = " AND CLASSES.CLASSE_ID = {$nClasseId} ";
-} else if($nPeriodeId != null) {//juste l'eleve
-	$sFiltres = " AND ID_PERIODE = {$nPeriodeId} ";
-}
+$sQueryPeriodeId = ($nPeriodeId != -1) ? " AND ID_PERIODE = {$nPeriodeId} " : "";
+$sQueryClasseId = ($nClasseId != -1) ? " AND CLASSES.CLASSE_ID = {$nClasseId} " : "";
 
 // ===== La liste des evaluations collectives a ce jour =====
 $sQuery = <<< EOQ
@@ -82,10 +73,11 @@ $sQuery = <<< EOQ
 			ON EVALUATIONS_COLLECTIVES.ID_PERIODE = PERIODES.PERIODE_ID
 	WHERE 1=1
 	{$sRestrictionAnneeScolaire}
-	{$sFiltres}
+	{$sQueryPeriodeId}
+	{$sQueryClasseId}
 	ORDER BY PERIODE_NOM ASC
 EOQ;
-$aEvalCols= Database::fetchArray($sQuery);
+$aEvalCols = Database::fetchArray($sQuery);
 // $aEvalCols[][COLONNE] = VALEUR
 
 //==============================================================================
@@ -119,7 +111,7 @@ $aEvalCols= Database::fetchArray($sQuery);
 </table>
 <form method="post" action="?page=evaluations_collectives" name="formulaire_eval_col" id="formulaire_eval_col">
 	<table class="formulaire">
-		<caption>Critéres de recherche</caption>
+		<caption>Critères de recherche</caption>
 		<thead></thead>
 		<tfoot></tfoot>
 		<tbody>
@@ -127,7 +119,7 @@ $aEvalCols= Database::fetchArray($sQuery);
 				<td>Liste des classes de l'année courante</td>
 				<td>
 					<select name="CLASSE_ID" onchange="document.getElementById('formulaire_eval_col').submit();">
-						<option value="0">-- Sélectionner une classe --</option>
+						<option value="-1">-- Sélectionner une classe --</option>
 						<?php foreach($aClasses as $aClasse): ?>
 							<option value="<?php echo($aClasse['CLASSE_ID']); ?>"<?php echo($aClasse['CLASSE_ID'] == $nClasseId ? ' selected="selected"' :''); ?>><?php echo($aClasse['CLASSE_ANNEE_SCOLAIRE']. " - " . $aClasse['CLASSE_NOM']); ?></option>
 						<?php endforeach; ?>
@@ -138,7 +130,7 @@ $aEvalCols= Database::fetchArray($sQuery);
 				<td>Liste des périodes</td>
 				<td>
 					<select name="PERIODE_ID" onchange="document.getElementById('formulaire_eval_col').submit();">
-						<option value="0">-- Sélectionner une période --</option>
+						<option value="-1">-- Sélectionner une période --</option>
 						<?php foreach($aPeriodes as $aPeriode): ?>
 							<option value="<?php echo($aPeriode['PERIODE_ID']); ?>"<?php echo($aPeriode['PERIODE_ID'] == $nPeriodeId ? ' selected="selected"' :''); ?>><?php echo($aPeriode['PERIODE_NOM']); ?></option>
 						<?php endforeach; ?>
@@ -151,10 +143,17 @@ $aEvalCols= Database::fetchArray($sQuery);
 		</tbody>
 	</table>
 </form>
-<br />
+
 <?php if(count($aEvalCols) <= 0): ?>
-	Aucune évaluation collective n'a été saisie à ce jour.<br />
-	<a href="?page=evaluations_collectives&amp;mode=add">Ajouter une évaluation collective</a>
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucune évaluation collective n'a été saisie à ce jour.<br />
+			<a href="?page=evaluations_collectives&amp;mode=add">Ajouter une évaluation collective</a>
+		</td>
+	</tr>
+</table>
 <?php else: ?>
 <table class="list_tree">
 	<caption>Liste des évaluations</caption>

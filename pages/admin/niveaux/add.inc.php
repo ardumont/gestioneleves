@@ -86,8 +86,7 @@ $aNiveaux = Database::fetchArray($sQuery);
 			<th>Niveaux</th>
 		</tr>
 	</thead>
-	<tfoot>
-	</tfoot>
+	<tfoot></tfoot>
 	<tbody>
 		<?php foreach($aNiveaux as $nRowNum => $aNiveau): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
@@ -98,5 +97,12 @@ $aNiveaux = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucun niveau n'a été renseigné à ce jour.
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucun niveau n'a été renseigné à ce jour.
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

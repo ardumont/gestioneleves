@@ -60,7 +60,6 @@ $aEvalCols= Database::fetchArray($sQuery);
 //==============================================================================
 // Affichage de la page
 //==============================================================================
-
 ?>
 <h1>Ajout d'une &eacute;valuation collective</h1>
 
@@ -71,13 +70,22 @@ $aEvalCols= Database::fetchArray($sQuery);
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
+
 <br />
 <?php if(count($aClasses) <= 0 && count($aPeriodes <= 0) ): ?>
-	Vous devez d'abord <a href="admin.php?page=classes&amp;mode=add">cr&eacute;er au moins une classe</a>
-	et <a href="admin.php?page=periodes&amp;mode=add">au moins une p&eacute;riode</a> auxquelles vous pourrez alors
-	rattacher votre &eacute;valuation collective.<br />
-	<?php die;?>
+	<table class="formulaire">
+		<caption>Informations</caption>
+		<tr>
+			<td>
+				Vous devez d'abord <a href="admin.php?page=classes&amp;mode=add">cr&eacute;er au moins une classe</a>
+				et <a href="admin.php?page=periodes&amp;mode=add">au moins une p&eacute;riode</a> auxquelles vous pourrez alors
+				rattacher votre &eacute;valuation collective.<br />
+			</td>
+		</tr>
+	</table>
+	<?php die; ?>
 <?php else: ?>
+
 <form method="post" action="?page=evaluations_collectives&amp;mode=add_do">
 	<table class="formulaire">
 		<caption>Ajouter une &eacute;valuation collective</caption>
@@ -136,7 +144,14 @@ $aEvalCols= Database::fetchArray($sQuery);
 <?php endif; ?>
 
 <?php if(count($aEvalCols) <= 0): ?>
-	Aucune &eacute;valuation collective n'a &eacute;t&eacute; saisie &agrave; ce jour.
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucune &eacute;valuation collective n'a &eacute;t&eacute; saisie &agrave; ce jour.
+		</td>
+	</tr>
+</table>
 <?php else: ?>
 <table class="list_tree">
 	<caption>Liste des &eacute;valuations</caption>

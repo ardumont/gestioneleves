@@ -83,8 +83,7 @@ $aNotes = Database::fetchArray($sQuery);
 			<th>Coefficients</th>
 		</tr>
 	</thead>
-	<tfoot>
-	</tfoot>
+	<tfoot></tfoot>
 	<tbody>
 		<?php foreach($aNotes as $nRowNum => $aNote): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
@@ -96,6 +95,12 @@ $aNotes = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucune note n'a été renseignée à ce jour.
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucune note n'a été renseignée à ce jour.
+		</td>
+	</tr>
+</table>
 <?php endif; ?>
-

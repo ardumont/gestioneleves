@@ -270,10 +270,17 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 		</tbody>
 	</table>
 <?php else: ?>
-	<?php if($nCycleId != -1 || $nMatiereId != -1 || $nDomaineId != -1): ?>
-		Aucune compétence n'a été renseignée pour ces critères de recherche.<br />
-	<?php else:?>
-		Aucune compétence n'a été renseignée à ce jour.<br />
-		<a href="?page=competences&amp;mode=add">Ajouter une compétence</a>
-	<?php endif; ?>
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			<?php if($nCycleId != -1 || $nMatiereId != -1 || $nDomaineId != -1): ?>
+				Aucune compétence n'a été renseignée pour ces critères de recherche.<br />
+			<?php else:?>
+				Aucune compétence n'a été renseignée à ce jour.<br />
+				<a href="?page=competences&amp;mode=add">Ajouter une compétence</a>
+			<?php endif; ?>
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

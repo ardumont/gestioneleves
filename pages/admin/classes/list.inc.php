@@ -111,6 +111,13 @@ $aClasses = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucune classe n'a été renseignée à ce jour.<br />
-	<a href="?page=classes&amp;mode=add">Ajouter une classe</a>
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucune classe n'a été renseignée à ce jour.<br />
+			<a href="?page=classes&amp;mode=add">Ajouter une classe</a>
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

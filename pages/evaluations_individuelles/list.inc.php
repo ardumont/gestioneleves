@@ -11,12 +11,12 @@ $sRestrictionAnneeScolaire =
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-// recuperation de l'id de l'eleve une fois qu'il a ete trouve
-// (via module de recherche)
-$nEleveId = $objForm->getValue('ELEVE_ID', $_POST, 'convert_int');
-$nClasseId = $objForm->getValue('CLASSE_ID', $_POST, 'convert_int');
+// recuperation des ids de restrictions de recherche
+$nEleveId = $oForm->getValue('ELEVE_ID', $_POST, 'convert_int', -1);
+$nClasseId = $oForm->getValue('CLASSE_ID', $_POST, 'convert_int', -1);
+$nEvalCollId = $oForm->getValue('EVAL_COL_ID', $_POST, 'convert_int', -1);
 
 //==============================================================================
 // Actions du formulaire
@@ -25,6 +25,28 @@ $nClasseId = $objForm->getValue('CLASSE_ID', $_POST, 'convert_int');
 //==============================================================================
 // Traitement des donnees
 //==============================================================================
+
+// ===== La liste des evaluations collectives à ce jour =====
+$sQuery = <<< EOQ
+	SELECT
+		EVAL_COL_ID,
+		EVAL_COL_NOM,
+		EVAL_COL_DESCRIPTION,
+		DATE_FORMAT(EVAL_COL_DATE, '%d/%m/%Y') AS EVAL_COL_DATE,
+		PERIODE_NOM,
+		CLASSE_NOM,
+		CLASSE_ANNEE_SCOLAIRE
+	FROM EVALUATIONS_COLLECTIVES
+		INNER JOIN CLASSES
+			ON EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID
+		INNER JOIN PERIODES
+			ON EVALUATIONS_COLLECTIVES.ID_PERIODE = PERIODES.PERIODE_ID
+	WHERE 1=1
+	{$sRestrictionAnneeScolaire}
+	ORDER BY PERIODE_NOM ASC
+EOQ;
+$aEvalCols = Database::fetchArray($sQuery);
+// $aEvalCols[][COLONNE] = VALEUR
 
 // ===== La liste des eleves du professeur pour l'annee courante =====
 $sQuery = <<< EOQ
@@ -66,17 +88,9 @@ $aClasses = Database::fetchArray($sQuery);
 // $aClasses[][COLONNE] = VALEUR
 
 // criteres de recherche
-$sFiltres = "";
-if($nEleveId != null && $nClasseId != null) {// eleve + classe
-	// cette recherche peux ne rien donner
-	// dans le cas ou l'eleve n'appartient pas a la classe selectionnee
-	$sFiltres = " AND ELEVES.ELEVE_ID = {$nEleveId} " .
-				" AND CLASSES.CLASSE_ID = {$nClasseId} ";
-} else if($nClasseId != null) {//juste la classe
-	$sFiltres = " AND CLASSES.CLASSE_ID = {$nClasseId} ";
-} else if($nEleveId != null) {//juste l'eleve
-	$sFiltres = " AND ELEVES.ELEVE_ID = {$nEleveId} ";
-}
+$sQueryElevesId = ($nEleveId != -1) ? " AND ELEVES.ELEVE_ID = {$nEleveId} " : "";
+$sQueryClasseId = ($nClasseId != -1) ? " AND CLASSES.CLASSE_ID = {$nClasseId} " : "";
+$sQueryEvalCollId = ($nEvalCollId != -1) ? " AND EVALUATIONS_COLLECTIVES.EVAL_COL_ID = {$nEvalCollId} " : "";
 
 // ===== La liste des evaluations individuelles a ce jour =====
 $sQuery = <<< EOQ
@@ -86,6 +100,7 @@ $sQuery = <<< EOQ
 		NOTE_NOM,
 		EVAL_IND_ID,
 		EVAL_IND_COMMENTAIRE,
+		EVAL_COL_NOM,
 		COMPETENCE_NOM,
 		MATIERE_NOM,
 		DOMAINE_NOM
@@ -106,9 +121,13 @@ $sQuery = <<< EOQ
 			ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
 		INNER JOIN PROFESSEUR_CLASSE
 			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
+		INNER JOIN EVALUATIONS_COLLECTIVES
+			ON EVALUATIONS_COLLECTIVES.EVAL_COL_ID = EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL
 	WHERE PROFESSEUR_CLASSE.ID_PROFESSEUR = {$_SESSION['PROFESSEUR_ID']}
 	{$sRestrictionAnneeScolaire}
-	{$sFiltres}
+	{$sQueryElevesId}
+	{$sQueryEvalCollId}
+	{$sQueryClasseId}
 	ORDER BY DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
 EOQ;
 $aEvalInds= Database::fetchArray($sQuery);
@@ -143,17 +162,29 @@ $aEvalInds= Database::fetchArray($sQuery);
 		</td>
 	</tr>
 </table>
+
 <form method="post" action="?page=evaluations_individuelles" name="formulaire_eval_ind" id="formulaire_eval_ind">
 	<table class="formulaire">
-		<caption>Critéres de recherche</caption>
+		<caption>Critères de recherche</caption>
 		<thead></thead>
 		<tfoot></tfoot>
 		<tbody>
 			<tr>
+				<td>Liste des évaluations collectives de l'année courante</td>
+				<td>
+					<select name="EVAL_COL_ID" onchange="document.getElementById('formulaire_eval_ind').submit();">
+						<option value="-1">-- Sélectionner une évaluation collective --</option>
+						<?php foreach($aEvalCols as $aEvalCol): ?>
+							<option value="<?php echo($aEvalCol['EVAL_COL_ID']); ?>"<?php echo($aEvalCol['EVAL_COL_ID'] == $nEvalCollId ? ' selected="selected"' :''); ?>><?php echo($aEvalCol['EVAL_COL_NOM']); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
 				<td>Liste des classes de l'année courante</td>
 				<td>
 					<select name="CLASSE_ID" onchange="document.getElementById('formulaire_eval_ind').submit();">
-						<option value="0">-- Sélectionner une classe --</option>
+						<option value="-1">-- Sélectionner une classe --</option>
 						<?php foreach($aClasses as $aClasse): ?>
 							<option value="<?php echo($aClasse['CLASSE_ID']); ?>"<?php echo($aClasse['CLASSE_ID'] == $nClasseId ? ' selected="selected"' :''); ?>><?php echo($aClasse['CLASSE_ANNEE_SCOLAIRE']. " - " . $aClasse['CLASSE_NOM']); ?></option>
 						<?php endforeach; ?>
@@ -164,7 +195,7 @@ $aEvalInds= Database::fetchArray($sQuery);
 				<td>Liste des élèves de l'année courante</td>
 				<td>
 					<select name="ELEVE_ID" onchange="document.getElementById('formulaire_eval_ind').submit();">
-						<option value="0">-- Sélectionner un élève --</option>
+						<option value="-1">-- Sélectionner un élève --</option>
 						<?php foreach($aEleves as $aEleve): ?>
 							<option value="<?php echo($aEleve['ELEVE_ID']); ?>"<?php echo($aEleve['ELEVE_ID'] == $nEleveId ? ' selected="selected"' :''); ?>><?php echo($aEleve['CLASSE_ANNEE_SCOLAIRE']. " - " . $aEleve['CLASSE_NOM'] . " - " . $aEleve['ELEVE_NOM']); ?></option>
 						<?php endforeach; ?>
@@ -177,10 +208,17 @@ $aEvalInds= Database::fetchArray($sQuery);
 		</tbody>
 	</table>
 </form>
-<br />
+
 <?php if(count($aEvalInds) <= 0): ?>
-	Aucune évaluation individuelle n'a été saisie à ce jour pour ces critères.<br />
-	<a href="?page=evaluations_individuelles&amp;mode=add">Ajouter une évaluation individuelle</a>
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucune évaluation individuelle n'a été saisie à ce jour pour ces critères.<br />
+			<a href="?page=evaluations_individuelles&amp;mode=add">Ajouter une évaluation individuelle</a>
+		</td>
+	</tr>
+</table>
 <?php else: ?>
 	<table class="list_tree">
 		<caption>Liste des évaluations individuelles</caption>
@@ -189,11 +227,11 @@ $aEvalInds= Database::fetchArray($sQuery);
 				<th><a href="?page=evaluations_individuelles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 				<th>Elèves</th>
 				<th>Classes</th>
-				<th>Domaines</th>
+				<th>Evaluations<br />collectives</th>
 				<th>Matières</th>
 				<th>Compétences</th>
 				<th>Notes</th>
-				<th>Commentaires</th>
+				<th></th>
 				<th colspan="2">Actions</th>
 			</tr>
 		</thead>
@@ -207,13 +245,13 @@ $aEvalInds= Database::fetchArray($sQuery);
 			<?php foreach($aEvalInds as $nRowNum => $aEvalInd): ?>
 			<tr class="level0_row<?php echo($nRowNum%2); ?>">
 				<td></td>
-				<td><?php echo($aEvalInd['ELEVE_NOM']); ?></td>
+				<th><?php echo($aEvalInd['ELEVE_NOM']); ?></th>
 				<td><?php echo($aEvalInd['CLASSE_NOM']); ?></td>
-				<td><?php echo($aEvalInd['DOMAINE_NOM']); ?></td>
+				<td><?php echo($aEvalInd['EVAL_COL_NOM']); ?></td>
 				<td><?php echo($aEvalInd['MATIERE_NOM']); ?></td>
 				<td><?php echo($aEvalInd['COMPETENCE_NOM']); ?></td>
 				<td><?php echo($aEvalInd['NOTE_NOM']); ?></td>
-				<td><pre><?php echo($aEvalInd['EVAL_IND_COMMENTAIRE']); ?></pre></td>
+				<td></td>
 				<!-- Edition -->
 				<td>
 					<a href="?page=evaluations_individuelles&amp;mode=edit&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
@@ -223,6 +261,13 @@ $aEvalInds= Database::fetchArray($sQuery);
 					<a href="?page=evaluations_individuelles&amp;mode=delete&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
 				</td>
 			</tr>
+			<?php if($aEvalInd['EVAL_IND_COMMENTAIRE'] != null): ?>
+			<tr class="level0_row<?php echo($nRowNum%2); ?>">
+				<td colspan="2"></td>
+				<th>Commentaires</th>
+				<td colspan="8"><pre style="font-size: 1.2em;"><?php echo($aEvalInd['EVAL_IND_COMMENTAIRE']); ?></pre></td>
+			</tr>
+			<?php endif; ?>
 			<?php endforeach; ?>
 		</tbody>
 	</table>

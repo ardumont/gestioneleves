@@ -97,6 +97,13 @@ $aPeriodes = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucune période n'a été renseignée à ce jour.<br />
-	<a href="?page=periodes&amp;mode=add">Ajouter une période</a>
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucune période n'a été renseignée à ce jour.<br />
+			<a href="?page=periodes&amp;mode=add">Ajouter une période</a>
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

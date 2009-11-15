@@ -83,8 +83,7 @@ $aPeriodes = Database::fetchArray($sQuery);
 			<th>Dates de fin</th>
 		</tr>
 	</thead>
-	<tfoot>
-	</tfoot>
+	<tfoot></tfoot>
 	<tbody>
 		<?php foreach($aPeriodes as $nRowNum => $aPeriode): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
@@ -96,5 +95,12 @@ $aPeriodes = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucune période n'a été renseignée à ce jour.
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucune période n'a été renseignée à ce jour.
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

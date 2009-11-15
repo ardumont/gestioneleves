@@ -152,10 +152,17 @@ if($nEvalColId != null)
 <?php endif; ?>
 <br />
 <?php if(count($aEvalCols) <= 0): ?>
-	Aucune &eacute;valuation collective saisie &agrave; ce jour.<br />
-	Si vous voulez saisir une &eacute;valuation individuelle, vous devez d'abord
-	<a href="?page=evaluations_collectives&amp;mode=add">saisir au moins une &eacute;valuation collective</a>
-	&agrave; laquelle vous pourrez alors rattacher votre &eacute;valuation individuelle.
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucune &eacute;valuation collective saisie &agrave; ce jour.<br />
+			Si vous voulez saisir une &eacute;valuation individuelle, vous devez d'abord
+			<a href="?page=evaluations_collectives&amp;mode=add">saisir au moins une &eacute;valuation collective</a>
+			&agrave; laquelle vous pourrez alors rattacher votre &eacute;valuation individuelle.
+		</td>
+	</tr>
+</table>
 <?php else: ?>
 <form method="post" action="?page=evaluations_individuelles&amp;mode=add" name="recherche_eval_coll" id="recherche_eval_coll">
 	<table class="formulaire">
@@ -183,10 +190,8 @@ if($nEvalColId != null)
 	<form method="post" action="?page=evaluations_individuelles&amp;mode=add_do">
 		<table class="list_tree" width="300px">
 			<caption>D&eacute;tail de l'&eacute;valuation collective</caption>
-			<thead>
-			</thead>
-			<tfoot>
-			</tfoot>
+			<thead></thead>
+			<tfoot></tfoot>
 			<tbody>
 				<tr class="level0_row0">
 					<td>Evaluation collective</td>
@@ -206,7 +211,7 @@ if($nEvalColId != null)
 				</tr>
 			</tbody>
 		</table>
-		<br /><br />
+		<br />
 		<table class="formulaire">
 			<caption>Ajout d'une &eacute;valuation individuelle</caption>
 			<tr>
@@ -251,8 +256,16 @@ if($nEvalColId != null)
 			</tr>
 		</table>
 	</form>
+
 	<?php if(count($aEvalInds) <= 0): ?>
-		Aucune &eacute;valuation individuelle n'a &eacute;t&eacute; saisie &agrave; ce jour.
+	<table class="formulaire">
+		<caption>Informations</caption>
+		<tr>
+			<td>
+				Aucune &eacute;valuation individuelle n'a &eacute;t&eacute; saisie &agrave; ce jour.
+			</td>
+		</tr>
+	</table>
 	<?php else: ?>
 	<table class="list_tree">
 		<caption>Liste des &eacute;valuations individuelles</caption>

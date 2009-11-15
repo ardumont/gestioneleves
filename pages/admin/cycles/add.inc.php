@@ -78,5 +78,12 @@ $aCycles = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucun cycle n'a été renseigné à ce jour.
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucun cycle n'a été renseigné à ce jour.
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

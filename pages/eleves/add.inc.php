@@ -123,25 +123,26 @@ if ($nClasseId != null)
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
+
 <br />
 <table class="formulaire">
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-Pour &eacute;viter de saisir un &eacute;l&egrave;ve qui existe d&eacute;j&agrave;
-dans la base.<br />
-Vous pouvez toujours saisir le d&eacute;but de son nom dans la zone de texte
-ci-dessous puis cliquer sur le bouton <i>Rechercher</i>.<br />
-La page va alors se recharger.<br />
-S'il existe des noms qui correspondent &agrave; vos crit&egrave;res de
-recherche, vous pourrez alors s&eacute;lectionner un &eacute;l&egrave;ve dans la
- liste d'&eacute;l&egrave;ves trouv&eacute;s pour l'ajouter dans la classe voulue.
- <br />
-Si vous ne le trouvez pas, vous pouvez toujours saisir un nouveau nom dans la
-zone de texte <i>Nom de l'&eacute;l&egrave;ve</i> situ&eacute;e dans
-l'encadr&eacute; intitul&eacute; <i>Ajouter un &eacute;l&egrave;ve</i>.<br />
-La date de naissance est obligatoire car cela permet de distinguer les homonymes.
-Si vous n'avez pas de date de naissance, laisser le champ initialis&eacute; &agrave; <i>jj/mm/aaaa</i> et penser &agrave; r&eacute;&eacute;diter les dates de naissance plus-tard.
+			Pour &eacute;viter de saisir un &eacute;l&egrave;ve qui existe d&eacute;j&agrave;
+			dans la base.<br />
+			Vous pouvez toujours saisir le d&eacute;but de son nom dans la zone de texte
+			ci-dessous puis cliquer sur le bouton <i>Rechercher</i>.<br />
+			La page va alors se recharger.<br />
+			S'il existe des noms qui correspondent &agrave; vos crit&egrave;res de
+			recherche, vous pourrez alors s&eacute;lectionner un &eacute;l&egrave;ve dans la
+			 liste d'&eacute;l&egrave;ves trouv&eacute;s pour l'ajouter dans la classe voulue.
+			 <br />
+			Si vous ne le trouvez pas, vous pouvez toujours saisir un nouveau nom dans la
+			zone de texte <i>Nom de l'&eacute;l&egrave;ve</i> situ&eacute;e dans
+			l'encadr&eacute; intitul&eacute; <i>Ajouter un &eacute;l&egrave;ve</i>.<br />
+			La date de naissance est obligatoire car cela permet de distinguer les homonymes.
+			Si vous n'avez pas de date de naissance, laisser le champ initialis&eacute; &agrave; <i>jj/mm/aaaa</i> et penser &agrave; r&eacute;&eacute;diter les dates de naissance plus-tard.
 		</td>
 	</tr>
 </table>
@@ -164,6 +165,8 @@ Si vous n'avez pas de date de naissance, laisser le champ initialis&eacute; &agr
 <form method="post" action="?page=eleves&amp;mode=add_do">
 	<table class="formulaire">
 		<caption>Ajouter un &eacute;l&egrave;ve</caption>
+		<thead></thead>
+		<tfoot></tfoot>
 		<tbody>
 			<tr>
 				<td>Classe de l'&eacute;l&egrave;ve</td>
@@ -219,10 +222,8 @@ Si vous n'avez pas de date de naissance, laisser le champ initialis&eacute; &agr
 <?php if($nClasseId != null && $aClasseRow != false): ?>
 <table class="list_tree">
 	<caption>D&eacute;tails de la classe</caption>
-	<thead>
-	</thead>
-	<tfoot>
-	</tfoot>
+	<thead></thead>
+	<tfoot></tfoot>
 	<tbody>
 		<tr class="level0_row0">
 			<th>Classe</th>
@@ -272,5 +273,12 @@ Si vous n'avez pas de date de naissance, laisser le champ initialis&eacute; &agr
 	</tbody>
 </table>
 <?php else: ?>
-	Aucune classe ne correspondant aux critères de sélection n'a été trouvée.
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucune classe ne correspondant aux critères de sélection n'a été trouvée.
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

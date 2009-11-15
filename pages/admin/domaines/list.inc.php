@@ -159,10 +159,17 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 	</tbody>
 </table>
 <?php else: ?>
-	<?php if($nCycleId != -1): ?>
-	Aucun domaine n'a été renseigné pour le cycle sélectionné.<br />
-	<?php else: ?>
-	Aucun domaine n'a été renseigné à ce jour.<br />
-	<a href="?page=domaines&amp;mode=add">Ajouter un domaine</a>
-	<?php endif; ?>
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			<?php if($nCycleId != -1): ?>
+			Aucun domaine n'a été renseigné pour le cycle sélectionné.<br />
+			<?php else: ?>
+			Aucun domaine n'a été renseigné à ce jour.<br />
+			<a href="?page=domaines&amp;mode=add">Ajouter un domaine</a>
+			<?php endif; ?>
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

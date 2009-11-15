@@ -97,6 +97,13 @@ $aEcoles = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucune école n'a été renseignée à ce jour.<br />
-	<a href="?page=ecoles&amp;mode=add">Ajouter une école</a>
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucune école n'a été renseignée à ce jour.<br />
+			<a href="?page=ecoles&amp;mode=add">Ajouter une école</a>
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

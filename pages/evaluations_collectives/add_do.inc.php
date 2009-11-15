@@ -51,17 +51,17 @@ switch(strtolower($sAction))
 	// ajoute l'eleve
 	case 'ajouter':
 		if($objForm->hasError() == true) break;
-		// insertion de l'eleve dans la table		
+		// insertion de l'eleve dans la table
 		$sQuery =
 			"INSERT INTO EVALUATIONS_COLLECTIVES (" .
 			"	EVAL_COL_NOM, EVAL_COL_DESCRIPTION, EVAL_COL_DATE, " .
 			"	ID_PERIODE, ID_CLASSE" .
 			")" .
 			"VALUES(" .
-				Database::prepareString($sEvalColNom) . "," . 
-				Database::prepareString($sEvalColDescription) . "," . 
-				"STR_TO_DATE(".Database::prepareString($sEvalColDate).", '%d/%m/%Y')," . 
-				$nIdPeriode . "," . 
+				Database::prepareString($sEvalColNom) . "," .
+				Database::prepareString($sEvalColDescription) . "," .
+				"STR_TO_DATE(".Database::prepareString($sEvalColDate).", '%d/%m/%Y')," .
+				$nIdPeriode . "," .
 				$nIdClasse .
 			")";
 		Database::execute($sQuery);
@@ -70,7 +70,7 @@ switch(strtolower($sAction))
 		header("Location: ?page=evaluations_collectives&mode=add");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
@@ -83,7 +83,7 @@ switch(strtolower($sAction))
 	// ----------
 	default:
 		$objForm->clearError();
-		
+
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
 

@@ -151,5 +151,12 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 	</tbody>
 </table>
 <?php else: ?>
-	Aucune compétence n'a été renseignée à ce jour.
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucune compétence n'a été renseignée à ce jour.
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

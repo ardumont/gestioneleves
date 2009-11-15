@@ -69,8 +69,8 @@ $sQuery = <<< EOQ
 		INNER JOIN DOMAINES
 			ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
 		INNER JOIN CYCLES
-			ON DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID 
-	WHERE 1=1 
+			ON DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
+	WHERE 1=1
 	{$sQueryDomaineId}
 	{$sQueryCycleId}
 	ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC
@@ -101,13 +101,13 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-Par défaut, cette page liste l'ensemble des matières existantes dans l'application.<br />
-Cette page permet de filtrer sur un cycle ou un domaine pour faciliter la lecture.<br />
-Pour cela, sélectionner un cycle ou un domaine ou bien encore une combinaison de ces filtres puis cliquez sur le bouton
-<i>Rechercher</i> pour que la page se rafraîchisse.<br />
-<br />
-Vous pouvez modifier une matière en cliquant sur le nom de la matière.<br />
-Vous pouvez également ajouter une matière en cliquant sur le + en haut à gauche du tableau.<br />
+			Par défaut, cette page liste l'ensemble des matières existantes dans l'application.<br />
+			Cette page permet de filtrer sur un cycle ou un domaine pour faciliter la lecture.<br />
+			Pour cela, sélectionner un cycle ou un domaine ou bien encore une combinaison de ces filtres puis cliquer sur le bouton
+			<i>Rechercher</i> pour que la page se rafraîchisse.<br />
+			<br />
+			Vous pouvez modifier une matière en cliquant sur le nom de la matière.<br />
+			Vous pouvez également ajouter une matière en cliquant sur le + en haut à gauche du tableau.<br />
 		</td>
 	</tr>
 </table>
@@ -211,10 +211,17 @@ Vous pouvez également ajouter une matière en cliquant sur le + en haut à gauc
 		</tbody>
 	</table>
 <?php else: ?>
-	<?php if($nCycleId != -1 || $nMatiereId != -1): ?>
-		Aucune matière n'a été renseignée pour ces critères de recherche.<br />
-	<?php else:?>
-		Aucune matière n'a été renseignée à ce jour.<br />
-		<a href="?page=matieres&amp;mode=add">Ajouter une matière</a>
-	<?php endif; ?>
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			<?php if($nCycleId != -1 || $nMatiereId != -1): ?>
+				Aucune matière n'a été renseignée pour ces critères de recherche.<br />
+			<?php else:?>
+				Aucune matière n'a été renseignée à ce jour.<br />
+				<a href="?page=matieres&amp;mode=add">Ajouter une matière</a>
+			<?php endif; ?>
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

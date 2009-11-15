@@ -91,5 +91,12 @@ $aEcoles = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucune école n'a été renseignée à ce jour.
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucune école n'a été renseignée à ce jour.
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

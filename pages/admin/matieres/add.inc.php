@@ -46,7 +46,6 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 //==============================================================================
 // Affichage de la page
 //==============================================================================
-
 ?>
 <h1>Mati&egrave;res</h1>
 
@@ -83,7 +82,6 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 	</table>
 </form>
 
-
 <?php if($aCycle != false): ?>
 <table class="list_tree">
 	<thead>
@@ -93,8 +91,7 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 			<th>Mati&egrave;res</th>
 		</tr>
 	</thead>
-	<tfoot>
-	</tfoot>
+	<tfoot></tfoot>
 	<tbody>
 		<?php $nRowNum = 0; ?>
 		<?php foreach($aMatieres as $sCycle => $aCycle): ?>
@@ -129,5 +126,12 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 	</tbody>
 </table>
 <?php else: ?>
-	Aucun cycle n'a été renseigné à ce jour.
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucun cycle n'a été renseigné à ce jour.
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

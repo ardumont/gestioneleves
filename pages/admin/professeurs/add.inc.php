@@ -80,5 +80,12 @@ $aProfesseurs = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucun professeur n'a été renseigné à ce jour.
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucun professeur n'a été renseigné à ce jour.
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

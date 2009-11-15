@@ -111,5 +111,12 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 	</tbody>
 </table>
 <?php else: ?>
-	Aucun domaine n'a été renseigné à ce jour.
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucun domaine n'a été renseigné à ce jour.
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

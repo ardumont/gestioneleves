@@ -208,10 +208,24 @@ ____EOQ;
 			</tbody>
 		</table>
 	<?php else: ?>
-		Aucun &eacute;l&egrave;ve affect&eacute; &agrave; cette classe.
+		<table class="formulaire">
+			<caption>Informations</caption>
+			<tr>
+				<td>
+					Aucun &eacute;l&egrave;ve affect&eacute; &agrave; cette classe.
+				</td>
+			</tr>
+		</table>
 	<?php endif; ?>
 <?php else: ?>
-	Aucune classe n'a été renseignée à ce jour.<br />
-	<a href="?page=classes&amp;mode=add">Ajouter une classe</a> puis <br />
-	<a href="index.php?page=eleves&amp;mode=add">Ajouter des élèves</a>
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucune classe n'a été renseignée à ce jour.<br />
+			<a href="?page=classes&amp;mode=add">Ajouter une classe</a> puis <br />
+			<a href="index.php?page=eleves&amp;mode=add">Ajouter des élèves</a>
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

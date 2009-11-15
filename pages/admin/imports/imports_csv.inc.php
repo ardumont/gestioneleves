@@ -83,5 +83,12 @@ $sCSVExemple = utf8_decode($sCSVExemple);
 </form>
 
 <?php if($bResImport != -1): ?>
-	L'import est un <?php echo ($bResImport == "ok") ? ' <span style="color:green;font-weight:bold;">succès</span>' : ' <span style="color:red;font-weight:bold;">échec</span>'; ?>.<br />
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			L'import est un <?php echo ($bResImport == "ok") ? ' <span style="color:green;font-weight:bold;">succès</span>' : ' <span style="color:red;font-weight:bold;">échec</span>'; ?>.<br />
+		</td>
+	</tr>
+</table>
 <?php endif; ?>

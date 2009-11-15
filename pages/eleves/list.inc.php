@@ -232,9 +232,23 @@ ____EOQ;
 			</tbody>
 		</table>
 	<?php else: ?>
-		Aucun élève affecté à cette classe.
+		<table class="formulaire">
+			<caption>Informations</caption>
+			<tr>
+				<td>
+					Aucun élève affecté à cette classe.
+				</td>
+			</tr>
+		</table>
 	<?php endif; ?>
 <?php else: ?>
-	Aucune classe n'a été affectée à ce professeur.<br />
-	Vous devez d'abord <a href="admin.php?page=classes&amp;mode=add">créer une classe</a> puis l'affecter à ce professeur.
+<table class="formulaire">
+	<caption>Informations</caption>
+	<tr>
+		<td>
+			Aucune classe n'a été affectée à ce professeur.<br />
+			Vous devez d'abord <a href="admin.php?page=classes&amp;mode=add">créer une classe</a> puis l'affecter à ce professeur.
+		</td>
+	</tr>
+</table>
 <?php endif; ?>
