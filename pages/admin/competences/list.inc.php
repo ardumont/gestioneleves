@@ -141,7 +141,6 @@ Vous pouvez également ajouter une compétence en cliquant sur le + en haut à g
 		</td>
 	</tr>
 </table>
-<br />
 
 <form method="post" action="?page=competences" name="formulaire_competence" id="formulaire_competence">
 	<table class="formulaire">

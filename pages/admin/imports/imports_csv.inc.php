@@ -38,6 +38,14 @@ $sCSVExemple = utf8_decode($sCSVExemple);
 ?>
 <h1>Imports CSV</h1>
 
+<?php if(Message::hasError() == true): ?>
+<ul class="form_error">
+	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
+	<li><?php echo($sErrorMessage); ?></li>
+	<?php endforeach; ?>
+</ul>
+<?php endif; ?>
+
 <br />
 <table class="formulaire">
 	<caption>Fonctionnement</caption>
@@ -56,15 +64,6 @@ $sCSVExemple = utf8_decode($sCSVExemple);
 		</td>
 	</tr>
 </table>
-
-<br />
-<?php if(Message::hasError() == true): ?>
-<ul class="form_error">
-	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
-	<li><?php echo($sErrorMessage); ?></li>
-	<?php endforeach; ?>
-</ul>
-<?php endif; ?>
 
 <form method="post" action="?page=imports&amp;mode=imports_csv_do" enctype="multipart/form-data">
 	<table class="formulaire">

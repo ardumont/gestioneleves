@@ -42,8 +42,16 @@ $sXMLExemple = htmlentities(utf8_decode($sXMLExemple));
 
 ?>
 <h1>Imports XML</h1>
-<br />
 
+<?php if(Message::hasError() == true): ?>
+<ul class="form_error">
+	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
+	<li><?php echo($sErrorMessage); ?></li>
+	<?php endforeach; ?>
+</ul>
+<?php endif; ?>
+
+<br />
 <table class="formulaire">
 	<caption>Fonctionnement</caption>
 	<tr>
@@ -61,15 +69,7 @@ $sXMLExemple = htmlentities(utf8_decode($sXMLExemple));
 		</td>
 	</tr>
 </table>
-
 <br />
-<?php if(Message::hasError() == true): ?>
-<ul class="form_error">
-	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
-	<li><?php echo($sErrorMessage); ?></li>
-	<?php endforeach; ?>
-</ul>
-<?php endif; ?>
 
 <form method="post" action="?page=imports&amp;mode=imports_xml_classe_do" enctype="multipart/form-data">
 	<table class="formulaire">
