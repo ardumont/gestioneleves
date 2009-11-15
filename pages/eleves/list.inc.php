@@ -29,14 +29,14 @@ if($nClasseId == null)
 
 // ===== La liste des classes =====
 $sQuery = <<< EOQ
-	SELECT 
+	SELECT
 		CLASSE_ID,
-		CLASSE_NOM, 
-		CLASSE_ANNEE_SCOLAIRE, 
-		PROFESSEUR_NOM 
+		CLASSE_NOM,
+		CLASSE_ANNEE_SCOLAIRE,
+		PROFESSEUR_NOM
 	FROM CLASSES
 		INNER JOIN PROFESSEUR_CLASSE
-			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE 
+			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
 		INNER JOIN PROFESSEURS
 			ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
 	WHERE PROFESSEURS.PROFESSEUR_ID = {$_SESSION['PROFESSEUR_ID']}
@@ -56,19 +56,19 @@ if($aClasses != false)
 	// ===== Les informations de la classe =====
 	$sQuery = <<< ____EOQ
 		SELECT
-			CLASSE_NOM, 
-		 	PROFESSEUR_NOM, 
+			CLASSE_NOM,
+		 	PROFESSEUR_NOM,
 			CLASSE_ANNEE_SCOLAIRE,
-			ECOLE_NOM, 
-			ECOLE_VILLE, 
-			ECOLE_DEPARTEMENT 
+			ECOLE_NOM,
+			ECOLE_VILLE,
+			ECOLE_DEPARTEMENT
 		FROM CLASSES
 			INNER JOIN PROFESSEUR_CLASSE
 				ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
 			INNER JOIN PROFESSEURS
 				ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
 			INNER JOIN ECOLES
-				ON CLASSES.ID_ECOLE = ECOLES.ECOLE_ID  
+				ON CLASSES.ID_ECOLE = ECOLES.ECOLE_ID
 		WHERE CLASSES.CLASSE_ID = {$nClasseId}
 		ORDER BY CLASSE_NOM ASC
 ____EOQ;
@@ -76,15 +76,15 @@ ____EOQ;
 
 	// ===== La liste des eleves de la classe =====
 	$sQuery = <<< ____EOQ
-		SELECT 
+		SELECT
 			ELEVE_ID,
-			ELEVE_NOM, 
-			DATE_FORMAT(ELEVE_DATE_NAISSANCE, '%d/%m/%Y') AS ELEVE_DATE_NAISSANCE, 
-			ID_CLASSE, 
-			ELEVE_ACTIF 
-		FROM ELEVES 
+			ELEVE_NOM,
+			DATE_FORMAT(ELEVE_DATE_NAISSANCE, '%d/%m/%Y') AS ELEVE_DATE_NAISSANCE,
+			ID_CLASSE,
+			ELEVE_ACTIF
+		FROM ELEVES
 			INNER JOIN ELEVE_CLASSE
-				ON ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE 
+				ON ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE
 		WHERE ELEVE_CLASSE.ID_CLASSE = {$nClasseId}
 		ORDER BY ELEVE_NOM ASC
 ____EOQ;
@@ -100,7 +100,7 @@ ____EOQ;
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Liste des &eacute;lèves</h1>
+<h1>Liste des élèves</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
@@ -116,9 +116,9 @@ ____EOQ;
 	<tr>
 		<td>
 Par défaut, cette page affiche tous les élèves par classe du professeur connecté.<br />
-Vous pouvez sélectionner une classe parmi la liste proposée puis cliquez sur le bouton <i>Rechercher</i>.<br />
+Vous pouvez sélectionner une classe parmi la liste proposée puis cliquer sur le bouton <i>Rechercher</i>.<br />
 <br />
-Pour éditer un élève, cliquez sur le nom de l'élève puis modifiez les propriétés désirés.<br />
+Pour éditer un élève, cliquez sur le nom de l'élève puis modifiez les propriétés désirées.<br />
 Pour ajouter un élève, cliquez sur le + en image dans l'angle en haut a gauche.
 		</td>
 	</tr>
