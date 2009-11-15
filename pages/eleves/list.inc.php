@@ -115,11 +115,11 @@ ____EOQ;
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-Par défaut, cette page affiche tous les élèves par classe du professeur connecté.<br />
-Vous pouvez sélectionner une classe parmi la liste proposée puis cliquer sur le bouton <i>Rechercher</i>.<br />
-<br />
-Pour éditer un élève, cliquez sur le nom de l'élève puis modifiez les propriétés désirées.<br />
-Pour ajouter un élève, cliquez sur le + en image dans l'angle en haut a gauche.
+			Par défaut, cette page affiche tous les élèves par classe du professeur connecté.<br />
+			Vous pouvez sélectionner une classe parmi la liste proposée puis cliquer sur le bouton <i>Rechercher</i>.<br />
+			<br />
+			Pour éditer un élève, cliquer sur le nom de l'élève puis modifier les propriétés désirées.<br />
+			Pour ajouter un élève, cliquer sur le + en image dans l'angle en haut a gauche.
 		</td>
 	</tr>
 </table>

@@ -131,13 +131,13 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-Par défaut, cette page affiche l'ensemble des compétences existantes dans l'application.<br />
-Cette page permet de filtrer sur un cycle, un domaine ou une matière pour faciliter la lecture.<br />
-Pour cela, sélectionner un cycle ou un domaine ou une matière ou bien encore une combinaison de ces filtres puis cliquez sur le bouton
-<i>Rechercher</i> pour que la page se rafraîchisse.<br />
-<br />
-Vous pouvez modifier une compétence en cliquant sur le nom de la compétence.<br />
-Vous pouvez également ajouter une compétence en cliquant sur le + en haut à gauche du tableau.<br />
+			Par défaut, cette page affiche l'ensemble des compétences existantes dans l'application.<br />
+			Cette page permet de filtrer sur un cycle, un domaine ou une matière pour faciliter la lecture.<br />
+			Pour cela, sélectionner un cycle ou un domaine ou une matière ou bien encore une combinaison de ces filtres
+			 puis cliquer sur le bouton <i>Rechercher</i> pour que la page se rafraîchisse.<br />
+			<br />
+			Vous pouvez modifier une compétence en cliquant sur le nom de la compétence.<br />
+			Vous pouvez également ajouter une compétence en cliquant sur le + en haut à gauche du tableau.<br />
 		</td>
 	</tr>
 </table>

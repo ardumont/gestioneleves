@@ -19,15 +19,15 @@
 $sQuery = <<< EOQ
 	SELECT
 		CLASSE_ID,
-		CLASSE_NOM, 
-		PROFESSEUR_NOM, 
+		CLASSE_NOM,
+		PROFESSEUR_NOM,
 	 	CLASSE_ANNEE_SCOLAIRE,
-		ECOLE_NOM, 
-		ECOLE_VILLE, 
+		ECOLE_NOM,
+		ECOLE_VILLE,
 		ECOLE_DEPARTEMENT
 	FROM CLASSES
 		INNER JOIN PROFESSEUR_CLASSE
-			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE 
+			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
 		INNER JOIN PROFESSEURS
 			ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
 		INNER JOIN ECOLES
@@ -59,10 +59,10 @@ $aClasses = Database::fetchArray($sQuery);
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-Par défaut, cette page liste les classes existantes dans l'application.<br />
-<br />
-Vous pouvez modifier une classe en cliquant sur le nom de la classe<br />
-Vous pouvez également ajouter une classe en cliquant sur le + en haut à gauche du tableau.<br />
+			Par défaut, cette page liste les classes existantes dans l'application.<br />
+			<br />
+			Vous pouvez modifier une classe en cliquant sur le nom de la classe.<br />
+			Vous pouvez également ajouter une classe en cliquant sur le + en haut à gauche du tableau.<br />
 		</td>
 	</tr>
 </table>

@@ -19,10 +19,10 @@
 $sQuery = <<< EOQ
 	SELECT
 		PERIODE_ID,
-		PERIODE_NOM, 
-		PERIODE_DATE_DEBUT, 
-		PERIODE_DATE_FIN 
-	FROM PERIODES 
+		PERIODE_NOM,
+		PERIODE_DATE_DEBUT,
+		PERIODE_DATE_FIN
+	FROM PERIODES
 	ORDER BY PERIODE_NOM ASC
 EOQ;
 $aPeriodes = Database::fetchArray($sQuery);
@@ -51,10 +51,10 @@ $aPeriodes = Database::fetchArray($sQuery);
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-Par défaut, cette page affiche l'ensemble des périodes existantes dans l'application.<br />
-<br />
-Vous pouvez modifier une période en cliquant sur son nom.<br />
-Vous pouvez également ajouter une période en cliquant sur le + en haut à gauche du tableau.<br />
+			Par défaut, cette page affiche l'ensemble des périodes existantes dans l'application.<br />
+			<br />
+			Vous pouvez modifier une période en cliquant sur son nom.<br />
+			Vous pouvez également ajouter une période en cliquant sur le + en haut à gauche du tableau.<br />
 		</td>
 	</tr>
 </table>

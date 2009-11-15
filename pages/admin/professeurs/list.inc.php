@@ -18,9 +18,9 @@
 // ===== La liste des classes =====
 $sQuery = <<< EOQ
 	SELECT
-		PROFESSEUR_ID, 
+		PROFESSEUR_ID,
 		PROFESSEUR_NOM
-	FROM PROFESSEURS 
+	FROM PROFESSEURS
 	ORDER BY PROFESSEUR_NOM ASC
 EOQ;
 $aProfesseurs = Database::fetchArray($sQuery);
@@ -48,9 +48,9 @@ $aProfesseurs = Database::fetchArray($sQuery);
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-Par défaut, cette page affiche l'ensemble des professeurs qui utilisent l'application.<br />
-Vous pouvez modifier un professeur en cliquant sur le nom du professeur.<br />
-Pour ajouter un professeur, cliquez sur le plus en haut à gauche du tableau.<br />
+			Par défaut, cette page affiche l'ensemble des professeurs qui utilisent l'application.<br />
+			Vous pouvez modifier un professeur en cliquant sur le nom du professeur.<br />
+			Pour ajouter un professeur, cliquer sur le plus en haut à gauche du tableau.<br />
 		</td>
 	</tr>
 </table>

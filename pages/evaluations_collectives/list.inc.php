@@ -25,10 +25,10 @@ $nClasseId = $objForm->getValue('CLASSE_ID', $_POST, 'convert_int');
 
 // ===== La liste des eleves du professeur pour l'annee courante =====
 $sQuery = <<< EOQ
-	SELECT 
+	SELECT
 		PERIODE_ID,
-		PERIODE_NOM 
-	FROM PERIODES 
+		PERIODE_NOM
+	FROM PERIODES
 	ORDER BY PERIODE_NOM ASC
 EOQ;
 $aPeriodes = Database::fetchArray($sQuery);
@@ -36,17 +36,17 @@ $aPeriodes = Database::fetchArray($sQuery);
 
 // ===== La liste des classes pour l'annee scolaire du professeur logge =====
 $sQuery = <<< EOQ
-	SELECT 
+	SELECT
 		CLASSE_ID,
-		CLASSE_NOM, 
-		CLASSE_ANNEE_SCOLAIRE 
+		CLASSE_NOM,
+		CLASSE_ANNEE_SCOLAIRE
 	FROM CLASSES
 		INNER JOIN PROFESSEUR_CLASSE
 			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
 		INNER JOIN PROFESSEURS
 			ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
 	WHERE PROFESSEURS.PROFESSEUR_ID = {$_SESSION['PROFESSEUR_ID']}
-	{$sRestrictionAnneeScolaire} 
+	{$sRestrictionAnneeScolaire}
 	ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC
 EOQ;
 $aClasses = Database::fetchArray($sQuery);
@@ -68,21 +68,21 @@ if($nPeriodeId != null && $nClasseId != null) {// eleve + classe
 // ===== La liste des evaluations collectives a ce jour =====
 $sQuery = <<< EOQ
 	SELECT
-		EVAL_COL_ID, 
-		EVAL_COL_NOM, 
-		EVAL_COL_DESCRIPTION, 
-		DATE_FORMAT(EVAL_COL_DATE, '%d/%m/%Y') AS EVAL_COL_DATE, 
-		PERIODE_NOM, 
-		CLASSE_NOM, 
-		CLASSE_ANNEE_SCOLAIRE 
+		EVAL_COL_ID,
+		EVAL_COL_NOM,
+		EVAL_COL_DESCRIPTION,
+		DATE_FORMAT(EVAL_COL_DATE, '%d/%m/%Y') AS EVAL_COL_DATE,
+		PERIODE_NOM,
+		CLASSE_NOM,
+		CLASSE_ANNEE_SCOLAIRE
 	FROM EVALUATIONS_COLLECTIVES
 		INNER JOIN CLASSES
 			ON EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID
 		INNER JOIN PERIODES
 			ON EVALUATIONS_COLLECTIVES.ID_PERIODE = PERIODES.PERIODE_ID
-	WHERE 1=1 
-	{$sRestrictionAnneeScolaire} 
-	{$sFiltres} 
+	WHERE 1=1
+	{$sRestrictionAnneeScolaire}
+	{$sFiltres}
 	ORDER BY PERIODE_NOM ASC
 EOQ;
 $aEvalCols= Database::fetchArray($sQuery);
@@ -111,11 +111,9 @@ $aEvalCols= Database::fetchArray($sQuery);
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-Par défaut, cette page affiche toutes les évaluations collectives saisies à ce
- jour par le professeur connecté.<br />
-Vous pouvez toutefois ne filtrer que par classe ou par période.<br />
-Pour cela, sélectionner une classe ou une période puis cliquer
- sur le bouton <i>Rechercher</i>.<br />
+			Par défaut, cette page affiche toutes les évaluations collectives saisies à ce jour par le professeur connecté.<br />
+			Vous pouvez toutefois ne filtrer que par classe ou par période.<br />
+			Pour cela, sélectionner une classe ou une période puis cliquer sur le bouton <i>Rechercher</i>.<br />
 		</td>
 	</tr>
 </table>

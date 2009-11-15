@@ -77,12 +77,12 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-Par défaut, cette page liste les domaines existants dans l'application.<br />
-Cette page permet de filtrer sur un cycle pour faciliter la lecture.<br />
-Pour cela, sélectionner un cycle puis cliquez sur le bouton <i>Rechercher</i> pour que la page se rafraîchisse.<br />
-<br />
-Vous pouvez modifier un domaine en cliquant sur le nom du cycle.<br />
-Vous pouvez également ajouter un cycle en cliquant sur le + en haut à gauche du tableau.
+			Par défaut, cette page liste les domaines existants dans l'application.<br />
+			Cette page permet de filtrer sur un cycle pour faciliter la lecture.<br />
+			Pour cela, sélectionner un cycle puis cliquer sur le bouton <i>Rechercher</i> pour que la page se rafraîchisse.<br />
+			<br />
+			Vous pouvez modifier un domaine en cliquant sur le nom du cycle.<br />
+			Vous pouvez également ajouter un cycle en cliquant sur le + en haut à gauche du tableau.
 		</td>
 	</tr>
 </table>

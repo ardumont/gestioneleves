@@ -19,10 +19,10 @@
 $sQuery = <<< EOQ
 	SELECT
 		ECOLE_ID,
-		ECOLE_NOM, 
-		ECOLE_VILLE, 
-		ECOLE_DEPARTEMENT 
-	FROM ECOLES 
+		ECOLE_NOM,
+		ECOLE_VILLE,
+		ECOLE_DEPARTEMENT
+	FROM ECOLES
 	ORDER BY ECOLE_VILLE ASC, ECOLE_NOM ASC
 EOQ;
 $aEcoles = Database::fetchArray($sQuery);
@@ -51,10 +51,10 @@ $aEcoles = Database::fetchArray($sQuery);
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-Par défaut, cette page liste les écoles existantes dans l'application.<br />
-<br />
-Vous pouvez modifier une classe en cliquant sur le nom de l'école.<br />
-Vous pouvez également ajouter une école en cliquant sur le + en haut à gauche du tableau.<br />
+			Par défaut, cette page liste les écoles existantes dans l'application.<br />
+			<br />
+			Vous pouvez modifier une classe en cliquant sur le nom de l'école.<br />
+			Vous pouvez également ajouter une école en cliquant sur le + en haut à gauche du tableau.<br />
 		</td>
 	</tr>
 </table>

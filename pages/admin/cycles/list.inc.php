@@ -18,9 +18,9 @@
 // ===== La liste des cycles =====
 $sQuery = <<< EOQ
 	SELECT
-		CYCLE_ID, 
-		CYCLE_NOM 
-	FROM CYCLES 
+		CYCLE_ID,
+		CYCLE_NOM
+	FROM CYCLES
 	ORDER BY CYCLE_NOM ASC
 EOQ;
 $aCycles = Database::fetchArray($sQuery);
@@ -48,10 +48,10 @@ $aCycles = Database::fetchArray($sQuery);
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-Par défaut, cette page liste les cycles existants dans l'application.<br />
-<br />
-Vous pouvez modifier un cycle en cliquant sur le nom du cycle.<br />
-Vous pouvez également ajouter un cycle en cliquant sur le + en haut à gauche du tableau.<br />
+			Par défaut, cette page liste les cycles existants dans l'application.<br />
+			<br />
+			Vous pouvez modifier un cycle en cliquant sur le nom du cycle.<br />
+			Vous pouvez également ajouter un cycle en cliquant sur le + en haut à gauche du tableau.<br />
 		</td>
 	</tr>
 </table>

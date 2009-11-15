@@ -52,10 +52,10 @@ $aNiveaux = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-Par défaut, cette page affiche l'ensemble des niveaux existants dans l'application.<br />
-<br />
-Vous pouvez modifier un niveau en cliquant sur son nom.<br />
-Vous pouvez également ajouter un niveau en cliquant sur le + en haut à gauche du tableau.<br />
+			Par défaut, cette page affiche l'ensemble des niveaux existants dans l'application.<br />
+			<br />
+			Vous pouvez modifier un niveau en cliquant sur son nom.<br />
+			Vous pouvez également ajouter un niveau en cliquant sur le + en haut à gauche du tableau.<br />
 		</td>
 	</tr>
 </table>
