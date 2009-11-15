@@ -16,13 +16,15 @@
 //==============================================================================
 
 // ===== La liste des ecoles =====
-$sQuery = "SELECT" .
-		  "  ECOLE_ID," .
-		  "  ECOLE_NOM, " .
-		  "  ECOLE_VILLE, " .
-		  "  ECOLE_DEPARTEMENT " .
-		  " FROM ECOLES " .
-		  " ORDER BY ECOLE_VILLE ASC, ECOLE_NOM ASC";
+$sQuery = <<< EOQ
+	SELECT
+		ECOLE_ID,
+		ECOLE_NOM, 
+		ECOLE_VILLE, 
+		ECOLE_DEPARTEMENT 
+	FROM ECOLES 
+	ORDER BY ECOLE_VILLE ASC, ECOLE_NOM ASC
+EOQ;
 $aEcoles = Database::fetchArray($sQuery);
 // $aEcoles[][COLONNE] = VALEUR
 
@@ -36,7 +38,6 @@ $aEcoles = Database::fetchArray($sQuery);
 ?>
 <h1>Liste des &eacute;coles</h1>
 
-<br />
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
@@ -44,6 +45,20 @@ $aEcoles = Database::fetchArray($sQuery);
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
+
+<br />
+<table class="formulaire">
+	<caption>Fonctionnement</caption>
+	<tr>
+		<td>
+Par défaut, cette page liste les écoles existantes dans l'application.<br />
+<br />
+Vous pouvez modifier une classe en cliquant sur le nom de l'école.<br />
+Vous pouvez également ajouter une école en cliquant sur le + en haut à gauche du tableau.<br />
+		</td>
+	</tr>
+</table>
+<br />
 
 <?php if($aEcoles != false): ?>
 <table class="list_tree">
@@ -66,7 +81,7 @@ $aEcoles = Database::fetchArray($sQuery);
 		<?php foreach($aEcoles as $nRowNum => $aEcole): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td></td>
-			<td><?php echo($aEcole['ECOLE_NOM']); ?></td>
+			<td><a href="?page=ecoles&amp;mode=edit&amp;ecole_id=<?php echo($aEcole['ECOLE_ID']); ?>"><?php echo($aEcole['ECOLE_NOM']); ?></a></td>
 			<td><?php echo($aEcole['ECOLE_VILLE']); ?></td>
 			<td><?php echo($aEcole['ECOLE_DEPARTEMENT']); ?></td>
 			<!-- Edition -->

@@ -4,7 +4,7 @@
 //==============================================================================
 
 // Chemin absolu jusqu'à la racine du site (pas de "/" à la fin).
-define('PATH_ROOT', "/home/tony/public_html/gestion_eleves");
+define('PATH_ROOT', "/home/chris/public_html/gestion_eleves");
 
 // Les dossiers principaux du site (pas de "/" à la fin).
 define('PATH_CONFIG',  PATH_ROOT."/config");
@@ -19,7 +19,7 @@ define('PATH_XSD',    PATH_ROOT."/xsd");
 //==============================================================================
 
 // URL à ajouter à "http://SERVER_NAME:PORT" pour avoir la racine du site ( pas de "/" à la fin).
-define('URL_ROOT', "/~tony/gestion_eleves");
+define('URL_ROOT', "/~chris/gestion_eleves");
 
 // URL des dossiers principaux du site (pas de "/" à la fin).
 define('URL_IMAGES',      URL_ROOT."/images");

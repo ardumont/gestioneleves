@@ -39,7 +39,6 @@ $aNiveaux = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 ?>
 <h1>Liste des niveaux</h1>
 
-<br />
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
@@ -47,6 +46,20 @@ $aNiveaux = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
+
+<br />
+<table class="formulaire">
+	<caption>Fonctionnement</caption>
+	<tr>
+		<td>
+Par défaut, cette page affiche l'ensemble des niveaux existants dans l'application.<br />
+<br />
+Vous pouvez modifier un niveau en cliquant sur son nom.<br />
+Vous pouvez également ajouter un niveau en cliquant sur le + en haut à gauche du tableau.<br />
+		</td>
+	</tr>
+</table>
+<br />
 
 <?php if($aNiveaux != false): ?>
 <table class="list_tree">
@@ -84,7 +97,7 @@ $aNiveaux = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 					<!-- Nom du cycle -->
 					<td></td>
 					<!-- Niveau -->
-					<td><?php echo($aNiveau['NIVEAU_NOM']); ?></td>
+					<td><a href="?page=niveaux&amp;mode=edit&amp;niveau_id=<?php echo($aNiveau['NIVEAU_ID']); ?>"><?php echo($aNiveau['NIVEAU_NOM']); ?></a></td>
 					<!-- Edition du niveau -->
 					<td>
 						<a href="?page=niveaux&amp;mode=edit&amp;niveau_id=<?php echo($aNiveau['NIVEAU_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>

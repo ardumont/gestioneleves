@@ -44,8 +44,10 @@ $sQuery = <<< EOQ
 		CYCLE_NOM,
 		DOMAINE_ID,
 		DOMAINE_NOM
-	FROM DOMAINES, CYCLES
-	WHERE DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
+	FROM DOMAINES
+		INNER JOIN CYCLES
+			ON DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
+	WHERE 1=1
 	{$sQueryCycleId}
 	ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC
 EOQ;
@@ -62,7 +64,6 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 ?>
 <h1>Liste des domaines</h1>
 
-<br />
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
@@ -70,32 +71,48 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
+<br />
+
+<table class="formulaire">
+	<caption>Fonctionnement</caption>
+	<tr>
+		<td>
+Par défaut, cette page liste les domaines existants dans l'application.<br />
+Cette page permet de filtrer sur un cycle pour faciliter la lecture.<br />
+Pour cela, sélectionner un cycle puis cliquez sur le bouton <i>Rechercher</i> pour que la page se rafraîchisse.<br />
+<br />
+Vous pouvez modifier un domaine en cliquant sur le nom du cycle.<br />
+Vous pouvez également ajouter un cycle en cliquant sur le + en haut à gauche du tableau.
+		</td>
+	</tr>
+</table>
+
+<form method="post" action="?page=domaines" name="formulaire_domaine" id="formulaire_domaine">
+	<table class="formulaire">
+		<caption>Crit&eacute;res de recherche</caption>
+		<thead></thead>
+		<tfoot></tfoot>
+		<tbody>
+			<tr>
+				<td>Cycle</td>
+				<td>
+					<select name="cycle_id" onchange="document.getElementById('formulaire_domaine').submit();">
+						<option value="-1">-- Sélectionnez un cycle --</option>
+						<?php foreach($aCycles as $aCycle): ?>
+							<option value="<?php echo($aCycle['CYCLE_ID']); ?>"<?php echo ($nCycleId == $aCycle['CYCLE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aCycle['CYCLE_NOM']); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="action" value="Rechercher" /></td>
+			</tr>
+		</tbody>
+	</table>
+</form>
 
 <?php if($aDomaines != false): ?>
-	<form method="post" action="?page=domaines" name="formulaire_domaine" id="formulaire_domaine">
-		<table class="formulaire">
-			<caption>Crit&eacute;res de recherche</caption>
-			<tfoot>
-			</tfoot>
-			<tbody>
-				<tr>
-					<td>Cycle</td>
-					<td>
-						<select name="cycle_id" onchange="document.getElementById('formulaire_domaine').submit();">
-							<option value="-1">-- Sélectionnez un cycle --</option>
-							<?php foreach($aCycles as $aCycle): ?>
-								<option value="<?php echo($aCycle['CYCLE_ID']); ?>"<?php echo ($nCycleId == $aCycle['CYCLE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aCycle['CYCLE_NOM']); ?></option>
-							<?php endforeach; ?>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td><input type="submit" name="action" value="Rechercher" /></td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
-	<table class="list_tree">
+<table class="list_tree">
 	<thead>
 		<tr>
 			<th><a href="?page=domaines&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
@@ -127,7 +144,7 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 				<!-- Nom du cycle -->
 				<td></td>
 				<!-- Nom de domaine -->
-				<td><?php echo($aDomaine['DOMAINE_NOM']); ?></td>
+				<td><a href="?page=domaines&amp;mode=edit&amp;domaine_id=<?php echo($aDomaine['DOMAINE_ID']); ?>"><?php echo($aDomaine['DOMAINE_NOM']); ?></a></td>
 				<!-- Edition -->
 				<td>
 					<a href="?page=domaines&amp;mode=edit&amp;domaine_id=<?php echo($aDomaine['DOMAINE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>

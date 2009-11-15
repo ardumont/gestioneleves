@@ -38,6 +38,7 @@ $sCSVExemple = utf8_decode($sCSVExemple);
 ?>
 <h1>Imports CSV</h1>
 
+<br />
 <table class="formulaire">
 	<caption>Fonctionnement</caption>
 	<tr>

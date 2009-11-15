@@ -10,12 +10,13 @@
 // ===== Modification de la date =====
 $oForm = new FormValidation();
 
-// soumission via post, typiquement une fois le bouton rechercher appuye.
+// Récupère éventuellement le cycle à filtrer
 $nCycleId = $oForm->getValue('cycle_id', $_POST, 'convert_int', -1);
 
-// soumission via post, typiquement une fois le bouton rechercher appuye.
+// Récupère éventuellement le domaine à filtrer
 $nDomaineId = $oForm->getValue('domaine_id', $_POST, 'convert_int', -1);
 
+// Récupère éventuellement la matière à filtrer
 $nMatiereId = $oForm->getValue('matiere_id', $_POST, 'convert_int', -1);
 
 //==============================================================================
@@ -118,7 +119,6 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 ?>
 <h1>Liste des comp&eacute;tences</h1>
 
-<br />
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
@@ -126,53 +126,69 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
+<br />
+<table class="formulaire">
+	<caption>Fonctionnement</caption>
+	<tr>
+		<td>
+Par défaut, cette page affiche l'ensemble des compétences existantes dans l'application.<br />
+Cette page permet de filtrer sur un cycle, un domaine ou une matière pour faciliter la lecture.<br />
+Pour cela, sélectionner un cycle ou un domaine ou une matière ou bien encore une combinaison de ces filtres puis cliquez sur le bouton
+<i>Rechercher</i> pour que la page se rafraîchisse.<br />
+<br />
+Vous pouvez modifier une compétence en cliquant sur le nom de la compétence.<br />
+Vous pouvez également ajouter une compétence en cliquant sur le + en haut à gauche du tableau.<br />
+		</td>
+	</tr>
+</table>
+<br />
 
+<form method="post" action="?page=competences" name="formulaire_competence" id="formulaire_competence">
+	<table class="formulaire">
+		<caption>Crit&eacute;res de recherche</caption>
+		<thead></thead>
+		<tfoot></tfoot>
+		<tbody>
+			<tr>
+				<td>Cycle</td>
+				<td>
+					<select name="cycle_id" onchange="document.getElementById('formulaire_competence').submit();">
+						<option value="-1">-- Sélectionnez un cycle --</option>
+						<?php foreach($aCycles as $aCycle): ?>
+							<option value="<?php echo($aCycle['CYCLE_ID']); ?>"<?php echo ($nCycleId == $aCycle['CYCLE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aCycle['CYCLE_NOM']); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Domaines</td>
+				<td>
+					<select name="domaine_id" onchange="document.getElementById('formulaire_competence').submit();">
+						<option value="-1">-- Sélectionnez un domaine --</option>
+						<?php foreach($aDomaines as $aDomaine): ?>
+							<option value="<?php echo($aDomaine['DOMAINE_ID']); ?>"<?php echo ($nDomaineId == $aDomaine['DOMAINE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aDomaine['DOMAINE_NOM']); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Matières</td>
+				<td>
+					<select name="matiere_id" onchange="document.getElementById('formulaire_competence').submit();">
+						<option value="-1">-- Sélectionnez une matière --</option>
+						<?php foreach($aMatieres as $aMatiere): ?>
+							<option value="<?php echo($aMatiere['MATIERE_ID']); ?>"<?php echo ($nMatiereId == $aMatiere['MATIERE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aMatiere['MATIERE_NOM']); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="action" value="Rechercher" /></td>
+			</tr>
+		</tbody>
+	</table>
+</form>
 <?php if($aCompetences != false): ?>
-	<form method="post" action="?page=competences" name="formulaire_competence" id="formulaire_competence">
-		<table class="formulaire">
-			<caption>Crit&eacute;res de recherche</caption>
-			<tfoot>
-			</tfoot>
-			<tbody>
-				<tr>
-					<td>Cycle</td>
-					<td>
-						<select name="cycle_id" onchange="document.getElementById('formulaire_competence').submit();">
-							<option value="-1">-- Sélectionnez un cycle --</option>
-							<?php foreach($aCycles as $aCycle): ?>
-								<option value="<?php echo($aCycle['CYCLE_ID']); ?>"<?php echo ($nCycleId == $aCycle['CYCLE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aCycle['CYCLE_NOM']); ?></option>
-							<?php endforeach; ?>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>Domaines</td>
-					<td>
-						<select name="domaine_id" onchange="document.getElementById('formulaire_competence').submit();">
-							<option value="-1">-- Sélectionnez un domaine --</option>
-							<?php foreach($aDomaines as $aDomaine): ?>
-								<option value="<?php echo($aDomaine['DOMAINE_ID']); ?>"<?php echo ($nDomaineId == $aDomaine['DOMAINE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aDomaine['DOMAINE_NOM']); ?></option>
-							<?php endforeach; ?>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>Matières</td>
-					<td>
-						<select name="matiere_id" onchange="document.getElementById('formulaire_competence').submit();">
-							<option value="-1">-- Sélectionnez une matière --</option>
-							<?php foreach($aMatieres as $aMatiere): ?>
-								<option value="<?php echo($aMatiere['MATIERE_ID']); ?>"<?php echo ($nMatiereId == $aMatiere['MATIERE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aMatiere['MATIERE_NOM']); ?></option>
-							<?php endforeach; ?>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td><input type="submit" name="action" value="Rechercher" /></td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
 	<table class="list_tree">
 		<thead>
 			<tr>

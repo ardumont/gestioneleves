@@ -16,13 +16,15 @@
 //==============================================================================
 
 // ===== La liste des periodes =====
-$sQuery = "SELECT" .
-		  "  PERIODE_ID," .
-		  "  PERIODE_NOM, " .
-		  "  PERIODE_DATE_DEBUT, " .
-		  "  PERIODE_DATE_FIN " .
-		  " FROM PERIODES " .
-		  " ORDER BY PERIODE_NOM ASC";
+$sQuery = <<< EOQ
+	SELECT
+		PERIODE_ID,
+		PERIODE_NOM, 
+		PERIODE_DATE_DEBUT, 
+		PERIODE_DATE_FIN 
+	FROM PERIODES 
+	ORDER BY PERIODE_NOM ASC
+EOQ;
 $aPeriodes = Database::fetchArray($sQuery);
 // $aPeriodes[][COLONNE] = VALEUR
 
@@ -36,7 +38,6 @@ $aPeriodes = Database::fetchArray($sQuery);
 ?>
 <h1>Liste des p&eacute;riodes</h1>
 
-<br />
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
@@ -44,6 +45,20 @@ $aPeriodes = Database::fetchArray($sQuery);
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
+
+<br />
+<table class="formulaire">
+	<caption>Fonctionnement</caption>
+	<tr>
+		<td>
+Par défaut, cette page affiche l'ensemble des périodes existantes dans l'application.<br />
+<br />
+Vous pouvez modifier une période en cliquant sur son nom.<br />
+Vous pouvez également ajouter une période en cliquant sur le + en haut à gauche du tableau.<br />
+		</td>
+	</tr>
+</table>
+<br />
 
 <?php if($aPeriodes != false): ?>
 <table class="list_tree">
@@ -66,7 +81,7 @@ $aPeriodes = Database::fetchArray($sQuery);
 		<?php foreach($aPeriodes as $nRowNum => $aPeriode): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td></td>
-			<td><?php echo($aPeriode['PERIODE_NOM']); ?></td>
+			<td><a href="?page=periodes&amp;mode=edit&amp;periode_id=<?php echo($aPeriode['PERIODE_ID']); ?>"><?php echo($aPeriode['PERIODE_NOM']); ?></a></td>
 			<td><?php echo($aPeriode['PERIODE_DATE_DEBUT']); ?></td>
 			<td><?php echo($aPeriode['PERIODE_DATE_FIN']); ?></td>
 			<!-- Edition -->

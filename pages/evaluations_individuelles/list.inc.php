@@ -27,31 +27,41 @@ $nClasseId = $objForm->getValue('CLASSE_ID', $_POST, 'convert_int');
 //==============================================================================
 
 // ===== La liste des eleves du professeur pour l'annee courante =====
-$sQuery = "SELECT DISTINCT " .
-		  "  ELEVE_ID," .
-		  "  ELEVE_NOM, " .
-		  "  CLASSE_ANNEE_SCOLAIRE, " .
-		  "  CLASSE_NOM " .
-		  " FROM ELEVES, ELEVE_CLASSE, CLASSES, PROFESSEUR_CLASSE " .
-		  " WHERE ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE " .
-		  " AND ELEVE_CLASSE.ID_CLASSE = CLASSES.CLASSE_ID" .
-		  " AND PROFESSEUR_CLASSE.ID_PROFESSEUR = " . $_SESSION['PROFESSEUR_ID'] .
-		  " {$sRestrictionAnneeScolaire} " .
-		  " ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC, ELEVE_NOM ASC";
+$sQuery = <<< EOQ
+	SELECT DISTINCT 
+		ELEVE_ID,
+		ELEVE_NOM, 
+		CLASSE_ANNEE_SCOLAIRE, 
+		CLASSE_NOM 
+	FROM ELEVES
+		INNER JOIN ELEVE_CLASSE
+			ON ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE
+		INNER JOIN CLASSES
+			ON ELEVE_CLASSE.ID_CLASSE = CLASSES.CLASSE_ID
+		INNER JOIN PROFESSEUR_CLASSE
+			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
+	WHERE PROFESSEUR_CLASSE.ID_PROFESSEUR = {$_SESSION['PROFESSEUR_ID']}
+	{$sRestrictionAnneeScolaire} 
+	ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC, ELEVE_NOM ASC
+EOQ;
 $aEleves = Database::fetchArray($sQuery);
 // $aEleves[][COLONNE] = VALEUR
 
 // ===== La liste des classes pour l'annee scolaire du professeur logge =====
-$sQuery = "SELECT " .
-		  "  CLASSE_ID," .
-		  "  CLASSE_NOM, " .
-		  "  CLASSE_ANNEE_SCOLAIRE " .
-		  " FROM CLASSES, PROFESSEUR_CLASSE, PROFESSEURS " .
-		  " WHERE CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE " .
-		  " AND PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID " .
-		  " AND PROFESSEURS.PROFESSEUR_ID = " . $_SESSION['PROFESSEUR_ID'] .
-		  " {$sRestrictionAnneeScolaire} " .
-		  " ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC";
+$sQuery = <<< EOQ
+	SELECT 
+		CLASSE_ID,
+		CLASSE_NOM, 
+		CLASSE_ANNEE_SCOLAIRE 
+	FROM CLASSES
+		INNER JOIN PROFESSEUR_CLASSE
+			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE 
+		INNER JOIN PROFESSEURS
+			ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
+	WHERE PROFESSEURS.PROFESSEUR_ID = {$_SESSION['PROFESSEUR_ID']}
+	{$sRestrictionAnneeScolaire} 
+	ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC
+EOQ;
 $aClasses = Database::fetchArray($sQuery);
 // $aClasses[][COLONNE] = VALEUR
 
@@ -69,29 +79,38 @@ if($nEleveId != null && $nClasseId != null) {// eleve + classe
 }
 
 // ===== La liste des evaluations individuelles a ce jour =====
-$sQuery = "SELECT" .
-		  "  ELEVE_NOM, " .
-		  "  CLASSE_NOM, " .
-		  "  NOTE_NOM, " .
-		  "  EVAL_IND_ID, " .
-		  "  EVAL_IND_COMMENTAIRE, " .
-		  "  COMPETENCE_NOM, " .
-		  "  MATIERE_NOM, " .
-		  "  DOMAINE_NOM " .
-		  " FROM EVALUATIONS_INDIVIDUELLES, NOTES, ELEVES, ELEVE_CLASSE, CLASSES, " .
-		  " COMPETENCES, MATIERES, DOMAINES, PROFESSEUR_CLASSE " .
-		  " WHERE EVALUATIONS_INDIVIDUELLES.ID_NOTE = NOTES.NOTE_ID " .
-		  " AND EVALUATIONS_INDIVIDUELLES.ID_ELEVE = ELEVES.ELEVE_ID " .
-		  " AND ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE " .
-		  " AND ELEVE_CLASSE.ID_CLASSE = CLASSES.CLASSE_ID " .
-		  " AND CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE " .
-		  " AND EVALUATIONS_INDIVIDUELLES.ID_COMPETENCE = COMPETENCES.COMPETENCE_ID " .
-		  " AND COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID " .
-		  " AND MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID " .
-		  " AND PROFESSEUR_CLASSE.ID_PROFESSEUR = " . $_SESSION['PROFESSEUR_ID'] .
-		  " {$sRestrictionAnneeScolaire} " .
-		  " {$sFiltres} " .
-		  " ORDER BY DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC";
+$sQuery = <<< EOQ
+	SELECT
+		ELEVE_NOM, 
+		CLASSE_NOM, 
+		NOTE_NOM, 
+		EVAL_IND_ID, 
+		EVAL_IND_COMMENTAIRE, 
+		COMPETENCE_NOM, 
+		MATIERE_NOM, 
+		DOMAINE_NOM 
+	FROM EVALUATIONS_INDIVIDUELLES
+		INNER JOIN NOTES
+			ON EVALUATIONS_INDIVIDUELLES.ID_NOTE = NOTES.NOTE_ID
+		INNER JOIN ELEVES
+			ON EVALUATIONS_INDIVIDUELLES.ID_ELEVE = ELEVES.ELEVE_ID 
+		INNER JOIN ELEVE_CLASSE
+			ON ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE 
+		INNER JOIN CLASSES
+			ON ELEVE_CLASSE.ID_CLASSE = CLASSES.CLASSE_ID 
+		INNER JOIN COMPETENCES
+			ON EVALUATIONS_INDIVIDUELLES.ID_COMPETENCE = COMPETENCES.COMPETENCE_ID 
+		INNER JOIN MATIERES
+			ON COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID 
+		INNER JOIN DOMAINES
+			ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID 
+		INNER JOIN PROFESSEUR_CLASSE
+			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE  
+	WHERE PROFESSEUR_CLASSE.ID_PROFESSEUR = {$_SESSION['PROFESSEUR_ID']}
+	{$sRestrictionAnneeScolaire} 
+	{$sFiltres} 
+	ORDER BY DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
+EOQ;
 $aEvalInds= Database::fetchArray($sQuery);
 // $aEvalInds[][COLONNE] = VALEUR
 
@@ -103,7 +122,7 @@ $aEvalInds= Database::fetchArray($sQuery);
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Liste des &eacute;valuations individuelles</h1>
+<h1>Liste des évaluations individuelles</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
@@ -117,28 +136,27 @@ $aEvalInds= Database::fetchArray($sQuery);
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-Par d&eacute;faut, cette page affiche toutes les &eacute;valuations individuelles saisies &agrave; ce
- jour par le professeur connect&eacute;.<br />
-Vous pouvez toutefois ne filtrer que par classe ou par &eacute;l&egrave;ve.<br />
-Pour cela, s&eacute;lectionner une classe ou un &eacute;l&egrave;ve puis cliquer
+Par défaut, cette page affiche toutes les évaluations individuelles saisies à ce
+ jour par le professeur connecté.<br />
+Vous pouvez toutefois ne filtrer que par classe ou par élève.<br />
+Pour cela, sélectionner une classe ou un élève puis cliquer
  sur le bouton <i>Rechercher</i>.<br />
-Vous pouvez &eacute;galement filtrer sur la classe et l'&eacute;l&egrave;ve.<br />
-Attention, toutefois, si l'&eacute;l&egrave;ve n'appartient pas &agrave; la
-classe, aucun r&eacute;sultat ne s'affichera.
+Attention, toutefois, si l'élève n'appartient pas à la
+classe, aucun résultat ne s'affichera.
 		</td>
 	</tr>
 </table>
 <form method="post" action="?page=evaluations_individuelles" name="formulaire_eval_ind" id="formulaire_eval_ind">
 	<table class="formulaire">
-		<caption>Crit&eacute;res de recherche</caption>
-		<tfoot>
-		</tfoot>
+		<caption>Critéres de recherche</caption>
+		<thead></thead>
+		<tfoot></tfoot>
 		<tbody>
 			<tr>
-				<td>Liste des classes de l'ann&eacute;e courante</td>
+				<td>Liste des classes de l'année courante</td>
 				<td>
 					<select name="CLASSE_ID" onchange="document.getElementById('formulaire_eval_ind').submit();">
-						<option value="0">-- S&eacute;lectionner une classe --</option>
+						<option value="0">-- Sélectionner une classe --</option>
 						<?php foreach($aClasses as $aClasse): ?>
 							<option value="<?php echo($aClasse['CLASSE_ID']); ?>"<?php echo($aClasse['CLASSE_ID'] == $nClasseId ? ' selected="selected"' :''); ?>><?php echo($aClasse['CLASSE_ANNEE_SCOLAIRE']. " - " . $aClasse['CLASSE_NOM']); ?></option>
 						<?php endforeach; ?>
@@ -146,10 +164,10 @@ classe, aucun r&eacute;sultat ne s'affichera.
 				</td>
 			</tr>
 			<tr>
-				<td>Liste des &eacute;l&egrave;ves de l'ann&eacute;e courante</td>
+				<td>Liste des élèves de l'année courante</td>
 				<td>
 					<select name="ELEVE_ID" onchange="document.getElementById('formulaire_eval_ind').submit();">
-						<option value="0">-- S&eacute;lectionner un &eacute;l&egrave;ve --</option>
+						<option value="0">-- Sélectionner un élève --</option>
 						<?php foreach($aEleves as $aEleve): ?>
 							<option value="<?php echo($aEleve['ELEVE_ID']); ?>"<?php echo($aEleve['ELEVE_ID'] == $nEleveId ? ' selected="selected"' :''); ?>><?php echo($aEleve['CLASSE_ANNEE_SCOLAIRE']. " - " . $aEleve['CLASSE_NOM'] . " - " . $aEleve['ELEVE_NOM']); ?></option>
 						<?php endforeach; ?>
@@ -164,19 +182,19 @@ classe, aucun r&eacute;sultat ne s'affichera.
 </form>
 <br />
 <?php if(count($aEvalInds) <= 0): ?>
-	Aucune &eacute;valuation individuelle n'a &eacute;t&eacute; saisie &agrave; ce jour pour ces crit&egrave;res.<br />
+	Aucune évaluation individuelle n'a été saisie à ce jour pour ces critères.<br />
 	<a href="?page=evaluations_individuelles&amp;mode=add">Ajouter une évaluation individuelle</a>
 <?php else: ?>
 	<table class="list_tree">
-		<caption>Liste des &eacute;valuations individuelles</caption>
+		<caption>Liste des évaluations individuelles</caption>
 		<thead>
 			<tr>
 				<th><a href="?page=evaluations_individuelles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
-				<th>El&egrave;ves</th>
+				<th>Elèves</th>
 				<th>Classes</th>
 				<th>Domaines</th>
-				<th>Mati&egrave;res</th>
-				<th>Comp&eacute;tences</th>
+				<th>Matières</th>
+				<th>Compétences</th>
 				<th>Notes</th>
 				<th>Commentaires</th>
 				<th colspan="2">Actions</th>

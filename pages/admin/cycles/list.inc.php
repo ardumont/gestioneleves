@@ -16,11 +16,13 @@
 //==============================================================================
 
 // ===== La liste des cycles =====
-$sQuery = "SELECT" .
-		  "  CYCLE_ID, " .
-		  "  CYCLE_NOM " .
-		  " FROM CYCLES " .
-		  " ORDER BY CYCLE_NOM ASC";
+$sQuery = <<< EOQ
+	SELECT
+		CYCLE_ID, 
+		CYCLE_NOM 
+	FROM CYCLES 
+	ORDER BY CYCLE_NOM ASC
+EOQ;
 $aCycles = Database::fetchArray($sQuery);
 // $aCycles[][COLONNE] = VALEUR
 
@@ -34,7 +36,6 @@ $aCycles = Database::fetchArray($sQuery);
 ?>
 <h1>Liste des cycles</h1>
 
-<br />
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
@@ -42,6 +43,19 @@ $aCycles = Database::fetchArray($sQuery);
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
+<br />
+<table class="formulaire">
+	<caption>Fonctionnement</caption>
+	<tr>
+		<td>
+Par défaut, cette page liste les cycles existants dans l'application.<br />
+<br />
+Vous pouvez modifier un cycle en cliquant sur le nom du cycle.<br />
+Vous pouvez également ajouter un cycle en cliquant sur le + en haut à gauche du tableau.<br />
+		</td>
+	</tr>
+</table>
+<br />
 
 <?php if($aCycles != false): ?>
 <table class="list_tree">
@@ -62,7 +76,7 @@ $aCycles = Database::fetchArray($sQuery);
 		<?php foreach($aCycles as $nRowNum => $aCycle): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td></td>
-			<td><?php echo($aCycle['CYCLE_NOM']); ?></td>
+			<td><a href="?page=cycles&amp;mode=edit&amp;cycle_id=<?php echo($aCycle['CYCLE_ID']); ?>"><?php echo($aCycle['CYCLE_NOM']); ?></a></td>
 			<!-- Edition -->
 			<td>
 				<a href="?page=cycles&amp;mode=edit&amp;cycle_id=<?php echo($aCycle['CYCLE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>

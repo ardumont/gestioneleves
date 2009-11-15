@@ -16,11 +16,13 @@
 //==============================================================================
 
 // ===== La liste des classes =====
-$sQuery = "SELECT" .
-		  "  PROFESSEUR_ID, " .
-		  "  PROFESSEUR_NOM " .
-		  " FROM PROFESSEURS " .
-		  " ORDER BY PROFESSEUR_NOM ASC";
+$sQuery = <<< EOQ
+	SELECT
+		PROFESSEUR_ID, 
+		PROFESSEUR_NOM
+	FROM PROFESSEURS 
+	ORDER BY PROFESSEUR_NOM ASC
+EOQ;
 $aProfesseurs = Database::fetchArray($sQuery);
 // $aProfesseurs[][COLONNE] = VALEUR
 
@@ -34,7 +36,6 @@ $aProfesseurs = Database::fetchArray($sQuery);
 ?>
 <h1>Liste des professeurs</h1>
 
-<br />
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
@@ -42,7 +43,18 @@ $aProfesseurs = Database::fetchArray($sQuery);
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
-
+<br />
+<table class="formulaire">
+	<caption>Fonctionnement</caption>
+	<tr>
+		<td>
+Par défaut, cette page affiche l'ensemble des professeurs qui utilisent l'application.<br />
+Vous pouvez modifier un professeur en cliquant sur le nom du professeur.<br />
+Pour ajouter un professeur, cliquez sur le plus en haut à gauche du tableau.<br />
+		</td>
+	</tr>
+</table>
+<br />
 <?php if($aProfesseurs != false): ?>
 <table class="list_tree">
 	<thead>

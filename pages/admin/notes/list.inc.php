@@ -36,7 +36,6 @@ $aNotes = Database::fetchArray($sQuery);
 ?>
 <h1>Liste des notes</h1>
 
-<br />
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
@@ -44,6 +43,20 @@ $aNotes = Database::fetchArray($sQuery);
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
+
+<br />
+<table class="formulaire">
+	<caption>Fonctionnement</caption>
+	<tr>
+		<td>
+Par défaut, cette page affiche l'ensemble des notes existantes dans l'application.<br />
+<br />
+Vous pouvez modifier une note en cliquant sur son nom.<br />
+Vous pouvez également ajouter une note en cliquant sur le + en haut à gauche du tableau.<br />
+		</td>
+	</tr>
+</table>
+<br />
 
 <?php if($aNotes != false): ?>
 <table class="list_tree">
@@ -66,7 +79,7 @@ $aNotes = Database::fetchArray($sQuery);
 		<?php foreach($aNotes as $nRowNum => $aNote): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td></td>
-			<td><?php echo($aNote['NOTE_NOM']); ?></td>
+			<td><a href="?page=notes&amp;mode=edit&amp;note_id=<?php echo($aNote['NOTE_ID']); ?>"><?php echo($aNote['NOTE_NOM']); ?></a></td>
 			<td><?php echo($aNote['NOTE_LABEL']); ?></td>
 			<td><?php echo($aNote['NOTE_NOTE']); ?></td>
 			<!-- Edition -->

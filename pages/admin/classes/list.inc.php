@@ -16,19 +16,24 @@
 //==============================================================================
 
 // ===== La liste des classes =====
-$sQuery = "SELECT" .
-		  "  CLASSE_ID," .
-		  "  CLASSE_NOM, " .
-		  "  PROFESSEUR_NOM, " .
-		  "  CLASSE_ANNEE_SCOLAIRE, " .
-		  "  ECOLE_NOM, " .
-		  "  ECOLE_VILLE, " .
-		  "  ECOLE_DEPARTEMENT " .
-		  " FROM CLASSES, PROFESSEUR_CLASSE, PROFESSEURS, ECOLES " .
-		  " WHERE CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE " .
-		  " AND PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID " .
-		  " AND CLASSES.ID_ECOLE = ECOLES.ECOLE_ID " .
-		  " ORDER BY CLASSE_NOM ASC";
+$sQuery = <<< EOQ
+	SELECT
+		CLASSE_ID,
+		CLASSE_NOM, 
+		PROFESSEUR_NOM, 
+	 	CLASSE_ANNEE_SCOLAIRE,
+		ECOLE_NOM, 
+		ECOLE_VILLE, 
+		ECOLE_DEPARTEMENT
+	FROM CLASSES
+		INNER JOIN PROFESSEUR_CLASSE
+			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE 
+		INNER JOIN PROFESSEURS
+			ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
+		INNER JOIN ECOLES
+			ON CLASSES.ID_ECOLE = ECOLES.ECOLE_ID
+	ORDER BY CLASSE_NOM ASC
+EOQ;
 $aClasses = Database::fetchArray($sQuery);
 // $aClasses[][COLONNE] = VALEUR
 
@@ -42,7 +47,6 @@ $aClasses = Database::fetchArray($sQuery);
 ?>
 <h1>Liste des classes</h1>
 
-<br />
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
@@ -50,6 +54,19 @@ $aClasses = Database::fetchArray($sQuery);
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
+<br />
+<table class="formulaire">
+	<caption>Fonctionnement</caption>
+	<tr>
+		<td>
+Par défaut, cette page liste les classes existantes dans l'application.<br />
+<br />
+Vous pouvez modifier une classe en cliquant sur le nom de la classe<br />
+Vous pouvez également ajouter une classe en cliquant sur le + en haut à gauche du tableau.<br />
+		</td>
+	</tr>
+</table>
+<br />
 
 <?php if($aClasses != false): ?>
 <table class="list_tree">
@@ -76,7 +93,7 @@ $aClasses = Database::fetchArray($sQuery);
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td></td>
 			<td><?php echo($aClasse['PROFESSEUR_NOM']); ?></td>
-			<td><?php echo($aClasse['CLASSE_NOM']); ?></td>
+			<td><a href="?page=classes&amp;mode=edit&amp;classe_id=<?php echo($aClasse['CLASSE_ID']); ?>"><?php echo($aClasse['CLASSE_NOM']); ?></a></td>
 			<td><?php echo($aClasse['CLASSE_ANNEE_SCOLAIRE']); ?></td>
 			<td><?php echo($aClasse['ECOLE_NOM']); ?></td>
 			<td><?php echo($aClasse['ECOLE_VILLE']); ?></td>

@@ -65,9 +65,12 @@ $sQuery = <<< EOQ
 		DOMAINE_NOM,
 		MATIERE_ID,
 		MATIERE_NOM
-	FROM MATIERES, DOMAINES, CYCLES
-	WHERE MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
-	AND DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
+	FROM MATIERES
+		INNER JOIN DOMAINES
+			ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
+		INNER JOIN CYCLES
+			ON DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID 
+	WHERE 1=1 
 	{$sQueryDomaineId}
 	{$sQueryCycleId}
 	ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC
@@ -85,7 +88,6 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 ?>
 <h1>Liste des mati&egrave;res</h1>
 
-<br />
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
@@ -94,41 +96,58 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 </ul>
 <?php endif; ?>
 
+<br />
+<table class="formulaire">
+	<caption>Fonctionnement</caption>
+	<tr>
+		<td>
+Par défaut, cette page liste l'ensemble des matières existantes dans l'application.<br />
+Cette page permet de filtrer sur un cycle ou un domaine pour faciliter la lecture.<br />
+Pour cela, sélectionner un cycle ou un domaine ou bien encore une combinaison de ces filtres puis cliquez sur le bouton
+<i>Rechercher</i> pour que la page se rafraîchisse.<br />
+<br />
+Vous pouvez modifier une matière en cliquant sur le nom de la matière.<br />
+Vous pouvez également ajouter une matière en cliquant sur le + en haut à gauche du tableau.<br />
+		</td>
+	</tr>
+</table>
+
+<form method="post" action="?page=matieres" name="formulaire_matiere" id="formulaire_matiere">
+	<table class="formulaire">
+		<caption>Crit&eacute;res de recherche</caption>
+		<thead></thead>
+		<tfoot></tfoot>
+		<tbody>
+			<tr>
+				<td>Cycle</td>
+				<td>
+					<select name="cycle_id" onchange="document.getElementById('formulaire_matiere').submit();">
+						<option value="-1">-- Sélectionnez un cycle --</option>
+						<?php foreach($aCycles as $aCycle): ?>
+							<option value="<?php echo($aCycle['CYCLE_ID']); ?>"<?php echo ($nCycleId == $aCycle['CYCLE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aCycle['CYCLE_NOM']); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Domaines</td>
+				<td>
+					<select name="domaine_id" onchange="document.getElementById('formulaire_matiere').submit();">
+						<option value="-1">-- Sélectionnez un domaine --</option>
+						<?php foreach($aDomaines as $aDomaine): ?>
+							<option value="<?php echo($aDomaine['DOMAINE_ID']); ?>"<?php echo ($nDomaineId == $aDomaine['DOMAINE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aDomaine['DOMAINE_NOM']); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="action" value="Rechercher" /></td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+
 <?php if($aMatieres != false): ?>
-	<form method="post" action="?page=matieres" name="formulaire_matiere" id="formulaire_matiere">
-		<table class="formulaire">
-			<caption>Crit&eacute;res de recherche</caption>
-			<tfoot>
-			</tfoot>
-			<tbody>
-				<tr>
-					<td>Cycle</td>
-					<td>
-						<select name="cycle_id" onchange="document.getElementById('formulaire_matiere').submit();">
-							<option value="-1">-- Sélectionnez un cycle --</option>
-							<?php foreach($aCycles as $aCycle): ?>
-								<option value="<?php echo($aCycle['CYCLE_ID']); ?>"<?php echo ($nCycleId == $aCycle['CYCLE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aCycle['CYCLE_NOM']); ?></option>
-							<?php endforeach; ?>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>Domaines</td>
-					<td>
-						<select name="domaine_id" onchange="document.getElementById('formulaire_matiere').submit();">
-							<option value="-1">-- Sélectionnez un domaine --</option>
-							<?php foreach($aDomaines as $aDomaine): ?>
-								<option value="<?php echo($aDomaine['DOMAINE_ID']); ?>"<?php echo ($nDomaineId == $aDomaine['DOMAINE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aDomaine['DOMAINE_NOM']); ?></option>
-							<?php endforeach; ?>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td><input type="submit" name="action" value="Rechercher" /></td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
 	<table class="list_tree">
 		<thead>
 			<tr>

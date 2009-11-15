@@ -201,6 +201,11 @@ $aMenuPage = array
 		'edit'              => "profils/edit.inc.php",
 		'edit_do'           => "profils/edit_do.inc.php",
 	),
+
+	// ----- Carnets -----
+	'carnets' => array(
+		
+	),
 );
 
 //==============================================================================

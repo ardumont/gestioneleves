@@ -28,15 +28,19 @@ if($nClasseId == null)
 //==============================================================================
 
 // ===== La liste des classes =====
-$sQuery = "SELECT" .
-		  "  CLASSE_ID," .
-		  "  CLASSE_NOM, " .
-		  "  CLASSE_ANNEE_SCOLAIRE, " .
-		  "	 PROFESSEUR_NOM ".
-		  " FROM CLASSES, PROFESSEUR_CLASSE, PROFESSEURS " .
-		  " WHERE CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE " .
-		  " AND PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID " .
-		  " ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC";
+$sQuery = <<< EOQ
+	SELECT
+		CLASSE_ID,
+		CLASSE_NOM, 
+		CLASSE_ANNEE_SCOLAIRE, 
+		PROFESSEUR_NOM 
+	FROM CLASSES
+		INNER JOIN PROFESSEUR_CLASSE
+			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
+		INNER JOIN PROFESSEURS
+			ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
+	ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC
+EOQ;
 $aClasses = Database::fetchArray($sQuery);
 // $aClasses[][COLONNE] = VALEUR
 
@@ -49,32 +53,40 @@ if($nClasseId == null && $aClasses != false)
 if($aClasses != false)
 {
 	// ===== Les informations de la classe =====
-	$sQuery = "SELECT" .
-			  "  CLASSE_NOM, " .
-			  "  PROFESSEUR_NOM, " .
-			  "  CLASSE_ANNEE_SCOLAIRE, " .
-			  "  ECOLE_NOM, " .
-			  "  ECOLE_VILLE, " .
-			  "  ECOLE_DEPARTEMENT " .
-			  " FROM CLASSES, PROFESSEUR_CLASSE, PROFESSEURS, ECOLES " .
-			  " WHERE CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE " .
-			  " AND PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID " .
-			  " AND CLASSES.ID_ECOLE = ECOLES.ECOLE_ID " .
-			  " AND CLASSES.CLASSE_ID = {$nClasseId} " .
-			  " ORDER BY CLASSE_NOM ASC";
+	$sQuery = <<< ____EOQ
+		SELECT
+			CLASSE_NOM, 
+			PROFESSEUR_NOM, 
+			CLASSE_ANNEE_SCOLAIRE, 
+			ECOLE_NOM, 
+			ECOLE_VILLE, 
+			ECOLE_DEPARTEMENT 
+		FROM CLASSES
+			INNER JOIN PROFESSEUR_CLASSE
+				ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE 
+			INNER JOIN PROFESSEURS
+				ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID 
+			INNER JOIN ECOLES
+				ON  CLASSES.ID_ECOLE = ECOLES.ECOLE_ID
+		WHERE CLASSES.CLASSE_ID = {$nClasseId} 
+		ORDER BY CLASSE_NOM ASC
+____EOQ;
 	$aClasseRow = Database::fetchOneRow($sQuery);
 
 	// ===== La liste des eleves de la classe =====
-	$sQuery = "SELECT " .
-			  "  ELEVE_ID," .
-			  "  ELEVE_NOM, " .
-			  "  DATE_FORMAT(ELEVE_DATE_NAISSANCE, '%d/%m/%Y') AS ELEVE_DATE_NAISSANCE, " .
-			  "  ID_CLASSE, " .
-			  "  ELEVE_ACTIF " .
-			  " FROM ELEVES, ELEVE_CLASSE " .
-			  " WHERE ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE " .
-			  " AND ELEVE_CLASSE.ID_CLASSE = {$nClasseId}" .
-			  " ORDER BY ELEVE_NOM ASC";
+	$sQuery = <<< ____EOQ
+		SELECT 
+			ELEVE_ID,
+			ELEVE_NOM, 
+			DATE_FORMAT(ELEVE_DATE_NAISSANCE, '%d/%m/%Y') AS ELEVE_DATE_NAISSANCE, 
+			ID_CLASSE, 
+			ELEVE_ACTIF 
+		FROM ELEVES
+			INNER JOIN ELEVE_CLASSE
+				ON ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE 
+		WHERE ELEVE_CLASSE.ID_CLASSE = {$nClasseId}
+		ORDER BY ELEVE_NOM ASC
+____EOQ;
 	$aEleves = Database::fetchArray($sQuery);
 	// $aEleves[][COLONNE] = VALEUR
 }
@@ -97,12 +109,27 @@ if($aClasses != false)
 </ul>
 <?php endif; ?>
 <br />
+
+<table class="formulaire">
+	<caption>Fonctionnement</caption>
+	<tr>
+		<td>
+Par défaut, cette page affiche tous les élèves par classe du professeur connecté.<br />
+Vous pouvez sélectionner une classe parmi la liste proposée puis cliquez sur le bouton <i>Rechercher</i>.<br />
+<br />
+Vous ne pouvez pas éditez ou ajouter de nouveaux élèves sur cette page.<br />
+Cette page ne sert qu'à lister les élèves et leur rattachement à une classe.<br />
+Pour éditer ou ajouter un nouvel élève, rendez-vous sur la page <a href="index.php?page=eleves">de gestion des élèves</a>.
+		</td>
+	</tr>
+</table>
+
 <?php if($aClasses != false): ?>
 	<form method="post" action="?page=eleves" name="formulaire_eleve" id="formulaire_eleve">
 		<table class="formulaire">
 			<caption>Crit&eacute;res de recherche</caption>
-			<tfoot>
-			</tfoot>
+			<thead></thead>
+			<tfoot></tfoot>
 			<tbody>
 				<tr>
 					<td>Classe</td>

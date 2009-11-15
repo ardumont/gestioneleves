@@ -28,16 +28,20 @@ if($nClasseId == null)
 //==============================================================================
 
 // ===== La liste des classes =====
-$sQuery = "SELECT" .
-		  "  CLASSE_ID," .
-		  "  CLASSE_NOM, " .
-		  "  CLASSE_ANNEE_SCOLAIRE, " .
-		  "	 PROFESSEUR_NOM ".
-		  " FROM CLASSES, PROFESSEUR_CLASSE, PROFESSEURS " .
-		  " WHERE CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE " .
-		  " AND PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID " .
-		  " AND PROFESSEURS.PROFESSEUR_ID = " . $_SESSION['PROFESSEUR_ID'] .
-		  " ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC";
+$sQuery = <<< EOQ
+	SELECT 
+		CLASSE_ID,
+		CLASSE_NOM, 
+		CLASSE_ANNEE_SCOLAIRE, 
+		PROFESSEUR_NOM 
+	FROM CLASSES
+		INNER JOIN PROFESSEUR_CLASSE
+			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE 
+		INNER JOIN PROFESSEURS
+			ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
+	WHERE PROFESSEURS.PROFESSEUR_ID = {$_SESSION['PROFESSEUR_ID']}
+	ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC
+EOQ;
 $aClasses = Database::fetchArray($sQuery);
 // $aClasses[][COLONNE] = VALEUR
 
@@ -50,32 +54,40 @@ if($nClasseId == null && $aClasses != false)
 if($aClasses != false)
 {
 	// ===== Les informations de la classe =====
-	$sQuery = "SELECT" .
-			  "  CLASSE_NOM, " .
-			  "  PROFESSEUR_NOM, " .
-			  "  CLASSE_ANNEE_SCOLAIRE, " .
-			  "  ECOLE_NOM, " .
-			  "  ECOLE_VILLE, " .
-			  "  ECOLE_DEPARTEMENT " .
-			  " FROM CLASSES, PROFESSEUR_CLASSE, PROFESSEURS, ECOLES " .
-			  " WHERE CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE " .
-			  " AND PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID " .
-			  " AND CLASSES.ID_ECOLE = ECOLES.ECOLE_ID " .
-			  " AND CLASSES.CLASSE_ID = {$nClasseId} " .
-			  " ORDER BY CLASSE_NOM ASC";
+	$sQuery = <<< ____EOQ
+		SELECT
+			CLASSE_NOM, 
+		 	PROFESSEUR_NOM, 
+			CLASSE_ANNEE_SCOLAIRE,
+			ECOLE_NOM, 
+			ECOLE_VILLE, 
+			ECOLE_DEPARTEMENT 
+		FROM CLASSES
+			INNER JOIN PROFESSEUR_CLASSE
+				ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
+			INNER JOIN PROFESSEURS
+				ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
+			INNER JOIN ECOLES
+				ON CLASSES.ID_ECOLE = ECOLES.ECOLE_ID  
+		WHERE CLASSES.CLASSE_ID = {$nClasseId}
+		ORDER BY CLASSE_NOM ASC
+____EOQ;
 	$aClasseRow = Database::fetchOneRow($sQuery);
 
 	// ===== La liste des eleves de la classe =====
-	$sQuery = "SELECT " .
-			  "  ELEVE_ID," .
-			  "  ELEVE_NOM, " .
-			  "  DATE_FORMAT(ELEVE_DATE_NAISSANCE, '%d/%m/%Y') AS ELEVE_DATE_NAISSANCE, " .
-			  "  ID_CLASSE, " .
-			  "  ELEVE_ACTIF " .
-			  " FROM ELEVES, ELEVE_CLASSE " .
-			  " WHERE ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE " .
-			  " AND ELEVE_CLASSE.ID_CLASSE = {$nClasseId}" .
-			  " ORDER BY ELEVE_NOM ASC";
+	$sQuery = <<< ____EOQ
+		SELECT 
+			ELEVE_ID,
+			ELEVE_NOM, 
+			DATE_FORMAT(ELEVE_DATE_NAISSANCE, '%d/%m/%Y') AS ELEVE_DATE_NAISSANCE, 
+			ID_CLASSE, 
+			ELEVE_ACTIF 
+		FROM ELEVES 
+			INNER JOIN ELEVE_CLASSE
+				ON ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE 
+		WHERE ELEVE_CLASSE.ID_CLASSE = {$nClasseId}
+		ORDER BY ELEVE_NOM ASC
+____EOQ;
 	$aEleves = Database::fetchArray($sQuery);
 	// $aEleves[][COLONNE] = VALEUR
 }
@@ -88,7 +100,7 @@ if($aClasses != false)
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Liste des &eacute;l&egrave;ves</h1>
+<h1>Liste des &eacute;lèves</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
@@ -98,12 +110,26 @@ if($aClasses != false)
 </ul>
 <?php endif; ?>
 <br />
+
+<table class="formulaire">
+	<caption>Fonctionnement</caption>
+	<tr>
+		<td>
+Par défaut, cette page affiche tous les élèves par classe du professeur connecté.<br />
+Vous pouvez sélectionner une classe parmi la liste proposée puis cliquez sur le bouton <i>Rechercher</i>.<br />
+<br />
+Pour éditer un élève, cliquez sur le nom de l'élève puis modifiez les propriétés désirés.<br />
+Pour ajouter un élève, cliquez sur le + en image dans l'angle en haut a gauche.
+		</td>
+	</tr>
+</table>
+
 <?php if($aClasses != false): ?>
 	<form method="post" action="?page=eleves" name="formulaire_eleve" id="formulaire_eleve">
 		<table class="formulaire">
-			<caption>Crit&eacute;res de recherche</caption>
-			<tfoot>
-			</tfoot>
+			<caption>Critéres de recherche</caption>
+			<thead></thead>
+			<tfoot></tfoot>
 			<tbody>
 				<tr>
 					<td>Classe</td>
@@ -122,7 +148,7 @@ if($aClasses != false)
 		</table>
 	</form>
 	<table class="list_tree">
-		<caption>D&eacute;tails de la classe</caption>
+		<caption>Détails de la classe</caption>
 		<thead>
 		</thead>
 		<tfoot>
@@ -133,7 +159,7 @@ if($aClasses != false)
 				<td><?php echo($aClasseRow['CLASSE_NOM']); ?></td>
 			</tr>
 			<tr class="level0_row1">
-				<th>Ann&eacute;e scolaire</th>
+				<th>Année scolaire</th>
 				<td><?php echo($aClasseRow['CLASSE_ANNEE_SCOLAIRE']); ?></td>
 			</tr>
 			<tr class="level0_row0">
@@ -149,7 +175,7 @@ if($aClasses != false)
 				<td><?php echo($aClasseRow['ECOLE_VILLE']); ?></td>
 			</tr>
 			<tr class="level0_row1">
-				<th>D&eacute;partement</th>
+				<th>Département</th>
 				<td><?php echo($aClasseRow['ECOLE_DEPARTEMENT']); ?></td>
 			</tr>
 		</tbody>
@@ -160,9 +186,9 @@ if($aClasses != false)
 			<thead>
 				<tr>
 					<th><a href="?page=eleves&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
-					<th>El&egrave;ves</th>
+					<th>Elèves</th>
 					<th>Dates de naissance</th>
-					<th>Activit&eacute;s</th>
+					<th>Activités</th>
 					<th colspan="2">Actions</th>
 				</tr>
 			</thead>
@@ -206,9 +232,9 @@ if($aClasses != false)
 			</tbody>
 		</table>
 	<?php else: ?>
-		Aucun &eacute;l&egrave;ve affect&eacute; &agrave; cette classe.
+		Aucun élève affecté à cette classe.
 	<?php endif; ?>
 <?php else: ?>
-	Aucune classe n'a &eacute;t&eacute; affect&eacute;e &agrave; ce professeur.<br />
-	Vous devez d'abord <a href="admin.php?page=classes&amp;mode=add">cr&eacute;er une classe</a> puis l'affecter &agrave; ce professeur.
+	Aucune classe n'a été affectée à ce professeur.<br />
+	Vous devez d'abord <a href="admin.php?page=classes&amp;mode=add">créer une classe</a> puis l'affecter à ce professeur.
 <?php endif; ?>
