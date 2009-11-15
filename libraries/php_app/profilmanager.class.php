@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ProjectSion : Classe pour gérer les profils et les droits s'y rattachant.
+ * Classe pour gérer les profils et les droits s'y rattachant.
  *
  * @author Lionel SAURON
  * @version 1.0.0
@@ -44,7 +44,7 @@ class ProfilManager
 	/**
 	 * Lecture des droits depuis la session ou la BDD.
 	 *
-	 * ProjectSion n'étant pas une application militaire, ni une application
+	 * N'étant pas une application militaire, ni une application
 	 * destinée à gérer tout les projets d'une entreprise (en une seule fois),
 	 * on stocke les droits en session pour éviter un accès en BDD.
 	 */
