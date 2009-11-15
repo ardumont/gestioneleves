@@ -31,9 +31,9 @@ if($nClasseId == null)
 $sQuery = <<< EOQ
 	SELECT
 		CLASSE_ID,
-		CLASSE_NOM, 
-		CLASSE_ANNEE_SCOLAIRE, 
-		PROFESSEUR_NOM 
+		CLASSE_NOM,
+		CLASSE_ANNEE_SCOLAIRE,
+		PROFESSEUR_NOM
 	FROM CLASSES
 		INNER JOIN PROFESSEUR_CLASSE
 			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
@@ -55,35 +55,35 @@ if($aClasses != false)
 	// ===== Les informations de la classe =====
 	$sQuery = <<< ____EOQ
 		SELECT
-			CLASSE_NOM, 
-			PROFESSEUR_NOM, 
-			CLASSE_ANNEE_SCOLAIRE, 
-			ECOLE_NOM, 
-			ECOLE_VILLE, 
-			ECOLE_DEPARTEMENT 
+			CLASSE_NOM,
+			PROFESSEUR_NOM,
+			CLASSE_ANNEE_SCOLAIRE,
+			ECOLE_NOM,
+			ECOLE_VILLE,
+			ECOLE_DEPARTEMENT
 		FROM CLASSES
 			INNER JOIN PROFESSEUR_CLASSE
-				ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE 
+				ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
 			INNER JOIN PROFESSEURS
-				ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID 
+				ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
 			INNER JOIN ECOLES
 				ON  CLASSES.ID_ECOLE = ECOLES.ECOLE_ID
-		WHERE CLASSES.CLASSE_ID = {$nClasseId} 
+		WHERE CLASSES.CLASSE_ID = {$nClasseId}
 		ORDER BY CLASSE_NOM ASC
 ____EOQ;
 	$aClasseRow = Database::fetchOneRow($sQuery);
 
 	// ===== La liste des eleves de la classe =====
 	$sQuery = <<< ____EOQ
-		SELECT 
+		SELECT
 			ELEVE_ID,
-			ELEVE_NOM, 
-			DATE_FORMAT(ELEVE_DATE_NAISSANCE, '%d/%m/%Y') AS ELEVE_DATE_NAISSANCE, 
-			ID_CLASSE, 
-			ELEVE_ACTIF 
+			ELEVE_NOM,
+			DATE_FORMAT(ELEVE_DATE_NAISSANCE, '%d/%m/%Y') AS ELEVE_DATE_NAISSANCE,
+			ID_CLASSE,
+			ELEVE_ACTIF
 		FROM ELEVES
 			INNER JOIN ELEVE_CLASSE
-				ON ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE 
+				ON ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE
 		WHERE ELEVE_CLASSE.ID_CLASSE = {$nClasseId}
 		ORDER BY ELEVE_NOM ASC
 ____EOQ;
@@ -124,35 +124,34 @@ Pour éditer ou ajouter un nouvel élève, rendez-vous sur la page <a href="inde
 	</tr>
 </table>
 
+<form method="post" action="?page=eleves" name="formulaire_eleve" id="formulaire_eleve">
+	<table class="formulaire">
+		<caption>Crit&eacute;res de recherche</caption>
+		<thead></thead>
+		<tfoot></tfoot>
+		<tbody>
+			<tr>
+				<td>Classe</td>
+				<td>
+					<select name="CLASSE_ID" onchange="document.getElementById('formulaire_eleve').submit();">
+						<?php foreach($aClasses as $aClasse): ?>
+							<option value="<?php echo($aClasse['CLASSE_ID']); ?>"<?php echo($aClasse['CLASSE_ID'] == $nClasseId ? ' selected="selected"' :''); ?>><?php echo($aClasse['PROFESSEUR_NOM'] . " - " .$aClasse['CLASSE_ANNEE_SCOLAIRE']. " - " . $aClasse['CLASSE_NOM']); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="action" value="Rechercher" /></td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+
 <?php if($aClasses != false): ?>
-	<form method="post" action="?page=eleves" name="formulaire_eleve" id="formulaire_eleve">
-		<table class="formulaire">
-			<caption>Crit&eacute;res de recherche</caption>
-			<thead></thead>
-			<tfoot></tfoot>
-			<tbody>
-				<tr>
-					<td>Classe</td>
-					<td>
-						<select name="CLASSE_ID" onchange="document.getElementById('formulaire_eleve').submit();">
-							<?php foreach($aClasses as $aClasse): ?>
-								<option value="<?php echo($aClasse['CLASSE_ID']); ?>"<?php echo($aClasse['CLASSE_ID'] == $nClasseId ? ' selected="selected"' :''); ?>><?php echo($aClasse['PROFESSEUR_NOM'] . " - " .$aClasse['CLASSE_ANNEE_SCOLAIRE']. " - " . $aClasse['CLASSE_NOM']); ?></option>
-							<?php endforeach; ?>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td><input type="submit" name="action" value="Rechercher" /></td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
 	<table class="list_tree">
 		<caption>D&eacute;tails de la classe</caption>
-		<thead>
-		</thead>
-		<tfoot>
-		</tfoot>
+		<thead></thead>
+		<tfoot></tfoot>
 		<tbody>
 			<tr class="level0_row0">
 				<th>Classe</th>
