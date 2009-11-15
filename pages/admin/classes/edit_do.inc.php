@@ -71,7 +71,7 @@ switch(strtolower($sAction))
 		$sQuery =
 			"UPDATE CLASSES" .
 			" SET CLASSE_NOM = ".Database::prepareString($sClasseNom) . "," .
-			"     CLASSE_ANNEE_SCOLAIRE = " . Database::prepareString($sClasseAnneeScolaire) . "," . 
+			"     CLASSE_ANNEE_SCOLAIRE = " . Database::prepareString($sClasseAnneeScolaire) . "," .
 			"     ID_ECOLE = {$nIdEcole}".
 			" WHERE CLASSE_ID = {$nClasseId}";
 		Database::execute($sQuery);
@@ -95,14 +95,14 @@ switch(strtolower($sAction))
 		Database::execute($sQuery);
 
 		// Rechargement
-		header("Location: ?page=classes&mode=edit&classe_id={$nClasseId}");
+		header("Location: ?page=classes");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
-		
+
 		// Rechargement
 		header("Location: ?page=classes");
 		return;
@@ -133,5 +133,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=classes&mode=edit&classe_id={$nClasseId}");
 return;
-
-?>

@@ -51,15 +51,15 @@ switch(strtolower($sAction))
 	// ajoute l'eleve
 	case 'ajouter':
 		if($objForm->hasError() == true) break;
-		// insertion de l'eleve dans la table		
+		// insertion de l'eleve dans la table
 		$sQuery =
 			"INSERT INTO EVALUATIONS_INDIVIDUELLES (" .
 			"	EVAL_IND_COMMENTAIRE, " .
 			"   ID_EVAL_COL, ID_ELEVE, ID_NOTE, ID_COMPETENCE " .
 			")" .
 			"VALUES(" .
-				Database::prepareString($sEvalIndCommentaire) . "," . 
-				"{$nIdEvalCol}, {$nIdEleve}, {$nIdNote}, {$nIdCompetence}" . 
+				Database::prepareString($sEvalIndCommentaire) . "," .
+				"{$nIdEvalCol}, {$nIdEleve}, {$nIdNote}, {$nIdCompetence}" .
 			")";
 		Database::execute($sQuery);
 
@@ -67,7 +67,7 @@ switch(strtolower($sAction))
 		header("Location: ?page=evaluations_individuelles&mode=add&ideval={$nIdEvalCol}");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
@@ -80,7 +80,7 @@ switch(strtolower($sAction))
 	// ----------
 	default:
 		$objForm->clearError();
-		
+
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
 
@@ -102,5 +102,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=evaluations_individuelles&mode=add");
 return;
-
-?>

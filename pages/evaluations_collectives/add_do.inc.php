@@ -105,5 +105,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=evaluations_collectives&mode=add");
 return;
-
-?>

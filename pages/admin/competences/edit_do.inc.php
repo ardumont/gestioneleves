@@ -47,14 +47,14 @@ switch(strtolower($sAction))
 		Database::execute($sQuery);
 
 		// Rechargement
-		header("Location: ?page=competences&mode=edit&competence_id={$nCompetenceId}&matiere_id={$nMatiereId}");
+		header("Location: ?page=competences");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
-		
+
 		// Rechargement
 		header("Location: ?page=competences");
 		return;
@@ -85,4 +85,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=competences&mode=edit&competence_id={$nCompetenceId}&matiere_id={$nMatiereId}");
 return;
-?>

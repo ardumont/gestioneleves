@@ -81,7 +81,7 @@ ________EOQ;
 		Database::execute($sQuery);
 
 		// Rechargement
-		header("Location: ?page=professeurs&mode=edit&professeur_id={$nProfesseurId}");
+		header("Location: ?page=professeurs");
 		return;
 	break;
 

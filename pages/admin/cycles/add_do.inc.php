@@ -27,11 +27,11 @@ switch(strtolower($sAction))
 	case 'ajouter':
 		if($objForm->hasError() == true) break;
 
-		// insertion du nouveau cycle		
+		// insertion du nouveau cycle
 		$sQuery =
 			"INSERT INTO CYCLES(CYCLE_NOM) " .
 			"VALUE(" .
-				Database::prepareString($sCycleNom) .  
+				Database::prepareString($sCycleNom) .
 			")";
 		Database::execute($sQuery);
 
@@ -39,7 +39,7 @@ switch(strtolower($sAction))
 		header("Location: ?page=cycles&mode=add");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
@@ -52,7 +52,7 @@ switch(strtolower($sAction))
 	// ----------
 	default:
 		$objForm->clearError();
-		
+
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
 
@@ -74,5 +74,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=cycles&mode=add");
 return;
-
-?>

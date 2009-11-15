@@ -55,18 +55,18 @@ switch(strtolower($sAction))
 	// ajoute l'eleve
 	case 'ajouter':
 		if($objForm->hasError() == true) break;
-		// insertion de l'eleve dans la table		
+		// insertion de l'eleve dans la table
 		$sQuery =
 			"INSERT INTO CLASSES (CLASSE_NOM, CLASSE_ANNEE_SCOLAIRE, ID_ECOLE)" .
 			"VALUES(" .
-				Database::prepareString($sClasseNom) . "," . 
-				Database::prepareString($sClasseAnneeScolaire) . "," . 
+				Database::prepareString($sClasseNom) . "," .
+				Database::prepareString($sClasseAnneeScolaire) . "," .
 				$nIdEcole .
 			")";
 		Database::execute($sQuery);
 
 		// recupere l'id de la classe nouvellement inseree
-		$sQuery = 
+		$sQuery =
 			" SELECT MAX(CLASSE_ID) " .
 			" FROM CLASSES";
 		$nId = Database::fetchOneValue($sQuery);
@@ -89,11 +89,11 @@ switch(strtolower($sAction))
 			")";
 		Database::execute($sQuery);
 
-		// rechargement de la liste des eleves
+		// rechargement de la liste des classes
 		header("Location: ?page=classes&mode=add");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
@@ -106,7 +106,7 @@ switch(strtolower($sAction))
 	// ----------
 	default:
 		$objForm->clearError();
-		
+
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
 
@@ -128,5 +128,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=classes&mode=add");
 return;
-
-?>

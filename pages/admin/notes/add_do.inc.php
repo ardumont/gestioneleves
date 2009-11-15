@@ -42,7 +42,7 @@ switch(strtolower($sAction))
 	case 'ajouter':
 		if($objForm->hasError() == true) break;
 
-		// insertion de la nouvelle periode		
+		// insertion de la nouvelle periode
 		$sQuery =
 			"INSERT INTO NOTES(NOTE_NOM, NOTE_LABEL, NOTE_NOTE) " .
 			"VALUE(" .
@@ -56,7 +56,7 @@ switch(strtolower($sAction))
 		header("Location: ?page=notes&mode=add");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
@@ -69,7 +69,7 @@ switch(strtolower($sAction))
 	// ----------
 	default:
 		$objForm->clearError();
-		
+
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
 
@@ -91,5 +91,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=notes&mode=add");
 return;
-
-?>

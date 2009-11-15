@@ -38,7 +38,7 @@ switch(strtolower($sAction))
 		header("Location: ?page=cycles");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
@@ -73,4 +73,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=cycles");
 return;
-?>

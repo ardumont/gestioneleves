@@ -48,20 +48,20 @@ switch(strtolower($sAction))
 		$sQuery =
 			"UPDATE ELEVES" .
 			" SET ELEVE_NOM = ".Database::prepareString($sEleveNom) . "," .
-			"     ELEVE_DATE_NAISSANCE = STR_TO_DATE(" . Database::prepareString($sEleveDateNaissance) . ", '%d/%m/%Y')," . 
+			"     ELEVE_DATE_NAISSANCE = STR_TO_DATE(" . Database::prepareString($sEleveDateNaissance) . ", '%d/%m/%Y')," .
 			"     ELEVE_ACTIF = {$bEleveActif}".
 			" WHERE ELEVE_ID = {$nEleveId}";
 		Database::execute($sQuery);
 
 		// Rechargement
-		header("Location: ?page=eleves&mode=edit&eleve_id={$nEleveId}");
+		header("Location: ?page=eleves");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
-		
+
 		// Rechargement
 		header("Location: ?page=eleves");
 		return;
@@ -92,5 +92,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=eleves&mode=edit&eleve_id={$nEleveId}");
 return;
-
-?>

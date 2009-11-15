@@ -47,21 +47,21 @@ switch(strtolower($sAction))
 			" WHERE ID_ELEVE = {$nEleveId} ";
 		$aEleves = Database::fetchArray($sQuery);
 
-		// s'il n'appartient pas a d'autres classes (donc aucun resultat 
+		// s'il n'appartient pas a d'autres classes (donc aucun resultat
 		// pour la requete precedente), on le supprime de la base
 		if(count($aEleves) <= 0)
 		{
 			$sQuery =
 				"DELETE FROM ELEVES " .
 				" WHERE ELEVE_ID = {$nEleveId} ";
-			Database::execute($sQuery);		
+			Database::execute($sQuery);
 		}
 
 		// Rechargement
 		header("Location: ?page=eleves&classe_id={$nClasseId}");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
@@ -96,4 +96,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=eleves&classe_id={$nClasseId}");
 return;
-?>

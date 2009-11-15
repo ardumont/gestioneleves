@@ -43,7 +43,7 @@ switch(strtolower($sAction))
 		header("Location: ?page=eleves&classe_id={$nClasseId}");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objFormEleve->clearError();
@@ -78,4 +78,3 @@ Message::addErrorFromFormValidation($objFormEleve->getError());
 // Rechargement
 header("Location: ?page=eleves&classe_id={$nClasseId}");
 return;
-?>

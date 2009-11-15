@@ -51,14 +51,14 @@ switch(strtolower($sAction))
 		$sQuery =
 			"UPDATE EVALUATIONS_COLLECTIVES " .
 			" SET EVAL_COL_NOM = ".Database::prepareString($sEvalColNom) . "," .
-			"     EVAL_COL_DATE = STR_TO_DATE(" . Database::prepareString($sEvalColDate) . ", '%d/%m/%Y')," . 
+			"     EVAL_COL_DATE = STR_TO_DATE(" . Database::prepareString($sEvalColDate) . ", '%d/%m/%Y')," .
 			"     EVAL_COL_DESCRIPTION = ".Database::prepareString($sEvalColDescription) . "," .
 			"     ID_PERIODE = {$nPeriodeId} " .
 			" WHERE EVAL_COL_ID = {$nEvalColId}";
 		Database::execute($sQuery);
 
 		// Rechargement
-		header("Location: ?page=evaluations_collectives&mode=edit&eval_col_id={$nEvalColId}");
+		header("Location: ?page=evaluations_collectives");
 		return;
 	break;
 
@@ -96,4 +96,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=evaluations_collectives&mode=edit&eval_col_id={$nEvalColId}");
 return;
-?>

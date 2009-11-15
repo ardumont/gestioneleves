@@ -36,7 +36,7 @@ switch(strtolower($sAction))
 		header("Location: ?page=evaluations_individuelles");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
@@ -71,4 +71,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=evaluations_individuelles");
 return;
-?>

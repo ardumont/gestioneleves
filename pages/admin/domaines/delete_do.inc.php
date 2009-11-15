@@ -37,7 +37,7 @@ switch(strtolower($sAction))
 		header("Location: ?page=domaines");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
@@ -72,4 +72,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=domaines");
 return;
-?>

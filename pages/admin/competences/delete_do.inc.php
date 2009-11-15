@@ -44,7 +44,7 @@ switch(strtolower($sAction))
 		header("Location: ?page=competences");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
@@ -79,4 +79,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=competences");
 return;
-?>

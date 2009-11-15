@@ -50,14 +50,14 @@ switch(strtolower($sAction))
 		Database::execute($sQuery);
 
 		// Rechargement
-		header("Location: ?page=matieres&mode=edit&matiere_id={$nMatiereId}");
+		header("Location: ?page=matieres");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
-		
+
 		// Rechargement
 		header("Location: ?page=matieres");
 		return;
@@ -88,4 +88,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=matieres&mode=edit&matiere_id={$nMatiereId}");
 return;
-?>

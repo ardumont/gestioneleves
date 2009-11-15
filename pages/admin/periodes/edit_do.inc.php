@@ -54,19 +54,19 @@ switch(strtolower($sAction))
 			"UPDATE PERIODES " .
 			" SET PERIODE_NOM = " . Database::prepareString($sPeriodeNom) . "," .
 			"     PERIODE_DATE_DEBUT = " . Database::prepareString($sPeriodeDateDebut) . "," .
-			"     PERIODE_DATE_FIN = " . Database::prepareString($sPeriodeDateFin) .			
+			"     PERIODE_DATE_FIN = " . Database::prepareString($sPeriodeDateFin) .
 			" WHERE PERIODE_ID = {$nPeriodeId}";
 		Database::execute($sQuery);
 
 		// Rechargement
-		header("Location: ?page=periodes&mode=edit&periode_id={$nPeriodeId}");
+		header("Location: ?page=periodes");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
-		
+
 		// Rechargement
 		header("Location: ?page=periodes");
 		return;
@@ -97,5 +97,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=periodes&mode=edit&periode_id={$nPeriodeId}");
 return;
-
-?>

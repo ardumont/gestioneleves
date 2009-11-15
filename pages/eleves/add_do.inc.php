@@ -11,7 +11,7 @@ $objForm = new FormValidation();
 
 $sAction = $objForm->getValue('action', $_POST, 'is_string', "");
 
-// si le champ ELEVE_NOM est specifie alors il s'agit d'un ajout d'un nouvel 
+// si le champ ELEVE_NOM est specifie alors il s'agit d'un ajout d'un nouvel
 // via la zone de texte de saisie
 // pas de test de verification a cause du module de recherche
 $sNomEleve = $objForm->getValue('ELEVE_NOM', $_POST, 'is_string');
@@ -79,9 +79,9 @@ switch(strtolower($sAction))
 				// insertion de l'eleve dans la table ELEVES
 				$sQuery =
 					"INSERT INTO ELEVES (ELEVE_NOM, ELEVE_DATE_NAISSANCE)" .
-					"VALUES(" . 
+					"VALUES(" .
 						 Database::prepareString($sNomEleve) . ", " .
-						"STR_TO_DATE(" . Database::prepareString($sEleveDateNaissance) . ", '%d/%m/%Y') " . 
+						"STR_TO_DATE(" . Database::prepareString($sEleveDateNaissance) . ", '%d/%m/%Y') " .
 				")";
 				Database::execute($sQuery);
 
@@ -152,5 +152,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=eleves&mode=add");
 return;
-
-?>

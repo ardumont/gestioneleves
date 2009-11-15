@@ -45,20 +45,20 @@ switch(strtolower($sAction))
 		$sQuery =
 			"UPDATE EVALUATIONS_INDIVIDUELLES " .
 			" SET EVAL_IND_COMMENTAIRE = ".Database::prepareString($sEvalIndCommentaire) . "," .
-			"     ID_COMPETENCE = {$nEvalIndCompetenceId}, " . 
+			"     ID_COMPETENCE = {$nEvalIndCompetenceId}, " .
 			"     ID_NOTE = {$nEvalIndNoteId}".
 			" WHERE EVAL_IND_ID = {$nEvalIndId}";
 		Database::execute($sQuery);
 
 		// Rechargement
-		header("Location: ?page=evaluations_individuelles&mode=edit&eval_ind_id={$nEvalIndId}");
+		header("Location: ?page=evaluations_individuelles");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
-		
+
 		// Rechargement
 		header("Location: ?page=evaluations_individuelles");
 		return;
@@ -89,5 +89,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=evaluations_individuelles&mode=edit&eval_ind_id={$nEvalIndId}");
 return;
-
-?>

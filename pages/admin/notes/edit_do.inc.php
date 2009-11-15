@@ -54,19 +54,19 @@ switch(strtolower($sAction))
 			"UPDATE NOTES " .
 			" SET NOTE_NOM = " . Database::prepareString($sNoteNom) . "," .
 			"     NOTE_LABEL = " . Database::prepareString($sNoteLabel) . "," .
-			"     NOTE_NOTE = " . Database::prepareString($sNoteNote) .			
+			"     NOTE_NOTE = " . Database::prepareString($sNoteNote) .
 			" WHERE NOTE_ID = {$nNoteId}";
 		Database::execute($sQuery);
 
 		// Rechargement
-		header("Location: ?page=notes&mode=edit&note_id={$nNoteId}");
+		header("Location: ?page=notes");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
-		
+
 		// Rechargement
 		header("Location: ?page=notes");
 		return;
@@ -97,5 +97,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=notes&mode=edit&note_id={$nNoteId}");
 return;
-
-?>

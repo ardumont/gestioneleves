@@ -34,12 +34,12 @@ switch(strtolower($sAction))
 	// ajoute l'eleve
 	case 'ajouter':
 		if($objForm->hasError() == true) break;
-		// insertion de l'eleve dans la table		
+		// insertion de l'eleve dans la table
 		$sQuery =
 			"INSERT INTO MATIERES (MATIERE_NOM, ID_DOMAINE)" .
 			"VALUES(" .
-				Database::prepareString($sMatiereNom) . "," . 
-				$nIdDomaine . 
+				Database::prepareString($sMatiereNom) . "," .
+				$nIdDomaine .
 			")";
 		Database::execute($sQuery);
 
@@ -47,7 +47,7 @@ switch(strtolower($sAction))
 		header("Location: ?page=matieres&mode=add");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
@@ -82,5 +82,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=matieres&mode=add");
 return;
-
-?>

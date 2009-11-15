@@ -34,12 +34,12 @@ switch(strtolower($sAction))
 	case 'ajouter':
 		if($objForm->hasError() == true) break;
 
-		// insertion du niveau		
+		// insertion du niveau
 		$sQuery =
 			"INSERT INTO NIVEAUX(NIVEAU_NOM, ID_CYCLE)" .
 			"VALUES(" .
-				Database::prepareString($sNiveauNom) . "," . 
-				$nIdCycle . 
+				Database::prepareString($sNiveauNom) . "," .
+				$nIdCycle .
 			")";
 		Database::execute($sQuery);
 
@@ -47,7 +47,7 @@ switch(strtolower($sAction))
 		header("Location: ?page=niveaux&mode=add");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
@@ -82,5 +82,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=niveaux&mode=add");
 return;
-
-?>

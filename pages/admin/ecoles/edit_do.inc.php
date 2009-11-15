@@ -61,7 +61,7 @@ switch(strtolower($sAction))
 		Database::execute($sQuery);
 
 		// Rechargement
-		header("Location: ?page=ecoles&mode=edit&ecole_id={$nEcoleId}");
+		header("Location: ?page=ecoles");
 		return;
 	break;
 

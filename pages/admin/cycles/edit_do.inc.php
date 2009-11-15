@@ -38,19 +38,19 @@ switch(strtolower($sAction))
 		// mise a jour du cycle
 		$sQuery =
 			"UPDATE CYCLES" .
-			" SET CYCLE_NOM = ".Database::prepareString($sCycleNom) . 
+			" SET CYCLE_NOM = ".Database::prepareString($sCycleNom) .
 			" WHERE CYCLE_ID = {$nCycleId}";
 		Database::execute($sQuery);
 
 		// Rechargement
-		header("Location: ?page=cycles&mode=edit&cycle_id={$nCycleId}");
+		header("Location: ?page=cycles");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
-		
+
 		// Rechargement
 		header("Location: ?page=cycles");
 		return;
@@ -81,5 +81,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=cycles&mode=edit&cycle_id={$nCycleId}");
 return;
-
-?>

@@ -50,14 +50,14 @@ switch(strtolower($sAction))
 		Database::execute($sQuery);
 
 		// Rechargement
-		header("Location: ?page=domaines&mode=edit&domaine_id={$nDomaineId}");
+		header("Location: ?page=domaines");
 		return;
 	break;
-	
+
 	// ----------
 	case 'annuler':
 		$objForm->clearError();
-		
+
 		// Rechargement
 		header("Location: ?page=domaines");
 		return;
@@ -88,5 +88,3 @@ Message::addErrorFromFormValidation($objForm->getError());
 // Rechargement
 header("Location: ?page=domaines&mode=edit&domaine_id={$nDomaineId}");
 return;
-
-?>
