@@ -26,7 +26,6 @@ function globalDatabaseErrorHandler($aError)
 
 	// ===== Le message pour l'ecran =====
 
-
 	$s_StopErrorHandler = false;
 }
 
@@ -75,17 +74,16 @@ require_once("config/main.conf.php");
 // ===== Fichier de configuration d'export =====
 require_once("config/export.conf.php");
 
-// ===== Les autres fichiers de configurations =====
-require_once(PATH_CONFIG."/database.conf.php");
+// Les autres fichiers de configurations
+require_once("config/database.conf.php");
+require_once("config/constantes.conf.php");
 
 // ===== Les librairies et les classes =====
+
 require_once(PATH_PHP_LIB."/utils.lib.php");
 require_once(PATH_PHP_LIB."/database.class.php");
 require_once(PATH_PHP_LIB."/formvalidation.class.php");
 require_once(PATH_PHP_LIB."/message.class.php");
-
-require_once(PATH_ROOT."/libraries/metier/project.class.php");
-require_once(PATH_ROOT."/libraries/metier/task.class.php");
 
 // ===== Les gestionnaires d'erreurs =====
 set_error_handler("globalScriptErrorHandler");
@@ -115,11 +113,7 @@ Message::loadFromSession($_SESSION['ERROR_MESSAGE']);
 $aMenuPage = array
 (
 	// ----- General -----
-	'export'                 => "special/export.inc.php",
-	'export_detail'          => "special/export_detail.inc.php",
-	'export_all'             => "special/export_all.inc.php",
-	'export_projets'         => "special/export_projets.inc.php",
-	'export_projets_details' => "special/export_projets_details.inc.php",
+	'export_livret_eleve' => "special/export_livret_eleve.inc.php",
 );
 
 //==============================================================================
@@ -136,14 +130,14 @@ $sMode   = $objFormNavigation->getValue('mode', $_GET, 'is_string', "");
 // Actions du formulaire
 //==============================================================================
 
-// ===== Recherche de la page e afficher =====
+// ===== Recherche de la page à afficher =====
 $sPageName = "error404.inc.php";
+
 
 if(array_key_exists($sPageId, $aMenuPage) == true)
 {
-	// Il faut etre identifie pour voir une page autre que 'login_do' ou 'home'
-	if(($sPageId != "login_do") && ($sPageId != "home")
-	&& (isset($_SESSION['user_id']) != true))
+	// Il faut étre identifié pour voir une page autre que 'login_do' ou 'home'
+	if(($sPageId != "login_do") && ($sPageId != "home") && (isset($_SESSION['PROFESSEUR_ID']) != true))
 	{
 		$sPageId = "home";
 	}
@@ -164,8 +158,7 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 	}
 
 	// ===== Le fichier existe ? =====
-	if((file_exists(PATH_PAGES."/".$sPageName) == false)
-	|| (is_file(PATH_PAGES."/".$sPageName) == false))
+	if((file_exists(PATH_PAGES."/".$sPageName) == false) || (is_file(PATH_PAGES."/".$sPageName) == false))
 	{
 		$sPageName = "error404.inc.php";
 	}

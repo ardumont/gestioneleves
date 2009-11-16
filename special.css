@@ -1,0 +1,72 @@
+body
+{
+	font-size: 1em;
+	font-family: cursive;
+}
+
+#page_1
+{
+	background-color: #A9D0F5;
+	width: 1024px;
+	height: 768px;
+	border: 1px solid black;
+	text-align: center;
+}
+
+#titre1
+{
+	font-weight: bold;
+	font-size: 3em;
+}
+
+#titre2
+{
+	font-weight: bold;
+	font-size: 2em;		
+}
+
+/* Présentation du cycle */
+#titre3
+{
+	margin-left: 362px; /* (1024-300) / 2*/
+	border: 1px solid black;
+	width: 300px;
+	height: 200px;
+	font-weight: bold;
+	font-size: 2.5em;		
+}
+
+#titre4
+{
+	font-weight: bold;
+	font-size: 2.75em;
+}
+
+#titre5
+{
+	font-weight: bold;
+	font-size: 1.1em;		
+}
+
+#titre6
+{
+	margin-left: 362px; /* (1024-300) / 2*/
+	width: 300px;
+	height: 400px; 
+	font-size: 1em;
+	text-align: left;
+}
+
+#struct_identite_eleve
+{
+	margin-left: 312px;/* (1024 - 400) / 2*/
+	border: 1px solid black; 
+	width: 300px;
+	height: 65px;
+	text-align: center;
+}
+
+#identite_eleve, #classe_eleve
+{
+	text-align: left;
+}

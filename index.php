@@ -202,9 +202,10 @@ $aMenuPage = array
 		'edit_do'           => "profils/edit_do.inc.php",
 	),
 
-	// ----- Carnets -----
-	'carnets' => array(
-		
+	// ----- Livrets -----
+	'livrets' => array(
+		''        => "livrets/list.inc.php",
+		'list_do' => "livrets/list_do.inc.php",
 	),
 );
 
@@ -228,8 +229,7 @@ $sPageName = "error404.inc.php";
 if(array_key_exists($sPageId, $aMenuPage) == true)
 {
 	// Il faut étre identifié pour voir une page autre que 'login_do' ou 'home'
-	if(($sPageId != "login_do") && ($sPageId != "home")
-	&& (isset($_SESSION['PROFESSEUR_ID']) != true))
+	if(($sPageId != "login_do") && ($sPageId != "home") && (isset($_SESSION['PROFESSEUR_ID']) != true))
 	{
 		$sPageId = "home";
 	}
@@ -250,8 +250,7 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 	}
 
 	// ===== Le fichier existe ? =====
-	if((file_exists(PATH_PAGES."/".$sPageName) == false)
-	|| (is_file(PATH_PAGES."/".$sPageName) == false))
+	if((file_exists(PATH_PAGES."/".$sPageName) == false) || (is_file(PATH_PAGES."/".$sPageName) == false))
 	{
 		$sPageName = "error404.inc.php";
 	}
@@ -278,9 +277,6 @@ $aUsers = Database::fetchColumnWithKey($sQuery);
 $sAgent = $_SERVER['HTTP_USER_AGENT'];
 
 // ===== Lancer l'install ? =====
-
-// TODO : Enlever le test de l'existence de la colonne dès que l'on enlève
-// la compatibilité avec la v3.2.0
 
 $bNeedInstall = false;
 
@@ -447,6 +443,8 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 				<h4><a href="?page=evaluations_collectives"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
 			<h3>Evaluations individuelles</h3>
 				<h4><a href="?page=evaluations_individuelles"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+			<h3>Livrets</h3>
+				<h4><a href="?page=livrets"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
 			<h3>Aide/Info</h3>
 				<h4><a href="?page=contributeurs"><img src="<?php echo(URL_ICONS_16X16); ?>/contributeur.png"/>Contributeurs</a></h4>
 				<h4><a href="admin.php"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Page d'administration</a></h4>
