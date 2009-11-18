@@ -61,7 +61,6 @@ $aPeriodes = Database::fetchArray($sQuery);
 ?>
 <h1>Génération de livret périodique</h1>
 
-<?php debug($_SESSION['ERROR_MESSAGE']);?>
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
