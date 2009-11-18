@@ -113,7 +113,8 @@ Message::loadFromSession($_SESSION['ERROR_MESSAGE']);
 $aMenuPage = array
 (
 	// ----- General -----
-	'export_livret_eleve' => "special/export_livret_eleve.inc.php",
+	'export_livret_eleve_annuel' => "special/export_livret_eleve_annuel.inc.php",
+	'export_livret_eleve_period' => "special/export_livret_eleve_period.inc.php",
 );
 
 //==============================================================================

@@ -6,19 +6,17 @@ body
 
 @page
 {
-	size:21.0cm 29.7cm;
-	margin-top:1.7cm;
-	margin-bottom:1.4cm;
+	size: 21.0cm 29.7cm;
+	margin-top: 1.7cm;
+	margin-bottom: 1.4cm;
 	margin-left: 2cm;
 	margin-right: 2cm
 }
 
 .page_1
 {
-	background-color: #A9D0F5;
 	width: 1024px;
 	height: 768px;
-	border: 1px solid black;
 	text-align: center;
 }
 

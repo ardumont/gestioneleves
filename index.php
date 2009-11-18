@@ -204,8 +204,8 @@ $aMenuPage = array
 
 	// ----- Livrets -----
 	'livrets' => array(
-		''        => "livrets/list.inc.php",
-		'list_do' => "livrets/list_do.inc.php",
+		'livret_annuel' => "livrets/livret_annuel.inc.php",
+		'livret_period' => "livrets/livret_period.inc.php",
 	),
 );
 
@@ -257,11 +257,13 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 }
 
 // ===== La liste des utilisateurs (pour la combobox) =====
-$sQuery = "SELECT" .
-		  "  PROFESSEUR_ID," .
-		  "  PROFESSEUR_NOM" .
-		  " FROM PROFESSEURS" .
-		  " ORDER BY PROFESSEUR_NOM";
+$sQuery = <<< EOQ
+	SELECT
+		PROFESSEUR_ID,
+		PROFESSEUR_NOM
+	FROM PROFESSEURS
+	ORDER BY PROFESSEUR_NOM
+EOQ;
 $aUsers = Database::fetchColumnWithKey($sQuery);
 // $aUsers[Id] = Nom
 
@@ -444,7 +446,8 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 			<h3>Evaluations individuelles</h3>
 				<h4><a href="?page=evaluations_individuelles"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
 			<h3>Livrets</h3>
-				<h4><a href="?page=livrets"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h4><a href="?page=livrets&amp;mode=livret_annuel"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Livret annuel</a></h4>
+				<h4><a href="?page=livrets&amp;mode=livret_period"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Livret périodique</a></h4>
 			<h3>Aide/Info</h3>
 				<h4><a href="?page=contributeurs"><img src="<?php echo(URL_ICONS_16X16); ?>/contributeur.png"/>Contributeurs</a></h4>
 				<h4><a href="admin.php"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Page d'administration</a></h4>
