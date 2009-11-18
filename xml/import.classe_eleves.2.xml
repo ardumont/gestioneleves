@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classe cycle="II" niveau="CP" nom="cp1b" professeur="Christelle Héritier" annee_scolaire="2008-2009">
+	<ecole nom="Edouard Vaillant" ville="Blanc-Mesnil" departement="93150" />
+	<eleve nom="CARMEL Sally" date_naissance="07/10/2002" />
+</classe>
