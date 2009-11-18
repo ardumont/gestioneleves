@@ -4,7 +4,16 @@ body
 	font-family: cursive;
 }
 
-#page_1
+@page
+{
+	size:21.0cm 29.7cm;
+	margin-top:1.7cm;
+	margin-bottom:1.4cm;
+	margin-left: 2cm;
+	margin-right: 2cm
+}
+
+.page_1
 {
 	background-color: #A9D0F5;
 	width: 1024px;
@@ -13,22 +22,22 @@ body
 	text-align: center;
 }
 
-#titre1
+.titre1
 {
 	font-weight: bold;
 	font-size: 3em;
 }
 
-#titre2
+.titre2
 {
 	font-weight: bold;
 	font-size: 2em;		
 }
 
 /* Présentation du cycle */
-#titre3
+.titre3
 {
-	margin-left: 362px; /* (1024-300) / 2*/
+	margin-left: 362px; /* (1024-300) / 2 */
 	border: 1px solid black;
 	width: 300px;
 	height: 200px;
@@ -36,37 +45,73 @@ body
 	font-size: 2.5em;		
 }
 
-#titre4
+.titre4
 {
 	font-weight: bold;
 	font-size: 2.75em;
 }
 
-#titre5
+.titre5
 {
 	font-weight: bold;
 	font-size: 1.1em;		
 }
 
-#titre6
+.titre6
 {
-	margin-left: 362px; /* (1024-300) / 2*/
+	margin-left: 362px; /* (1024-300) / 2 */
 	width: 300px;
 	height: 400px; 
 	font-size: 1em;
 	text-align: left;
 }
 
-#struct_identite_eleve
+.struct_identite_eleve
 {
-	margin-left: 312px;/* (1024 - 400) / 2*/
+	margin-left: 312px;/* (1024 - 400) / 2 */
 	border: 1px solid black; 
 	width: 300px;
 	height: 65px;
 	text-align: center;
 }
 
-#identite_eleve, #classe_eleve
+.identite_eleve, .classe_eleve
 {
 	text-align: left;
+}
+
+.page_n
+{
+	width: 1024px;
+	height: 768px;
+	border: 1px solid black;
+	text-align: center;
+}
+
+table.entete_n tr td
+{
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+
+table.display tr td
+{
+	border-collapse: collapse;
+	border: 1px solid black;
+	text-align: left;
+}
+
+.colonne1
+{
+	background-color: #A4A4A4;
+}
+
+.colonne2
+{
+	background-color: #BDBDBD;
+}
+
+.colonne3
+{
+	background-color: #D8D8D8;
 }
