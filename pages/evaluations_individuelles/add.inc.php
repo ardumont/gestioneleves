@@ -6,17 +6,17 @@
 // recupere l'annee courante
 $nYear = strftime("%Y",time());
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
 // au retour de la soumission du formulaire de recherche
-$nEvalColId = $objForm->getValue('EVAL_COL_ID', $_POST, 'convert_int');
+$nEvalColId = $oForm->getValue('EVAL_COL_ID', $_POST, 'convert_int');
 
 // si on ne trouve pas la variable dans le formulaire post
 // on peux eventuellement la trouver dans le formulaire get
 // en cas de retour de la page d'ajout d'une evaluation individuelle
 if($nEvalColId == null)
 {
-	$nEvalColId = $objForm->getValue('ideval', $_GET, 'convert_int');
+	$nEvalColId = $oForm->getValue('ideval', $_GET, 'convert_int');
 }
 
 //==============================================================================
@@ -32,15 +32,18 @@ if($nEvalColId == null)
 //==============================================================================
 
 // ===== La liste des evaluations collectives a ce jour pour le select =====
-$sQuery = "SELECT" .
-		  "  EVAL_COL_ID, " .
-		  "  EVAL_COL_NOM, " .
-		  "  EVAL_COL_DESCRIPTION, " .
-		  "  CLASSE_NOM, " .
-		  "  CLASSE_ANNEE_SCOLAIRE " .
-		  " FROM EVALUATIONS_COLLECTIVES, CLASSES " .
-		  " WHERE EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID " .
-		  " ORDER BY EVAL_COL_DATE ASC";
+$sQuery = <<< EOQ
+	SELECT
+		EVAL_COL_ID,
+		EVAL_COL_NOM,
+		EVAL_COL_DESCRIPTION,
+		CLASSE_NOM,
+		CLASSE_ANNEE_SCOLAIRE
+	FROM EVALUATIONS_COLLECTIVES
+		INNER JOIN CLASSES
+			ON EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID
+	ORDER BY EVAL_COL_DATE ASC
+EOQ;
 $aEvalCols = Database::fetchArray($sQuery);
 // $aEvalCols[][COLONNE] = VALEUR
 
@@ -54,80 +57,107 @@ if($nEvalColId == null && $aEvalCols != false)
 if($nEvalColId != null)
 {
 	// ===== detail de l'evaluation collective =====
-	$sQuery = "SELECT" .
-			  "  EVAL_COL_ID, " .
-			  "  EVAL_COL_NOM, " .
-			  "  EVAL_COL_DESCRIPTION, " .
-			  "  CLASSE_NOM, " .
-			  "  CLASSE_ANNEE_SCOLAIRE, " .
-			  "  NIVEAU_NOM," .
-			  "  NIVEAU_ID " .
-			  " FROM EVALUATIONS_COLLECTIVES, CLASSES, NIVEAU_CLASSE, NIVEAUX " .
-			  " WHERE EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID " .
-			  " AND CLASSES.CLASSE_ID = NIVEAU_CLASSE.ID_CLASSE ".
-			  " AND NIVEAU_CLASSE.ID_NIVEAU = NIVEAUX.NIVEAU_ID " .
-			  " AND EVALUATIONS_COLLECTIVES.EVAL_COL_ID = {$nEvalColId}";
-	$aEvalCollective= Database::fetchOneRow($sQuery);
+	$sQuery = <<< ____EOQ
+		SELECT
+			EVAL_COL_ID,
+			EVAL_COL_NOM,
+			EVAL_COL_DESCRIPTION,
+			CLASSE_NOM,
+			CLASSE_ANNEE_SCOLAIRE,
+			NIVEAU_NOM,
+			NIVEAU_ID
+		FROM EVALUATIONS_COLLECTIVES
+			INNER JOIN CLASSES
+				ON EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID
+			INNER JOIN NIVEAU_CLASSE
+				ON CLASSES.CLASSE_ID = NIVEAU_CLASSE.ID_CLASSE
+			INNER JOIN NIVEAUX
+				ON NIVEAU_CLASSE.ID_NIVEAU = NIVEAUX.NIVEAU_ID
+		WHERE EVALUATIONS_COLLECTIVES.EVAL_COL_ID = {$nEvalColId}
+____EOQ;
+	$aEvalCollective = Database::fetchOneRow($sQuery);
 	// $aEvalCollective[COLONNE] = VALEUR
 
 	// ===== La liste des competences =====
-	$sQuery = "SELECT" .
-			  "  COMPETENCE_ID, " .
-			  "  MATIERE_NOM, " .
-			  "  COMPETENCE_NOM " .
-			  " FROM NIVEAUX, CYCLES, DOMAINES, MATIERES, COMPETENCES " .
-			  " WHERE NIVEAUX.ID_CYCLE = CYCLES.CYCLE_ID " .
-			  " AND CYCLES.CYCLE_ID = DOMAINES.ID_CYCLE " .
-			  " AND DOMAINES.DOMAINE_ID = MATIERES.ID_DOMAINE " .
-			  " AND MATIERES.MATIERE_ID = COMPETENCES.ID_MATIERE " .
-			  " AND NIVEAUX.NIVEAU_ID = " .$aEvalCollective['NIVEAU_ID'] .
-			  " ORDER BY MATIERE_NOM ASC, COMPETENCE_NOM ASC";
+	$sQuery = <<< ____EOQ
+		SELECT
+			COMPETENCE_ID,
+			MATIERE_NOM,
+			COMPETENCE_NOM
+		FROM NIVEAUX
+			INNER JOIN CYCLES
+				ON NIVEAUX.ID_CYCLE = CYCLES.CYCLE_ID
+			INNER JOIN DOMAINES
+				ON CYCLES.CYCLE_ID = DOMAINES.ID_CYCLE
+			INNER JOIN MATIERES
+				ON DOMAINES.DOMAINE_ID = MATIERES.ID_DOMAINE
+			INNER JOIN COMPETENCES
+				ON MATIERES.MATIERE_ID = COMPETENCES.ID_MATIERE
+		WHERE NIVEAUX.NIVEAU_ID = {$aEvalCollective['NIVEAU_ID']}
+		ORDER BY MATIERE_NOM ASC, COMPETENCE_NOM ASC
+____EOQ;
 	$aCompetences = Database::fetchArray($sQuery);
 	// $aCompetences[][COLONNE] = VALEUR
 
 	// ===== La liste des eleves =====
-	$sQuery = "SELECT" .
-			  "  ELEVE_ID," .
-			  "  ELEVE_NOM " .
-			  " FROM EVALUATIONS_COLLECTIVES, CLASSES, ELEVE_CLASSE, ELEVES  " .
-			  " WHERE EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID " .
-			  " AND CLASSES.CLASSE_ID = ELEVE_CLASSE.ID_CLASSE " .
-			  " AND ELEVE_CLASSE.ID_ELEVE = ELEVES.ELEVE_ID " .
-			  " AND EVALUATIONS_COLLECTIVES.EVAL_COL_ID = {$nEvalColId}" .
-			  " ORDER BY ELEVE_NOM ASC";
+	$sQuery = <<< ____EOQ
+		SELECT
+			ELEVE_ID,
+			ELEVE_NOM
+		FROM EVALUATIONS_COLLECTIVES
+			INNER JOIN CLASSES
+				ON EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID
+			INNER JOIN ELEVE_CLASSE
+				ON CLASSES.CLASSE_ID = ELEVE_CLASSE.ID_CLASSE
+			INNER JOIN ELEVES
+				ON ELEVE_CLASSE.ID_ELEVE = ELEVES.ELEVE_ID
+		WHERE EVALUATIONS_COLLECTIVES.EVAL_COL_ID = {$nEvalColId}
+		ORDER BY ELEVE_NOM ASC
+____EOQ;
 	$aEleves = Database::fetchColumnWithKey($sQuery);
 	// $aEleves[ELEVE_ID] = ELEVE_NOM
 
 	// ===== La liste des notes =====
-	$sQuery = "SELECT" .
-			  "  NOTE_ID," .
-			  "  NOTE_NOM " .
-			  " FROM NOTES " .
-			  " ORDER BY NOTE_NOTE DESC";
+	$sQuery = <<< ____EOQ
+		SELECT
+			NOTE_ID,
+			NOTE_NOM
+		FROM NOTES
+		ORDER BY NOTE_NOTE DESC
+____EOQ;
 	$aNotes = Database::fetchColumnWithKey($sQuery);
 	// $aNotes[NOTE_ID] = NOTE_NOM
 
 	// ===== liste des eval. ind. attachees a cette eval. coll. =====
-	$sQuery = "SELECT" .
-			  "  ELEVE_NOM, " .
-			  "  CLASSE_NOM, " .
-			  "  NOTE_NOM, " .
-			  "  EVAL_IND_COMMENTAIRE, " .
-			  "  COMPETENCE_NOM, " .
-			  "  MATIERE_NOM, " .
-			  "  DOMAINE_NOM " .
-			  " FROM EVALUATIONS_INDIVIDUELLES, NOTES, ELEVES, ELEVE_CLASSE, CLASSES, " .
-			  " COMPETENCES, MATIERES, DOMAINES, PROFESSEUR_CLASSE " .
-			  " WHERE EVALUATIONS_INDIVIDUELLES.ID_NOTE = NOTES.NOTE_ID " .
-			  " AND EVALUATIONS_INDIVIDUELLES.ID_ELEVE = ELEVES.ELEVE_ID " .
-			  " AND ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE " .
-			  " AND ELEVE_CLASSE.ID_CLASSE = CLASSES.CLASSE_ID " .
-			  " AND CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE " .
-			  " AND EVALUATIONS_INDIVIDUELLES.ID_COMPETENCE = COMPETENCES.COMPETENCE_ID " .
-			  " AND COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID " .
-			  " AND MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID " .
-			  " AND EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL = {$nEvalColId} " .
-			  " ORDER BY DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC";
+	$sQuery = <<< ____EOQ
+		SELECT
+			ELEVE_NOM,
+			CLASSE_NOM,
+			NOTE_NOM,
+			EVAL_IND_COMMENTAIRE,
+			COMPETENCE_NOM,
+			MATIERE_NOM,
+			DOMAINE_NOM
+		FROM EVALUATIONS_INDIVIDUELLES
+			INNER JOIN NOTES
+				ON EVALUATIONS_INDIVIDUELLES.ID_NOTE = NOTES.NOTE_ID
+			INNER JOIN ELEVES
+				ON EVALUATIONS_INDIVIDUELLES.ID_ELEVE = ELEVES.ELEVE_ID
+			INNER JOIN EVALUATIONS_COLLECTIVES
+				ON EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL = EVALUATIONS_COLLECTIVES.EVAL_COL_ID
+			INNER JOIN CLASSES
+				ON EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID
+			INNER JOIN COMPETENCES
+				ON EVALUATIONS_INDIVIDUELLES.ID_COMPETENCE = COMPETENCES.COMPETENCE_ID
+			INNER JOIN MATIERES
+				ON COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
+			INNER JOIN DOMAINES
+				ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
+			INNER JOIN PROFESSEUR_CLASSE
+				ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
+		WHERE EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL = {$nEvalColId}
+		ORDER BY DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
+____EOQ;
 	$aEvalInds= Database::fetchArray($sQuery);
 	// $aEvalInds[][COLONNE] = VALEUR
 }
