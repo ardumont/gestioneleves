@@ -53,7 +53,7 @@ $aEleves = Database::fetchArray($sQuery);
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Génération de livrets</h1>
+<h1>Génération de livret annuel</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
@@ -67,13 +67,14 @@ $aEleves = Database::fetchArray($sQuery);
 	<caption>Fonctionnement</caption>
 	<tr>
 		<td>
-			Par défaut, cette page permet de générer des livrets pour un élève.<br />
-			Vous sélectionnez la classe et l'élève puis vous lancez la génération du livret.<br />
+			Par défaut, cette page permet de générer un livret annuel (toutes les périodes du cycle de votre classe)
+			pour un élève.<br />
+			Vous sélectionnez l'élève de votre classe puis vous lancez la génération du livret en cliquant sur le bouton <i>Générer</i>.<br />.<br />
 		</td>
 	</tr>
 </table>
 
-<form method="post" action="special.php?page=export_livret_eleve" name="formulaire_list" id="formulaire_list">
+<form method="post" action="special.php?page=export_livret_eleve_annuel" name="formulaire_list" id="formulaire_list">
 	<table class="formulaire">
 		<caption>Critères de sélection</caption>
 		<thead></thead>
@@ -91,7 +92,7 @@ $aEleves = Database::fetchArray($sQuery);
 				</td>
 			</tr>
 			<tr>
-				<td><input type="submit" name="action" value="Rechercher" /></td>
+				<td><input type="submit" name="action" value="Générer" /></td>
 			</tr>
 		</tbody>
 	</table>
