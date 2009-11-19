@@ -62,6 +62,17 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 		<dl>
 			<dt>
 				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+				v1.5.0
+			</dt>
+			<dd>
+				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impresison d'un carnet annuel pour un élève.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impresison d'un carnet périodique pour un élève.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout du manuel du développeur (installation de plateforme, MPD, explication des sources, etc...)</li>
+				</ul>
+			</dd>
+			<dt>
+				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
 				v1.4.0
 			</dt>
 			<dd>
@@ -119,7 +130,7 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 			</dd>
 			<dt>
 				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
-				v1.1.0
+				v1.0.0
 			</dt>
 			<dd>
 				<ul>
