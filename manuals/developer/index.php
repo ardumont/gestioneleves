@@ -41,10 +41,6 @@ $sAgent = $_SERVER['HTTP_USER_AGENT'];
 				<h4><a href="#mpd">Modèle Physique de données</a></h4>
 				<h5>&nbsp;</h5>
 			<h2><img src="../../images/icons/16x16/hhelp.png" alt="" title="Documentations" />Documentations</h2>
-				<h4><a href="../install/index.php"><img src="../../images/icons/16x16/help.png" alt="" title="Manuel d'installation" />Manuel d'installation</a></h4>
-				<h4><a href="../upgrade/index.php"><img src="../../images/icons/16x16/help.png" alt="" title="Manuel de mise à jour" />Manuel de mise à jour</a></h4>
-				<h4><a href="../admin/index.php"><img src="../../images/icons/16x16/help.png" alt="" title="Manuel de l'administrateur" />Manuel de l'admin.</a></h4>
-				<h4><a href="../user/index.php"><img src="../../images/icons/16x16/help.png" alt="" title="Manuel de l'utilisateur" />Manuel de l'utilisateur</a></h4>
 				<h5>&nbsp;</h5>
 		</div>
 		<div id="struct_licence">
