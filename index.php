@@ -98,17 +98,19 @@ require_once("config/main.conf.php");
 require_once("config/constantes.conf.php");
 
 // Les autres fichiers de configurations
-require_once(PATH_CONFIG."/database.conf.php");
-require_once(PATH_CONFIG."/export.conf.php");
+require_once(PATH_CONFIG . "/database.conf.php");
+require_once(PATH_CONFIG . "/export.conf.php");
 
 // ===== Les librairies et les classes =====
 
-require_once(PATH_PHP_LIB."/utils.lib.php");
-require_once(PATH_PHP_LIB."/database.class.php");
-require_once(PATH_PHP_LIB."/formvalidation.class.php");
-require_once(PATH_PHP_LIB."/message.class.php");
+require_once(PATH_PHP_LIB . "/utils.lib.php");
+require_once(PATH_PHP_LIB . "/database.class.php");
+require_once(PATH_PHP_LIB . "/formvalidation.class.php");
+require_once(PATH_PHP_LIB . "/message.class.php");
 
 //require_once(PATH_APP_LIB."/profilmanager.class.php");
+
+require_once(PATH_METIER . "/livret.class.php");
 
 // Le gestionnaire d'erreurs global pour PHP
 set_error_handler("globalScriptErrorHandler");
@@ -206,6 +208,8 @@ $aMenuPage = array
 	'livrets' => array(
 		'livret_annuel' => "livrets/livret_annuel.inc.php",
 		'livret_period' => "livrets/livret_period.inc.php",
+		'recap_annuel'  => "livrets/recap_annuel.inc.php",
+		'recap_period'  => "livrets/recap_period.inc.php",
 	),
 );
 
@@ -316,11 +320,6 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<meta content="Antoine Romain DUMONT" name="author" />
 
-	<link rel="stylesheet" type="text/css" href="default.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="main.css" media="all" />
-	<!--[if IE]>
-	<link rel="stylesheet" type="text/css" href="main-ie.css" media="all" />
-	<! endif -->
 	<!-- calendar stylesheet -->
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo URL_JAVASCRIPT; ?>/jscalendar-1.0/calendar-blue3.css" title="calendar-blue2" />
 	<!-- main calendar program -->
@@ -329,9 +328,25 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/jscalendar-1.0/lang/calendar-en.js"></script>
 	<!-- the following script defines the Calendar.setup helper function, which makes adding a calendar a matter of 1 or 2 lines of code. -->
 	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/jscalendar-1.0/calendar-setup.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="default.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="main.css" media="all" />
+	<!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="main-ie.css" media="all" />
+	<! endif -->
 </head>
 <!-- ================================================== -->
 <body class="<?php echo($sGuiBodyCssClass); ?>">
+	<?php if($bNeedInstall == true): ?>
+	<div id="struct_popup_mask"></div>
+	<div id="struct_popup">
+		<h1>Problème de version</h1>
+		<p>Il semblerait que vous êtes en train d'installer une nouvelle version du Gestionnaire d'élèves<br />
+		car les versions de la base de données et de l'application ne correspondent pas.</p>
+		<p>Afin de pouvoir utiliser cette application, veuillez suivre les indications de l'installeur.<br />
+		<a href="install/">Mise à jour de l'application</a></p>
+	</div>
+	<?php endif; ?>
 	<!-- pour ameliorer l'affichage. -->
 	<script type="text/javascript">
 		/**
@@ -403,7 +418,6 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 		<div id="struct_identity">
 			<?php if(!isset($_SESSION['PROFESSEUR_ID'])): /* utilisateur non connecté */ ?>
 			<h1>Identification</h1>
-			<h4>
 			<form method="post" action="?page=login_do">
 				<table>
 					<tr>
@@ -427,7 +441,6 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 					<input type="submit" name="action" value="Valider" />
 				</div>
 			</form>
-			</h4>
 			<?php else: /* Utilisateur connecté */ ?>
 				<h1><?php echo $_SESSION['PROFESSEUR_NOM']; ?></h1>
 					<h4><a href="?page=profils&amp;mode=edit&amp;professeur_id=<?php echo $_SESSION['PROFESSEUR_ID']; ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/user.png"/>Modification du profil</a></h4>
@@ -446,8 +459,10 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 			<h3>Evaluations individuelles</h3>
 				<h4><a href="?page=evaluations_individuelles"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
 			<h3>Livrets</h3>
-				<h4><a href="?page=livrets&amp;mode=livret_annuel"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Livret annuel</a></h4>
-				<h4><a href="?page=livrets&amp;mode=livret_period"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Livret périodique</a></h4>
+				<h4><a href="?page=livrets&amp;mode=recap_annuel"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif annuel</a></h4>
+				<h4><a href="?page=livrets&amp;mode=livret_annuel"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Impression livret annuel</a></h4>
+				<h4><a href="?page=livrets&amp;mode=recap_period"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif périodique</a></h4>
+				<h4><a href="?page=livrets&amp;mode=livret_period"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Impression périodique</a></h4>
 			<h3>Aide/Info</h3>
 				<h4><a href="?page=contributeurs"><img src="<?php echo(URL_ICONS_16X16); ?>/contributeur.png"/>Contributeurs</a></h4>
 				<h4><a href="admin.php"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Page d'administration</a></h4>

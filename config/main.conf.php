@@ -9,10 +9,11 @@ define('PATH_ROOT', "/home/tony/public_html/gestion_eleves");
 // Les dossiers principaux du site (pas de "/" à la fin).
 define('PATH_CONFIG',  PATH_ROOT."/config");
 define('PATH_PHP_LIB', PATH_ROOT."/libraries/php");
+define('PATH_METIER',  PATH_ROOT."/libraries/metier");
 define('PATH_PAGES',   PATH_ROOT."/pages");
 define('PATH_DATA',    PATH_ROOT."/data");
 define('PATH_LOGS',    PATH_ROOT."/logs");
-define('PATH_XSD',     PATH_ROOT."/xsd");
+define('PATH_XSD',    PATH_ROOT."/xsd");
 
 //==============================================================================
 // URL diverses et variées (pour le client web).
@@ -27,7 +28,7 @@ define('URL_JAVASCRIPT',  URL_ROOT."/libraries/javascript");
 define('URL_ICONS_8X8',   URL_ROOT."/images/icons/8x8");
 define('URL_ICONS_16X16', URL_ROOT."/images/icons/16x16");
 define('URL_ICONS_32X32', URL_ROOT."/images/icons/32x32");
-define('URL_XSD',         URL_ROOT."/xsd");
+define('URL_XSD',      URL_ROOT."/xsd");
 
 //==============================================================================
 // Autres chemins ou URL.

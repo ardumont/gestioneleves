@@ -59,7 +59,7 @@ $aPeriodes = Database::fetchArray($sQuery);
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Génération de livret périodique</h1>
+<h1>Impression de livret périodique</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">

@@ -11,11 +11,6 @@ $sRestrictionAnneeScolaire =
 // Validation du formulaire
 //==============================================================================
 
-$oForm = new FormValidation();
-
-// recuperation des ids de restrictions de recherche
-$nEleveId = $oForm->getValue('ELEVE_ID', $_POST, 'convert_int', -1);
-
 //==============================================================================
 // Actions du formulaire
 //==============================================================================
@@ -53,7 +48,7 @@ $aEleves = Database::fetchArray($sQuery);
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Génération de livret annuel</h1>
+<h1>Impression de livret annuel</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
@@ -86,7 +81,7 @@ $aEleves = Database::fetchArray($sQuery);
 					<select name="eleve_id" onchange="document.getElementById('formulaire_list').submit();">
 						<option value="-1">-- Sélectionner un élève --</option>
 						<?php foreach($aEleves as $aEleve): ?>
-							<option value="<?php echo($aEleve['ELEVE_ID']); ?>"<?php echo($aEleve['ELEVE_ID'] == $nEleveId ? ' selected="selected"' :''); ?>><?php echo($aEleve['CLASSE_ANNEE_SCOLAIRE']. " - " . $aEleve['CLASSE_NOM'] . " - " . $aEleve['ELEVE_NOM']); ?></option>
+							<option value="<?php echo($aEleve['ELEVE_ID']); ?>"><?php echo($aEleve['CLASSE_ANNEE_SCOLAIRE']. " - " . $aEleve['CLASSE_NOM'] . " - " . $aEleve['ELEVE_NOM']); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</td>

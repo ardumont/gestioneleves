@@ -85,6 +85,8 @@ require_once(PATH_PHP_LIB."/database.class.php");
 require_once(PATH_PHP_LIB."/formvalidation.class.php");
 require_once(PATH_PHP_LIB."/message.class.php");
 
+require_once(PATH_METIER . "/livret.class.php");
+
 // ===== Les gestionnaires d'erreurs =====
 set_error_handler("globalScriptErrorHandler");
 Database::setErrorHandler("globalDatabaseErrorHandler");

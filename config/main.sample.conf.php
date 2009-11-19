@@ -9,6 +9,7 @@ define('PATH_ROOT', "XXXXXXXXXX");
 // Les dossiers principaux du site (pas de "/" à la fin).
 define('PATH_CONFIG',  PATH_ROOT."/config");
 define('PATH_PHP_LIB', PATH_ROOT."/libraries/php");
+define('PATH_METIER',  PATH_ROOT."/libraries/metier");
 define('PATH_PAGES',   PATH_ROOT."/pages");
 define('PATH_DATA',    PATH_ROOT."/data");
 define('PATH_LOGS',    PATH_ROOT."/logs");

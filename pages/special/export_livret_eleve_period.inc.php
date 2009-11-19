@@ -18,13 +18,13 @@ $oForm->read('eleve_id', $_POST);
 $oForm->testError0(null, 'exist',       "Il manque le champ eleve_id !");
 $oForm->testError0(null, 'blank',       "Il manque l'id de l'élève !");
 $oForm->testError0(null, 'convert_int', "L'identifiant de l'élève doit être un entier !");
-$nEleveId = $oForm->get(null);
+$nEleveId = $oForm->get(null, -1);
 
 $oForm->read('periode_id', $_POST);
 $oForm->testError0(null, 'exist',       "Il manque le champ periode_id !");
 $oForm->testError0(null, 'blank',       "Il manque l'id de la période !");
 $oForm->testError0(null, 'convert_int', "L'identifiant de la période doit être un entier !");
-$nPeriodeId = $oForm->get(null);
+$nPeriodeId = $oForm->get(null, -1);
 
 //==============================================================================
 // Actions du formulaire
@@ -63,163 +63,21 @@ if($oForm->hasError() == true)
 // Traitement des donnees
 //==============================================================================
 
-// ===== Les informations sur l'élève =====
-$sQuery = <<< EOQ
-	SELECT DISTINCT
-		ELEVE_NOM,
-		CLASSE_ANNEE_SCOLAIRE,
-		CLASSE_NOM,
-		ECOLE_NOM,
-		ECOLE_VILLE,
-		NIVEAU_NOM,
-		CYCLE_NOM
-	FROM ELEVES
-		INNER JOIN ELEVE_CLASSE
-			ON ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE
-		INNER JOIN CLASSES
-			ON ELEVE_CLASSE.ID_CLASSE = CLASSES.CLASSE_ID
-		INNER JOIN ECOLES
-			ON CLASSES.ID_ECOLE = ECOLES.ECOLE_ID
-		INNER JOIN NIVEAU_CLASSE
-			ON CLASSES.CLASSE_ID = NIVEAU_CLASSE.ID_CLASSE
-		INNER JOIN NIVEAUX
-			ON NIVEAU_CLASSE.ID_NIVEAU = NIVEAUX.NIVEAU_ID
-		INNER JOIN CYCLES
-			ON NIVEAUX.ID_CYCLE = CYCLES.CYCLE_ID
-	WHERE ELEVE_ID = {$nEleveId}
-	ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC, ELEVE_NOM ASC
-EOQ;
-$aEleve = Database::fetchOneRow($sQuery);
-// $aEleve[COLONNE] = VALEUR
+$aRes = Livret::recap_period($nEleveId, $nPeriodeId);
 
-// ===== Les informations sur l'élève =====
-$sQuery = <<< EOQ
-	SELECT DISTINCT
-		PROFESSEUR_NOM,
-		CLASSE_NOM,
-		CLASSE_ANNEE_SCOLAIRE
-	FROM ELEVES
-		INNER JOIN ELEVE_CLASSE
-			ON ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE
-		INNER JOIN CLASSES
-			ON ELEVE_CLASSE.ID_CLASSE = CLASSES.CLASSE_ID
-		INNER JOIN PROFESSEUR_CLASSE
-			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
-		INNER JOIN PROFESSEURS
-			ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
-	WHERE ELEVE_ID = {$nEleveId}
-	{$sRestrictionAnneeScolaire}
-	ORDER BY CLASSE_ANNEE_SCOLAIRE ASC
-EOQ;
-$aClassesEleve = Database::fetchOneRow($sQuery);
-// $aClassesEleve[COLONNE] = VALEUR
-
-// ===== Les informations sur les notes =====
-$sQuery = <<< EOQ
-	SELECT
-		NOTE_NOM,
-		NOTE_LABEL
-	FROM NOTES
-	ORDER BY NOTE_NOTE DESC
-EOQ;
-$aNotes = Database::fetchArray($sQuery);
-
-// ===== La liste des periodes =====
-$sQuery = <<< EOQ
-	SELECT
-		PERIODE_NOM
-	FROM PERIODES
-	WHERE PERIODE_ID = {$nPeriodeId}
-	ORDER BY PERIODE_NOM ASC
-EOQ;
-$aPeriodes = Database::fetchOneRow($sQuery);
-// $aPeriodes[COLONNE] = VALEUR
-
-// ===== La liste des classes =====
-$sQuery = <<< EOQ
-	SELECT
-		CLASSE_NOM,
-		NIVEAU_NOM
-	FROM CLASSES
-		INNER JOIN NIVEAU_CLASSE
-			ON CLASSES.CLASSE_ID = NIVEAU_CLASSE.ID_CLASSE
-		INNER JOIN NIVEAUX
-			ON NIVEAU_CLASSE.ID_NIVEAU = NIVEAUX.NIVEAU_ID
-		INNER JOIN CYCLES
-			ON NIVEAUX.ID_CYCLE = CYCLES.CYCLE_ID
-	WHERE CYCLE_NOM = '{$aEleve['CYCLE_NOM']}'
-	{$sRestrictionAnneeScolaire}
-	ORDER BY NIVEAU_ID ASC
-EOQ;
-$aClassesNiveaux = Database::fetchOneRow($sQuery);
-// $aClassesNiveaux[COLONNE] = VALEUR
-
-// ===== La liste des compétences (filtre sur le cycle et sur l'élève) =====
-$sQuery = <<< EOQ
-	SELECT
-		COMPETENCE_NOM,
-		MATIERE_NOM,
-		DOMAINE_NOM
-	FROM COMPETENCES
-		INNER JOIN MATIERES
-			ON COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
-		INNER JOIN DOMAINES
-			ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
-		INNER JOIN CYCLES
-			ON DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
-		INNER JOIN EVALUATIONS_INDIVIDUELLES
-			ON COMPETENCES.COMPETENCE_ID = EVALUATIONS_INDIVIDUELLES.ID_COMPETENCE
-	WHERE CYCLE_NOM = '{$aEleve['CYCLE_NOM']}'
-	AND EVALUATIONS_INDIVIDUELLES.ID_ELEVE = {$nEleveId}
-	ORDER BY DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
-EOQ;
-$aDomainesMatieresCompetences = Database::fetchArrayWithMultiKey($sQuery, array('DOMAINE_NOM', 'MATIERE_NOM', 'COMPETENCE_NOM'));
-// $aDomainesMatieresCompetences[NOM DU DOMAINE][NOM DE LA MATIERE][NOM DE LA COMPETENCE][COLONNE] = VALEUR
-
-// ===== La liste des evaluations individuelles a ce jour pour l'élève =====
-$sQuery = <<< EOQ
-	SELECT
-		MATIERE_NOM,
-		DOMAINE_NOM,
-		COMPETENCE_NOM,
-		NIVEAU_NOM,
-		CLASSE_NOM,
-		PERIODE_NOM,
-		NOTE_LABEL,
-		NOTE_NOTE
-	FROM EVALUATIONS_INDIVIDUELLES
-		INNER JOIN NOTES
-			ON EVALUATIONS_INDIVIDUELLES.ID_NOTE = NOTES.NOTE_ID
-		INNER JOIN ELEVES
-			ON EVALUATIONS_INDIVIDUELLES.ID_ELEVE = ELEVES.ELEVE_ID
-		INNER JOIN EVALUATIONS_COLLECTIVES
-			ON EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL = EVALUATIONS_COLLECTIVES.EVAL_COL_ID
-		INNER JOIN CLASSES
-			ON EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID
-		INNER JOIN NIVEAU_CLASSE
-			ON CLASSES.CLASSE_ID = NIVEAU_CLASSE.ID_CLASSE
-		INNER JOIN NIVEAUX
-			ON NIVEAU_CLASSE.ID_NIVEAU = NIVEAUX.NIVEAU_ID
-		INNER JOIN COMPETENCES
-			ON EVALUATIONS_INDIVIDUELLES.ID_COMPETENCE = COMPETENCES.COMPETENCE_ID
-		INNER JOIN MATIERES
-			ON COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
-		INNER JOIN DOMAINES
-			ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
-		INNER JOIN PERIODES
-			ON EVALUATIONS_COLLECTIVES.ID_PERIODE = PERIODES.PERIODE_ID
-	WHERE ELEVE_ID = {$nEleveId}
-	AND PERIODE_ID = {$nPeriodeId}
-	ORDER BY DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
-EOQ;
-$aEvalInds = Database::fetchArrayWithMultiKey($sQuery, array('DOMAINE_NOM', 'MATIERE_NOM', 'COMPETENCE_NOM', 'CLASSE_NOM', 'NIVEAU_NOM', 'PERIODE_NOM'));
-// $aEvalInds[NOM DU DOMAINE][NOM DE LA MATIERE][NOM DE LA COMPETENCE][NOM DE LA CLASSE][NOM DU NIVEAU][NOM DE LA PERIODE][COLONNE] = VALEUR
+$aEleve = $aRes['ELEVE'];
+$aClassesEleve = $aRes['CLASSES_ELEVES'];
+$aNotes = $aRes['NOTES'];
+$aNotesValues = $aRes['NOTES_VALUES'];
+$aPeriodes = $aRes['PERIODES'];
+$aClassesNiveaux = $aRes['CLASSES_NIVEAUX'];
+$aDomainesMatieresCompetences = $aRes['DOMAINES_MATIERES_COMPETENCES'];
+$aEvalInds = $aRes['EVAL_INDS'];
+$aNomPrenom = $aRes['NOM_PRENOM'];
 
 //==============================================================================
 // Preparation de l'affichage
 //==============================================================================
-
-$aNomPrenom = explode(" ", $aEleve['ELEVE_NOM']);
 
 //==============================================================================
 // Affichage de la page

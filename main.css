@@ -9,7 +9,7 @@ html
 body
 {
 	color: #666666;
-	font: Tahoma, Helvetica, Bitstream Vera, Verdana, Arial, Helvetica, sans-serif;
+	font: Tahoma, Comic Sans MS, Helvetica, Bitstream Vera, Courier New, Verdana, Arial, Monaco, Trebuchet MS, sans-serif;
 	font-size: 0.7em;
 }
 
@@ -780,3 +780,39 @@ body.popup_stop_scroll
 {
 	background-color: #9999FF;
 }
+
+/*==============================================================================
+|| Récapitulatif annuel ou périodique
+==============================================================================*/
+
+table.entete_n tr td
+{
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+
+table.display tr td
+{
+	border-collapse: collapse;
+	border: 1px solid black;
+	text-align: left;
+}
+
+.colonne1
+{
+	background-color: #A4A4A4;
+	color: white;
+}
+
+.colonne2
+{
+	background-color: #BDBDBD;
+	color: white;
+}
+
+.colonne3
+{
+	background-color: #D8D8D8;
+	color: white;
+}
+
