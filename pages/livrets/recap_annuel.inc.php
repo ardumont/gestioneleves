@@ -24,6 +24,25 @@ $nEleveId = $oForm->get(null, -1);
 // Actions du formulaire
 //==============================================================================
 
+// ===== Vérification des valeurs =====
+
+$sQuery = <<< EOQ
+	SELECT
+		1 EXIST
+	FROM ELEVES
+	WHERE ELEVE_ID = {$nEleveId}
+EOQ;
+
+$oForm->readArray('query1', Database::fetchOneRow($sQuery));
+$oForm->testError0('query1.EXIST', 'exist', "L'identifiant de l'élève \"{$nEleveId}\" n'est pas valide !");
+
+//if($oForm->hasError() == true)
+//{
+//	// rechargement de la liste des eleves
+//	header("Location: ?page=livrets&mode=recap_annuel");
+//	return;
+//}
+
 //==============================================================================
 // Traitement des donnees
 //==============================================================================
@@ -169,9 +188,19 @@ if($nEleveId != -1)
 											<?php $sNiveauNom = $aClasseNiveau['NIVEAU_NOM']; ?>
 											<?php $sClasseNom = $aClasseNiveau['CLASSE_NOM']; ?>
 											<?php $sPeriodeNom = $aPeriode['PERIODE_NOM']; ?>
-											<?php $aToDisplay = $aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]; ?>
-											<?php echo $aToDisplay['NOTE_LABEL']; ?>
-											&nbsp;
+											<?php
+												if(isset($aEvalInds[$sDomaine]) &&
+												   isset($aEvalInds[$sDomaine][$sMatiere]) &&
+												   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence]) &&
+												   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom]) &&
+												   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom]) &&
+												   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]))
+												{
+													$aToDisplay = $aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom];
+													echo $aToDisplay['NOTE_LABEL'];
+												} else { ?>
+													&nbsp;
+												<?php } ?>
 										</td>
 										<?php endforeach; ?>
 									<?php endforeach; ?>

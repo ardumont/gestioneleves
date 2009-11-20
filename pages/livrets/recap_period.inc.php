@@ -52,6 +52,13 @@ EOQ;
 $oForm->readArray('query2', Database::fetchOneRow($sQuery));
 $oForm->testError0('query2.EXIST', 'exist', "L'identifiant de la période \"{$nPeriodeId}\" n'est pas valide !");
 
+//if($oForm->hasError() == true)
+//{
+//	// rechargement de la liste des eleves
+//	header("Location: ?page=livrets&mode=recap_period");
+//	return;
+//}
+
 //==============================================================================
 // Actions du formulaire
 //==============================================================================
@@ -215,9 +222,18 @@ if($nEleveId != -1 && $nPeriodeId != -1)
 											<?php $sNiveauNom = $aClassesNiveaux['NIVEAU_NOM']; ?>
 											<?php $sClasseNom = $aClassesNiveaux['CLASSE_NOM']; ?>
 											<?php $sPeriodeNom = $aPeriodesInfo['PERIODE_NOM']; ?>
-											<?php $aToDisplay = $aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]; ?>
-											<?php echo $aToDisplay['NOTE_LABEL']; ?>
-											&nbsp;
+											<?php if(isset($aEvalInds[$sDomaine]) &&
+												   isset($aEvalInds[$sDomaine][$sMatiere]) &&
+												   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence]) &&
+												   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom]) &&
+												   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom]) &&
+												   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]))
+												{
+													$aToDisplay = $aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom];
+													echo $aToDisplay['NOTE_LABEL'];
+												} else { ?>
+													&nbsp;
+												<?php } ?>
 										</td>
 									</tr>
 									<?php endforeach; ?>
