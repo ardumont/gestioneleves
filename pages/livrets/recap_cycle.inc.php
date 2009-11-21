@@ -101,7 +101,10 @@ if($nEleveId != -1)
 </ul>
 <?php endif; ?>
 <br />
-<a href="javascript:void(0);" onclick="showOrHide('help')">Cliquer ici pour de l'aide</a>
+<a href="javascript:void(0);" onclick="showOrHide('help')">Aide</a>
+<?php if($nEleveId != -1): ?>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="special.php?page=export_livret_eleve_cycle&amp;eleve_id=<?php echo $nEleveId; ?>">Version imprimable</a>
+<?php endif ?>
 <div id="help" style="display: none;">
 	<table class="formulaire">
 		<caption>Fonctionnement</caption>
@@ -109,6 +112,9 @@ if($nEleveId != -1)
 			<td>
 				Par défaut, cette page permet d'afficher un récapitulatif de l'activité annuelle d'un élève de votre classe.<br />
 				Vous sélectionnez l'élève de votre classe puis vous lancez l'affichage en cliquant sur le bouton <i>Afficher</i>.
+				<br />
+				Pour générer une version imprimable, cliquer sur le lien <i>Version imprimable</i> puis, après affichage de
+				la nouvelle page, lancer une impression avec votre imprimante.
 				<br />&nbsp;
 			</td>
 		</tr>

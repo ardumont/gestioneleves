@@ -14,13 +14,13 @@ $sRestrictionAnneeScolaire =
 $oForm = new FormValidation();
 
 // Recuperation des ids de restrictions de recherche
-$oForm->read('eleve_id', $_POST);
+$oForm->read('eleve_id', $_GET);
 $oForm->testError0(null, 'exist',       "Il manque le champ eleve_id !");
 $oForm->testError0(null, 'blank',       "Il manque l'id de l'élève !");
 $oForm->testError0(null, 'convert_int', "L'identifiant de l'élève doit être un entier !");
 $nEleveId = $oForm->get(null, -1);
 
-$oForm->read('periode_id', $_POST);
+$oForm->read('periode_id', $_GET);
 $oForm->testError0(null, 'exist',       "Il manque le champ periode_id !");
 $oForm->testError0(null, 'blank',       "Il manque l'id de la période !");
 $oForm->testError0(null, 'convert_int', "L'identifiant de la période doit être un entier !");
@@ -55,7 +55,7 @@ $oForm->testError0('query2.EXIST', 'exist', "L'identifiant de la période \"{$nP
 if($oForm->hasError() == true)
 {
 	// rechargement de la liste des eleves
-	header("Location: index.php?page=livrets&mode=livret_period");
+	header("Location: index.php?page=livrets&mode=recap_period");
 	return;
 }
 

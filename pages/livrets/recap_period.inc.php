@@ -133,6 +133,9 @@ if($nEleveId != -1 && $nPeriodeId != -1)
 <?php endif; ?>
 <br />
 <a href="javascript:void(0);" onclick="showOrHide('help')">Cliquer ici pour de l'aide</a>
+<?php if($nEleveId != -1 && $nPeriodeId != -1): ?>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="special.php?page=export_livret_eleve_period&amp;eleve_id=<?php echo $nEleveId; ?>&amp;periode_id=<?php echo $nPeriodeId; ?>">Version imprimable</a>
+<?php endif ?>
 <div id="help" style="display: none;">
 	<table class="formulaire">
 		<caption>Fonctionnement</caption>
@@ -141,6 +144,9 @@ if($nEleveId != -1 && $nPeriodeId != -1)
 				Par défaut, cette page permet d'afficher un récapitulatif de l'activité périodique d'un élève de votre classe.<br />
 				Vous sélectionnez l'élève de votre classe et la période désirée puis vous lancez l'affichage en cliquant sur
 				le bouton <i>Afficher</i>.
+				<br />
+				Pour générer une version imprimable, cliquer sur le lien <i>Version imprimable</i> puis, après affichage de
+				la nouvelle page, lancer une impression avec votre imprimante.
 				<br />&nbsp;
 			</td>
 		</tr>

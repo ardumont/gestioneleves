@@ -10,7 +10,7 @@
 $oForm = new FormValidation();
 
 // Recuperation des ids de restrictions de recherche
-$oForm->read('eleve_id', $_POST);
+$oForm->read('eleve_id', $_GET);
 $oForm->testError0(null, 'exist',       "Il manque le champ eleve_id !");
 $oForm->testError0(null, 'blank',       "Il manque l'id de l'élève !");
 $oForm->testError0(null, 'convert_int', "L'identifiant de l'élève doit être un entier !");
@@ -35,7 +35,7 @@ $oForm->testError0('query1.EXIST', 'exist', "L'identifiant de l'élève \"{$nEle
 if($oForm->hasError() == true)
 {
 	// rechargement de la liste des eleves
-	header("Location: index.php?page=livrets&mode=livret_cycle");
+	header("Location: index.php?page=livrets&mode=recap_cycle");
 	return;
 }
 

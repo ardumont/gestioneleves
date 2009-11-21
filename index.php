@@ -206,11 +206,8 @@ $aMenuPage = array
 
 	// ----- Livrets -----
 	'livrets' => array(
-		'livret_annuel' => "livrets/livret_annuel.inc.php",
-		'livret_period' => "livrets/livret_period.inc.php",
 		'recap_annuel'  => "livrets/recap_annuel.inc.php",
 		'recap_period'  => "livrets/recap_period.inc.php",
-		'livret_cycle' => "livrets/livret_cycle.inc.php",
 		'recap_cycle'  => "livrets/recap_cycle.inc.php",
 	),
 );
@@ -461,12 +458,9 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 			<h3>Evaluations individuelles</h3>
 				<h4><a href="?page=evaluations_individuelles"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
 			<h3>Livrets</h3>
-				<h4><a href="?page=livrets&amp;mode=recap_annuel"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif annuel</a></h4>
-				<h4><a href="?page=livrets&amp;mode=livret_annuel"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Impression livret annuel</a></h4>
 				<h4><a href="?page=livrets&amp;mode=recap_period"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif périodique</a></h4>
-				<h4><a href="?page=livrets&amp;mode=livret_period"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Impression livret périod.</a></h4>
+				<h4><a href="?page=livrets&amp;mode=recap_annuel"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif annuel</a></h4>
 				<h4><a href="?page=livrets&amp;mode=recap_cycle"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif cycle</a></h4>
-				<h4><a href="?page=livrets&amp;mode=livret_cycle"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Impression livret cycl.</a></h4>
 			<h3>Aide/Info</h3>
 				<h4><a href="?page=contributeurs"><img src="<?php echo(URL_ICONS_16X16); ?>/contributeur.png"/>Contributeurs</a></h4>
 				<h4><a href="admin.php"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Page d'administration</a></h4>
