@@ -66,8 +66,10 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 			</dt>
 			<dd>
 				<ul>
-					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impresison d'un carnet annuel pour un élève.</li>
-					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impresison d'un carnet périodique pour un élève.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impression d'un livret annuel pour un élève.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impression d'un livret périodique pour un élève.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm de visualisation de progression annuel ou cyclique d'un élève.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm de visualisation de progression périodique pour un élève.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Ajout du manuel du développeur (installation de plateforme, MPD, explication des sources, etc...)</li>
 				</ul>
 			</dd>
