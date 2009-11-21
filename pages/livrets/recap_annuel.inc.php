@@ -106,7 +106,7 @@ if($nEleveId != -1)
 	<tr>
 		<td>
 			Par défaut, cette page permet d'afficher un récapitulatif de l'activité annuelle d'un élève de votre classe.<br />
-			Vous sélectionnez l'élève de votre classe puis vous lancez l'affichage en cliquant sur le bouton <i>Afficher</i>.<br />.<br />
+			Vous sélectionnez l'élève de votre classe puis vous lancez l'affichage en cliquant sur le bouton <i>Afficher</i>.
 		</td>
 	</tr>
 </table>
@@ -136,7 +136,7 @@ if($nEleveId != -1)
 </form>
 
 <?php if($nEleveId != -1): ?>
-	<?php if($aDomainesMatieresCompetences != false): ?>
+	<?php if($aEvalInds != false): ?>
 	<!-- Affichage du récapitulatif -->
 	<table class="formulaire">
 		<caption>Compétences de fin de cycle <?php echo $aEleveInfo['CYCLE_NOM']; ?></caption>
@@ -218,7 +218,7 @@ if($nEleveId != -1)
 			<caption>Informations</caption>
 			<tr>
 				<td>
-					Aucune compétence évaluée de l'année pour cet utilisateur.
+					Aucune compétence n'a été évaluée pour cet élève sur l'année scolaire.
 				</td>
 			</tr>
 		</table>

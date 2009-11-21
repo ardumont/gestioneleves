@@ -138,7 +138,7 @@ if($nEleveId != -1 && $nPeriodeId != -1)
 		<td>
 			Par défaut, cette page permet d'afficher un récapitulatif de l'activité périodique d'un élève de votre classe.<br />
 			Vous sélectionnez l'élève de votre classe et la période désirée puis vous lancez l'affichage en cliquant sur
-			le bouton <i>Afficher</i>.<br />.<br />
+			le bouton <i>Afficher</i>.
 		</td>
 	</tr>
 </table>
@@ -179,7 +179,7 @@ if($nEleveId != -1 && $nPeriodeId != -1)
 </form>
 
 <?php if($nEleveId != -1 && $nPeriodeId != -1): ?>
-	<?php if($aDomainesMatieresCompetences != false): ?>
+	<?php if($aEvalInds != false): ?>
 		<table class="formulaire">
 			<caption>Compétences de fin de cycle <?php echo $aEleveInfo['CYCLE_NOM']; ?></caption>
 			<tbody>
@@ -249,7 +249,7 @@ if($nEleveId != -1 && $nPeriodeId != -1)
 		<caption>Informations</caption>
 		<tr>
 			<td>
-				Aucune compétence évaluée pour cet utilisateur sur cette période.
+				Aucune compétence n'a été évaluée pour cet élève sur cette période.
 			</td>
 		</tr>
 	</table>
