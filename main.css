@@ -221,7 +221,7 @@ body.popup_stop_scroll
 	margin: -5px -5px 0px -5px;
 	padding: 0px 5px 5px 5px;
 	font-size: 1em;
-	background-color: #999;
+	background-color: #777;
 	font-weight: bold;
 	color: white;
 }
@@ -326,44 +326,6 @@ body.popup_stop_scroll
 }
 
 /*======================================
-|| Tableaux de type "list" : 1 seul niveau.
-======================================*/
-
-#struct_main table.list
-{
-	border-collapse: collapse;
-	color: white;
-}
-
-#struct_main table.list a
-{
-	color: inherit;
-}
-
-#struct_main table.list caption
-{
-	background-color: #205bb3;
-}
-
-#struct_main table.list thead tr
-{
-	background-color: #205bb3;
-}
-
-#struct_main table.list tfoot
-{
-	color: black;
-}
-#struct_main table.list tr.row0 {background-color: #0066FF;}
-#struct_main table.list tr.row1 {background-color: #0099FF;}
-#struct_main table.list tr.row_total {background-color: #8AABFF;}
-
-/* Colonne application */
-#struct_main table.list tr.app0 {background-color: #3b85cc;}
-#struct_main table.list tr.app1 {background-color: #307bc3;}
-
-
-/*======================================
 || Tableau de type "information".
 ======================================*/
 
@@ -433,10 +395,6 @@ body.popup_stop_scroll
 	text-align:left;
 }
 
-#struct_main table.list_tree tr td
-{
-}
-
 #struct_main table.list_tree tr.level0_row0 {background-color: #3092c4;}
 #struct_main table.list_tree tr.level0_row1 {background-color: #3b9dcc;}
 #struct_main table.list_tree tr.level1_row0 {background-color: #4169E1;}
@@ -460,106 +418,12 @@ body.popup_stop_scroll
 || Tableau special calendrier.
 ======================================*/
 
-#struct_main table.calendar
-{
-	border-collapse: collapse;
-	color: white;
-}
-
-#struct_main table.calendar a,
-#struct_main table.calendar input, 
-#struct_main table.calendar select
-{
-	color: inherit;
-}
-
-/* Enleve le decalage a gauche du au border-collapse : Firefox respecte les specifications, mais c'est moche : IE ne respecte rien */
-#struct_main table.calendar caption
-{
-	background-color: #205bb3;
-	margin-left: -1px;
-}
-
-#struct_main table.calendar caption img
-{
-	vertical-align: middle;
-}
-
-#struct_main table.calendar caption a.today { }
-
-#struct_main table.calendar tr
-{
-	font-size: 0.9em;	
-}
-
-#struct_main table.calendar tfoot tr
-{
-	font-size: 1.1em;	
-}
-
-#struct_main table.calendar tr select
-{
-	font-size: 1.0em;	
-}
-
-#struct_main table.calendar thead tr
-{
-	background-color: #205bb3;
-}
-
-/* Alternance des couleurs entre les taches */
-#struct_main table.calendar tr.row0,
-#struct_main table.calendar tr.row0 select,
-#struct_main table.calendar tr.row0 input
-{
-	background-color: #3ba0c3;
-	background-image: url(images/bckgrd/separateur_tache.png);
-	background-repeat: repeat-x;
-
-}
-
-/* Alternance des couleurs entre les taches */
-#struct_main table.calendar tr.row1,
-#struct_main table.calendar tr.row1 select,
-#struct_main table.calendar tr.row1 input
-{
-	background-color: #3295b5;
-	background-image: url(images/bckgrd/separateur_tache.png);
-	background-repeat: repeat-x;
-}
-
-#struct_main table.calendar tbody th
-{
-	text-align: left;
-	font-weight: normal;
-}
-
-#struct_main table.calendar tfoot
-{
-	color: #666666;
-}
-
-/* Onglet ajout element */
-#struct_main table.calendar   th.tab_top_left
-{
-	background-image: url(images/bckgrd/tab_top_r.png);
-	background-repeat: no-repeat;
-	background-position: bottom left;
-}
-
 #struct_main table.list_tree  th.tab_top_left
 {
 	background-image: url(images/bckgrd/tab_top_r.png);
 	background-repeat: no-repeat;
 	background-position: bottom left;
 	padding: 0px 0px 0px 20px;
-}
-
-#struct_main table.calendar th.tab_bottom_left
-{
-	background-image: url(images/bckgrd/tab_bottom_r.png);
-	background-repeat: no-repeat;
-	background-position: bottom left;
 }
 
 #struct_main table.list_tree th.tab_bottom_left
@@ -570,7 +434,6 @@ body.popup_stop_scroll
 	padding: 0px 0px 0px 20px;
 }
 
-#struct_main table.calendar  th.tab_top_right,
 #struct_main table.list_tree  th.tab_top_right
 {
 	background-image: url(images/bckgrd/tab_top_l.png);
@@ -578,96 +441,11 @@ body.popup_stop_scroll
 	background-position: bottom left;
 }
 
-#struct_main table.calendar  th.tab_bottom_right,
 #struct_main table.list_tree  th.tab_bottom_right
 {
 	background-image: url(images/bckgrd/tab_bottom_l.png);
 	background-repeat: no-repeat;
 	background-position: bottom left;	
-}
-
-/* Barre de navigation par semaine */
-#struct_main table.calendar th.navigation
-{
-	text-align: left;
-	vertical-align: middle;
-}
-
-#struct_main table.calendar th.navigation img
-{
-	padding: 0px 0px 0px 0px;
-}
-
-#struct_main table.calendar th.navigation a
-{
-	text-decoration:none; 
-}
-
-#struct_main table.calendar tr
-{
-    white-space: nowrap;
-}
-
-/* Alternance des couleurs entre les taches par type de colonne */
-/* Alternance des couleurs entre les taches (application) */
-#struct_main table.calendar th.app0
-{
-	background-color: #3b85cc;
-	background-image: url(images/bckgrd/separateur_app.png);
-	background-repeat: repeat-x;
-}
-
-/* Alternance des couleurs entre les taches (application) */
-#struct_main table.calendar th.app1
-{
-	background-color: #307bc3;
-	background-image: url(images/bckgrd/separateur_app.png);
-	background-repeat: repeat-x;	
-}
-
-/* Alternance des couleurs entre les taches (projet) */
-#struct_main table.calendar th.proj0
-{
-	background-color: #3b9dcc;
-	background-image: url(images/bckgrd/separateur_projet.png);
-	background-repeat: repeat-x;
-}
-
-/* Alternance des couleurs entre les taches (projet) */
-#struct_main table.calendar th.proj1
-{
-	background-color: #3092c4;
-	background-image: url(images/bckgrd/separateur_projet.png);
-	background-repeat: repeat-x;	
-}
-
-/* >V2| -----------------------------*/
-
-/*========== On met en couleur Samedi=6 et Dimanche=0 ==========*/
-
-
-#struct_main table.calendar tbody tr:hover,
-#struct_main table.calendar tbody tr:hover select,
-#struct_main table.calendar tbody tr:hover input,
-#struct_main table.list_tree tbody tr:hover,
-#struct_main table.list tr.row0:hover,
-#struct_main table.list tr.row1:hover,
-#struct_main table.list tr.app0:hover,
-#struct_main table.list tr.app1:hover,
-#struct_main table.list tr.row_total:hover,
-#struct_main table.calendar tr th.day_6,
-#struct_main table.calendar tr th.day_0,
-#struct_main table.calendar tr td.day_6,
-#struct_main table.calendar tr td.day_6 input[type=text],
-#struct_main table.calendar tr td.day_0,
-#struct_main table.calendar tr td.day_0 input[type=text],
-#struct_main table.calendar tr td.day_6:hover,
-#struct_main table.calendar tr td.day_0:hover
-#struct_main table.calendar tr td.day_6 input:hover,
-#struct_main table.calendar tr td.day_0 input:hover
-{
-	background-color: #999;
-	color: black;
 }
 
 /*======================================
@@ -712,37 +490,8 @@ body.popup_stop_scroll
 || Ecran "activity".
 ==============================================================================*/
 
-#struct_main.activities table.calendar input[type=text]
-{
-	width: 1em;
-}
-
 .display_value
 {
-	text-align: center;
-}
-
-/*==============================================================================
-|| Ecran "holidays".
-==============================================================================*/
-
-#struct_main.holidays table.calendar thead .solde
-{
-	background-color: #666666;
-	color: white;
-}
-
-#struct_main.holidays table.calendar tbody tr.row0 .solde
-{
-	background-color: #DDDDDD;
-	color: black;
-	text-align: center;
-}
-
-#struct_main.holidays table.calendar tbody tr.row1 .solde
-{
-	background-color: #999999;
-	color: black;
 	text-align: center;
 }
 
@@ -780,15 +529,17 @@ body.popup_stop_scroll
 || Suivi du curseur sur les tableaux
 ==============================================================================*/
 
-#struct_main table.calendar tbody tr:hover,
-#struct_main table.calendar tbody tr:hover select,
-#struct_main table.calendar tbody tr:hover input,
 #struct_main table.list_tree tbody tr:hover,
-#struct_main table.list tr.row0:hover,
-#struct_main table.list tr.row1:hover,
-#struct_main table.list tr.row_total:hover
+tr.row0:hover,
+tr.row1:hover,
+.colonne1:hover,
+.colonne2:hover,
+.colonne3:hover,
+.domaine:hover,
+.matiere:hover
 {
-	background-color: #9999FF;
+	background-color: #888;
+	font-size: 1em;
 }
 
 /*==============================================================================
@@ -845,28 +596,45 @@ table.display tr td
 /* Legende des notes */
 .A
 {
-	background-color: #99FF00;
-	color: black;
+	background-color: green;
+	color: white;
 	text-align: center;
 }
 
 .AR
 {
-	background-color: #99CC00;
+	background-color: yellow;
 	color: black;
 	text-align: center;
 }
 
 .ECA
 {
-	background-color: #CC9900;
-	color: black;
+	background-color: orange;
+	color: white;
 	text-align: center;
 }
 
 .NA
 {
-	background-color: #FF0000;
-	color: black;
+	background-color: red;
+	color: white;
 	text-align: center;
+}
+
+/* Alternance de couleurs */
+tr.row0, tr.row1
+{
+	font-size: 0.9em;
+	color: white;
+}
+
+tr.row0
+{
+	background-color: #3092c4;
+}
+
+tr.row1
+{
+	background-color: #3b9dcc;
 }

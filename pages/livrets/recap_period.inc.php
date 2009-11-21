@@ -215,8 +215,9 @@ if($nEleveId != -1 && $nPeriodeId != -1)
 								<tr class="matiere"><!-- Ligne de la matière -->
 									<td colspan="2"><?php echo $sMatiere; ?></td>
 								</tr>
+									<?php $nRow = 0; ?>
 									<?php foreach($aCompetences as $sCompetence => $aCompetence): /* Pour chaque compétence */ ?>
-									<tr style="font-size: 0.9em;"><!-- Ligne de la competence -->
+									<tr class="row<?php echo (($nRow++)%2); ?>"><!-- Ligne de la competence -->
 										<td><?php echo $sCompetence; ?></td>
 											<?php $sNiveauNom = $aClassesNiveaux['NIVEAU_NOM']; ?>
 											<?php $sClasseNom = $aClassesNiveaux['CLASSE_NOM']; ?>

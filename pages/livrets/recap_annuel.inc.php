@@ -179,8 +179,9 @@ if($nEleveId != -1)
 							<tr class="matiere"><!-- Ligne de la matière -->
 								<td colspan="<?php echo 1+count($aClassesNiveaux) * count($aPeriodesInfo); ?>"><?php echo $sMatiere; ?></td>
 							</tr>
+								<?php $nRow = 0; ?>
 								<?php foreach($aCompetences as $sCompetence => $aCompetence): /* Pour chaque compétence */ ?>
-								<tr style="font-size: 0.9em;"><!-- Ligne de la competence -->
+								<tr class="row<?php echo (($nRow++)%2); ?>"><!-- Ligne de la competence -->
 									<td><?php echo $sCompetence; ?></td>
 									<?php foreach($aClassesNiveaux as $i => $aClasseNiveau): /* Pour chaque classe de l'élève */ ?>
 										<?php foreach($aPeriodesInfo as $aPeriode): /* Pour chaque période */ ?>
