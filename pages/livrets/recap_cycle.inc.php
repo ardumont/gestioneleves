@@ -107,6 +107,7 @@ if($nEleveId != -1)
 		<td>
 			Par défaut, cette page permet d'afficher un récapitulatif de l'activité annuelle d'un élève de votre classe.<br />
 			Vous sélectionnez l'élève de votre classe puis vous lancez l'affichage en cliquant sur le bouton <i>Afficher</i>.
+			<br />&nbsp;
 		</td>
 	</tr>
 </table>

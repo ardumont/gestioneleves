@@ -105,7 +105,8 @@ $aEvalCols = Database::fetchArray($sQuery);
 		<td>
 			Par défaut, cette page affiche toutes les évaluations collectives saisies à ce jour par le professeur connecté.<br />
 			Vous pouvez toutefois ne filtrer que par classe ou par période.<br />
-			Pour cela, sélectionner une classe ou une période puis cliquer sur le bouton <i>Rechercher</i>.<br />
+			Pour cela, sélectionner une classe ou une période puis cliquer sur le bouton <i>Rechercher</i>.
+			<br />&nbsp;
 		</td>
 	</tr>
 </table>

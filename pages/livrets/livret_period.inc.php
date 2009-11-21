@@ -75,6 +75,7 @@ $aPeriodes = Database::fetchArray($sQuery);
 		<td>
 			Par défaut, cette page permet de générer un livret périodique pour un élève.<br />
 			Vous sélectionnez la période et l'élève puis vous lancez la génération du livret en cliquant sur le bouton <i>Générer</i>.
+			<br />&nbsp;
 		</td>
 	</tr>
 </table>

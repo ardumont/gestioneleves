@@ -119,7 +119,9 @@ ____EOQ;
 			<br />
 			Vous ne pouvez pas éditez ou ajouter de nouveaux élèves sur cette page.<br />
 			Cette page ne sert qu'à lister les élèves et leur rattachement à une classe.<br />
-			Pour éditer ou ajouter un nouvel élève, rendez-vous sur la page <a href="index.php?page=eleves">de gestion des élèves</a>.
+			Pour éditer ou ajouter un nouvel élève, rendez-vous sur la page <a href="index.php?page=eleves">de
+			gestion des élèves</a>.
+			<br />&nbsp;
 		</td>
 	</tr>
 </table>

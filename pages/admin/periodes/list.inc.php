@@ -54,7 +54,8 @@ $aPeriodes = Database::fetchArray($sQuery);
 			Par défaut, cette page affiche l'ensemble des périodes existantes dans l'application.<br />
 			<br />
 			Vous pouvez modifier une période en cliquant sur son nom.<br />
-			Vous pouvez également ajouter une période en cliquant sur le + en haut à gauche du tableau.<br />
+			Vous pouvez également ajouter une période en cliquant sur le + en haut à gauche du tableau.
+			<br />&nbsp;
 		</td>
 	</tr>
 </table>

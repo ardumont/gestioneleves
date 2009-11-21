@@ -137,7 +137,8 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 			 puis cliquer sur le bouton <i>Rechercher</i> pour que la page se rafraîchisse.<br />
 			<br />
 			Vous pouvez modifier une compétence en cliquant sur le nom de la compétence.<br />
-			Vous pouvez également ajouter une compétence en cliquant sur le + en haut à gauche du tableau.<br />
+			Vous pouvez également ajouter une compétence en cliquant sur le + en haut à gauche du tableau.
+			<br />&nbsp;
 		</td>
 	</tr>
 </table>

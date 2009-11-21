@@ -50,7 +50,8 @@ $aProfesseurs = Database::fetchArray($sQuery);
 		<td>
 			Par défaut, cette page affiche l'ensemble des professeurs qui utilisent l'application.<br />
 			Vous pouvez modifier un professeur en cliquant sur le nom du professeur.<br />
-			Pour ajouter un professeur, cliquer sur le plus en haut à gauche du tableau.<br />
+			Pour ajouter un professeur, cliquer sur le plus en haut à gauche du tableau.
+			<br />&nbsp;
 		</td>
 	</tr>
 </table>

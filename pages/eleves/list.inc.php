@@ -120,6 +120,7 @@ ____EOQ;
 			<br />
 			Pour éditer un élève, cliquer sur le nom de l'élève puis modifier les propriétés désirées.<br />
 			Pour ajouter un élève, cliquer sur le + en image dans l'angle en haut a gauche.
+			<br />&nbsp;
 		</td>
 	</tr>
 </table>

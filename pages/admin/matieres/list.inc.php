@@ -107,7 +107,8 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 			<i>Rechercher</i> pour que la page se rafraîchisse.<br />
 			<br />
 			Vous pouvez modifier une matière en cliquant sur le nom de la matière.<br />
-			Vous pouvez également ajouter une matière en cliquant sur le + en haut à gauche du tableau.<br />
+			Vous pouvez également ajouter une matière en cliquant sur le + en haut à gauche du tableau.
+			<br />&nbsp;
 		</td>
 	</tr>
 </table>

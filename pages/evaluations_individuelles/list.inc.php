@@ -159,6 +159,7 @@ $aEvalInds= Database::fetchArray($sQuery);
 			Vous pouvez toutefois ne filtrer que par classe ou par élève.<br />
 			Pour cela, sélectionner une classe ou un élève puis cliquer sur le bouton <i>Rechercher</i>.<br />
 			Attention, toutefois, si l'élève n'appartient pas à la classe, aucun résultat ne s'affichera.
+			<br />&nbsp;
 		</td>
 	</tr>
 </table>

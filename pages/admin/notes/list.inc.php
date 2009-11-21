@@ -52,7 +52,8 @@ $aNotes = Database::fetchArray($sQuery);
 			Par défaut, cette page affiche l'ensemble des notes existantes dans l'application.<br />
 			<br />
 			Vous pouvez modifier une note en cliquant sur son nom.<br />
-			Vous pouvez également ajouter une note en cliquant sur le + en haut à gauche du tableau.<br />
+			Vous pouvez également ajouter une note en cliquant sur le + en haut à gauche du tableau.
+			<br />&nbsp;
 		</td>
 	</tr>
 </table>

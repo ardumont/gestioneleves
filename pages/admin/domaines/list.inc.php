@@ -83,6 +83,7 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 			<br />
 			Vous pouvez modifier un domaine en cliquant sur le nom du cycle.<br />
 			Vous pouvez également ajouter un cycle en cliquant sur le + en haut à gauche du tableau.
+			<br />&nbsp;
 		</td>
 	</tr>
 </table>

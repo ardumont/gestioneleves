@@ -54,7 +54,8 @@ $aEcoles = Database::fetchArray($sQuery);
 			Par défaut, cette page liste les écoles existantes dans l'application.<br />
 			<br />
 			Vous pouvez modifier une classe en cliquant sur le nom de l'école.<br />
-			Vous pouvez également ajouter une école en cliquant sur le + en haut à gauche du tableau.<br />
+			Vous pouvez également ajouter une école en cliquant sur le + en haut à gauche du tableau.
+			<br />&nbsp;
 		</td>
 	</tr>
 </table>

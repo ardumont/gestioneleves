@@ -64,7 +64,8 @@ $aEleves = Database::fetchArray($sQuery);
 		<td>
 			Par défaut, cette page permet de générer un livret annuel (toutes les périodes du cycle de votre classe)
 			pour un élève.<br />
-			Vous sélectionnez l'élève de votre classe puis vous lancez la génération du livret en cliquant sur le bouton <i>Générer</i>.<br />.<br />
+			Vous sélectionnez l'élève de votre classe puis vous lancez la génération du livret en cliquant sur le bouton <i>Générer</i>.
+			<br />&nbsp;
 		</td>
 	</tr>
 </table>
