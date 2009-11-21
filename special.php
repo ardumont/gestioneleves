@@ -117,6 +117,7 @@ $aMenuPage = array
 	// ----- General -----
 	'export_livret_eleve_annuel' => "special/export_livret_eleve_annuel.inc.php",
 	'export_livret_eleve_period' => "special/export_livret_eleve_period.inc.php",
+	'export_livret_eleve_cycle' => "special/export_livret_eleve_cycle.inc.php",
 );
 
 //==============================================================================

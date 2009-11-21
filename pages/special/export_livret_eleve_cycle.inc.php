@@ -3,10 +3,6 @@
 // Preparation des donnees
 //==============================================================================
 
-//restriction sur l'annee scolaire courante
-$sRestrictionAnneeScolaire =
-	" AND CLASSE_ANNEE_SCOLAIRE = " . sql_annee_scolaire_courante();
-
 //==============================================================================
 // Validation du formulaire
 //==============================================================================
@@ -19,12 +15,6 @@ $oForm->testError0(null, 'exist',       "Il manque le champ eleve_id !");
 $oForm->testError0(null, 'blank',       "Il manque l'id de l'élève !");
 $oForm->testError0(null, 'convert_int', "L'identifiant de l'élève doit être un entier !");
 $nEleveId = $oForm->get(null, -1);
-
-$oForm->read('periode_id', $_POST);
-$oForm->testError0(null, 'exist',       "Il manque le champ periode_id !");
-$oForm->testError0(null, 'blank',       "Il manque l'id de la période !");
-$oForm->testError0(null, 'convert_int', "L'identifiant de la période doit être un entier !");
-$nPeriodeId = $oForm->get(null, -1);
 
 //==============================================================================
 // Actions du formulaire
@@ -42,20 +32,10 @@ EOQ;
 $oForm->readArray('query1', Database::fetchOneRow($sQuery));
 $oForm->testError0('query1.EXIST', 'exist', "L'identifiant de l'élève \"{$nEleveId}\" n'est pas valide !");
 
-$sQuery = <<< EOQ
-	SELECT
-		1 EXIST
-	FROM PERIODES
-	WHERE PERIODE_ID = {$nPeriodeId}
-EOQ;
-
-$oForm->readArray('query2', Database::fetchOneRow($sQuery));
-$oForm->testError0('query2.EXIST', 'exist', "L'identifiant de la période \"{$nPeriodeId}\" n'est pas valide !");
-
 if($oForm->hasError() == true)
 {
 	// rechargement de la liste des eleves
-	header("Location: index.php?page=livrets&mode=livret_period");
+	header("Location: index.php?page=livrets&mode=livret_cycle");
 	return;
 }
 
@@ -63,7 +43,7 @@ if($oForm->hasError() == true)
 // Traitement des donnees
 //==============================================================================
 
-$aRes = Livret::recap_period($nEleveId, $nPeriodeId);
+$aRes = Livret::recap_cycle($nEleveId);
 
 $aEleve = $aRes['ELEVE'];
 $aClassesEleve = $aRes['CLASSES_ELEVES'];
@@ -133,15 +113,17 @@ $sGuiTitle = "Livret d'évaluation";
 		<!-- Présentation de l'élève -->
 		<div class="titre6">
 			<table class="classe_eleve">
-				<caption>Années scolaire et enseignant(e)</caption>
+				<caption>Années scolaires et enseignants</caption>
 				<thead></thead>
 				<tfoot></tfoot>
 				<tbody>
+					<?php foreach($aClassesEleve as $aClasse): ?>
 					<tr>
-						<td><?php echo $aClassesEleve['CLASSE_NOM']; ?></td>
-						<td><?php echo $aClassesEleve['CLASSE_ANNEE_SCOLAIRE']; ?></td>
-						<td><?php echo $aClassesEleve['PROFESSEUR_NOM']; ?></td>
+						<td><?php echo $aClasse['CLASSE_NOM']; ?></td>
+						<td><?php echo $aClasse['CLASSE_ANNEE_SCOLAIRE']; ?></td>
+						<td><?php echo $aClasse['PROFESSEUR_NOM']; ?></td>
 					</tr>
+					<?php endforeach; ?>
 				</tbody>
 			</table>
 		</div>
@@ -166,81 +148,122 @@ $sGuiTitle = "Livret d'évaluation";
 	<table class="display">
 		<tr><!-- 1ère ligne de titre -->
 			<td></td>
-			<td class="colonne1" colspan="1">classe <?php echo $aClassesNiveaux['CLASSE_NOM']; ?> (<?php echo $aClassesNiveaux['NIVEAU_NOM']; ?>)</td>
+			<?php foreach($aClassesNiveaux as $i => $aClasseNiveau): /* Pour chaque classe de l'élève */ ?>
+			<td class="colonne<?php echo ($i+1)%count($aPeriodes); ?>" colspan="<?php echo count($aPeriodes); ?>">classe <?php echo $aClasseNiveau['CLASSE_NOM']; ?> (<?php echo $aClasseNiveau['NIVEAU_NOM']; ?>)</td>
+			<?php endforeach; ?>
 		</tr>
 		<tr><!-- 2ème ligne de titre -->
 			<td>Livret n°</td>
-			<td class="colonne1" style="width: 25px;"><?php echo $aPeriodes['PERIODE_NOM']; ?></td>
+			<?php foreach($aClassesNiveaux as $i => $aClasseNiveau): /* Pour chaque classe de l'élève */ ?>
+				<?php foreach($aPeriodes as $aPeriode): ?>
+				<td class="colonne<?php echo ($i+1)%count($aPeriodes); ?>" style="width: 25px;"><?php echo $aPeriode['PERIODE_NOM']; ?></td>
+				<?php endforeach; ?>
+			<?php endforeach; ?>
 		</tr>
 		<?php foreach($aDomainesMatieresCompetences as $sDomaine => $aMatieres): ?>
 		<tr style="font-size: 1.1em; background-color: #848484;"><!-- Ligne du domaine -->
-			<td colspan="2" style="text-align: center;"><?php echo $sDomaine; ?></td>
+			<td colspan="<?php echo 1+count($aClassesNiveaux) * count($aPeriodes); ?>" style="text-align: center;"><?php echo $sDomaine; ?></td>
 		</tr>
 			<?php foreach($aMatieres as $sMatiere => $aCompetences): ?>
 			<tr style="font-size: 1em;"><!-- Ligne de la matière -->
-				<td colspan="2" style="text-align: left; background-color: #848484;"><?php echo $sMatiere; ?></td>
+				<td colspan="<?php echo 1+count($aClassesNiveaux) * count($aPeriodes); ?>" style="text-align: left; background-color: #848484;"><?php echo $sMatiere; ?></td>
 			</tr>
 				<?php foreach($aCompetences as $sCompetence => $aCompetence): /* Pour chaque compétence */ ?>
 				<tr style="font-size: 0.9em;"><!-- Ligne de la competence -->
 					<td><?php echo $sCompetence; ?></td>
-					<td class="colonne1">
-						<?php $sNiveauNom = $aClassesNiveaux['NIVEAU_NOM']; ?>
-						<?php $sClasseNom = $aClassesNiveaux['CLASSE_NOM']; ?>
-						<?php $sPeriodeNom = $aPeriodes['PERIODE_NOM']; ?>
-						<?php $aToDisplay = $aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]; ?>
-						<?php echo $aToDisplay['NOTE_LABEL']; ?>&nbsp;
-					</td>
+					<?php foreach($aClassesNiveaux as $i => $aClasseNiveau): /* Pour chaque classe de l'élève */ ?>
+						<?php foreach($aPeriodes as $aPeriode): /* Pour chaque période */ ?>
+						<td class="colonne<?php echo ($i+1)%count($aPeriodes); ?>">
+							<?php $sNiveauNom = $aClasseNiveau['NIVEAU_NOM']; ?>
+							<?php $sClasseNom = $aClasseNiveau['CLASSE_NOM']; ?>
+							<?php $sPeriodeNom = $aPeriode['PERIODE_NOM']; ?>
+							<?php $aToDisplay = $aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]; ?>
+							<?php echo $aToDisplay['NOTE_LABEL']; ?>
+						</td>
+						<?php endforeach; ?>
+					<?php endforeach; ?>
 				</tr>
 				<?php endforeach; ?>
 			<?php endforeach; ?>
 		<?php endforeach; ?>
 	</table>
 
-	<!-- Saut de ligne -->
-	<div style="page-break-after:always;"></div>
+	<?php foreach($aClassesNiveaux as $i => $aClasseNiveau): /* Pour chaque classe de l'élève */ ?>
+		<!-- Saut de ligne -->
+		<div style="page-break-after:always;"></div>
+		<!-- Tableau d'appréciations -->
+		<table class="display" style="width: 1000px;">
+			<thead>
+				<tr>
+					<td colspan="2">classe <?php echo $aClasseNiveau['CLASSE_NOM']; ?> (<?php echo $aClasseNiveau['NIVEAU_NOM']; ?>)</td>
+				</tr>
+				<tr>
+					<td>N° livret</td>
+					<td>APPRECIATIONS DE L'ENSEIGNANT</td>
+				</tr>
+			</thead>
+			<tfoot></tfoot>
+			<tbody>
+				<?php foreach($aPeriodes as $aPeriode): /* Pour chaque période */ ?>
+				<tr style="width: 500px; height: 150px;">
+					<td style="width: 20%"><?php echo $aPeriode['PERIODE_NOM']; ?></td>
+					<td style="width: 80%"></td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
 
-	<!-- Tableau d'appréciations -->
-	<table class="display" style="width: 1000px;">
-		<thead>
-			<tr>
-				<td colspan="2">classe <?php echo $aClassesNiveaux['CLASSE_NOM']; ?> (<?php echo $aClassesNiveaux['NIVEAU_NOM']; ?>)</td>
-			</tr>
-			<tr>
-				<td>N° livret</td>
-				<td>APPRECIATIONS DE L'ENSEIGNANT</td>
-			</tr>
-		</thead>
-		<tfoot></tfoot>
-		<tbody>
-			<tr style="width: 500px; height: 150px;">
-				<td style="width: 20%"><?php echo $aPeriodes['PERIODE_NOM']; ?></td>
-				<td style="width: 80%">&nbsp;</td>
-			</tr>
-		</tbody>
-	</table>
+		<!-- Saut de ligne -->
+		<div style="page-break-after:always;"></div>
+		<!-- Tableau des signatures -->
+		<table class="display" style="width: 1000px;">
+			<thead>
+				<tr>
+					<td colspan="4">classe <?php echo $aClasseNiveau['CLASSE_NOM']; ?> ..................</td>
+				</tr>
+				<tr>
+					<td>N° livret</td>
+					<td>L'enseignant(e)</td>
+					<td>La directrice<br />Le directeur</td>
+					<td>Les parents</td>
+				</tr>
+			</thead>
+			<tfoot></tfoot>
+			<tbody>
+				<?php foreach($aPeriodes as $aPeriode): /* Pour chaque période */ ?>
+				<tr style="height: 150px;">
+					<td style="width: 10%"><?php echo $aPeriode['PERIODE_NOM']; ?></td>
+					<td style="width: 30%"></td>
+					<td style="width: 30%"></td>
+					<td style="width: 30%"></td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
 
-	<!-- Tableau des signatures -->
-	<table class="display" style="width: 1000px; margin-top: 30px;">
-		<thead>
-			<tr>
-				<td colspan="4">classe <?php echo $aClassesNiveaux['CLASSE_NOM']; ?></td>
-			</tr>
-			<tr>
-				<td>N° livret</td>
-				<td>L'enseignant(e)</td>
-				<td>La directrice<br />Le directeur</td>
-				<td>Les parents</td>
-			</tr>
-		</thead>
-		<tfoot></tfoot>
-		<tbody>
-			<tr style="height: 150px;">
-				<td style="width: 10%"><?php echo $aPeriodes['PERIODE_NOM']; ?></td>
-				<td style="width: 30%">&nbsp;</td>
-				<td style="width: 30%">&nbsp;</td>
-				<td style="width: 30%">&nbsp;</td>
-			</tr>
-		</tbody>
-	</table>
+		<!-- Tableau de conseil -->
+		<table class="display" style="margin-top: 30px; width: 1000px;">
+			<tbody></tbody>
+			<tfoot></tfoot>
+			<tbody>
+				<tr>
+					<td colspan="3">Avis du conseil des maîtres de cycle <?php echo $aEleve['CYCLE_NOM']; ?></td>
+				</tr>
+				<tr style="height: 150px;">
+					<td colspan="3"></td>
+				</tr>
+				<tr>
+					<td>L'enseignant(e)</td>
+					<td>La directrice<br />Le directeur</td>
+					<td>Les parents</td>
+				</tr>
+				<tr style="height: 150px;">
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	<?php endforeach; ?>
 </body>
 </html>
