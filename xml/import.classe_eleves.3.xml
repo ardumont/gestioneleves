@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classe cycle="III" niveau="CM2" nom="cm2a" professeur="Christelle Héritier" annee_scolaire="2009-2010">
+	<ecole nom="Edouard Vaillant" ville="Blanc-Mesnil" departement="93150" />
+	<eleve nom="DUMONT Antoine" date_naissance="22/10/1982" />
+</classe>
