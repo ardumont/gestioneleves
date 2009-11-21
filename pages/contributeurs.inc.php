@@ -15,13 +15,15 @@ $aTitres = array(
 // tableau des mainteneurs
 // Nom => "Initiateur, Archi, Dév, Doc, Design, bugs, évo, testeurs"
 $aMainteneurs = array(
-	"Antoine Romain Dumont"	=>	"1,1,1,1,1,1,1,1",
+	"Dumont Antoine Romain "	=>	"1,1,1,1,1,1,1,1",
 );
 
 // tableau des contributeurs
 // Nom => "Initiateur, Archi, Dév, Doc, Design, bugs, évo, testeurs"
 $aConstributeurs = array(
-	"Christelle Héritier"	=>	"0,0,0,1,0,0,0,1",
+	"Bianchi Edouard"     => "0,1,0,0,0,0,0,0",
+	"Héritier Christelle" => "0,0,0,1,0,0,1,1",
+	"Sauron Lionel"       => "0,1,0,0,0,0,0,0",
 );
 ?>
 <h1>Liste des contributeurs</h1>
