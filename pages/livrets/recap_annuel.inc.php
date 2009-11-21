@@ -144,13 +144,13 @@ if($nEleveId != -1)
 			<tr>
 				<td>
 					<!-- Les pages d'évaluations individuelles -->
-					<table>
+					<table class="entete_n">
 						<thead></thead>
 						<tfoot></tfoot>
 						<thead>
 							<tr>
 								<?php foreach($aNotes as $aNote): ?>
-								<td><?php echo $aNote['NOTE_LABEL']; ?> = <?php echo $aNote['NOTE_NOM']; ?></td>
+								<td class="<?php echo $aNote['NOTE_LABEL']; ?>"><?php echo $aNote['NOTE_LABEL']; ?> = <?php echo $aNote['NOTE_NOM']; ?></td>
 								<?php endforeach; ?>
 							</tr>
 						</thead>
@@ -160,31 +160,30 @@ if($nEleveId != -1)
 						<tr><!-- 1ère ligne de titre -->
 							<td></td>
 							<?php foreach($aClassesNiveaux as $i => $aClasseNiveau): /* Pour chaque classe de l'élève */ ?>
-							<td class="colonne<?php echo ($i+1)%2; ?>" colspan="<?php echo count($aPeriodesInfo); ?>">classe <?php echo $aClasseNiveau['CLASSE_NOM']; ?> (<?php echo $aClasseNiveau['NIVEAU_NOM']; ?>)</td>
+							<td class="colonne<?php echo ($i+1)%count($aPeriodesInfo); ?>" colspan="<?php echo count($aPeriodesInfo); ?>">classe <?php echo $aClasseNiveau['CLASSE_NOM']; ?> (<?php echo $aClasseNiveau['NIVEAU_NOM']; ?>)</td>
 							<?php endforeach; ?>
 						</tr>
 						<tr><!-- 2ème ligne de titre -->
 							<td>Livret n°</td>
 							<?php foreach($aClassesNiveaux as $i => $aClasseNiveau): /* Pour chaque classe de l'élève */ ?>
 								<?php foreach($aPeriodesInfo as $aPeriode): ?>
-								<td class="colonne<?php echo ($i+1)%2; ?>" style="width: 25px;"><?php echo $aPeriode['PERIODE_NOM']; ?></td>
+								<td class="colonne<?php echo ($i+1)%count($aPeriodesInfo); ?>" style="width: 25px;"><?php echo $aPeriode['PERIODE_NOM']; ?></td>
 								<?php endforeach; ?>
 							<?php endforeach; ?>
 						</tr>
 						<?php foreach($aDomainesMatieresCompetences as $sDomaine => $aMatieres): ?>
-						<tr style="font-size: 1.1em; background-color: #848484;"><!-- Ligne du domaine -->
+						<tr class="domaine"><!-- Ligne du domaine -->
 							<td colspan="<?php echo 1+count($aClassesNiveaux) * count($aPeriodesInfo); ?>" style="text-align: center;"><?php echo $sDomaine; ?></td>
 						</tr>
 							<?php foreach($aMatieres as $sMatiere => $aCompetences): ?>
-							<tr style="font-size: 1em;"><!-- Ligne de la matière -->
-								<td colspan="<?php echo 1+count($aClassesNiveaux) * count($aPeriodesInfo); ?>" style="text-align: left; background-color: #848484;"><?php echo $sMatiere; ?></td>
+							<tr class="matiere"><!-- Ligne de la matière -->
+								<td colspan="<?php echo 1+count($aClassesNiveaux) * count($aPeriodesInfo); ?>"><?php echo $sMatiere; ?></td>
 							</tr>
 								<?php foreach($aCompetences as $sCompetence => $aCompetence): /* Pour chaque compétence */ ?>
 								<tr style="font-size: 0.9em;"><!-- Ligne de la competence -->
 									<td><?php echo $sCompetence; ?></td>
 									<?php foreach($aClassesNiveaux as $i => $aClasseNiveau): /* Pour chaque classe de l'élève */ ?>
 										<?php foreach($aPeriodesInfo as $aPeriode): /* Pour chaque période */ ?>
-										<td class="colonne<?php echo ($i+1)%2; ?>">
 											<?php $sNiveauNom = $aClasseNiveau['NIVEAU_NOM']; ?>
 											<?php $sClasseNom = $aClasseNiveau['CLASSE_NOM']; ?>
 											<?php $sPeriodeNom = $aPeriode['PERIODE_NOM']; ?>
@@ -196,12 +195,11 @@ if($nEleveId != -1)
 												   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom]) &&
 												   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]))
 												{
-													$aToDisplay = $aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom];
-													echo $aToDisplay['NOTE_LABEL'];
-												} else { ?>
-													&nbsp;
+													$aToDisplay = $aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]; ?>
+													<td class="<?php echo $aToDisplay['NOTE_LABEL']; ?>"><?php echo $aToDisplay['NOTE_LABEL']; ?></td>
+												<?php } else { ?>
+													<td class="colonne<?php echo ($i+1)%count($aPeriodesInfo); ?>">&nbsp;</td>
 												<?php } ?>
-										</td>
 										<?php endforeach; ?>
 									<?php endforeach; ?>
 								</tr>

@@ -147,14 +147,14 @@ $aNomPrenom = $aRes['NOM_PRENOM'];
 		<tr><!-- 1ère ligne de titre -->
 			<td></td>
 			<?php foreach($aClassesNiveaux as $i => $aClasseNiveau): /* Pour chaque classe de l'élève */ ?>
-			<td class="colonne<?php echo ($i+1)%2; ?>" colspan="<?php echo count($aPeriodes); ?>">classe <?php echo $aClasseNiveau['CLASSE_NOM']; ?> (<?php echo $aClasseNiveau['NIVEAU_NOM']; ?>)</td>
+			<td class="colonne<?php echo ($i+1)%count($aPeriodes); ?>" colspan="<?php echo count($aPeriodes); ?>">classe <?php echo $aClasseNiveau['CLASSE_NOM']; ?> (<?php echo $aClasseNiveau['NIVEAU_NOM']; ?>)</td>
 			<?php endforeach; ?>
 		</tr>
 		<tr><!-- 2ème ligne de titre -->
 			<td>Livret n°</td>
 			<?php foreach($aClassesNiveaux as $i => $aClasseNiveau): /* Pour chaque classe de l'élève */ ?>
 				<?php foreach($aPeriodes as $aPeriode): ?>
-				<td class="colonne<?php echo ($i+1)%2; ?>" style="width: 25px;"><?php echo $aPeriode['PERIODE_NOM']; ?></td>
+				<td class="colonne<?php echo ($i+1)%count($aPeriodes); ?>" style="width: 25px;"><?php echo $aPeriode['PERIODE_NOM']; ?></td>
 				<?php endforeach; ?>
 			<?php endforeach; ?>
 		</tr>
@@ -171,7 +171,7 @@ $aNomPrenom = $aRes['NOM_PRENOM'];
 					<td><?php echo $sCompetence; ?></td>
 					<?php foreach($aClassesNiveaux as $i => $aClasseNiveau): /* Pour chaque classe de l'élève */ ?>
 						<?php foreach($aPeriodes as $aPeriode): /* Pour chaque période */ ?>
-						<td class="colonne<?php echo ($i+1)%2; ?>">
+						<td class="colonne<?php echo ($i+1)%count($aPeriodes); ?>">
 							<?php $sNiveauNom = $aClasseNiveau['NIVEAU_NOM']; ?>
 							<?php $sClasseNom = $aClasseNiveau['CLASSE_NOM']; ?>
 							<?php $sPeriodeNom = $aPeriode['PERIODE_NOM']; ?>

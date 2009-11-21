@@ -192,7 +192,7 @@ if($nEleveId != -1 && $nPeriodeId != -1)
 							<thead>
 								<tr>
 									<?php foreach($aNotes as $aNote): ?>
-									<td><?php echo $aNote['NOTE_LABEL']; ?> = <?php echo $aNote['NOTE_NOM']; ?></td>
+									<td class="<?php echo $aNote['NOTE_LABEL']; ?>"><?php echo $aNote['NOTE_LABEL']; ?> = <?php echo $aNote['NOTE_NOM']; ?></td>
 									<?php endforeach; ?>
 								</tr>
 							</thead>
@@ -208,17 +208,16 @@ if($nEleveId != -1 && $nPeriodeId != -1)
 								<td class="colonne1" style="width: 25px;"><?php echo $aPeriodesInfo['PERIODE_NOM']; ?></td>
 							</tr>
 							<?php foreach($aDomainesMatieresCompetences as $sDomaine => $aMatieres): ?>
-							<tr style="font-size: 1.1em; background-color: #848484;"><!-- Ligne du domaine -->
+							<tr class="domaine"><!-- Ligne du domaine -->
 								<td colspan="2" style="text-align: center;"><?php echo $sDomaine; ?></td>
 							</tr>
 								<?php foreach($aMatieres as $sMatiere => $aCompetences): ?>
-								<tr style="font-size: 1em;"><!-- Ligne de la matière -->
-									<td colspan="2" style="text-align: left; background-color: #848484;"><?php echo $sMatiere; ?></td>
+								<tr class="matiere"><!-- Ligne de la matière -->
+									<td colspan="2"><?php echo $sMatiere; ?></td>
 								</tr>
 									<?php foreach($aCompetences as $sCompetence => $aCompetence): /* Pour chaque compétence */ ?>
 									<tr style="font-size: 0.9em;"><!-- Ligne de la competence -->
 										<td><?php echo $sCompetence; ?></td>
-										<td class="colonne1">
 											<?php $sNiveauNom = $aClassesNiveaux['NIVEAU_NOM']; ?>
 											<?php $sClasseNom = $aClassesNiveaux['CLASSE_NOM']; ?>
 											<?php $sPeriodeNom = $aPeriodesInfo['PERIODE_NOM']; ?>
@@ -229,12 +228,11 @@ if($nEleveId != -1 && $nPeriodeId != -1)
 												   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom]) &&
 												   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]))
 												{
-													$aToDisplay = $aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom];
-													echo $aToDisplay['NOTE_LABEL'];
-												} else { ?>
-													&nbsp;
+													$aToDisplay = $aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]; ?>
+													<td class="<?php echo $aToDisplay['NOTE_LABEL']; ?>"><?php echo $aToDisplay['NOTE_LABEL']; ?></td>
+												<?php } else { ?>
+													<td class="colonne<?php echo ($i+1)%2; ?>">&nbsp;</td>
 												<?php } ?>
-										</td>
 									</tr>
 									<?php endforeach; ?>
 								<?php endforeach; ?>
