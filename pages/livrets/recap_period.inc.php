@@ -181,7 +181,7 @@ if($nEleveId != -1 && $nPeriodeId != -1)
 <?php if($nEleveId != -1 && $nPeriodeId != -1): ?>
 	<?php if($aEvalInds != false): ?>
 		<table class="formulaire">
-			<caption>Compétences de fin de cycle <?php echo $aEleveInfo['CYCLE_NOM']; ?></caption>
+			<caption>Compétences - Cycle <?php echo $aEleveInfo['CYCLE_NOM']; ?> - Période <?php echo $aPeriodesInfo['PERIODE_NOM']; ?> - Classe <?php echo $aClassesNiveaux['CLASSE_NOM']; ?> - Elève <?php echo $aEleveInfo['ELEVE_NOM']; ?></caption>
 			<tbody>
 				<tr>
 					<td>

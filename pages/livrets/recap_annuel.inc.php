@@ -139,7 +139,7 @@ if($nEleveId != -1)
 	<?php if($aEvalInds != false): ?>
 	<!-- Affichage du récapitulatif -->
 	<table class="formulaire">
-		<caption>Compétences de fin de cycle <?php echo $aEleveInfo['CYCLE_NOM']; ?></caption>
+		<caption>Compétences - Cycle <?php echo $aEleveInfo['CYCLE_NOM']; ?> - Elève <?php echo $aEleveInfo['ELEVE_NOM']; ?></caption>
 		<tbody>
 			<tr>
 				<td>
