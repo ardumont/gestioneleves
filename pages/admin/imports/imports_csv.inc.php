@@ -47,23 +47,26 @@ $sCSVExemple = utf8_decode($sCSVExemple);
 <?php endif; ?>
 
 <br />
-<table class="formulaire">
-	<caption>Fonctionnement</caption>
-	<tr>
-		<td>
-			Le but est de faciliter la cr&eacute;ation des Cycle/Domaine/Mati&egrave;re/Comp&eacute;tence.<br />
-			Pour cela, vous pouvez
-			<ul>
-				<li>soit saisir dans chacune des ihms dans cet ordre les cycles, domaines, mati&egrave;res et comp&eacute;tences.</li>
-				<li>soit importer un fichier csv &eacute;dit&eacute; &agrave; la main avec une structure similaire :
-					<pre style="font-size: 1.1em;"><?php echo htmlentities($sCSVExemple); ?></pre>
-					L'ordre dans le fichier est important, il montre la dépendance des cycles, niveaux, domaines, matières et compétences.
-					Attention à l'encodage du fichier qui doit être en UTF-8.
-				</li>
-			</ul>
-		</td>
-	</tr>
-</table>
+<a href="javascript:void(0);" onclick="showOrHide('help')">Cliquer ici pour de l'aide</a>
+<div id="help" style="display: none;">
+	<table class="formulaire">
+		<caption>Fonctionnement</caption>
+		<tr>
+			<td>
+				Le but est de faciliter la cr&eacute;ation des Cycle/Domaine/Mati&egrave;re/Comp&eacute;tence.<br />
+				Pour cela, vous pouvez
+				<ul>
+					<li>soit saisir dans chacune des ihms dans cet ordre les cycles, domaines, mati&egrave;res et comp&eacute;tences.</li>
+					<li>soit importer un fichier csv &eacute;dit&eacute; &agrave; la main avec une structure similaire :
+						<pre style="font-size: 1.1em;"><?php echo htmlentities($sCSVExemple); ?></pre>
+						L'ordre dans le fichier est important, il montre la dépendance des cycles, niveaux, domaines, matières et compétences.
+						Attention à l'encodage du fichier qui doit être en UTF-8.
+					</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+</div>
 
 <form method="post" action="?page=imports&amp;mode=imports_csv_do" enctype="multipart/form-data">
 	<table class="formulaire">

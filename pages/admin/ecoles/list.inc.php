@@ -47,18 +47,21 @@ $aEcoles = Database::fetchArray($sQuery);
 <?php endif; ?>
 
 <br />
-<table class="formulaire">
-	<caption>Fonctionnement</caption>
-	<tr>
-		<td>
-			Par défaut, cette page liste les écoles existantes dans l'application.<br />
-			<br />
-			Vous pouvez modifier une classe en cliquant sur le nom de l'école.<br />
-			Vous pouvez également ajouter une école en cliquant sur le + en haut à gauche du tableau.
-			<br />&nbsp;
-		</td>
-	</tr>
-</table>
+<a href="javascript:void(0);" onclick="showOrHide('help')">Cliquer ici pour de l'aide</a>
+<div id="help" style="display: none;">
+	<table class="formulaire">
+		<caption>Fonctionnement</caption>
+		<tr>
+			<td>
+				Par défaut, cette page liste les écoles existantes dans l'application.<br />
+				<br />
+				Vous pouvez modifier une classe en cliquant sur le nom de l'école.<br />
+				Vous pouvez également ajouter une école en cliquant sur le + en haut à gauche du tableau.
+				<br />&nbsp;
+			</td>
+		</tr>
+	</table>
+</div>
 <br />
 
 <?php if($aEcoles != false): ?>

@@ -97,21 +97,24 @@ $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAI
 <?php endif; ?>
 
 <br />
-<table class="formulaire">
-	<caption>Fonctionnement</caption>
-	<tr>
-		<td>
-			Par défaut, cette page liste l'ensemble des matières existantes dans l'application.<br />
-			Cette page permet de filtrer sur un cycle ou un domaine pour faciliter la lecture.<br />
-			Pour cela, sélectionner un cycle ou un domaine ou bien encore une combinaison de ces filtres puis cliquer sur le bouton
-			<i>Rechercher</i> pour que la page se rafraîchisse.<br />
-			<br />
-			Vous pouvez modifier une matière en cliquant sur le nom de la matière.<br />
-			Vous pouvez également ajouter une matière en cliquant sur le + en haut à gauche du tableau.
-			<br />&nbsp;
-		</td>
-	</tr>
-</table>
+<a href="javascript:void(0);" onclick="showOrHide('help')">Cliquer ici pour de l'aide</a>
+<div id="help" style="display: none;">
+	<table class="formulaire">
+		<caption>Fonctionnement</caption>
+		<tr>
+			<td>
+				Par défaut, cette page liste l'ensemble des matières existantes dans l'application.<br />
+				Cette page permet de filtrer sur un cycle ou un domaine pour faciliter la lecture.<br />
+				Pour cela, sélectionner un cycle ou un domaine ou bien encore une combinaison de ces filtres puis cliquer sur le bouton
+				<i>Rechercher</i> pour que la page se rafraîchisse.<br />
+				<br />
+				Vous pouvez modifier une matière en cliquant sur le nom de la matière.<br />
+				Vous pouvez également ajouter une matière en cliquant sur le + en haut à gauche du tableau.
+				<br />&nbsp;
+			</td>
+		</tr>
+	</table>
+</div>
 
 <form method="post" action="?page=matieres" name="formulaire_matiere" id="formulaire_matiere">
 	<table class="formulaire">

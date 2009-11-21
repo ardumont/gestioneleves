@@ -44,17 +44,20 @@ $aProfesseurs = Database::fetchArray($sQuery);
 </ul>
 <?php endif; ?>
 <br />
-<table class="formulaire">
-	<caption>Fonctionnement</caption>
-	<tr>
-		<td>
-			Par défaut, cette page affiche l'ensemble des professeurs qui utilisent l'application.<br />
-			Vous pouvez modifier un professeur en cliquant sur le nom du professeur.<br />
-			Pour ajouter un professeur, cliquer sur le plus en haut à gauche du tableau.
-			<br />&nbsp;
-		</td>
-	</tr>
-</table>
+<a href="javascript:void(0);" onclick="showOrHide('help')">Cliquer ici pour de l'aide</a>
+<div id="help" style="display: none;">
+	<table class="formulaire">
+		<caption>Fonctionnement</caption>
+		<tr>
+			<td>
+				Par défaut, cette page affiche l'ensemble des professeurs qui utilisent l'application.<br />
+				Vous pouvez modifier un professeur en cliquant sur le nom du professeur.<br />
+				Pour ajouter un professeur, cliquer sur le plus en haut à gauche du tableau.
+				<br />&nbsp;
+			</td>
+		</tr>
+	</table>
+</div>
 <br />
 <?php if($aProfesseurs != false): ?>
 <table class="list_tree">

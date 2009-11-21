@@ -73,20 +73,23 @@ $aDomaines = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 <?php endif; ?>
 <br />
 
-<table class="formulaire">
-	<caption>Fonctionnement</caption>
-	<tr>
-		<td>
-			Par défaut, cette page liste les domaines existants dans l'application.<br />
-			Cette page permet de filtrer sur un cycle pour faciliter la lecture.<br />
-			Pour cela, sélectionner un cycle puis cliquer sur le bouton <i>Rechercher</i> pour que la page se rafraîchisse.<br />
-			<br />
-			Vous pouvez modifier un domaine en cliquant sur le nom du cycle.<br />
-			Vous pouvez également ajouter un cycle en cliquant sur le + en haut à gauche du tableau.
-			<br />&nbsp;
-		</td>
-	</tr>
-</table>
+<a href="javascript:void(0);" onclick="showOrHide('help')">Cliquer ici pour de l'aide</a>
+<div id="help" style="display: none;">
+	<table class="formulaire">
+		<caption>Fonctionnement</caption>
+		<tr>
+			<td>
+				Par défaut, cette page liste les domaines existants dans l'application.<br />
+				Cette page permet de filtrer sur un cycle pour faciliter la lecture.<br />
+				Pour cela, sélectionner un cycle puis cliquer sur le bouton <i>Rechercher</i> pour que la page se rafraîchisse.<br />
+				<br />
+				Vous pouvez modifier un domaine en cliquant sur le nom du cycle.<br />
+				Vous pouvez également ajouter un cycle en cliquant sur le + en haut à gauche du tableau.
+				<br />&nbsp;
+			</td>
+		</tr>
+	</table>
+</div>
 
 <form method="post" action="?page=domaines" name="formulaire_domaine" id="formulaire_domaine">
 	<table class="formulaire">

@@ -101,16 +101,19 @@ if($nEleveId != -1)
 </ul>
 <?php endif; ?>
 <br />
-<table class="formulaire">
-	<caption>Fonctionnement</caption>
-	<tr>
-		<td>
-			Par défaut, cette page permet d'afficher un récapitulatif de l'activité annuelle d'un élève de votre classe.<br />
-			Vous sélectionnez l'élève de votre classe puis vous lancez l'affichage en cliquant sur le bouton <i>Afficher</i>.
-			<br />&nbsp;
-		</td>
-	</tr>
-</table>
+<a href="javascript:void(0);" onclick="showOrHide('help')">Cliquer ici pour de l'aide</a>
+<div id="help" style="display: none;">
+	<table class="formulaire">
+		<caption>Fonctionnement</caption>
+		<tr>
+			<td>
+				Par défaut, cette page permet d'afficher un récapitulatif de l'activité annuelle d'un élève de votre classe.<br />
+				Vous sélectionnez l'élève de votre classe puis vous lancez l'affichage en cliquant sur le bouton <i>Afficher</i>.
+				<br />&nbsp;
+			</td>
+		</tr>
+	</table>
+</div>
 
 <form method="post" action="?page=livrets&amp;mode=recap_cycle" name="formulaire_list" id="formulaire_list">
 	<table class="formulaire">

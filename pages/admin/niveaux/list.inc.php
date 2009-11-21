@@ -48,18 +48,21 @@ $aNiveaux = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 <?php endif; ?>
 
 <br />
-<table class="formulaire">
-	<caption>Fonctionnement</caption>
-	<tr>
-		<td>
-			Par défaut, cette page affiche l'ensemble des niveaux existants dans l'application.<br />
-			<br />
-			Vous pouvez modifier un niveau en cliquant sur son nom.<br />
-			Vous pouvez également ajouter un niveau en cliquant sur le + en haut à gauche du tableau.
-			<br />&nbsp;
-		</td>
-	</tr>
-</table>
+<a href="javascript:void(0);" onclick="showOrHide('help')">Cliquer ici pour de l'aide</a>
+<div id="help" style="display: none;">
+	<table class="formulaire">
+		<caption>Fonctionnement</caption>
+		<tr>
+			<td>
+				Par défaut, cette page affiche l'ensemble des niveaux existants dans l'application.<br />
+				<br />
+				Vous pouvez modifier un niveau en cliquant sur son nom.<br />
+				Vous pouvez également ajouter un niveau en cliquant sur le + en haut à gauche du tableau.
+				<br />&nbsp;
+			</td>
+		</tr>
+	</table>
+</div>
 <br />
 
 <?php if($aNiveaux != false): ?>

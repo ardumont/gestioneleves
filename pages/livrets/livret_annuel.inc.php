@@ -58,17 +58,20 @@ $aEleves = Database::fetchArray($sQuery);
 </ul>
 <?php endif; ?>
 <br />
-<table class="formulaire">
-	<caption>Fonctionnement</caption>
-	<tr>
-		<td>
-			Par défaut, cette page permet de générer un livret annuel (toutes les périodes du cycle de votre classe)
-			pour un élève.<br />
-			Vous sélectionnez l'élève de votre classe puis vous lancez la génération du livret en cliquant sur le bouton <i>Générer</i>.
-			<br />&nbsp;
-		</td>
-	</tr>
-</table>
+<a href="javascript:void(0);" onclick="showOrHide('help')">Cliquer ici pour de l'aide</a>
+<div id="help" style="display: none;">
+	<table class="formulaire">
+		<caption>Fonctionnement</caption>
+		<tr>
+			<td>
+				Par défaut, cette page permet de générer un livret annuel (toutes les périodes du cycle de votre classe)
+				pour un élève.<br />
+				Vous sélectionnez l'élève de votre classe puis vous lancez la génération du livret en cliquant sur le bouton <i>Générer</i>.
+				<br />&nbsp;
+			</td>
+		</tr>
+	</table>
+</div>
 
 <form method="post" action="special.php?page=export_livret_eleve_annuel" name="formulaire_list" id="formulaire_list">
 	<table class="formulaire">

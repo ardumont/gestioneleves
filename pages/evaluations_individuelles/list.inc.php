@@ -151,19 +151,21 @@ $aEvalInds= Database::fetchArray($sQuery);
 </ul>
 <?php endif; ?>
 <br />
-<table class="formulaire">
-	<caption>Fonctionnement</caption>
-	<tr>
-		<td>
-			Par défaut, cette page affiche toutes les évaluations individuelles saisies à ce jour par le professeur connecté.<br />
-			Vous pouvez toutefois ne filtrer que par classe ou par élève.<br />
-			Pour cela, sélectionner une classe ou un élève puis cliquer sur le bouton <i>Rechercher</i>.<br />
-			Attention, toutefois, si l'élève n'appartient pas à la classe, aucun résultat ne s'affichera.
-			<br />&nbsp;
-		</td>
-	</tr>
-</table>
-
+<a href="javascript:void(0);" onclick="showOrHide('help')">Cliquer ici pour de l'aide</a>
+<div id="help" style="display: none;">
+	<table class="formulaire">
+		<caption>Fonctionnement</caption>
+		<tr>
+			<td>
+				Par défaut, cette page affiche toutes les évaluations individuelles saisies à ce jour par le professeur connecté.<br />
+				Vous pouvez toutefois ne filtrer que par classe ou par élève.<br />
+				Pour cela, sélectionner une classe ou un élève puis cliquer sur le bouton <i>Rechercher</i>.<br />
+				Attention, toutefois, si l'élève n'appartient pas à la classe, aucun résultat ne s'affichera.
+				<br />&nbsp;
+			</td>
+		</tr>
+	</table>
+</div>
 <form method="post" action="?page=evaluations_individuelles" name="formulaire_eval_ind" id="formulaire_eval_ind">
 	<table class="formulaire">
 		<caption>Critères de recherche</caption>

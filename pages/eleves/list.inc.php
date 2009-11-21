@@ -111,19 +111,22 @@ ____EOQ;
 <?php endif; ?>
 <br />
 
-<table class="formulaire">
-	<caption>Fonctionnement</caption>
-	<tr>
-		<td>
-			Par défaut, cette page affiche tous les élèves par classe du professeur connecté.<br />
-			Vous pouvez sélectionner une classe parmi la liste proposée puis cliquer sur le bouton <i>Rechercher</i>.<br />
-			<br />
-			Pour éditer un élève, cliquer sur le nom de l'élève puis modifier les propriétés désirées.<br />
-			Pour ajouter un élève, cliquer sur le + en image dans l'angle en haut a gauche.
-			<br />&nbsp;
-		</td>
-	</tr>
-</table>
+<a href="javascript:void(0);" onclick="showOrHide('help')">Cliquer ici pour de l'aide</a>
+<div id="help" style="display: none;">
+	<table class="formulaire">
+		<caption>Fonctionnement</caption>
+		<tr>
+			<td>
+				Par défaut, cette page affiche tous les élèves par classe du professeur connecté.<br />
+				Vous pouvez sélectionner une classe parmi la liste proposée puis cliquer sur le bouton <i>Rechercher</i>.<br />
+				<br />
+				Pour éditer un élève, cliquer sur le nom de l'élève puis modifier les propriétés désirées.<br />
+				Pour ajouter un élève, cliquer sur le + en image dans l'angle en haut a gauche.
+				<br />&nbsp;
+			</td>
+		</tr>
+	</table>
+</div>
 
 <?php if($aClasses != false): ?>
 	<form method="post" action="?page=eleves" name="formulaire_eleve" id="formulaire_eleve">
