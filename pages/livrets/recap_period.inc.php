@@ -132,7 +132,7 @@ if($nEleveId != -1 && $nPeriodeId != -1)
 </ul>
 <?php endif; ?>
 <br />
-<a href="javascript:void(0);" onclick="showOrHide('help')">Cliquer ici pour de l'aide</a>
+<a href="javascript:void(0);" onclick="showOrHide('help')">Aide</a>
 <?php if($nEleveId != -1 && $nPeriodeId != -1): ?>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="special.php?page=export_livret_eleve_period&amp;eleve_id=<?php echo $nEleveId; ?>&amp;periode_id=<?php echo $nPeriodeId; ?>">Version imprimable</a>
 <?php endif ?>

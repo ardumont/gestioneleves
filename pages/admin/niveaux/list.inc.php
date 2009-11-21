@@ -48,7 +48,7 @@ $aNiveaux = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 <?php endif; ?>
 
 <br />
-<a href="javascript:void(0);" onclick="showOrHide('help')">Cliquer ici pour de l'aide</a>
+<a href="javascript:void(0);" onclick="showOrHide('help')">Aide</a>
 <div id="help" style="display: none;">
 	<table class="formulaire">
 		<caption>Fonctionnement</caption>
