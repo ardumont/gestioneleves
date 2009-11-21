@@ -49,6 +49,7 @@ class Livret
 				INNER JOIN CYCLES
 					ON NIVEAUX.ID_CYCLE = CYCLES.CYCLE_ID
 			WHERE ELEVE_ID = {$nEleveId}
+			{$sRestrictionAnneeScolaire}
 			ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC, ELEVE_NOM ASC
 ________EOQ;
 		$aEleve = Database::fetchOneRow($sQuery);
@@ -70,6 +71,7 @@ ________EOQ;
 				INNER JOIN PROFESSEURS
 					ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
 			WHERE ELEVE_ID = {$nEleveId}
+			{$sRestrictionAnneeScolaire}
 			ORDER BY CLASSE_ANNEE_SCOLAIRE ASC
 ________EOQ;
 		$aClassesEleve = Database::fetchArray($sQuery);
@@ -112,6 +114,7 @@ ________EOQ;
 				INNER JOIN CYCLES
 					ON NIVEAUX.ID_CYCLE = CYCLES.CYCLE_ID
 			WHERE CYCLE_NOM = '{$aEleve['CYCLE_NOM']}'
+			{$sRestrictionAnneeScolaire}
 			ORDER BY NIVEAU_ID ASC
 ________EOQ;
 		$aClassesNiveaux = Database::fetchArray($sQuery);
