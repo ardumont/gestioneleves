@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cycle name="III">
+	<domaine name="Langue française, éducation littéraire et humaine">
+        <matiere name="Littérature (lire, dire, écrire)">
+            <competence name="Etre capable de se servir des catalogues (papiers ou informatiques) de la BCD pour trouver un livre." />
+            <competence name="Etre capable de se servir des informations portées sur la couverture et la page de titre d’un livre pour savoir s’il correspond au livre que l’on cherche." />
+            <competence name="Etre capable de comprendre en le lisant silencieusement un texte littéraire court (petite nouvelle, extrait...) de complexité adaptée à l’âge et à la culture des élèves en s’appuyant sur un traitement correct des substituts des noms, des connecteurs, des formes verbales, de la ponctuation..., et en faisant les inférences nécessaires." />
+            <competence name="Etre capable de lire en le comprenant un texte littéraire long, mettre en mémoire ce qui a été lu (synthèses successives) en mobilisant ses souvenirs lors des reprises." />
+            <competence name="Etre capable de lire personnellement au moins un livre de littérature par mois." />
+            <competence name="Etre capable de reformuler dans ses propres mots une lecture entendue." />
+            <competence name="Etre capable de participer à un débat sur l’interprétation d’un texte littéraire en étant susceptible de vérifier dans le texte ce qui interdit ou permet l’interprétation défendue." />
+            <competence name="Etre capable de restituer au moins dix textes (de prose, de poésie ou de théâtre) parmi ceux qui ont été mémorisés." />
+            <competence name="Etre capable de dire quelques-uns de ces textes en en proposant une interprétation (et en étant susceptible d’expliciter cette dernière)." />
+            <competence name="Etre capable de pouvoir mettre sa voix et son corps en jeu dans un travail collectif portant sur un texte théâtral ou sur un texte poétique." />
+            <competence name="Etre capable d'élaborer et écrire un récit d’au moins une vingtaine de lignes, avec ou sans support, en respectant des contraintes orthographiques, syntaxiques, lexicales et de présentation." />
+            <competence name="Etre capable de pouvoir écrire un fragment de texte de type poétique en obéissant à une ou plusieurs règles précises en référence à des textes poétiques." />
+            <competence name="Avoir compris et retenu que le sens d’une oeuvre littéraire n’est pas immédiatement accessible, mais que le travail d’interprétation nécessaire ne peut s’affranchir des contraintes du texte." />
+            <competence name="Avoir compris et retenu qu’on ne peut confondre un récit littéraire et un récit historique, la fiction et le réel." />
+            <competence name="Avoir compris et retenu les titres des textes lus dans l’année et le nom de leurs auteurs." />
+        </matiere>
+        <matiere name="Observation réfléchie de la langue (orthographe, grammaire, conjugaison, vocabulaire)">
+            <competence name="Etre capable d'effectuer des manipulations dans un texte écrit (déplacement, remplacement, expansion, réduction)." />
+            <competence name="Etre capable d'identifier les verbes dans une phrase." />
+            <competence name="Etre capable de manipuler les différents types de compléments des verbes les plus fréquents." />
+            <competence name="Etre capable d'identifier les noms dans une phrase." />
+            <competence name="Etre capable de manipuler les différentes déterminations du nom (articles, déterminants possessifs, démonstratifs, indéfinis)." />
+            <competence name="Etre capable de manipuler les différentes expansions du nom (adjectifs qualificatifs, relatives, compléments du nom)." />
+            <competence name="Etre capable de trouver le présent, le passé composé, l’imparfait, le passé simple, le futur, le conditionnel présent et le présent du subjonctif des verbes réguliers (à partir des règles d’engendrement)." />
+            <competence name="Etre capable de marquer l’accord sujet/verbe (situations régulières)." />
+            <competence name="Etre capable de repérer et réaliser les chaînes d’accords dans le groupe nominal." />
+            <competence name="Etre capable d'utiliser un dictionnaire pour retrouver la définition d’un mot dans un emploi déterminé." />
+            <competence name="Avoir compris et retenu qu’un texte est structuré." />
+            <competence name="Avoir compris et retenu que les constituants d’une phrase ne sont pas seulement juxtaposés mais sont liés par de nombreuses relations (avec le verbe, autour du nom)." />
+            <competence name="Avoir compris et retenu que la plupart des mots, dans des contextes différents, ont des significations différentes." />
+            <competence name="Avoir compris et retenu qu’il existe des régularités dans l’orthographe lexicale et que l’on peut les mobiliser pour écrire." />
+        </matiere>
+        <matiere name="Langues étrangères et régionales">
+            <competence name="Etre capable de comprendre" />
+            <competence name="Etre capable de comprendre des énoncés oraux simples au sujet de lui-même, de sa famille et de l’environnement concret et immédiat, si les gens parlent lentement et distinctement." />
+            <competence name="Etre capable de reconnaître des éléments connus ainsi que des phrases très simples, par exemple dans des annonces, des affiches ou des catalogues." />
+            <competence name="Etre capable de prendre part à une conversation" />
+            <competence name="Etre capable de communiquer de façon simple, à condition que l’ interlocuteur soit disposé à répéter ou à reformuler ses phrases plus lentement et à l’aider à formuler ce qu’il/elle essaie de dire." /> 
+            <competence name="Etre capable de poser des questions simples sur des sujets familiers ou sur ce dont il/elle a immédiatement besoin, ainsi que répondre à de telles questions." />
+            <competence name="Etre capable d' utiliser des expressions et des phrases simples pour décrire son lieu d’habitation et les gens qu’il/elle connaît. " />
+            <competence name="Etre capable de raconter une courte séquence au passé." />
+            <competence name="Etre capable d'écrire un message électronique simple, une courte carte postale simple, par exemple de vacances." />
+            <competence name="Etre capable de remplir un questionnaire d’identité extrêmement simple." />
+            <competence name="Avoir compris et retenu quelques formules usuelles de communication correspondant aux fonctions de communication définies ci-dessus." />
+            <competence name="Avoir compris et retenu la syntaxe et la morphosyntaxe." />
+            <competence name="Avoir compris et retenu du lexique." />
+            <competence name="Avoir compris et retenu l’organisation de la syntaxe de la phrase simple déclarative et interrogative." />
+            <competence name="Avoir compris et retenu les moyens élémentaires de l’énonciation." />
+            <competence name="Avoir compris et retenu l’opposition de l’unicité et du nombre." />
+            <competence name="Avoir compris et retenu les moyens verbaux de la relation d’événements présents, passés ou à venir." />
+            <competence name="Avoir compris et retenu les moyens d’exprimer la localisation." />
+            <competence name="Avoir compris et retenu les comportements culturels dans les relations interpersonnelles liés aux fonctions de communication prévues au programme." />
+            <competence name="Avoir compris et retenu la vie scolaire d’enfants du même âge dans le(s) pays ou région(s) concerné(s)." />
+            <competence name="Avoir compris et retenu le calendrier de l’année scolaire et civile, avec les événements les plus significatifs." />
+            <competence name="Avoir compris et retenu le folklore, les personnages des légendes ou des contes des pays ou régions concernés." />
+            <competence name="Avoir compris et retenu quelques repères culturels propres aux pays ou régions concernés." />
+        </matiere>
+        <matiere name="Histoire">
+            <competence name="Etre capable de distinguer les grandes périodes historiques, pouvoir les situer chronologiquement, commencer à connaître pour chacune d’entre elles différentes formes de pouvoir, des groupes sociaux, et quelques productions techniques et artistiques." />
+            <competence name="Etre capable de classer des documents selon leur nature, leur date et leur origine." />
+            <competence name="Etre capable de savoir utiliser les connaissances historiques en éducation civique et dans les autres enseignements, en particulier dans le domaine artistique." />
+            <competence name="Etre capable de consulter une encyclopédie et les pages de la toile." />
+            <competence name="Etre capable d'utiliser à bon escient les temps du passé rencontrés dans les récits historiques" />
+            <competence name="Avoir compris et retenu une vingtaine d’événements et leurs dates (voir document d’application)." />
+            <competence name="Avoir compris et retenu le rôle des personnages et des groupes qui apparaissent dans les divers points forts, ainsi que les faits les plus significatifs, et pouvoir les situer dans leur période." />
+            <competence name="Avoir compris et retenu le vocabulaire spécifique, pouvoir l’utiliser de façon exacte et appropriée." />
+        </matiere>
+        <matiere name="Géographie">
+            <competence name="Etre capable d'effectuer une recherche dans un atlas imprimé et dans un atlas numérique." />
+            <competence name="Etre capable de mettre en relation des cartes à différentes échelles pour localiser un phénomène." />
+            <competence name="Etre capable de réaliser un croquis spatial simple." />
+            <competence name="Etre capable de situer le lieu où se trouve l’école dans l’espace local et régional." />
+            <competence name="Etre capable de situer la France dans l’espace mondial." />
+            <competence name="Etre capable de situer les positions des principales villes françaises et des grands axes de communication français." />
+            <competence name="Etre capable de situer l’Europe, ses principaux Etats, ses principales villes dans l’espace mondial." />
+            <competence name="Etre capable d'appliquer les compétences acquises dans le domaine du calcul à l’usage de la monnaie (euros, centimes)." />
+            <competence name="Avoir compris et retenu le vocabulaire géographique de base (Etre capable de l’utiliser dans un contexte approprié)." />
+            <competence name="Avoir compris et retenu les grands types de paysages (Etre capable de les différencier)." />
+            <competence name="Avoir compris et retenu les grands ensembles humains (continentaux et océaniques) et pouvoir les reconnaître et les localiser sur un globe et sur un planisphère." />
+            <competence name="Avoir compris et retenu les Etats qui participent à l’Union européenne." />
+        </matiere>
+    </domaine>
+	<domaine name="Education scientifique - Mathématiques">
+        <matiere name="Compétences générales">
+            <competence name="Etre capable d'utiliser ses connaissances pour traiter des problèmes." />
+            <competence name="Etre capable de  chercher et produire une solution originale dans un problème de recherche" />
+            <competence name="Etre capable de  mettre en oeuvre un raisonnement, articuler les différentes étapes d’une solution." />
+            <competence name="Etre capable de formuler et communiquer sa démarche et ses résultats par écrit et les exposer oralement." />
+            <competence name="Etre capable de contrôler et discuter la pertinence ou la vraisemblance d’une solution." />
+            <competence name="Etre capable d'identifier des erreurs dans une solution en distinguant celles qui sont relatives au choix d’une procédure de celles qui interviennent dans sa mise en oeuvre." />
+            <competence name="Etre capable d'argumenter à propos de la validité d’une solution." />
+        </matiere>
+        <matiere name="Exploitation de données numériques : Problèmes relevant des quatre opérations">
+            <competence name="Etre capable de résoudre des problèmes en utilisant les connaissances sur les nombres naturels et décimaux et sur les opérations étudiées." />
+        </matiere>
+        <matiere name="Exploitation de données numériques : Proportionnalité">
+            <competence name="Etre capable de résoudre des problèmes relevant de la proportionnalité en utilisant des raisonnements personnels appropriés (dont des problèmes relatifs aux pourcentages, aux échelles, aux vitesses moyennes ou aux conversions d’unités)." />
+        </matiere>
+        <matiere name="Exploitation de données numériques : Organisation et représentation de données numériques">
+            <competence name="Etre capable d'organiser des séries de données (listes, tableaux...)." />
+            <competence name="Etre capable de lire, interpréter et construire quelques représentations : diagrammes, graphiques." />
+        </matiere>
+        <matiere name="Exploitation de données numériques : Connaissance des nombres entiers naturels, Désignations orales et écrites des nombres entiers naturels">
+            <competence name="Etre capable de déterminer la valeur de chacun des chiffres composant l’écriture d’un nombre entier en fonction de sa position." />
+            <competence name="Etre capable de donner diverses décompositions d’un nombre en utilisant 10, 100, 1 000..., et retrouver l’écriture d’un nombre à partir d’une telle décomposition." />
+            <competence name="Etre capable de produire des suites orales et écrites de 1 en 1, 10 en 10, 100 en 100, à partir de n’importe quel nombre." />
+            <competence name="Etre capable d'associer la désignation orale et la désignation écrite (en chiffres) pour des nombres jusqu’à la classe des millions." />
+        </matiere>
+        <matiere name="Exploitation de données numériques : Ordre sur les nombres entiers naturels">
+            <competence name="Etre capable de comparer des nombres, les ranger en ordre croissant ou décroissant, les encadrer entre deux dizaines consécutives, deux centaines consécutives, deux milliers consécutifs...." />
+            <competence name="Etre capable d'utiliser les signes &lt; et &gt;> pour exprimer le résultat de la comparaison de deux nombres ou d’un encadrement." />
+            <competence name="Etre capable de situer précisément ou approximativement des nombres sur une droite graduée de 10 en 10, de 100 en 100..." />
+        </matiere>
+        <matiere name="Exploitation de données numériques : Structuration arithmétique des nombres entiers naturels">
+            <competence name="Etre capable de connaître et utiliser des expressions telles que : double, moitié ou demi, triple, tiers, quadruple, quart ; trois quarts, deux tiers, trois demis d’un nombre entier." />
+            <competence name="Etre capable de connaître et utiliser certaines relations entre des nombres d’usage courant : entre 5, 10, 25, 50, 75, 100 ; entre 50, 100, 200, 250, 500, 750, 1 000 ; entre 5, 15, 30, 45, 60, 90." />
+            <competence name="Etre capable de reconnaître les multiples de 2, de 5 et de 10." />
+        </matiere>
+        <matiere name="Exploitation de données numériques : Connaissance des fractions simples et des nombres décimaux, Fractions">
+            <competence name="Etre capable d'utiliser, dans des cas simples, des fractions ou des sommes d’entiers et de fractions pour coder des mesures de longueurs ou d’aires, une unité étant choisie, ou pour construire un segment (ou une surface) de longueur (ou d’aire) donnée." />
+            <competence name="Etre capable de nommer les fractions en utilisant le vocabulaire : demi, tiers, quart, dixième, centième...." />
+            <competence name="Etre capable d'encadrer une fraction simple par deux entiers consécutifs." />
+            <competence name="Etre capable d'écrire une fraction sous forme de somme d’un entier et d’une fraction inférieure à 1." />
+        </matiere>
+        <matiere name="Exploitation de données numériques : Désignations orales et écrites des nombres décimaux">
+            <competence name="Etre capable de déterminer la valeur de chacun des chiffres composant une écriture à virgule, en fonction de sa position." />
+            <competence name="Etre capable de passer, pour un nombre décimal, d’une écriture fractionnaire (fractions décimales) à une écriture à virgule (et réciproquement)." />
+            <competence name="Etre capable d'utiliser les nombres décimaux pour exprimer la mesure de la longueur d’un segment, celle de l’aire d’une surface (une unité étant donnée), ou pour repérer un point sur une droite graduée régulièrement de 1 en 1." />
+            <competence name="Etre capable d'écrire et interpréter sous forme décimale une mesure donnée avec plusieurs unités (et réciproquement)." />
+            <competence name="Etre capable de produire des décompositions liées à une écriture à virgule, en utilisant 10 ; 100 ; 1 000... et 0,1 ; 0,01 ; 0,001...." />
+            <competence name="Etre capable de produire des suites écrites ou orales de 0,1 en 0,1, de 0,01 en 0,01...." />
+            <competence name="Etre capable d'associer les désignations orales et l’écriture chiffrée d’un nombre décimal." />
+        </matiere>
+        <matiere name="Exploitation de données numériques : Ordre sur les nombres décimaux">
+            <competence name="Etre capable de comparer deux nombres décimaux donnés par leurs écritures à virgule." />
+            <competence name="Etre capable d'encadrer un nombre décimal par deux entiers consécutifs ou par deux nombres décimaux." />
+            <competence name="Etre capable d'intercaler des nombres décimaux entre deux nombres entiers consécutifs ou entre deux nombres décimaux." />
+            <competence name="Etre capable d'utiliser les signes &lt; et &gt; pour exprimer le résultat de la comparaison de deux nombres ou d’un encadrement." />
+            <competence name="Etre capable de donner une valeur approchée d’un nombre décimal à l’unité près, au dixième ou au centième près." />
+            <competence name="Etre capable de situer exactement ou approximativement des nombres décimaux sur une droite graduée de 1 en 1, de 0,1 en 0,1." />
+        </matiere>
+        <matiere name="Exploitation de données numériques : Relations entre certains nombres décimaux">
+            <competence name="Etre capable de connaître et utiliser des écritures fractionnaires et décimales de" />
+            <competence name="certains nombres : 0,1 et 1/10 ; 0,01 et 1/100 ; 0,5 et 1/2 ; 0,25 et 1/4 ; 0,75 et 3/4 ; " />
+            <competence name="Etre capable de connaître et utiliser les relations entre 1/4 (ou 0,25) et 1/2 (ou 0,5)." />
+            <competence name="entre 1/100 et 1/10  , entre et 1/1000 et 1/100" />
+        </matiere>
+        <matiere name="Calcul: Résultats mémorisés, procédures automatisées">
+            <competence name="Etre capable de connaître les tables d’addition (de 1 à 9) et de multiplication (de 2 à 9) et les utiliser pour calculer une somme, une différence ou un complément, un produit ou un quotient entier." />
+            <competence name="Etre capable d'additionner ou soustraire mentalement des dizaines entières (nombres inférieurs à 100) ou des centaines entières (nombres inférieurs à 1 000)." />
+            <competence name="Etre capable de connaître le complément à la dizaine supérieure pour tout nombre inférieur à 100 ou le complément à l’entier immédiatement supérieur pour tout décimal ayant un chiffre après la virgule." />
+            <competence name="Etre capable de multiplier ou diviser un nombre entier ou décimal par 10, 100, 1000." />
+            <competence name="Etre capable de calculer des sommes et des différences de nombres entiers ou décimaux, par un calcul écrit en ligne ou posé en colonnes." />
+            <competence name="Etre capable de calculer le produit de deux entiers ou le produit d’un décimal par un entier (3 chiffres par 2 chiffres), par un calcul posé." />
+            <competence name="Etre capable de calculer le quotient et le reste de la division euclidienne d’un nombre entier (d’au plus 4 chiffres) par un nombre entier (d’au plus 2 chiffres), par un calcul posé." />
+        </matiere>
+        <matiere name="Calcul réfléchi">
+            <competence name="Etre capable d'organiser et effectuer mentalement ou avec l’aide de l’écrit, sur des nombres entiers, un calcul additif, soustractif, multiplicatif, ou un calcul de division en s’appuyant sur des résultats mémorisés et en utilisant de façon implicite les propriétés des nombres et des opérations." />
+            <competence name="Etre capable d'organiser et effectuer des calculs du type 1,5 + 0,5 ; 2,8 + 0,2 ; 1,5 x 2 ; 0,5 x 3, en s’appuyant sur les résultats mémorisés et en utilisant de façon implicite les propriétés des nombres et des opérations." />
+            <competence name="Etre capable d'évaluer un ordre de grandeur d’un résultat, en utilisant un calcul approché, évaluer le nombre de chiffres d’un quotient entier." />
+            <competence name="Etre capable de développer des moyens de contrôle des calculs instrumentés : chiffre des unités, nombre de chiffres (en particulier pour un quotient), calcul approché...." />
+            <competence name="Etre capable de savoir trouver mentalement le résultat numérique d’un problème à données simples." />
+        </matiere>
+        <matiere name="Calcul instrumenté">
+            <competence name="Etre capable d'utiliser à bon escient sa calculatrice pour obtenir un résultat numérique issu d’un problème et interpréter le résultat obtenu." />
+            <competence name="Etre capable d'utiliser une calculatrice pour déterminer la somme, la différence de deux nombres entiers ou décimaux, le produit de deux nombres entiers ou celui d’un nombre décimal par un entier, le quotient entier ou décimal (exact ou approché) de deux entiers ou d’un décimal par un entier." />
+            <competence name="Etre capable de connaître et utiliser certaines fonctionnalités de sa calculatrice pour gérer une suite de calculs : touches 'opérations', touches 'mémoires', touches 'parenthèses', facteur constant." />
+        </matiere>
+        <matiere name="Espace et géométrie - Repérage, utilisation de plans, de cartes">
+            <competence name="Etre capable de repérer une case ou un point sur un quadrillage." />
+            <competence name="Etre capable d'utiliser un plan ou une carte pour situer un objet, anticiper ou réaliser un déplacement, évaluer une distance." />
+        </matiere>
+        <matiere name="Espace et géométrie - Relations et propriétés : alignement, perpendicularité, parallélisme, égalité de longueurs, symétrie axiale">
+            <competence name="Etre capable de vérifier, à l’aide des instruments : l’alignement de points (règle), l’égalité des longueurs de segments (compas ou instrument de mesure), la perpendicularité et le parallélisme entre droites (règle et équerre)." />
+            <competence name="Etre capable d'effectuer les tracés correspondants." />
+            <competence name="Etre capable de trouver le milieu d’un segment." />
+            <competence name="Etre capable de percevoir qu’une figure possèd'un ou plusieurs axes de symétrie et le vérifier en utilisant différentes techniques (pliage, papier calque, miroir)." />
+            <competence name="Etre capable de compléter une figure par symétrie axiale en utilisant des techniques telles que pliage, papier calque, miroir." />
+            <competence name="Etre capable de tracer, sur papier quadrillé, la figure symétrique d’une figure donnée par rapport à une droite donnée." />
+            <competence name="Etre capable d'utiliser à bon escient le vocabulaire suivant : points alignés, droite, droites perpendiculaires, droites parallèles, segment, milieu, angle, figure symétrique d’une figure donnée par rapport à une droite, axe de symétrie." />
+        </matiere>
+        <matiere name="Espace et géométrie - Figures planes : triangle (et cas particuliers), carré, rectangle, losange, cercle">
+            <competence name="Etre capable de reconnaître de manière perceptive une figure plane (en particulier dans une configuration plus complexe), en donner le nom, vérifier son existence en ayant recours aux propriétés et aux instruments." />
+            <competence name="Etre capable de décomposer une figure en figures plus simples." />
+            <competence name="Etre capable de tracer une figure (sur papier uni, quadrillé ou pointé), soit à partir d’un modèle, soit à partir d’une description, d’un programme de construction ou d’un dessin à main levée." />
+            <competence name="Etre capable de décrire une figure en vue de l’identifier dans un lot de figures ou de la faire reproduire sans équivoque." />
+            <competence name="Etre capable d'utiliser à bon escient le vocabulaire suivant : triangle, triangle rectangle, triangle isocèle, triangle équilatéral, carré, rectangle, losange, cercle ; sommet, côté ; centre, rayon et diamètre pour le cercle." />
+        </matiere>
+        <matiere name="Espace et géométrie - Solides : cube, parallélépipède rectangle">
+            <competence name="Etre capable de percevoir un solide, en donner le nom, vérifier certaines propriétés relatives aux faces ou arêtes d’un solide à l’aide des instruments." />
+            <competence name="Etre capable de décrire un solid'en vue de l’identifier dans un lot de solides divers ou de le faire reproduire sans équivoque." />
+            <competence name="Etre capable de construire un cube ou un parallélépipède rectangle." />
+            <competence name="Etre capable de reconnaître, construire ou compléter un patron de cube, de parallélépipède rectangle." />
+            <competence name="Etre capable d'utiliser à bon escient le vocabulaire suivant : cube, parallélépipède rectangle ; sommet, arête, face." />
+        </matiere>
+        <matiere name="Espace et géométrie - Agrandissement, réduction">
+            <competence name="Etre capable de réaliser, dans des cas simples, des agrandissements ou des réductions de figures planes." />
+            <competence name="Etre capable de contrôler si une figure est un agrandissement ou une réduction d’une autre figure." />
+        </matiere>
+        <matiere name="Espace et géométrie - Grandeurs et mesure: Longueurs, masses, volumes (contenances), repérage du temps, durées">
+            <competence name="Etre capable d'utiliser des instruments pour mesurer des objets physiques ou géométriques." />
+            <competence name="Etre capable d'exprimer le résultat d’un mesurage par un nombre ou un encadrement, l’unité (ou les unités) étant imposée(s) ou choisie(s) de façon appropriée." />
+            <competence name="Etre capable de lire l’heure sur une montre à aiguilles ou une horloge." />
+            <competence name="Etre capable de connaître les unités de mesure des durées (année, mois, semaine, jour, heure, minute, seconde) et leurs relations." />
+            <competence name="Etre capable d'estimer une mesure (ordre de grandeur)." />
+            <competence name="Etre capable de construire ou réaliser un objet dont des mesures sont données." />
+            <competence name="Etre capable de connaître les unités légales du système métrique pour les longueurs (mètre, ses multiples et ses sous-multiples usités), les masses (gramme, ses multiples et ses sous-multiples usités) et les contenances (litre, ses multiples et ses sous-multiples usités)." />
+            <competence name="Etre capable d'utiliser les équivalences entre les unités usuelles de longueur, de masse, de contenance, et effectuer des calculs simples sur les mesures, en tenant compte des relations entre les diverses unités correspondant à une même grandeur." />
+            <competence name="Etre capable d'utiliser le calcul pour obtenir la mesure d’une grandeur, en particulier : calculer le périmètre d’un polygone, calculer une durée à partir de la donnée de l’instant initial et de l’instant final." />
+        </matiere>
+        <matiere name="Espace et géométrie - Aires">
+            <competence name="Etre capable de classer et ranger des surfaces (figures) selon leur aire (par superposition, découpage et recollement ou pavage par une surface de référence)." />
+            <competence name="Etre capable de construire une surface qui a même aire qu’une surface donnée (et qui ne lui est pas superposable)." />
+            <competence name="Etre capable de différencier aire et périmètre d’une surface, en particulier savoir que deux surfaces peuvent avoir la même aire sans avoir nécessairement le même périmètre et qu’elles peuvent avoir le même" />
+            <competence name="périmètre sans avoir nécessairement la même aire." />
+            <competence name="Etre capable de mesurer l’aire d’une surface grâce à un pavage effectif à l’aide d’une surface de référence (dont l’aire est prise pour unité) ou grâce à l’utilisation d’un réseau quadrillé (le résultat étant une mesure exacte ou un encadrement)." />
+            <competence name="Etre capable de calculer l’aire d’un rectangle dont les côtés au moins sont de dimensions entières." />
+            <competence name="Etre capable de connaître et utiliser les unités usuelles (cm2, dm2, m2 et km2) ainsi que quelques équivalences (1 m2 = 100 dm2, 1 dm2 =100 cm2, 1 km2 = 1 000 000 m2)." />
+        </matiere>
+        <matiere name="Espace et géométrie - Angles">
+            <competence name="Etre capable de comparer des angles dessinés par superposition ou en utilisant un gabarit, en particulier des angles situés dans une figure (angles intérieurs d’un triangle, d’un quadrilatère...)." />
+            <competence name="Etre capable de reproduire un angle donné en utilisant un gabarit ou par report d’un étalon." />
+            <competence name="Etre capable de tracer un angle droit, ainsi qu’un angle égal à la moitié, le quart ou le tiers d’un angle droit." />
+        </matiere>
+    </domaine>
+    <domaine name="Sciences expérimentales et technologie">
+        <matiere name="Sciences expérimentales et technologie">
+            <competence name="Etre capable de poser des questions précises et cohérentes à propos d’une situation d’observation ou d’expérience." />
+            <competence name="Etre capable d'imaginer et réaliser un dispositif expérimental susceptible de répondre aux questions que l’on se pose, en s’appuyant sur des observations, des mesures appropriées ou un schéma." />
+            <competence name="Etre capable de réaliser un montage électrique à partir d’un schéma." />
+            <competence name="Etre capable d'utiliser des instruments d’observation et de mesure : double décimètre, loupe, boussole, balance, chronomètre ou horloge, thermomètre." />
+            <competence name="Etre capable de recommencer une expérience en ne modifiant qu’un seul facteur par rapport à l’expérience précédente." />
+            <competence name="Etre capable de mettre en relation des données, en faire une représentation schématique et l’interpréter, mettre en relation des observations réalisées en classe et des savoirs que l’on trouve dans une documentation." />
+            <competence name="Etre capable de participer à la préparation d’une enquête ou d’une visite en élaborant un protocole d’observation ou un questionnaire." />
+            <competence name="Etre capable de rédiger un compte rendu intégrant schéma d’expérience ou dessin d’observation." />
+            <competence name="Etre capable de produire, créer, modifier et exploiter un document à l’aide d’un logiciel de traitement de texte." />
+            <competence name="Etre capable de communiquer au moyen d’une messagerie électronique." />
+            <competence name="Avoir compris et retenu la conservation de la matière, dans les changements d’état de l’eau, les mélanges et la dissolution ; la matérialité de l’air." />
+            <competence name="Avoir compris et retenu des fonctions du vivant qui en marquent l’unité et la diversité : développement et reproduction." />
+            <competence name="Avoir compris et retenu les principes élémentaires des fonctions de nutrition et de mouvement à partir de leurs manifestations chez l’homme." />
+            <competence name="Avoir compris et retenu une première approche des notions d’espèce et d’évolution." />
+            <competence name="Avoir compris et retenu le rôle et la place des vivants dans leur environnement." />
+            <competence name="Avoir compris et retenu quelques phénomènes astronomiques : 'course du Soleil', durée des jours et des nuits, évolution au cours des saisons (calendrier), lien avec la boussole et les points cardinaux ; un petit nombre de modèles simples concernant ces phénomènes, le système solaire et l’Univers." />
+            <competence name="Avoir compris et retenu les principes élémentaires de fonctionnement de circuits électriques simples, de leviers, de balances, de systèmes de transmission du mouvement : quelques utilisations techniques." />
+        </matiere>
+    </domaine>
+    <domaine name="Education artistique">
+        <matiere name="Arts visuels">
+            <competence name="Etre capable d'utiliser le dessin dans ses différentes fonctions en utilisant diverses techniques." />
+            <competence name="Etre capable de réaliser une production en deux ou trois dimensions, individuelle ou collective, menée à partir de consignes précises." />
+            <competence name="Etre capable de choisir, manipuler et combiner des matériaux, des supports, des outils." />
+            <competence name="Etre capable de témoigner d’une expérience, décrire une image, s’exprimer sur une oeuvre." />
+            <competence name="Etre capable d'identifier différents types d’images en justifiant son point de vue." />
+            <competence name="Etre capable de réinvestir dans d’autres disciplines les apports des arts visuels." />
+            <competence name="Avoir compris et retenu les points communs et les différences entre les pratiques de la classe et les démarches des artistes ; repérer ce qui les distingue et ce qui les rapproche." />
+            <competence name="Avoir compris et retenu identifier et nommer quelques références (oeuvres, personnalités, événements...) à partir des oeuvres de la liste nationale ; pouvoir les caractériser simplement et les situer historiquement." />
+        </matiere>
+        <matiere name="Education musicale">
+            <competence name="Etre capable de pouvoir interpréter de mémoire plus de dix chansons parmi celles qui ont été apprises." />
+            <competence name="Etre capable de contrôler volontairement sa voix et son attitude corporelle pour chanter." />
+            <competence name="Etre capable de tenir sa voix et sa place en formation chorale, notamment dans une polyphonie." />
+            <competence name="Etre capable d'assumer son rôle dans un travail d’accompagnement." />
+            <competence name="Etre capable de soutenir une écoute prolongée, utiliser des consignes d’écoute." />
+            <competence name="Etre capable de repérer des éléments musicaux caractéristiques, les désigner et caractériser leur organisation (succession, simultanéité, ruptures...) en faisant appel à un lexique approprié." />
+            <competence name="Etre capable de reconnaître une oeuvre du répertoire travaillé, la situer dans son contexte de création, porter à son égard un jugement esthétique." />
+            <competence name="Etre capable de réemployer des savoir-faire au profit d’une production musicale ou chorégraphique inventée, personnelle ou collective." />
+            <competence name="Etre capable de témoigner de son aisance à évoluer dans une danse collective et  dans des dispositifs scéniques divers." />
+            <competence name="Etre capable d'exprimer son appréciation pour qualifier une réalisation dansée, chantée ou jouée, à la fois comme acteur et comme spectateur." />
+        </matiere>
+    </domaine>
+    <domaine name="Education physique et sportive">
+        <matiere name="Education physique et sportive">
+            <competence name="Etre capable, dans différentes activités physiques, sportives et artistiques, de " />
+            <competence name="Etre capable, dans différentes activités physiques, sportives et artistiques, de  réaliser une performance mesurée." />
+            <competence name="Etre capable, dans différentes activités physiques, sportives et artistiques, d'adapter ses déplacements à différents types d’environnements." />
+            <competence name="Etre capable, dans différentes activités physiques, sportives et artistiques, de  s’affronter individuellement ou collectivement." />
+            <competence name="Etre capable de concevoir et réaliser des actions à visée artistique, esthétique ou expressive." />
+            <competence name="Etre capable, dans diverses situations, de" /> 
+            <competence name="Etre capable de s’engager lucidement dans l’action." />
+            <competence name="Etre capable de construire un projet d’action." />
+            <competence name="Etre capable de mesurer et apprécier les effets de l’activité." />
+            <competence name="Etre capable d'appliquer et construire des principes de vie collective." />
+            <competence name="Etre capable de que l’on peut acquérir des connaissances spécifiques dans l’activité physique et sportive (sensations, émotions, savoirs sur les techniques de réalisation d’actions spécifiques...)." />
+            <competence name="Etre capable de des savoirs précis sur les différentes activités physiques et sportives rencontrées." />
+        </matiere>
+    </domaine>
+    <domaine name="Brevet informatique et Internet - niveau 1">
+        <matiere name="Maîtriser les premières bases de la technologie informatique et avoir une approche des principales fonctions d’un ordinateur.">
+            <competence name="Etre capable de nommer précisément les composants matériels et logiciels." />
+            <competence name="Etre capable d'utiliser la souris et le clavier." />
+            <competence name="Etre capable d'ouvrir un document, d’enregistrer un fichier dans un répertoire ou dossier." />
+        </matiere>
+        <matiere name="Adopter une attitude citoyenne face aux informations véhiculées par les outils informatiques">
+            <competence name="Etre capable de vérifier la pertinence et l’exactitude de données que l’élève a saisies lui-même." />
+            <competence name="Etre capable de prendre l’habitude de s’interroger sur la pertinence et sur la validité des résultats obtenus à l’aide de l’ordinateur." />
+            <competence name="Etre capable de reconnaître et respecter la propriété intellectuelle." />
+        </matiere>
+        <matiere name="Produire, crée, modifier et exploiter un document à l’aide d’un logiciel de traitement de texte.">
+            <competence name="Etre capable d’ouvrir, de consulter ou d’imprimer un document." />
+            <competence name="Etre capable de saisir et modifier un texte en utilisant les fonctions de base d’un traitement de texte." />
+            <competence name="Etre capable d’insérer des images à l’intérieur d’un texte." />
+            <competence name="Etre capable d’utiliser le correcteur orthographique" />
+        </matiere>
+        <matiere name="Chercher, se documenter au moyen d’un produit multimédia (cédérom, dévédérom, site Internet, base de données).">
+            <competence name="Etre capable de choisir le support approprié au résultat escompté." />
+            <competence name="Etre capable de mener à terme une recherche." />
+            <competence name="Etre capable de récupérer l’information recueillie." />
+            <competence name="Etre capable de qualifier l’information recueillie." />
+        </matiere>
+        <matiere name="Communiquer au moyen d’une messagerie électronique.">
+            <competence name="Etre capable d'adresser un message à un seul ou à plusieurs destinataires." />
+            <competence name="Etre capable de consulter et d’imprimer un message reçu ou à envoyer." />
+            <competence name="Etre capable de faire suivre ou de répondre à un message." />
+        </matiere>
+	</domaine>
+</cycle>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cycle name="I">
+	<domaine name="Le langage au coeur des apprentissages">
+	    <matiere name="Communication">
+	        <competence name="Etre capable de répondre aux sollicitations de l’adulte en se faisant comprendre dès la fin de la première année de scolarité (à trois ou quatre ans)." />
+	        <competence name="Etre capable de prendre l’initiative d’un échange et le conduire au-delà de la première réponse." />
+	        <competence name="Etre capable de participer à un échange collectif en acceptant d’écouter autrui, en attendant son tour de parole et en restant dans le propos de l’échange." />
+	    </matiere>
+	    <matiere name="Le langage d’accompagnement de l’action (langage en situation)">
+	        <competence name="Etre capable de comprendre les consignes ordinaires de la classe." />
+	        <competence name="Etre capable de dire ce que l’on fait ou ce que fait un camarade (dans une activité, un atelier...)." />
+	        <competence name="Etre capable de prêter sa voix à une mCrionnette." />
+		</matiere>
+	    <matiere name="Le langage d’évocation">
+	        <competence name="Etre capable de rappeler en se faisant comprendre un événement qui a été vécu collectivement (sortie, activité scolaire, incident...)." />
+	        <competence name="Etre capable de comprendre une histoire adaptée à son âge et le manifester en reformulant dans ses propres mots la trame narrative de l’histoire." />
+	        <competence name="Etre capable d'identifier les personnages d’une histoire, les caractériser physiquement et moralement, les dessiner." />
+	        <competence name="Etre capable de raconter un conte déjà connu en s’appuyant sur la succession des illustrations." />
+	        <competence name="Etre capable d'inventer une courte histoire dans laquelle les acteurs seront correctement posés, où il y aura au moins un événement et une clôture." />
+	        <competence name="Etre capable de dire ou chanter chaque année au moins une dizaine de comptines ou de jeux de doigts et au moins une dizaine de chansons et de poésies." />
+		</matiere>
+	    <matiere name="Le langage écrit - Fonctions de l’écrit">
+	        <competence name="Etre capable de savoir à quoi servent un panneau urbain, une affiche, un journal, un livre, un cahier, un écran d’ordinateur... (c’est-à-dire donner des exemples de textes pouvant être trouvés sur l’un d’entre eux)." />
+		</matiere>
+	    <matiere name="Le langage écrit - Familiarisation avec la langue de l’écrit et la littérature">
+	        <competence name="Etre capable de dicter individuellement un texte à un adulte en contrôlant la vitesse du débit et en demandant des rappels pour modifier ses énoncés." />
+	        <competence name="Etre capable de dans une dictée collective à l’adulte, restaurer la structure syntaxique d’une phrase non grammaticale, proposer une amélioration de la cohésion du texte (pronominalisation, connexion entre deux phrases, restauration de l’homogénéité temporelle...)." />
+	        <competence name="Etre capable de reformuler dans ses propres mots un passage lu par l’enseignant." />
+	        <competence name="Etre capable d'évoquer, à propos de quelques grandes expériences humaines, un texte lu ou raconté par le maître." />
+	        <competence name="Etre capable de raconter brièvement l’histoire de quelques personnages de fiction rencontrés dans les albums ou dans les contes découverts en classe." />
+	 	</matiere>
+	    <matiere name="Le langage écrit - Découverte des réalités sonores du langage">
+	        <competence name="Etre capable de rythmer un texte en en scandant les syllabes orales." />
+	        <competence name="Etre capable de reconnaître une même syllabe dans plusieurs énoncés (en fin d’énoncé, en début d’énoncé, en milieu d’énoncé)." />
+	        <competence name="Etre capable de produire des assonances ou des rimes." />
+		</matiere>
+	    <matiere name="Le langage écrit - Activités graphiques et écriture">
+	        <competence name="Etre capable d'écrire son prénom en capitales d’imprimerie et en lettres cursives." />
+	        <competence name="Etre capable de copier des mots en capitales d’imprimerie, en cursive avec ou sans l’aide de l’enseignant." />
+	        <competence name="Etre capable de reproduire un motif graphique simple en expliquant sa façon de procéder." />
+	        <competence name="Etre capable de représenter un objet, un personnage, réels ou fictifs." />
+	        <competence name="Etre capable d'en fin d’école maternelle, copier une ligne de texte en écriture cursive en ayant une tenue correcte de l’instrument, en plaçant sa feuille dans l’axe du bras et en respectant le sens des tracés." />
+		</matiere>
+	    <matiere name="Le langage écrit - Découverte du principe alphabétique">
+	        <competence name="Etre capable de dès la fin de la première année passée à l’école maternelle (à trois ou quatre ans), reconnaître son prénom écrit en capitales d’imprimerie." />
+	        <competence name="Etre capable de pouvoir dire où sont les mots successifs d’une phrase écrite après lecture par l’adulte." />
+	        <competence name="Etre capable de connaître le nom des lettres de l’alphabet." />
+	        <competence name="Etre capable de proposer une écriture alphabétique pour un mot simple en empruntant des fragments de mots au répertoire des mots affichés dans la classe." />
+		</matiere>
+	</domaine>
+	<domaine name="Vivre ensemble">
+	    <matiere name="Vivre ensemble">
+	        <competence name="Etre capable de jouer son rôle dans une activité en adoptant un comportement individuel qui tient compte des apports et des contraintes de la vie collective." />
+	        <competence name="Etre capable d'identifier et connaître les fonctions et le rôle des différents  adultes de l’école." />
+	        <competence name="Etre capable de respecter les règles de la vie commune (respect de l’autre, du matériel, des règles de la politesse...) et appliquer dans son comportement vis-à-vis de ses camarades quelques principes de vie collective (l’écoute, l’entraide, l’initiative...)." />
+		</matiere>
+	</domaine>
+	<domaine name="Agir et s'exprimer avec son corps">
+	    <matiere name="Réaliser une action que l’on peut mesurer">
+	        <competence name="Etre capable de courir, sauter, lancer de différentes façons (par exemple : courir vite, sauter loin avec ou sans élan)." />
+	        <competence name="Etre capable de courir, sauter, lancer dans des espaces et avec des matériels" />
+	   	</matiere>
+	    <matiere name="Adapter ses déplacements à différents types d’environnements">
+	        <competence name="Etre capable de se déplacer dans des formes d’actions inhabituelles remettant en cause l’équilibre (sauter, grimper, rouler, se balancer, se déplacer à quatre pattes, se renverser...)." />
+	        <competence name="Etre capable de se déplacer (marcher, courir) dans des environnements proches, puis progressivement dans des environnements étrangers et incertains (cour, parc public, petit bois...)." />
+	        <competence name="Etre capable de se déplacer avec ou sur des engins présentant un caractère d’instabilité (tricycles, trottinettes, vélos, rollers...)." />
+	        <competence name="Etre capable de se déplacer dans ou sur des milieux instables (eau, neige, glace, sable...)." />
+		</matiere>
+	    <matiere name="Coopérer et s’opposer individuellement ou collectivement">
+	        <competence name="Etre capable de s’opposer individuellement à un adversaire dans un jeu de lutte : tirer, pousser, saisir, tomber avec, immobiliser...." />
+	        <competence name="Etre capable de coopérer avec des partenaires et s’opposer collectivement à un ou plusieurs adversaires dans un jeu collectif : transporter, lancer (des objets, des balles), courir pour attraper, pour se sauver." />
+		</matiere>
+	    <matiere name="Réaliser des actions à visée artistique, esthétique ou expressive">
+	        <competence name="Etre capable d'exprimer corporellement des images, des personnages, des sentiments, des états." />
+	        <competence name="Etre capable de communiquer aux autres des sentiments ou des émotions." />
+	        <competence name="Etre capable de s’exprimer de façon libre ou en suivant un rythme simple, musical ou non, avec ou sans matériel." />
+		</matiere>
+	</domaine>
+	<domaine name="Découvrir le monde">
+	    <matiere name="Le domaine sensoriel">
+	        <competence name="Etre capable de décrire, comparer et classer des perceptions élémentaires (tactiles, gustatives, olfactives, auditives et visuelles)." />
+	        <competence name="Etre capable d'associer à des perceptions déterminées les organes des sens qui correspondent." />
+		</matiere>
+	    <matiere name="Le domaine de la matière et des objets">
+	        <competence name="Etre capable de reconnaître, classer, sérier, désigner des matières, des objets, leurs qualités et leurs usages." />
+	        <competence name="Etre capable d'utiliser des appareils alimentés par des piles (lampe de poche, jouets, magnétophone...)." />
+	        <competence name="Etre capable d'utiliser des objets programmables." />
+	        <competence name="Etre capable de choisir des outils et des matériaux adaptés à une situation, à des actions techniques spécifiques (plier, couper, coller, assembler, actionner...)." />
+	        <competence name="Etre capable de réaliser des jeux de construction simples, construire des maquettes simples." />
+	        <competence name="Etre capable d'utiliser des procédés empiriques pour faire fonctionner des mécanismes simples." />
+		</matiere>
+	    <matiere name="Le domaine du vivant, de l’environnement, de l’hygiène et de la santé">
+	        <competence name="Etre capable de retrouver l’ordre des étapes du développement d’un animal ou d’un végétal." />
+	        <competence name="Etre capable de reconstituer l’image du corps humain, d’un animal ou d’un végétal à partir d’éléments séparés." />
+	        <competence name="Etre capable de reconnaître des manifestations de la vie animale et végétale, les relier à de grandes fonctions : croissance, nutrition, locomotion, reproduction." />
+	        <competence name="Etre capable de repérer quelques caractéristiques des milieux." />
+	        <competence name="Etre capable de connaître et appliquer quelques règles d’hygiène du corps (lavage des mains...), des locaux (rangement, propreté), de l’alimentation (régularité des repas, composition des menus)." />
+	        <competence name="Etre capable de prendre en compte les risques de la rue (piétons et véhicules) ainsi que ceux de l’environnement familier proche (objets et comportements dangereux, produits toxiques) ou plus lointain (risques majeurs)." />
+	        <competence name="Etre capable de repérer une situation inhabituelle ou de danger, demander de l’aide, pour être secouru ou porter secours." />
+		</matiere>
+	    <matiere name="Le domaine de la structuration de l’espace">
+	        <competence name="Etre capable de repérer des objets ou des déplacements dans l’espace par rapport à soi." />
+	        <competence name="Etre capable de décrire des positions relatives ou des déplacements à l’aide d’indicateurs spatiaux et en se référant à des repères stables variés." />
+	        <competence name="Etre capable de décrire et représenter simplement l’environnement proche (classe, école, quartier...)." />
+	        <competence name="Etre capable de décrire des espaces moins familiers (espace vert, terrain vague, forêt, étang, haie, parc animalier)." />
+	        <competence name="Etre capable de suivre un parcours décrit oralement (pas à pas), décrire ou représenter un parcours simple." />
+	        <competence name="Etre capable de savoir reproduire l’organisation dans l’espace d’un ensemble limité d’objets (en les manipulant, en les représentant)." />
+	        <competence name="Etre capable de s’intéresser à des espaces inconnus découverts par des documentaires." />
+		</matiere>
+	    <matiere name="Le domaine de la structuration du temps">
+	        <competence name="Etre capable de reconnaître le caractère cyclique de certains phénomènes, utiliser des repères relatifs aux rythmes de la journée, de la semaine et de l’année, situer des événements les uns par rapport aux autres (distinguer succession et simultanéité)." />
+	        <competence name="Etre capable de pouvoir exprimer et comprendre les oppositions entre présent et passé, présent et futur en utilisant correctement les marques temporelles et chronologiques." />
+	        <competence name="Etre capable de comparer des événements en fonction de leur durée." />
+	        <competence name="Etre capable d'exprimer et comprendre, dans le rappel d’un événement ou dans un récit, la situation temporelle de chaque événement par rapport à l’origine posée, leurs situations relatives (simultanéité, antériorité, postériorité) en utilisant correctement les indicateurs temporels et chronologiques." />
+		</matiere>
+	    <matiere name="Formes et grandeurs">
+	        <competence name="Etre capable de différencier et classer des objets en fonction de caractéristiques liées à leur forme." />
+	        <competence name="Etre capable de reconnaître, classer et nommer des formes simples : carré, triangle, rond." />
+	        <competence name="Etre capable de reproduire un assemblage d’objets de formes simples à partir d’un modèle (puzzle, pavage, assemblage de solides)." />
+	        <competence name="Etre capable de comparer, classer et ranger des objets selon leur taille, leur masse ou leur contenance." />
+		</matiere>
+	    <matiere name="Quantités et nombres">
+	        <competence name="Etre capable de comparer des quantités en utilisant des procédures non numériques ou numériques." />
+	        <competence name="Etre capable de réaliser une collection qui comporte la même quantité d’objets qu’une autre collection (visible ou non, proche ou éloignée) en utilisant des procédures non numériques ou numériques, oralement ou avec l’aide de l’écrit." />
+	        <competence name="Etre capable de résoudre des problèmes portant sur les quantités (augmentation, diminution, réunion, distribution, partage) en utilisant les nombres connus, sans recourir aux opérations usuelles." />
+	        <competence name="Etre capable de reconnaître globalement et exprimer de très petites quantités (d'un à trois ou quatre)." />
+	        <competence name="Etre capable de reconnaître globalement et exprimer des petites quantités organisées en configurations connues (doigts de la main, constellations du dé)." />
+	        <competence name="Etre capable de connaître la comptine numérique orale au moins jusqu’à trente." />
+	        <competence name="Etre capable de dénombrer une quantité en utilisant la suite orale des nombres connus." />
+	        <competence name="Etre capable d'associer le nom des nombres connus avec leur écriture chiffrée en se référant à une bande numérique." />
+		</matiere>
+	</domaine>
+	<domaine name="La sensibilité, l'imagination et la création">
+	    <matiere name="Le regard et le geste">
+	        <competence name="Etre capable d'adapter son geste aux contraintes matérielles (outils, supports, matières)." />
+	        <competence name="Etre capable de surmonter une difficulté rencontrée." />
+	        <competence name="Etre capable de tirer parti des ressources expressives d’un procédé et d’un matériau donnés." />
+	        <competence name="Etre capable d'exercer des choix parmi des procédés et des matériaux déjà expérimentés." />
+	        <competence name="Etre capable d'utiliser le dessin comme moyen d’expression et de représentation." />
+	        <competence name="Etre capable de réaliser une composition en plan ou en volume selon un désir d’expression." />
+	        <competence name="Etre capable de reconnaître des images d’origines et de natures différentes." />
+	        <competence name="Etre capable d'identifier les principaux constituants d’un objet plastique (image, oeuvre d’art, production d’élève...)." />
+	        <competence name="Etre capable d'établir des rapprochements entre deux objets plastiques (une production d’élève et une reproduction d’oeuvre par exemple) sur leplan de la forme, de la couleur, du sens ou du procédé de réalisation." />
+	        <competence name="Etre capable de dire ce qu’on fait, ce qu’on voit, ce qu’on ressent, ce qu’on pense." />
+	        <competence name="Etre capable d'agir en coopération dans une situation de production collective." />
+		</matiere>
+	    <matiere name="La voix et l'écoute">
+	        <competence name="Etre capable d'avoir mémorisé un répertoire varié de comptines et de chansons." />
+	        <competence name="Etre capable d'interpréter avec des variantes expressives un chant, une comptine, en petit groupe." />
+	        <competence name="Etre capable de jouer de sa voix pour explorer des variantes de timbre, d’intensité, de hauteur, de nuance." />
+	        <competence name="Etre capable de marquer la pulsation corporellement ou à l’aide d’un objet sonore, jouer sur le tempo en situation d’imitation." />
+	        <competence name="Etre capable de repérer et reproduire des formules rythmiques simples corporellement ou avec des instruments." />
+	        <competence name="Etre capable de coordonner un texte parlé ou chanté et un accompagnement corporel ou instrumental." />
+	        <competence name="Etre capable de tenir sa place dans des activités collectives et intervenir très brièvement en soliste." />
+	        <competence name="Etre capable d'écouter un extrait musical ou une production, puis s’exprimer et dialoguer avec les autres pour donner ses impressions." />
+	        <competence name="Etre capable d'utiliser quelques moyens graphiques simples pour représenter et coder le déroulement d’une phrase musicale." />
+	        <competence name="Etre capable d'utiliser le corps et l’espace de façon variée et originale en fonction des caractéristiques temporelles et musicales des supports utilisés." />
+	        <competence name="Etre capable de faire des propositions lors des phases de création et d’invention, avec son corps, sa voix ou des objets sonores." />
+		</matiere>
+	</domaine>
+</cycle>

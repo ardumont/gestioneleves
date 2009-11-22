@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cycle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cycle.xsd" name="II">
+<cycle name="II">
 	<domaine name="Instruction civique et morale">
 		<matiere name="Instruction civique et morale">
 			<competence name="Prendre des responsabilités et être autonome" />
