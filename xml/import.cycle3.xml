@@ -35,7 +35,6 @@
             <competence name="Avoir compris et retenu qu’il existe des régularités dans l’orthographe lexicale et que l’on peut les mobiliser pour écrire." />
         </matiere>
         <matiere name="Langues étrangères et régionales">
-            <competence name="Etre capable de comprendre" />
             <competence name="Etre capable de comprendre des énoncés oraux simples au sujet de lui-même, de sa famille et de l’environnement concret et immédiat, si les gens parlent lentement et distinctement." />
             <competence name="Etre capable de reconnaître des éléments connus ainsi que des phrases très simples, par exemple dans des annonces, des affiches ou des catalogues." />
             <competence name="Etre capable de prendre part à une conversation" />
@@ -87,8 +86,8 @@
 	<domaine name="Education scientifique - Mathématiques">
         <matiere name="Compétences générales">
             <competence name="Etre capable d'utiliser ses connaissances pour traiter des problèmes." />
-            <competence name="Etre capable de  chercher et produire une solution originale dans un problème de recherche" />
-            <competence name="Etre capable de  mettre en oeuvre un raisonnement, articuler les différentes étapes d’une solution." />
+            <competence name="Etre capable de chercher et produire une solution originale dans un problème de recherche" />
+            <competence name="Etre capable de mettre en oeuvre un raisonnement, articuler les différentes étapes d’une solution." />
             <competence name="Etre capable de formuler et communiquer sa démarche et ses résultats par écrit et les exposer oralement." />
             <competence name="Etre capable de contrôler et discuter la pertinence ou la vraisemblance d’une solution." />
             <competence name="Etre capable d'identifier des erreurs dans une solution en distinguant celles qui sont relatives au choix d’une procédure de celles qui interviennent dans sa mise en oeuvre." />
@@ -144,10 +143,8 @@
             <competence name="Etre capable de situer exactement ou approximativement des nombres décimaux sur une droite graduée de 1 en 1, de 0,1 en 0,1." />
         </matiere>
         <matiere name="Exploitation de données numériques : Relations entre certains nombres décimaux">
-            <competence name="Etre capable de connaître et utiliser des écritures fractionnaires et décimales de" />
-            <competence name="certains nombres : 0,1 et 1/10 ; 0,01 et 1/100 ; 0,5 et 1/2 ; 0,25 et 1/4 ; 0,75 et 3/4 ; " />
-            <competence name="Etre capable de connaître et utiliser les relations entre 1/4 (ou 0,25) et 1/2 (ou 0,5)." />
-            <competence name="entre 1/100 et 1/10  , entre et 1/1000 et 1/100" />
+            <competence name="Etre capable de connaître et utiliser des écritures fractionnaires et décimales de certains nombres : 0,1 et 1/10 ; 0,01 et 1/100 ; 0,5 et 1/2 ; 0,25 et 1/4 ; 0,75 et 3/4 ; " />
+            <competence name="Etre capable de connaître et utiliser les relations entre 1/4 (ou 0,25) et 1/2 (ou 0,5) entre 1/100 et 1/10  , entre et 1/1000 et 1/100" />
         </matiere>
         <matiere name="Calcul: Résultats mémorisés, procédures automatisées">
             <competence name="Etre capable de connaître les tables d’addition (de 1 à 9) et de multiplication (de 2 à 9) et les utiliser pour calculer une somme, une différence ou un complément, un produit ou un quotient entier." />
@@ -215,8 +212,7 @@
         <matiere name="Espace et géométrie - Aires">
             <competence name="Etre capable de classer et ranger des surfaces (figures) selon leur aire (par superposition, découpage et recollement ou pavage par une surface de référence)." />
             <competence name="Etre capable de construire une surface qui a même aire qu’une surface donnée (et qui ne lui est pas superposable)." />
-            <competence name="Etre capable de différencier aire et périmètre d’une surface, en particulier savoir que deux surfaces peuvent avoir la même aire sans avoir nécessairement le même périmètre et qu’elles peuvent avoir le même" />
-            <competence name="périmètre sans avoir nécessairement la même aire." />
+            <competence name="Etre capable de différencier aire et périmètre d’une surface, en particulier savoir que deux surfaces peuvent avoir la même aire sans avoir nécessairement le même périmètre et qu’elles peuvent avoir le même périmètre sans avoir nécessairement la même aire." />
             <competence name="Etre capable de mesurer l’aire d’une surface grâce à un pavage effectif à l’aide d’une surface de référence (dont l’aire est prise pour unité) ou grâce à l’utilisation d’un réseau quadrillé (le résultat étant une mesure exacte ou un encadrement)." />
             <competence name="Etre capable de calculer l’aire d’un rectangle dont les côtés au moins sont de dimensions entières." />
             <competence name="Etre capable de connaître et utiliser les unités usuelles (cm2, dm2, m2 et km2) ainsi que quelques équivalences (1 m2 = 100 dm2, 1 dm2 =100 cm2, 1 km2 = 1 000 000 m2)." />
@@ -274,18 +270,16 @@
     </domaine>
     <domaine name="Education physique et sportive">
         <matiere name="Education physique et sportive">
-            <competence name="Etre capable, dans différentes activités physiques, sportives et artistiques, de " />
             <competence name="Etre capable, dans différentes activités physiques, sportives et artistiques, de  réaliser une performance mesurée." />
             <competence name="Etre capable, dans différentes activités physiques, sportives et artistiques, d'adapter ses déplacements à différents types d’environnements." />
             <competence name="Etre capable, dans différentes activités physiques, sportives et artistiques, de  s’affronter individuellement ou collectivement." />
-            <competence name="Etre capable de concevoir et réaliser des actions à visée artistique, esthétique ou expressive." />
-            <competence name="Etre capable, dans diverses situations, de" /> 
+            <competence name="Etre capable, dans différentes activités physiques, sportives et artistiques, de concevoir et réaliser des actions à visée artistique, esthétique ou expressive." />
             <competence name="Etre capable de s’engager lucidement dans l’action." />
             <competence name="Etre capable de construire un projet d’action." />
             <competence name="Etre capable de mesurer et apprécier les effets de l’activité." />
             <competence name="Etre capable d'appliquer et construire des principes de vie collective." />
-            <competence name="Etre capable de que l’on peut acquérir des connaissances spécifiques dans l’activité physique et sportive (sensations, émotions, savoirs sur les techniques de réalisation d’actions spécifiques...)." />
-            <competence name="Etre capable de des savoirs précis sur les différentes activités physiques et sportives rencontrées." />
+            <competence name="Avoir compris et retenu que l’on peut acquérir des connaissances spécifiques dans l’activité physique et sportive (sensations, émotions, savoirs sur les techniques de réalisation d’actions spécifiques...)." />
+            <competence name="Avoir compris et retenu des savoirs précis sur les différentes activités physiques et sportives rencontrées." />
         </matiere>
     </domaine>
     <domaine name="Brevet informatique et Internet - niveau 1">
