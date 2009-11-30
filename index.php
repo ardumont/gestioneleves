@@ -341,7 +341,7 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 	<div id="struct_popup_mask"></div>
 	<div id="struct_popup">
 		<h1>Problème de version</h1>
-		<p>Il semblerait que vous êtes en train d'installer une nouvelle version du Gestionnaire d'élèves<br />
+		<p>Il semblerait que vous soyez en train d'installer une nouvelle version du Gestionnaire d'élèves<br />
 		car les versions de la base de données et de l'application ne correspondent pas.</p>
 		<p>Afin de pouvoir utiliser cette application, veuillez suivre les indications de l'installeur.<br />
 		<a href="install/">Mise à jour de l'application</a></p>
