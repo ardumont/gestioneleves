@@ -66,6 +66,8 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 			</dt>
 			<dd>
 				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Les livrets font désormais les moyennes.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Retrait de la suppression et de l'ajout des notes (pour le calcul des moyennes).</li>
 					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impression d'un livret annuel pour un élève.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impression d'un livret périodique pour un élève.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm de visualisation de progression annuel ou cyclique d'un élève.</li>
