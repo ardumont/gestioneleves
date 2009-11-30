@@ -60,7 +60,7 @@ $aNotes = Database::fetchArray($sQuery);
 		</tr>
 	</table>
 </div>
-<br />
+<br /><br />
 
 <?php if($aNotes != false): ?>
 <table class="list_tree">

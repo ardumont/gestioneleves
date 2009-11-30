@@ -63,7 +63,7 @@ $aNiveaux = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 		</tr>
 	</table>
 </div>
-<br />
+<br /><br />
 
 <?php if($aNiveaux != false): ?>
 <table class="list_tree">

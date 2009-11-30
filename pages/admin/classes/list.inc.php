@@ -70,7 +70,7 @@ $aClasses = Database::fetchArray($sQuery);
 		</tr>
 	</table>
 </div>
-<br />
+<br /><br />
 
 <?php if($aClasses != false): ?>
 <table class="list_tree">

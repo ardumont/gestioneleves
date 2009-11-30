@@ -58,7 +58,8 @@ $aProfesseurs = Database::fetchArray($sQuery);
 		</tr>
 	</table>
 </div>
-<br />
+<br /><br />
+
 <?php if($aProfesseurs != false): ?>
 <table class="list_tree">
 	<thead>

@@ -62,7 +62,7 @@ $aEcoles = Database::fetchArray($sQuery);
 		</tr>
 	</table>
 </div>
-<br />
+<br /><br />
 
 <?php if($aEcoles != false): ?>
 <table class="list_tree">

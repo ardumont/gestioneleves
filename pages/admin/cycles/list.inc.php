@@ -60,7 +60,7 @@ $aCycles = Database::fetchArray($sQuery);
 		</tr>
 	</table>
 </div>
-<br />
+<br /><br />
 
 <?php if($aCycles != false): ?>
 <table class="list_tree">
