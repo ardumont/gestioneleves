@@ -111,6 +111,7 @@ require_once(PATH_PHP_LIB . "/message.class.php");
 //require_once(PATH_APP_LIB."/profilmanager.class.php");
 
 require_once(PATH_METIER . "/livret.class.php");
+require_once(PATH_METIER . "/moyenne.class.php");
 
 // Le gestionnaire d'erreurs global pour PHP
 set_error_handler("globalScriptErrorHandler");

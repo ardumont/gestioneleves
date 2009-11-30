@@ -174,8 +174,63 @@ ________EOQ;
 			WHERE ELEVE_ID = {$nEleveId}
 			ORDER BY DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
 ________EOQ;
-		$aEvalInds = Database::fetchArrayWithMultiKey($sQuery, array('DOMAINE_NOM', 'MATIERE_NOM', 'COMPETENCE_NOM', 'CLASSE_NOM', 'NIVEAU_NOM', 'PERIODE_NOM'));
+		$aEvalInds = Database::fetchArrayWithMultiKey($sQuery, array('DOMAINE_NOM', 'MATIERE_NOM', 'COMPETENCE_NOM', 'CLASSE_NOM', 'NIVEAU_NOM', 'PERIODE_NOM'), false);
 		// $aEvalInds[NOM DU DOMAINE][NOM DE LA MATIERE][NOM DE LA COMPETENCE][NOM DE LA CLASSE][NOM DU NIVEAU][NOM DE LA PERIODE][COLONNE] = VALEUR
+
+		// Lancement du calcul de la moyenne pour la période
+		// Parcours de tous les domaines
+		foreach($aDomainesMatieresCompetences as $sDomaine => $aMatieres)
+		{
+			// Parcours de toutes les matieres
+			foreach($aMatieres as $sMatiere => $aCompetences)
+			{
+				// Parcours de chaque classe de l'élève
+				foreach($aClassesNiveaux as $i => $aClasseNiveau)
+				{
+					$sNiveauNom = $aClasseNiveau['NIVEAU_NOM'];
+					$sClasseNom = $aClasseNiveau['CLASSE_NOM'];
+
+					// Parcours de chaque période de l'élève
+					foreach($aPeriodes as $aPeriode)
+					{
+						$sPeriodeNom = $aPeriode['PERIODE_NOM'];
+
+						// Parcours de toutes les compétences
+						foreach($aCompetences as $sCompetence => $aCompetence)
+						{
+							if(isset($aEvalInds[$sDomaine]) &&
+							   isset($aEvalInds[$sDomaine][$sMatiere]) &&
+							   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence]) &&
+							   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom]) &&
+							   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom]) &&
+							   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]))
+							{
+								// Récupère la liste des compétences évaluées
+								$aRes = $aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom];
+
+								// Nombre de compétences
+								$nNbComp = 0;
+								// Somme des notes des compétences
+								$nSommeComp = 0;
+								// Pour chaque compétence évaluée
+								foreach($aRes as $oRes)
+								{
+									// Somme
+									$nSommeComp += $oRes['NOTE_NOTE'];
+									// Incrémente le nombre de compétences évaluées
+									$nNbComp++;
+								}
+								// Calcul de la moyenne
+								$nMoy = $nSommeComp / $nNbComp;
+								// On stocke enfin la moyenne de ces compétences
+								$aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]['NOTE_LABEL'] = Moyenne::compute_and_label($nMoy);
+							}
+						}// fin parcours des compétences
+					}// fin parcours des périodes
+				}// fin parcours des classes
+			}// fin parcours des matieres
+		}// fin parcours des domaines
+		// fin calcul de la moyenne
 
 		// Calcule le nom et le prénom
 		$aNomPrenom = explode(" ", $aEleve['ELEVE_NOM']);
@@ -361,8 +416,63 @@ ________EOQ;
 			WHERE ELEVE_ID = {$nEleveId}
 			ORDER BY DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
 ________EOQ;
-		$aEvalInds = Database::fetchArrayWithMultiKey($sQuery, array('DOMAINE_NOM', 'MATIERE_NOM', 'COMPETENCE_NOM', 'CLASSE_NOM', 'NIVEAU_NOM', 'PERIODE_NOM'));
+		$aEvalInds = Database::fetchArrayWithMultiKey($sQuery, array('DOMAINE_NOM', 'MATIERE_NOM', 'COMPETENCE_NOM', 'CLASSE_NOM', 'NIVEAU_NOM', 'PERIODE_NOM'), false);
 		// $aEvalInds[NOM DU DOMAINE][NOM DE LA MATIERE][NOM DE LA COMPETENCE][NOM DE LA CLASSE][NOM DU NIVEAU][NOM DE LA PERIODE][COLONNE] = VALEUR
+
+		// Lancement du calcul de la moyenne pour la période
+		// Parcours de tous les domaines
+		foreach($aDomainesMatieresCompetences as $sDomaine => $aMatieres)
+		{
+			// Parcours de toutes les matieres
+			foreach($aMatieres as $sMatiere => $aCompetences)
+			{
+				// Parcours de chaque classe de l'élève
+				foreach($aClassesNiveaux as $i => $aClasseNiveau)
+				{
+					$sNiveauNom = $aClasseNiveau['NIVEAU_NOM'];
+					$sClasseNom = $aClasseNiveau['CLASSE_NOM'];
+
+					// Parcours de chaque période de l'élève
+					foreach($aPeriodes as $aPeriode)
+					{
+						$sPeriodeNom = $aPeriode['PERIODE_NOM'];
+
+						// Parcours de toutes les compétences
+						foreach($aCompetences as $sCompetence => $aCompetence)
+						{
+							if(isset($aEvalInds[$sDomaine]) &&
+							   isset($aEvalInds[$sDomaine][$sMatiere]) &&
+							   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence]) &&
+							   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom]) &&
+							   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom]) &&
+							   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]))
+							{
+								// Récupère la liste des compétences évaluées
+								$aRes = $aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom];
+
+								// Nombre de compétences
+								$nNbComp = 0;
+								// Somme des notes des compétences
+								$nSommeComp = 0;
+								// Pour chaque compétence évaluée
+								foreach($aRes as $oRes)
+								{
+									// Somme
+									$nSommeComp += $oRes['NOTE_NOTE'];
+									// Incrémente le nombre de compétences évaluées
+									$nNbComp++;
+								}
+								// Calcul de la moyenne
+								$nMoy = $nSommeComp / $nNbComp;
+								// On stocke enfin la moyenne de ces compétences
+								$aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]['NOTE_LABEL'] = Moyenne::compute_and_label($nMoy);
+							}
+						}// fin parcours des compétences
+					}// fin parcours des périodes
+				}// fin parcours des classes
+			}// fin parcours des matieres
+		}// fin parcours des domaines
+		// fin calcul de la moyenne
 
 		// Calcule le nom et le prénom
 		$aNomPrenom = explode(" ", $aEleve['ELEVE_NOM']);
@@ -524,11 +634,11 @@ ________EOQ;
 		// ===== La liste des evaluations individuelles a ce jour pour l'élève =====
 		$sQuery = <<< ________EOQ
 			SELECT
-				MATIERE_NOM,
 				DOMAINE_NOM,
+				MATIERE_NOM,
 				COMPETENCE_NOM,
-				NIVEAU_NOM,
 				CLASSE_NOM,
+				NIVEAU_NOM,
 				PERIODE_NOM,
 				NOTE_LABEL,
 				NOTE_NOTE
@@ -557,8 +667,54 @@ ________EOQ;
 			AND PERIODE_ID = {$nPeriodeId}
 			ORDER BY DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
 ________EOQ;
-		$aEvalInds = Database::fetchArrayWithMultiKey($sQuery, array('DOMAINE_NOM', 'MATIERE_NOM', 'COMPETENCE_NOM', 'CLASSE_NOM', 'NIVEAU_NOM', 'PERIODE_NOM'));
+		$aEvalInds = Database::fetchArrayWithMultiKey($sQuery, array('DOMAINE_NOM', 'MATIERE_NOM', 'COMPETENCE_NOM', 'CLASSE_NOM', 'NIVEAU_NOM', 'PERIODE_NOM'), false);
 		// $aEvalInds[NOM DU DOMAINE][NOM DE LA MATIERE][NOM DE LA COMPETENCE][NOM DE LA CLASSE][NOM DU NIVEAU][NOM DE LA PERIODE][COLONNE] = VALEUR
+
+		// Lancement du calcul de la moyenne pour la période
+		// Parcours de tous les domaines
+		foreach($aDomainesMatieresCompetences as $sDomaine => $aMatieres)
+		{
+			// Parcours de toutes les matieres
+			foreach($aMatieres as $sMatiere => $aCompetences)
+			{
+				$sNiveauNom = $aClassesNiveaux['NIVEAU_NOM'];
+				$sClasseNom = $aClassesNiveaux['CLASSE_NOM'];
+				$sPeriodeNom = $aPeriodes['PERIODE_NOM'];
+
+				// Parcours de toutes les compétences
+				foreach($aCompetences as $sCompetence => $aCompetence)
+				{
+					if(isset($aEvalInds[$sDomaine]) &&
+					   isset($aEvalInds[$sDomaine][$sMatiere]) &&
+					   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence]) &&
+					   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom]) &&
+					   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom]) &&
+					   isset($aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]))
+					{
+						// Récupère la liste des compétences évaluées
+						$aRes = $aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom];
+
+						// Nombre de compétences
+						$nNbComp = 0;
+						// Somme des notes des compétences
+						$nSommeComp = 0;
+						// Pour chaque compétence évaluée
+						foreach($aRes as $oRes)
+						{
+							// Somme
+							$nSommeComp += $oRes['NOTE_NOTE'];
+							// Incrémente le nombre de compétences évaluées
+							$nNbComp++;
+						}
+						// Calcul de la moyenne
+						$nMoy = $nSommeComp / $nNbComp;
+						// On stocke enfin la moyenne de ces compétences
+						$aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]['NOTE_LABEL'] = Moyenne::compute_and_label($nMoy);
+					}
+				}// fin parcours des compétences
+			}// fin parcours des matieres
+		}// fin parcours des domaines
+		// fin calcul de la moyenne
 
 		// Calcule le nom et le prénom
 		$aNomPrenom = explode(" ", $aEleve['ELEVE_NOM']);
@@ -577,4 +733,4 @@ ________EOQ;
 
 		return $aRes;
 	}// fin recap_period
-}
+}// fin class Livret

@@ -86,6 +86,7 @@ require_once(PATH_PHP_LIB."/formvalidation.class.php");
 require_once(PATH_PHP_LIB."/message.class.php");
 
 require_once(PATH_METIER . "/livret.class.php");
+require_once(PATH_METIER . "/moyenne.class.php");
 
 // ===== Les gestionnaires d'erreurs =====
 set_error_handler("globalScriptErrorHandler");

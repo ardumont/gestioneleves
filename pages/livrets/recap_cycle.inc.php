@@ -39,7 +39,7 @@ $oForm->testError0('query1.EXIST', 'exist', "L'identifiant de l'élève \"{$nEle
 //if($oForm->hasError() == true)
 //{
 //	// rechargement de la liste des eleves
-//	header("Location: ?page=livrets&mode=recap_annuel");
+//	header("Location: ?page=livrets&mode=recap_cycle");
 //	return;
 //}
 
