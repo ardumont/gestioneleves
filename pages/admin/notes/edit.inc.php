@@ -66,7 +66,7 @@ $aNote = Database::fetchOneRow($sQuery);
 		<tr>
 			<td>Coefficients</td>
 			<td>
-				<input type="text" name="NOTE_NOTE" size="10" maxlength="<?php echo NOTE_NOTE; ?>" value="<?php echo($aNote['NOTE_NOTE']) ?>"  />
+				<input type="text" disabled="disabled" name="NOTE_NOTE" size="10" maxlength="<?php echo NOTE_NOTE; ?>" value="<?php echo($aNote['NOTE_NOTE']) ?>"  />
 			</td>
 		</tr>
 		<tr>

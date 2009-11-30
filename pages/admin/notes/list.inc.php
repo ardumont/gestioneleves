@@ -54,7 +54,7 @@ $aNotes = Database::fetchArray($sQuery);
 				Par défaut, cette page affiche l'ensemble des notes existantes dans l'application.<br />
 				<br />
 				Vous pouvez modifier une note en cliquant sur son nom.<br />
-				Vous pouvez également ajouter une note en cliquant sur le + en haut à gauche du tableau.
+				Vous ne pouvez pas modifiez le coefficient d'une note car celui-ci est utilisé dans les calculs de moyenne.
 				<br />&nbsp;
 			</td>
 		</tr>
@@ -66,17 +66,17 @@ $aNotes = Database::fetchArray($sQuery);
 <table class="list_tree">
 	<thead>
 		<tr>
-			<th><a href="?page=notes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
+			<th></th>
 			<th>Notes</th>
 			<th>Labels</th>
 			<th>Coefficients</th>
-			<th colspan="2">Actions</th>
+			<th colspan="1">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
 		<tr>
-			<th><a href="?page=notes&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
-			<th colspan="5"></th>
+			<th></th>
+			<th colspan="4"></th>
 		</tr>
 	</tfoot>
 	<tbody>
@@ -89,10 +89,6 @@ $aNotes = Database::fetchArray($sQuery);
 			<!-- Edition -->
 			<td>
 				<a href="?page=notes&amp;mode=edit&amp;note_id=<?php echo($aNote['NOTE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-			</td>
-			<!-- Suppression -->
-			<td>
-				<a href="?page=notes&amp;mode=delete&amp;note_id=<?php echo($aNote['NOTE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
 			</td>
 		</tr>
 		<?php endforeach; ?>
