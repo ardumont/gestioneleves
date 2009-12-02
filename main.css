@@ -624,7 +624,7 @@ table.display tr td
 /* Alternance de couleurs */
 tr.row0, tr.row1
 {
-	font-size: 0.9em;
+	font-size: 1em;
 	color: white;
 }
 
