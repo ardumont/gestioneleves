@@ -19,6 +19,14 @@ if($nEvalColId == null)
 	$nEvalColId = $oForm->getValue('ideval', $_GET, 'convert_int');
 }
 
+// Récupère de la session les informations soumises
+$aIdEleves = isset($_SESSION['ID_ELEVE']) ? $_SESSION['ID_ELEVE'] : array();
+$aIdCompetences = isset($_SESSION['ID_COMPETENCE']) ? $_SESSION['ID_COMPETENCE'] : array();
+
+// Puis détruit la session
+$_SESSION['ID_ELEVE'] = null;
+$_SESSION['ID_COMPETENCE'] = null;
+
 //==============================================================================
 // Validation du formulaire
 //==============================================================================
@@ -35,13 +43,15 @@ if($nEvalColId == null)
 $sQuery = <<< EOQ
 	SELECT
 		EVAL_COL_ID,
-		EVAL_COL_NOM,
+		CONCAT(CLASSE_NOM, ' - ', PERIODE_NOM, ' - ', EVAL_COL_NOM) AS EVAL_COL_NOM,
 		EVAL_COL_DESCRIPTION,
 		CLASSE_NOM,
 		CLASSE_ANNEE_SCOLAIRE
 	FROM EVALUATIONS_COLLECTIVES
 		INNER JOIN CLASSES
 			ON EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID
+		INNER JOIN PERIODES
+			ON EVALUATIONS_COLLECTIVES.ID_PERIODE = PERIODES.PERIODE_ID
 	ORDER BY EVAL_COL_DATE ASC
 EOQ;
 $aEvalCols = Database::fetchArray($sQuery);
@@ -131,6 +141,7 @@ ____EOQ;
 	// ===== liste des eval. ind. attachees a cette eval. coll. =====
 	$sQuery = <<< ____EOQ
 		SELECT
+			EVAL_IND_ID,
 			ELEVE_NOM,
 			CLASSE_NOM,
 			NOTE_NOM,
@@ -156,9 +167,9 @@ ____EOQ;
 			INNER JOIN PROFESSEUR_CLASSE
 				ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
 		WHERE EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL = {$nEvalColId}
-		ORDER BY DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
+		ORDER BY ELEVE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
 ____EOQ;
-	$aEvalInds= Database::fetchArray($sQuery);
+	$aEvalInds = Database::fetchArray($sQuery);
 	// $aEvalInds[][COLONNE] = VALEUR
 }
 
@@ -203,7 +214,7 @@ ____EOQ;
 				<td>
 					<select name="EVAL_COL_ID" onchange="document.getElementById('recherche_eval_coll').submit();">
 						<?php foreach($aEvalCols as $aEvalCol): ?>
-							<option value="<?php echo($aEvalCol['EVAL_COL_ID']); ?>"<?php echo($aEvalCol['EVAL_COL_ID'] == $nEvalColId ? ' selected="selected"':''); ?>><?php echo($aEvalCol['CLASSE_NOM'] . " - " . $aEvalCol['EVAL_COL_NOM']); ?></option>
+							<option value="<?php echo($aEvalCol['EVAL_COL_ID']); ?>"<?php echo($aEvalCol['EVAL_COL_ID'] == $nEvalColId ? ' selected="selected"':''); ?>><?php echo($aEvalCol['EVAL_COL_NOM']); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</td>
@@ -245,21 +256,23 @@ ____EOQ;
 		<table class="formulaire">
 			<caption>Ajout d'une &eacute;valuation individuelle</caption>
 			<tr>
-				<td>El&egrave;ve</td>
+				<td>El&egrave;ves</td>
 				<td>
-					<select name="ID_ELEVE">
+					<select multiple="multiple" size="5" name="ID_ELEVE[]">
 						<?php foreach($aEleves as $nKey => $sValue): ?>
-							<option value="<?php echo($nKey); ?>"><?php echo($sValue); ?></option>
+							<?php $bInArray = in_array($nKey, $aIdEleves); ?>
+							<option value="<?php echo($nKey); ?>"<?php echo $bInArray ? ' selected="selected"': ''; ?>><?php echo($sValue); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</td>
 			</tr>
 			<tr>
-				<td>Comp&eacute;tence</td>
+				<td>Comp&eacute;tences</td>
 				<td>
-					<select name="ID_COMPETENCE">
+					<select multiple="multiple" size="5" name="ID_COMPETENCE[]">
 						<?php foreach($aCompetences as $aCompetence): ?>
-							<option value="<?php echo($aCompetence['COMPETENCE_ID']); ?>"><?php echo($aCompetence['MATIERE_NOM'] . " - " .$aCompetence['COMPETENCE_NOM']); ?></option>
+							<?php $bInArray = in_array($aCompetence['COMPETENCE_ID'], $aIdCompetences); ?>
+							<option value="<?php echo($aCompetence['COMPETENCE_ID']); ?>"<?php echo $bInArray ? ' selected="selected"': ''; ?>><?php echo($aCompetence['MATIERE_NOM'] . " - " .$aCompetence['COMPETENCE_NOM']); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</td>
@@ -307,7 +320,7 @@ ____EOQ;
 				<th>Mati&egrave;res</th>
 				<th>Comp&eacute;tences</th>
 				<th>Notes</th>
-				<th>Commentaires</th>
+				<th colspan="2">Actions</th>
 			</tr>
 		</thead>
 		<tfoot>
@@ -320,8 +333,15 @@ ____EOQ;
 				<td><?php echo($aEvalInd['DOMAINE_NOM']); ?></td>
 				<td><?php echo($aEvalInd['MATIERE_NOM']); ?></td>
 				<td><?php echo($aEvalInd['COMPETENCE_NOM']); ?></td>
-				<td><?php echo($aEvalInd['NOTE_NOM']); ?></td>
-				<td><pre><?php echo($aEvalInd['EVAL_IND_COMMENTAIRE']); ?></pre></td>
+				<td title="<?php echo($aEvalInd['EVAL_IND_COMMENTAIRE']); ?>"><?php echo($aEvalInd['NOTE_NOM']); ?></td>
+				<!-- Edition -->
+				<td>
+					<a href="?page=evaluations_individuelles&amp;mode=edit&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
+				</td>
+				<!-- Suppression -->
+				<td>
+					<a href="?page=evaluations_individuelles&amp;mode=delete&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
+				</td>
 			</tr>
 			<?php endforeach; ?>
 		</tbody>

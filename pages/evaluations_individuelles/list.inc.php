@@ -130,7 +130,7 @@ $sQuery = <<< EOQ
 	{$sQueryElevesId}
 	{$sQueryEvalCollId}
 	{$sQueryClasseId}
-	ORDER BY DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
+	ORDER BY ELEVE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
 EOQ;
 $aEvalInds = Database::fetchArray($sQuery);
 // $aEvalInds[][COLONNE] = VALEUR
