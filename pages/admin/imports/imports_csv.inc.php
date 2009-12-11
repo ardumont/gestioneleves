@@ -75,7 +75,7 @@ $sCSVExemple = utf8_decode($sCSVExemple);
 			<td>Fichier &agrave; importer</td>
 			<td>
 				<!-- taille max que supporte php pour la taille du fichier uploade -->
-				<input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+				<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
 				<input type="file" name="nom_fichier" accept="text/text" />
 			</td>
 		</tr>

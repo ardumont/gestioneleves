@@ -1,17 +1,17 @@
 body
 {
 	font: Tahoma, Comic Sans MS, Helvetica, Bitstream Vera, Courier New, Verdana, Arial, Monaco, Trebuchet MS, sans-serif;
-	font-size: 1em;
+	font-size: 1.3em;
 	font-family: cursive;
 }
 
 @page
 {
 	size: 21.0cm 29.7cm;
-	margin-top: 1.7cm;
-	margin-bottom: 1.4cm;
-	margin-left: 2cm;
-	margin-right: 2cm
+	margin-top: 1cm;
+	margin-bottom: 1cm;
+	margin-left: 1cm;
+	margin-right: 1cm
 }
 
 .page_1
@@ -19,6 +19,11 @@ body
 	width: 1024px;
 	height: 768px;
 	text-align: center;
+}
+
+.page_1, .titre1, .titre2, .titre3, .titre4, .titre5, .titre6, .struct_identite_eleve
+{
+	clear: both;
 }
 
 .titre1
@@ -38,10 +43,10 @@ body
 {
 	margin-left: 362px; /* (1024-300) / 2 */
 	border: 1px solid black;
-	width: 300px;
-	height: 200px;
+	width: 400px;
+	height: 300px;
 	font-weight: bold;
-	font-size: 2.5em;		
+	font-size: 2.5em;
 }
 
 .titre4

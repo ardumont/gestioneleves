@@ -116,9 +116,12 @@ Message::loadFromSession($_SESSION['ERROR_MESSAGE']);
 $aMenuPage = array
 (
 	// ----- General -----
-	'export_livret_eleve_annuel' => "special/export_livret_eleve_annuel.inc.php",
-	'export_livret_eleve_period' => "special/export_livret_eleve_period.inc.php",
-	'export_livret_eleve_cycle' => "special/export_livret_eleve_cycle.inc.php",
+	'export_livret_eleve_annuel'     => "special/export_livret_eleve_annuel.inc.php",
+	'export_livret_eleve_period'     => "special/export_livret_eleve_period.inc.php",
+	'export_livret_eleve_cycle'      => "special/export_livret_eleve_cycle.inc.php",
+	'export_livret_eleve_annuel_all' => "special/export_livret_eleve_annuel_all.inc.php",
+	'export_livret_eleve_period_all' => "special/export_livret_eleve_period_all.inc.php",
+	'export_livret_eleve_cycle_all'  => "special/export_livret_eleve_cycle_all.inc.php",
 );
 
 //==============================================================================
@@ -126,10 +129,10 @@ $aMenuPage = array
 //==============================================================================
 
 // ===== Navigation entre les pages =====
-$objFormNavigation = new FormValidation();
+$oForm = new FormValidation();
 
-$sPageId = $objFormNavigation->getValue('page', $_GET, 'is_string', "home");
-$sMode   = $objFormNavigation->getValue('mode', $_GET, 'is_string', "");
+$sPageId = $oForm->getValue('page', $_GET, 'is_string', "home");
+$sMode   = $oForm->getValue('mode', $_GET, 'is_string', "");
 
 //==============================================================================
 // Actions du formulaire

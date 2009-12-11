@@ -62,6 +62,23 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 		<dl>
 			<dt>
 				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+				v1.6.0
+			</dt>
+			<dd>
+				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Amélioration de l'ergonomie des ihms.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Retrait de l'édition des valeurs des notes (pour figer le calcul des moyennes).</li>
+					<li class="evolution_majeure" title="Evolution majeure">Augmentation de la taille des fichiers d'imports xml.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm de visualisation des livrets périodiques des élèves d'une classe.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impression des livrets périodiques des élèves d'une classe.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm de visualisation des livrets annuels des élèves d'une classe.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impression des livrets annuels des élèves d'une classe.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm de visualisation des livrets cycliques des élèves d'une classe.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impression des livrets cycliques des élèves d'une classe.</li>
+				</ul>
+			</dd>
+			<dt>
+				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
 				v1.5.0
 			</dt>
 			<dd>

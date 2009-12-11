@@ -90,7 +90,7 @@ $sGuiTitle = "Livret d'évaluation";
 		</div>
 		<br />
 		<!-- Présentation du cycle -->
-		<div class="titre3">Cycle des<br />apprentissages<br />fondamentaux</div>
+		<div class="titre3"><?php echo Livret::display_libelle_cycle($aEleve['CYCLE_NOM']); ?></div>
 		<div class="titre4">Cycle <?php echo $aEleve['CYCLE_NOM']; ?></div>
 		<br />
 		<!--  Présentation de l'élève -->
@@ -108,7 +108,7 @@ $sGuiTitle = "Livret d'évaluation";
 		</div>
 		<br />
 		<!-- Présentation de l'éducation nationale -->
-		<div class="titre5">Education Nationale - XXX circonscription</div>
+		<div class="titre5">Education Nationale</div>
 
 		<!-- Présentation de l'élève -->
 		<div class="titre6">
@@ -205,7 +205,7 @@ $sGuiTitle = "Livret d'évaluation";
 			<tfoot></tfoot>
 			<tbody>
 				<?php foreach($aPeriodes as $aPeriode): /* Pour chaque période */ ?>
-				<tr style="width: 500px; height: 150px;">
+				<tr style="width: 500px; height: 250px;">
 					<td style="width: 20%"><?php echo $aPeriode['PERIODE_NOM']; ?></td>
 					<td style="width: 80%"></td>
 				</tr>

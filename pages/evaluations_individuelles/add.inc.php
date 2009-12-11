@@ -9,7 +9,7 @@ $nYear = strftime("%Y",time());
 $oForm = new FormValidation();
 
 // au retour de la soumission du formulaire de recherche
-$nEvalColId = $oForm->getValue('EVAL_COL_ID', $_POST, 'convert_int');
+$nEvalColId = $oForm->getValue('EVAL_COL_ID', $_POST, 'convert_int', null);
 
 // si on ne trouve pas la variable dans le formulaire post
 // on peux eventuellement la trouver dans le formulaire get
@@ -138,6 +138,18 @@ ____EOQ;
 	$aNotes = Database::fetchColumnWithKey($sQuery);
 	// $aNotes[NOTE_ID] = NOTE_NOM
 
+	if($aIdEleves != false && $aIdCompetences != false)
+	{
+		$sQueryEleves = implode(",", $aIdEleves);
+		$sQueryCompetences = implode(",", $aIdCompetences);
+
+		$sQueryEleves = "AND ELEVES.ELEVE_ID IN ({$sQueryEleves})";
+		$sQueryCompetences = "AND COMPETENCES.COMPETENCE_ID IN ({$sQueryCompetences})";
+	} else {
+		$sQueryEleves = "";
+		$sQueryCompetences = "";
+	}
+
 	// ===== liste des eval. ind. attachees a cette eval. coll. =====
 	$sQuery = <<< ____EOQ
 		SELECT
@@ -167,6 +179,8 @@ ____EOQ;
 			INNER JOIN PROFESSEUR_CLASSE
 				ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
 		WHERE EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL = {$nEvalColId}
+		{$sQueryEleves}
+		{$sQueryCompetences}
 		ORDER BY ELEVE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
 ____EOQ;
 	$aEvalInds = Database::fetchArray($sQuery);
@@ -229,6 +243,7 @@ ____EOQ;
 
 <?php if($nEvalColId != null): ?>
 	<form method="post" action="?page=evaluations_individuelles&amp;mode=add_do">
+<!--
 		<table class="list_tree" width="300px">
 			<caption>D&eacute;tail de l'&eacute;valuation collective</caption>
 			<thead></thead>
@@ -253,6 +268,7 @@ ____EOQ;
 			</tbody>
 		</table>
 		<br />
+-->
 		<table class="formulaire">
 			<caption>Ajout d'une &eacute;valuation individuelle</caption>
 			<tr>
@@ -310,6 +326,7 @@ ____EOQ;
 		</tr>
 	</table>
 	<?php else: ?>
+	<form method="post" action="?page=evaluations_individuelles&amp;mode=delete_multiple&amp;retour=add">
 	<table class="list_tree">
 		<caption>Liste des &eacute;valuations individuelles</caption>
 		<thead>
@@ -320,11 +337,10 @@ ____EOQ;
 				<th>Mati&egrave;res</th>
 				<th>Comp&eacute;tences</th>
 				<th>Notes</th>
-				<th colspan="2">Actions</th>
+				<th colspan="3">Actions</th>
 			</tr>
 		</thead>
-		<tfoot>
-		</tfoot>
+		<tfoot></tfoot>
 		<tbody>
 			<?php foreach($aEvalInds as $nRowNum => $aEvalInd): ?>
 			<tr class="level0_row<?php echo($nRowNum%2); ?>">
@@ -342,9 +358,15 @@ ____EOQ;
 				<td>
 					<a href="?page=evaluations_individuelles&amp;mode=delete&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
 				</td>
+				<!-- Suppression multiple -->
+				<td>
+					<input type="checkbox" name="evals_inds_id[]" value="<?php echo($aEvalInd['EVAL_IND_ID']); ?>" alt="Suppression multiple" title="Suppression multiple"  />
+				</td>
 			</tr>
 			<?php endforeach; ?>
 		</tbody>
 	</table>
+	<input type="submit" name="suppression_multiple" value="Suppression multiple" />
+	</form>
 	<?php endif; ?>
 <?php endif; ?>

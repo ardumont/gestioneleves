@@ -189,13 +189,15 @@ $aMenuPage = array
 	// ----- gestion des evaluations individuelles -----
 	'evaluations_individuelles' => array
 	(
-		''				=> "evaluations_individuelles/list.inc.php",
-		'add'			=> "evaluations_individuelles/add.inc.php",
-		'add_do'		=> "evaluations_individuelles/add_do.inc.php",
-		'edit'			=> "evaluations_individuelles/edit.inc.php",
-		'edit_do'		=> "evaluations_individuelles/edit_do.inc.php",
-		'delete'		=> "evaluations_individuelles/delete.inc.php",
-		'delete_do'		=> "evaluations_individuelles/delete_do.inc.php",
+		''                   => "evaluations_individuelles/list.inc.php",
+		'add'                => "evaluations_individuelles/add.inc.php",
+		'add_do'             => "evaluations_individuelles/add_do.inc.php",
+		'edit'               => "evaluations_individuelles/edit.inc.php",
+		'edit_do'            => "evaluations_individuelles/edit_do.inc.php",
+		'delete'             => "evaluations_individuelles/delete.inc.php",
+		'delete_do'          => "evaluations_individuelles/delete_do.inc.php",
+		'delete_multiple'    => "evaluations_individuelles/delete_multiple.inc.php",
+		'delete_multiple_do' => "evaluations_individuelles/delete_multiple_do.inc.php",
 	),
 
 	// ----- Profil -----
@@ -207,9 +209,12 @@ $aMenuPage = array
 
 	// ----- Livrets -----
 	'livrets' => array(
-		'recap_annuel'  => "livrets/recap_annuel.inc.php",
-		'recap_period'  => "livrets/recap_period.inc.php",
-		'recap_cycle'  => "livrets/recap_cycle.inc.php",
+		'recap_annuel'     => "livrets/recap_annuel.inc.php",
+		'recap_period'     => "livrets/recap_period.inc.php",
+		'recap_cycle'      => "livrets/recap_cycle.inc.php",
+		'recap_annuel_all' => "livrets/recap_annuel_all.inc.php",
+		'recap_period_all' => "livrets/recap_period_all.inc.php",
+		'recap_cycle_all'  => "livrets/recap_cycle_all.inc.php",
 	),
 );
 
@@ -218,10 +223,10 @@ $aMenuPage = array
 //==============================================================================
 
 // ===== Navigation entre les pages =====
-$objFormNavigation = new FormValidation();
+$oForm = new FormValidation();
 
-$sPageId = $objFormNavigation->getValue('page', $_GET, 'is_string', "home");
-$sMode   = $objFormNavigation->getValue('mode', $_GET, 'is_string', "");
+$sPageId = $oForm->getValue('page', $_GET, 'is_string', "home");
+$sMode   = $oForm->getValue('mode', $_GET, 'is_string', "");
 
 //==============================================================================
 // Actions du formulaire
@@ -458,10 +463,16 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 				<h4><a href="?page=evaluations_collectives"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
 			<h3>Evaluations individuelles</h3>
 				<h4><a href="?page=evaluations_individuelles"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-			<h3>Livrets</h3>
+			<h3>Livrets par élève</h3>
 				<h4><a href="?page=livrets&amp;mode=recap_period"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif périodique</a></h4>
 				<h4><a href="?page=livrets&amp;mode=recap_annuel"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif annuel</a></h4>
 				<h4><a href="?page=livrets&amp;mode=recap_cycle"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif cycle</a></h4>
+			<h3>Livrets par classe</h3>
+				<h4><a href="?page=livrets&amp;mode=recap_period_all"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif périodique</a></h4>
+<!--
+				<h4><a href="?page=livrets&amp;mode=recap_annuel_all"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif annuel</a></h4>
+				<h4><a href="?page=livrets&amp;mode=recap_cycle_all"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif cycle</a></h4>
+-->
 			<h3>Aide/Info</h3>
 				<h4><a href="?page=contributeurs"><img src="<?php echo(URL_ICONS_16X16); ?>/contributeur.png"/>Contributeurs</a></h4>
 				<h4><a href="admin.php"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Page d'administration</a></h4>

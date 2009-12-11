@@ -6,6 +6,29 @@
 class Livret
 {
 	/**
+	 * Fonction d'affichage du libellé du cycle en fonction du cycle
+	 * @param $sCycleNom
+	 * @return string
+	 */
+	public static function display_libelle_cycle($sCycleNom)
+	{
+		$sLib = "";
+		switch($sCycleNom)
+		{
+			case "I": case "i":
+				$sLib = "Cycle des apprentissages personnalisés";
+				break;
+			case "II": case "ii":
+				$sLib = "Cycle des apprentissages fondamentaux";
+				break;
+			case "III": case "iii":
+				$sLib = "Cycle des approfondissements";
+				break;
+		}
+		return $sLib;
+	}// fin display_libelle_cycle
+	
+	/**
 	 * Récapitulatif annuel.
 	 * @param $nEleveId	Elève concerné par le livret
 	 * @return array	Résultat

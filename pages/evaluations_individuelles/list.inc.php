@@ -3,6 +3,8 @@
 // Preparation des donnees
 //==============================================================================
 
+$nOffset = 30;
+
 //restriction sur l'annee scolaire courante
 $sRestrictionAnneeScolaire =
 	" AND CLASSE_ANNEE_SCOLAIRE = " . sql_annee_scolaire_courante();
@@ -13,10 +15,30 @@ $sRestrictionAnneeScolaire =
 
 $oForm = new FormValidation();
 
-// recuperation des ids de restrictions de recherche
-$nEleveId = $oForm->getValue('ELEVE_ID', $_POST, 'convert_int', -1);
-$nClasseId = $oForm->getValue('CLASSE_ID', $_POST, 'convert_int', -1);
-$nEvalCollId = $oForm->getValue('EVAL_COL_ID', $_POST, 'convert_int', -1);
+// Pagination
+$nOffsetDep = $oForm->getValue('offset_depart', $_GET, 'convert_int', 0);
+$nOffsetFin = $nOffsetDep + $nOffset;
+
+// Recuperation des ids de restrictions de recherche
+$nEleveId = $oForm->getValue('eleve_id', $_GET, 'convert_int', -1);
+$nClasseId = $oForm->getValue('classe_id', $_GET, 'convert_int', -1);
+$nEvalCollId = $oForm->getValue('eval_col_id', $_GET, 'convert_int', -1);
+
+if($nEleveId == -1)
+{
+	// Recuperation des ids de restrictions de recherche
+	$nEleveId = $oForm->getValue('ELEVE_ID', $_POST, 'convert_int', -1);
+}
+
+if($nClasseId == -1)
+{
+	$nClasseId = $oForm->getValue('CLASSE_ID', $_POST, 'convert_int', -1);
+}
+
+if($nEvalCollId == -1)
+{
+	$nEvalCollId = $oForm->getValue('EVAL_COL_ID', $_POST, 'convert_int', -1);
+}
 
 //==============================================================================
 // Actions du formulaire
@@ -88,56 +110,106 @@ $aClasses = Database::fetchArray($sQuery);
 // $aClasses[][COLONNE] = VALEUR
 
 // criteres de recherche
-$sQueryElevesId = ($nEleveId != -1) ? " AND ELEVES.ELEVE_ID = {$nEleveId} " : "";
-$sQueryClasseId = ($nClasseId != -1) ? " AND CLASSES.CLASSE_ID = {$nClasseId} " : "";
 $sQueryEvalCollId = ($nEvalCollId != -1) ? " AND EVALUATIONS_COLLECTIVES.EVAL_COL_ID = {$nEvalCollId} " : "";
+$sQueryClasseId = ($nClasseId != -1) ? " AND CLASSES.CLASSE_ID = {$nClasseId} " : "";
+$sQueryElevesId = ($nEleveId != -1) ? " AND ELEVES.ELEVE_ID = {$nEleveId} " : "";
 
-// ===== La liste des evaluations individuelles a ce jour =====
-$sQuery = <<< EOQ
-	SELECT
-		ELEVE_NOM,
-		CLASSE_NOM,
-		NOTE_NOM,
-		EVAL_IND_ID,
-		EVAL_IND_COMMENTAIRE,
-		CONCAT(PERIODE_NOM, ' - ', EVAL_COL_NOM) AS EVAL_COL_NOM,
-		COMPETENCE_NOM,
-		MATIERE_NOM,
-		DOMAINE_NOM
-	FROM EVALUATIONS_INDIVIDUELLES
-		INNER JOIN NOTES
-			ON EVALUATIONS_INDIVIDUELLES.ID_NOTE = NOTES.NOTE_ID
-		INNER JOIN ELEVES
-			ON EVALUATIONS_INDIVIDUELLES.ID_ELEVE = ELEVES.ELEVE_ID
-		INNER JOIN ELEVE_CLASSE
-			ON ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE
-		INNER JOIN CLASSES
-			ON ELEVE_CLASSE.ID_CLASSE = CLASSES.CLASSE_ID
-		INNER JOIN COMPETENCES
-			ON EVALUATIONS_INDIVIDUELLES.ID_COMPETENCE = COMPETENCES.COMPETENCE_ID
-		INNER JOIN MATIERES
-			ON COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
-		INNER JOIN DOMAINES
-			ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
-		INNER JOIN PROFESSEUR_CLASSE
-			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
-		INNER JOIN EVALUATIONS_COLLECTIVES
-			ON EVALUATIONS_COLLECTIVES.EVAL_COL_ID = EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL
-		INNER JOIN PERIODES
-			ON EVALUATIONS_COLLECTIVES.ID_PERIODE = PERIODES.PERIODE_ID
-	WHERE PROFESSEUR_CLASSE.ID_PROFESSEUR = {$_SESSION['PROFESSEUR_ID']}
-	{$sRestrictionAnneeScolaire}
-	{$sQueryElevesId}
-	{$sQueryEvalCollId}
-	{$sQueryClasseId}
-	ORDER BY ELEVE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
-EOQ;
-$aEvalInds = Database::fetchArray($sQuery);
-// $aEvalInds[][COLONNE] = VALEUR
+if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1)
+{
+	// ===== La liste des evaluations individuelles a ce jour =====
+	$sQuery = <<< ____EOQ
+		SELECT
+			COUNT(*)
+		FROM EVALUATIONS_INDIVIDUELLES
+			INNER JOIN NOTES
+				ON EVALUATIONS_INDIVIDUELLES.ID_NOTE = NOTES.NOTE_ID
+			INNER JOIN ELEVES
+				ON EVALUATIONS_INDIVIDUELLES.ID_ELEVE = ELEVES.ELEVE_ID
+			INNER JOIN ELEVE_CLASSE
+				ON ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE
+			INNER JOIN CLASSES
+				ON ELEVE_CLASSE.ID_CLASSE = CLASSES.CLASSE_ID
+			INNER JOIN COMPETENCES
+				ON EVALUATIONS_INDIVIDUELLES.ID_COMPETENCE = COMPETENCES.COMPETENCE_ID
+			INNER JOIN MATIERES
+				ON COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
+			INNER JOIN DOMAINES
+				ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
+			INNER JOIN PROFESSEUR_CLASSE
+				ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
+			INNER JOIN EVALUATIONS_COLLECTIVES
+				ON EVALUATIONS_COLLECTIVES.EVAL_COL_ID = EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL
+			INNER JOIN PERIODES
+				ON EVALUATIONS_COLLECTIVES.ID_PERIODE = PERIODES.PERIODE_ID
+		WHERE PROFESSEUR_CLASSE.ID_PROFESSEUR = {$_SESSION['PROFESSEUR_ID']}
+		{$sRestrictionAnneeScolaire}
+		{$sQueryElevesId}
+		{$sQueryEvalCollId}
+		{$sQueryClasseId}
+		ORDER BY ELEVE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
+____EOQ;
+	$nRowCount = Database::fetchOneValue($sQuery);
+	
+	// ===== La liste des evaluations individuelles a ce jour =====
+	$sQuery = <<< ____EOQ
+		SELECT
+			ELEVE_NOM,
+			CLASSE_NOM,
+			NOTE_NOM,
+			NOTE_LABEL,
+			EVAL_IND_ID,
+			EVAL_IND_COMMENTAIRE,
+			CONCAT(PERIODE_NOM, ' - ', EVAL_COL_NOM) AS EVAL_COL_NOM,
+			COMPETENCE_NOM,
+			MATIERE_NOM,
+			DOMAINE_NOM
+		FROM EVALUATIONS_INDIVIDUELLES
+			INNER JOIN NOTES
+				ON EVALUATIONS_INDIVIDUELLES.ID_NOTE = NOTES.NOTE_ID
+			INNER JOIN ELEVES
+				ON EVALUATIONS_INDIVIDUELLES.ID_ELEVE = ELEVES.ELEVE_ID
+			INNER JOIN ELEVE_CLASSE
+				ON ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE
+			INNER JOIN CLASSES
+				ON ELEVE_CLASSE.ID_CLASSE = CLASSES.CLASSE_ID
+			INNER JOIN COMPETENCES
+				ON EVALUATIONS_INDIVIDUELLES.ID_COMPETENCE = COMPETENCES.COMPETENCE_ID
+			INNER JOIN MATIERES
+				ON COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
+			INNER JOIN DOMAINES
+				ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
+			INNER JOIN PROFESSEUR_CLASSE
+				ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
+			INNER JOIN EVALUATIONS_COLLECTIVES
+				ON EVALUATIONS_COLLECTIVES.EVAL_COL_ID = EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL
+			INNER JOIN PERIODES
+				ON EVALUATIONS_COLLECTIVES.ID_PERIODE = PERIODES.PERIODE_ID
+		WHERE PROFESSEUR_CLASSE.ID_PROFESSEUR = {$_SESSION['PROFESSEUR_ID']}
+		{$sRestrictionAnneeScolaire}
+		{$sQueryElevesId}
+		{$sQueryEvalCollId}
+		{$sQueryClasseId}
+		ORDER BY ELEVE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
+		LIMIT {$nOffsetDep}, {$nOffsetFin}
+____EOQ;
+	$aEvalInds = Database::fetchArray($sQuery);
+	// $aEvalInds[][COLONNE] = VALEUR
+} else {
+	$aEvalInds = array();
+}
 
 //==============================================================================
 // Preparation de l'affichage
 //==============================================================================
+
+// Création des liens de pagination
+$sEndLink = "";
+$sEndLink .= ($nEleveId != -1) ? "&amp;eleve_id={$nEleveId}" : "";
+$sEndLink .= ($nClasseId != -1) ? "&amp;classe_id={$nClasseId}" : "";
+$sEndLink .= ($nEvalCollId != -1) ? "&amp;eval_col_id={$nEvalCollId}" : "";
+
+$sLinkPrec = "?page=evaluations_individuelles&amp;offset_depart=" . ($nOffsetDep - $nOffset) . "{$sEndLink}";
+$sLinkSucc = "?page=evaluations_individuelles&amp;offset_depart={$nOffsetFin}{$sEndLink}";
 
 //==============================================================================
 // Affichage de la page
@@ -163,6 +235,8 @@ $aEvalInds = Database::fetchArray($sQuery);
 				Vous pouvez toutefois ne filtrer que par classe ou par élève.<br />
 				Pour cela, sélectionner une classe ou un élève puis cliquer sur le bouton <i>Rechercher</i>.<br />
 				Attention, toutefois, si l'élève n'appartient pas à la classe, aucun résultat ne s'affichera.
+				<br />
+				Par ailleurs, si l'affichage dépasse les <?php echo $nOffset; ?> lignes, des liens "précédent" et "suivant" apparaîssent pour afficher les <?php $nOffset; ?> éléments précédents ou suivants.
 				<br />&nbsp;
 			</td>
 		</tr>
@@ -213,20 +287,27 @@ $aEvalInds = Database::fetchArray($sQuery);
 		</tbody>
 	</table>
 </form>
-
 <?php if(count($aEvalInds) <= 0): ?>
 <table class="formulaire">
 	<caption>Informations</caption>
 	<tr>
 		<td>
-			Aucune évaluation individuelle n'a été saisie à ce jour pour ces critères.<br />
+			Aucun critère de recherche n'a été saisi ou aucune évaluation individuelle 
+			n'a été saisie à ce jour pour ces critères.<br />
 			<a href="?page=evaluations_individuelles&amp;mode=add">Ajouter une évaluation individuelle</a>
 		</td>
 	</tr>
 </table>
 <?php else: ?>
+<form method="post" action="?page=evaluations_individuelles&amp;mode=delete_multiple">
 	<table class="list_tree">
-		<caption>Liste des évaluations individuelles</caption>
+		<caption>
+			<strong>
+				<?php echo ($nOffsetDep > 0) ? '<a href="' . $sLinkPrec . '">précédent</a>&nbsp;': ''; ?>
+				Liste des évaluations individuelles (<?php echo "{$nOffsetDep} - {$nOffsetFin}"; ?>)&nbsp;
+				<?php echo ($nOffsetFin < $nRowCount) ? '<a href="' . $sLinkSucc . '">suivant</a>' : ''; ?>
+			</strong>
+		</caption>
 		<thead>
 			<tr>
 				<th><a href="?page=evaluations_individuelles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
@@ -237,13 +318,13 @@ $aEvalInds = Database::fetchArray($sQuery);
 				<th>Compétences</th>
 				<th>Notes</th>
 				<th></th>
-				<th colspan="2">Actions</th>
+				<th colspan="3">Actions</th>
 			</tr>
 		</thead>
 		<tfoot>
 			<tr>
 				<th><a href="?page=evaluations_individuelles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
-				<th colspan="9"></th>
+				<th colspan="10"></th>
 			</tr>
 		</tfoot>
 		<tbody>
@@ -255,7 +336,7 @@ $aEvalInds = Database::fetchArray($sQuery);
 				<td><?php echo($aEvalInd['EVAL_COL_NOM']); ?></td>
 				<td><?php echo($aEvalInd['MATIERE_NOM']); ?></td>
 				<td><?php echo($aEvalInd['COMPETENCE_NOM']); ?></td>
-				<td><?php echo($aEvalInd['NOTE_NOM']); ?></td>
+				<td title="<?php echo($aEvalInd['NOTE_NOM'] . (($aEvalInd['EVAL_IND_COMMENTAIRE'] != null) ? " - '" . $aEvalInd['EVAL_IND_COMMENTAIRE'] . "'" : "")); ?>"><?php echo($aEvalInd['NOTE_LABEL']); ?></td>
 				<td></td>
 				<!-- Edition -->
 				<td>
@@ -265,15 +346,14 @@ $aEvalInds = Database::fetchArray($sQuery);
 				<td>
 					<a href="?page=evaluations_individuelles&amp;mode=delete&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
 				</td>
+				<!-- Suppression multiple -->
+				<td>
+					<input type="checkbox" name="evals_inds_id[]" value="<?php echo($aEvalInd['EVAL_IND_ID']); ?>" alt="Suppression multiple" title="Suppression multiple"  />
+				</td>
 			</tr>
-			<?php if($aEvalInd['EVAL_IND_COMMENTAIRE'] != null): ?>
-			<tr class="level0_row<?php echo($nRowNum%2); ?>">
-				<td colspan="2"></td>
-				<th>Commentaires</th>
-				<td colspan="8"><pre style="font-size: 1.2em;"><?php echo($aEvalInd['EVAL_IND_COMMENTAIRE']); ?></pre></td>
-			</tr>
-			<?php endif; ?>
 			<?php endforeach; ?>
 		</tbody>
 	</table>
+	<input type="submit" name="suppression_multiple" value="Suppression multiple" />
+</form>
 <?php endif; ?>
