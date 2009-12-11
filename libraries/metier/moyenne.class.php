@@ -1,4 +1,8 @@
 <?php
+/**
+ * Classe de calcul des moyennes.
+ * @author Antoine Romain Dumont aka tony or ToNyX
+ */
 class Moyenne
 {
 	/**

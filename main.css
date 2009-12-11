@@ -621,6 +621,13 @@ table.display tr td
 	text-align: center;
 }
 
+.NE
+{
+	background-color: white;
+	color: black;
+	text-align: center;
+}
+
 /* Alternance de couleurs */
 tr.row0, tr.row1
 {

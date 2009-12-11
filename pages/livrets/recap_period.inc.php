@@ -110,7 +110,6 @@ if($nEleveId != -1 && $nPeriodeId != -1)
 	$aEleveInfo = $aRes['ELEVE'];
 	$aClassesEleve = $aRes['CLASSES_ELEVES'];
 	$aNotes = $aRes['NOTES'];
-//	$aNotesValues = $aRes['NOTES_VALUES'];
 	$aPeriodesInfo = $aRes['PERIODES'];
 	$aClassesNiveaux = $aRes['CLASSES_NIVEAUX'];
 	$aDomainesMatieresCompetences = $aRes['DOMAINES_MATIERES_COMPETENCES'];

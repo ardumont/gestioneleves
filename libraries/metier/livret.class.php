@@ -238,13 +238,18 @@ ________EOQ;
 								// Pour chaque compétence évaluée
 								foreach($aRes as $oRes)
 								{
+									// Les competences à "Non Evaluees" ne comptent pas dans la moyenne
+									if($oRes['NOTE_NOTE'] == 0)
+									{
+										continue;
+									}
 									// Somme
 									$nSommeComp += $oRes['NOTE_NOTE'];
 									// Incrémente le nombre de compétences évaluées
 									$nNbComp++;
 								}
 								// Calcul de la moyenne
-								$nMoy = $nSommeComp / $nNbComp;
+								$nMoy = ($nNbComp != 0) ? $nSommeComp / $nNbComp : 0;
 								// On stocke enfin la moyenne de ces compétences
 								$aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]['NOTE_LABEL'] = Moyenne::compute_and_label($nMoy);
 							}
@@ -480,13 +485,18 @@ ________EOQ;
 								// Pour chaque compétence évaluée
 								foreach($aRes as $oRes)
 								{
+									// Les competences à "Non Evaluees" ne comptent pas dans la moyenne
+									if($oRes['NOTE_NOTE'] == 0)
+									{
+										continue;
+									}
 									// Somme
 									$nSommeComp += $oRes['NOTE_NOTE'];
 									// Incrémente le nombre de compétences évaluées
 									$nNbComp++;
 								}
 								// Calcul de la moyenne
-								$nMoy = $nSommeComp / $nNbComp;
+								$nMoy = ($nNbComp != 0) ? $nSommeComp / $nNbComp : 0;
 								// On stocke enfin la moyenne de ces compétences
 								$aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]['NOTE_LABEL'] = Moyenne::compute_and_label($nMoy);
 							}
@@ -724,13 +734,18 @@ ________EOQ;
 						// Pour chaque compétence évaluée
 						foreach($aRes as $oRes)
 						{
+							// Les competences à "Non Evaluees" ne comptent pas dans la moyenne
+							if($oRes['NOTE_NOTE'] == 0)
+							{
+								continue;
+							}
 							// Somme
 							$nSommeComp += $oRes['NOTE_NOTE'];
 							// Incrémente le nombre de compétences évaluées
 							$nNbComp++;
 						}
 						// Calcul de la moyenne
-						$nMoy = $nSommeComp / $nNbComp;
+						$nMoy = ($nNbComp != 0) ? $nSommeComp / $nNbComp : 0;
 						// On stocke enfin la moyenne de ces compétences
 						$aEvalInds[$sDomaine][$sMatiere][$sCompetence][$sClasseNom][$sNiveauNom][$sPeriodeNom]['NOTE_LABEL'] = Moyenne::compute_and_label($nMoy);
 					}
