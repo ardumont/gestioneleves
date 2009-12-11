@@ -16,13 +16,15 @@
 //==============================================================================
 
 // ===== La liste des notes =====
-$sQuery = "SELECT" .
-		  "  NOTE_ID," .
-		  "  NOTE_NOM, " .
-		  "  NOTE_LABEL, " .
-		  "  NOTE_NOTE " .
-		  " FROM NOTES " .
-		  " ORDER BY NOTE_NOTE DESC";
+$sQuery = <<< EOQ
+	SELECT
+		NOTE_ID,
+		NOTE_NOM, 
+		NOTE_LABEL, 
+		NOTE_NOTE 
+	FROM NOTES 
+	ORDER BY NOTE_NOTE DESC
+EOQ;
 $aNotes = Database::fetchArray($sQuery);
 // $aNotes[][COLONNE] = VALEUR
 
@@ -53,9 +55,8 @@ $aNotes = Database::fetchArray($sQuery);
 			<td>
 				Par défaut, cette page affiche l'ensemble des notes existantes dans l'application.<br />
 				<br />
-				Vous pouvez modifier une note en cliquant sur son nom.<br />
-				Vous ne pouvez pas modifiez le coefficient d'une note car celui-ci est utilisé dans les calculs de moyenne.
-				<br />&nbsp;
+				Vous ne pouvez pas modifier les notes, ni en ajouter ou en supprimer.<br />
+				En effet, des modules de l'application en dépendent (le calcul des moyennes, l'affichage des livrets, etc...).<br />&nbsp;
 			</td>
 		</tr>
 	</table>
@@ -70,26 +71,21 @@ $aNotes = Database::fetchArray($sQuery);
 			<th>Notes</th>
 			<th>Labels</th>
 			<th>Coefficients</th>
-			<th colspan="1">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
 		<tr>
 			<th></th>
-			<th colspan="4"></th>
+			<th colspan="3"></th>
 		</tr>
 	</tfoot>
 	<tbody>
 		<?php foreach($aNotes as $nRowNum => $aNote): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td></td>
-			<td><a href="?page=notes&amp;mode=edit&amp;note_id=<?php echo($aNote['NOTE_ID']); ?>"><?php echo($aNote['NOTE_NOM']); ?></a></td>
+			<td><?php echo($aNote['NOTE_NOM']); ?></td>
 			<td><?php echo($aNote['NOTE_LABEL']); ?></td>
 			<td><?php echo($aNote['NOTE_NOTE']); ?></td>
-			<!-- Edition -->
-			<td>
-				<a href="?page=notes&amp;mode=edit&amp;note_id=<?php echo($aNote['NOTE_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-			</td>
 		</tr>
 		<?php endforeach; ?>
 	</tbody>
