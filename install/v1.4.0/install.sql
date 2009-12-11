@@ -314,7 +314,7 @@ INSERT INTO `NOTES` (`NOTE_ID`, `NOTE_NOM`, `NOTE_LABEL`, `NOTE_NOTE`) VALUES
 (1, 'Acquis', 'A', 20),
 (2, 'A Renforcer', 'AR', 15),
 (3, 'En cours d''acquisition', 'ECA', 10),
-(4, 'Non Acquis', 'NA', 5);
+(4, 'Non Acquis', 'NA', 5),
 (5, 'Non Evaluée', 'NE', 0);
 
 -- Contenu de la table `PERIODES`
