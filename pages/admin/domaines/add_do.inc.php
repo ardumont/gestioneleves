@@ -34,7 +34,7 @@ switch(strtolower($sAction))
 	// ajoute l'eleve
 	case 'ajouter':
 		if($objForm->hasError() == true) break;
-		// insertion de l'eleve dans la table
+		// insertion du domaine dans la table
 		$sQuery =
 			"INSERT INTO DOMAINES (DOMAINE_NOM, ID_CYCLE)" .
 			"VALUES(" .

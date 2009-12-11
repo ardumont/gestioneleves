@@ -12,9 +12,33 @@ $oForm = new FormValidation();
 // action du formulaire
 $sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
-// nom du fichier a importer
-//$sNomFichier = $oForm->getValue('nom_fichier', $_FILES['nom_fichier'], 'is_string', "");
-$sNomFichier = $_FILES['nom_fichier']['tmp_name'];
+if ($_FILES['nom_fichier']['error'])
+{
+	switch($_FILES['nom_fichier']['error'])
+	{
+		case 1: // UPLOAD_ERR_INI_SIZE
+			echo "Le fichier dépasse la limite autorisée par le serveur (fichier php.ini) !";
+			break;
+		case 2: // UPLOAD_ERR_FORM_SIZE
+			echo "Le fichier dépasse la limite autorisée dans le formulaire HTML !";
+			break;
+		case 3: // UPLOAD_ERR_PARTIAL
+			echo "L'envoi du fichier a été interrompu pendant le transfert !";
+			break;
+		case 4: // UPLOAD_ERR_NO_FILE
+			echo "Le fichier que vous avez envoyé a une taille nulle !";
+			break;
+	}
+	$sNomFichier = "";
+	// Trouver une meilleure gestion de l'erreur
+	die;
+} else {
+	// $_FILES['nom_fichier']['error'] vaut 0 soit UPLOAD_ERR_OK
+	// ce qui signifie qu'il n'y a eu aucune erreur
+	// nom du fichier a importer
+	//$sNomFichier = $oForm->getValue('nom_fichier', $_FILES['nom_fichier'], 'is_string', "");
+	$sNomFichier = $_FILES['nom_fichier']['tmp_name'];
+}
 
 //==============================================================================
 // Actions du formulaire

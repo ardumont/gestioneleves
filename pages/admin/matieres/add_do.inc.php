@@ -34,7 +34,8 @@ switch(strtolower($sAction))
 	// ajoute l'eleve
 	case 'ajouter':
 		if($objForm->hasError() == true) break;
-		// insertion de l'eleve dans la table
+
+		// Insertion de la matiere dans la table
 		$sQuery =
 			"INSERT INTO MATIERES (MATIERE_NOM, ID_DOMAINE)" .
 			"VALUES(" .
@@ -43,7 +44,7 @@ switch(strtolower($sAction))
 			")";
 		Database::execute($sQuery);
 
-		// rechargement de la liste des eleves
+		// Rechargement de la liste des eleves
 		header("Location: ?page=matieres&mode=add");
 		return;
 	break;

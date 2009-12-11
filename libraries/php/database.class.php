@@ -305,7 +305,6 @@ class Database
 		$aResult = array();
 		$aOneRow = array();
 
-
 		$aOneRow = mysql_fetch_array($hStatement, MYSQL_ASSOC);
 		while($aOneRow !== false)
 		{
@@ -313,7 +312,6 @@ class Database
 
 			$aOneRow = mysql_fetch_array($hStatement, MYSQL_ASSOC);
 		}
-
 		return $aResult;
 	}
 
@@ -674,6 +672,21 @@ class Database
 		return $aOneRow[0];
 	}
 
+	/**
+	 * Retourne le dernier identifiant inséré en bdd dans la connexion ouverte à la bdd
+	 *
+	 * @author Antoine Romain DUMONT
+	 *
+	 * @param $hConnection
+	 * @return <code>int</code>
+	 */
+	public static function lastInsertId($hConnection = null)
+	{
+		if($hConnection === null)
+		{
+			$hConnection = self::$s_hConnection;
+		}
+		return mysql_insert_id($hConnection);
+	}// end lastInsertId
 }
-
 ?>

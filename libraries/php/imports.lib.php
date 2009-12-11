@@ -132,6 +132,7 @@ function import_xml_cycle($sNomFichier)
 
 	// Récupère les cycles
 	$aCycles = $oXML->xpath("/cycle");
+
 	// Itération sur les cycles
 	foreach($aCycles as $oCycle)
 	{
@@ -141,7 +142,7 @@ function import_xml_cycle($sNomFichier)
 		$nIdCycle = ajoute_cycle($sCycleName);
 
 		// Récupère la liste des domaines du cycle
-		$aDomaines = $oXML->xpath("//cycle[@name='{$sCycleName}']/domaine");
+		$aDomaines = $oXML->xpath('/cycle[@name="'. $sCycleName . '"]/domaine');
 
 		// Itération sur les domaines
 		foreach($aDomaines as $oDomaine)
@@ -150,9 +151,9 @@ function import_xml_cycle($sNomFichier)
 			$sDomaineName = (string) $oDomaine['name'];
 			// Ajoute le domaine en bdd
 			$nIdDomaine = ajoute_domaine($nIdCycle, $sDomaineName);
-
 			// Récupère la liste des matières du domaine
-			$aMatieres = $oXML->xpath("/cycle[@name='{$sCycleName}']/domaine[@name='{$sDomaineName}']/matiere");
+			$aMatieres = $oXML->xpath('/cycle[@name="' . $sCycleName . '"]/domaine[@name="' . $sDomaineName . '"]/matiere');
+
 			// Itération sur les matières
 			foreach($aMatieres as $oMatiere)
 			{
@@ -162,7 +163,8 @@ function import_xml_cycle($sNomFichier)
 				$nIdMatiere = ajoute_matiere($nIdDomaine, $sMatiereName);
 
 				// Récupère la liste des compétences de la matière
-				$aCompetences = $oXML->xpath("/cycle[@name='{$sCycleName}']/domaine[@name='{$sDomaineName}']/matiere[@name='{$sMatiereName}']/competence");
+				$aCompetences = $oXML->xpath('/cycle[@name="' . $sCycleName . '"]/domaine[@name="' . $sDomaineName . '"]/matiere[@name="' . $sMatiereName . '"]/competence');
+
 				// Itération sur les compétences
 				foreach($aCompetences as $oCompetence)
 				{
@@ -215,7 +217,7 @@ function import_xml_classe($sNomFichier)
 		$sProfesseurNom = (string) $oClasse['professeur'];
 
 		// Récupère le nom de l'école
-		$aEcole = $oXML->xpath("/classe[@nom='{$sClasseNom}']/ecole");
+		$aEcole = $oXML->xpath('/classe[@nom="' . $sClasseNom . '"]/ecole');
 
 		// Récupère l'information sur l'école
 		$sNomEcole = (string) $aEcole[0]['nom'];
@@ -244,7 +246,7 @@ function import_xml_classe($sNomFichier)
 		ajoute_relation_classe_professeur($nIdClasse, $nIdProf);
 
 		// Récupère la liste des élèves
-		$aEleves = $oXML->xpath("/classe[@nom='{$sClasseNom}']/eleve");
+		$aEleves = $oXML->xpath('/classe[@nom="' . $sClasseNom . '"]/eleve');
 		// Itération sur les élèves
 		foreach($aEleves as $oEleve)
 		{
@@ -290,16 +292,9 @@ ____EOQ;
 			INSERT INTO ELEVES(ELEVE_NOM, ELEVE_DATE_NAISSANCE)
 			VALUES( {$sQueryNomEleve}, STR_TO_DATE({$sQueryDateNaissance}, '%d/%m/%Y'))
 ________EOQ;
-		Database::execute($sQuery);
+		$bRes = Database::execute($sQuery);
 
-		// puis on recupere son id
-		$sQuery = <<< ________EOQ
-			SELECT
-				ELEVE_ID
-			FROM ELEVES
-			WHERE ELEVE_NOM = {$sQueryNomEleve}
-________EOQ;
-		$nEleveId = Database::fetchOneValue($sQuery);
+		$nEleveId = ($bRes != false) ? Database::lastInsertId() : false;
 	}
 	return $nEleveId;
 }// fin ajoute_eleve
@@ -369,18 +364,9 @@ ____EOQ;
 			INSERT INTO ECOLES(ECOLE_NOM, ECOLE_VILLE, ECOLE_DEPARTEMENT)
 			VALUES({$sQueryNomEcole}, {$sQueryNomVille}, {$sQueryNomDept})
 ________EOQ;
-		Database::execute($sQuery);
+		$bRes = Database::execute($sQuery);
 
-		// On récupère l'id
-		$sQuery = <<< ________EOQ
-			SELECT
-				ECOLE_ID
-			FROM ECOLES
-			WHERE ECOLE_NOM = {$sQueryNomEcole}
-			AND ECOLE_VILLE = {$sQueryNomVille}
-			AND ECOLE_DEPARTEMENT = {$sQueryNomDept}
-________EOQ;
-		$nEcoleId = Database::fetchOneValue($sQuery);
+		$nEcoleId = ($bRes != false) ? Database::lastInsertId() : false;
 	}
 
 	return $nEcoleId;
@@ -415,16 +401,9 @@ ____EOQ;
 			INSERT INTO PROFESSEURS(PROFESSEUR_NOM, PROFESSEUR_PWD)
 			VALUES({$sQueryNomProf}, MD5('{$sSubProf}'))
 ________EOQ;
-		Database::execute($sQuery);
+		$bRes = Database::execute($sQuery);
 
-		// Récupère le nouvel id
-		$sQuery = <<< ________EOQ
-			SELECT
-				PROFESSEUR_ID
-			FROM PROFESSEURS
-			WHERE PROFESSEUR_NOM = {$sQueryNomProf}
-________EOQ;
-		$nIdProf = Database::fetchOneValue($sQuery);
+		$nIdProf = ($bRes != false) ? Database::lastInsertId() : false;
 	}
 
 	return $nIdProf;
@@ -456,7 +435,7 @@ ____EOQ;
 			INSERT INTO PROFESSEUR_CLASSE(ID_PROFESSEUR, ID_CLASSE)
 			VALUES({$nIdProf}, {$nIdClasse})
 ________EOQ;
-		Database::execute($sQuery);
+		$bRes = Database::execute($sQuery);
 	}
 }// fin ajoute_relation_classe_professeur
 
@@ -486,7 +465,7 @@ ____EOQ;
 			INSERT INTO ELEVE_CLASSE(ID_ELEVE, ID_CLASSE)
 			VALUES({$nIdEleve}, {$nIdClasse})
 ________EOQ;
-		Database::execute($sQuery);
+		$bRes = Database::execute($sQuery);
 	}
 }// fin ajoute_relation_classe_professeur
 
@@ -525,18 +504,9 @@ ____EOQ;
 			INSERT INTO CLASSES(CLASSE_NOM, CLASSE_ANNEE_SCOLAIRE, ID_ECOLE)
 			VALUES( {$sQueryNomClasse}, {$sQueryAnneeScol}, $nIdEcole)
 ________EOQ;
-		Database::execute($sQuery);
+		$bRes = Database::execute($sQuery);
 
-		// puis on recupere son id
-		$sQuery = <<< ________EOQ
-			SELECT
-				CLASSE_ID
-			FROM CLASSES
-			WHERE CLASSE_NOM = {$sQueryNomClasse}
-			AND CLASSE_ANNEE_SCOLAIRE = {$sQueryAnneeScol}
-			AND ID_ECOLE = {$nIdEcole}
-________EOQ;
-		$nClasseId = Database::fetchOneValue($sQuery);
+		$nClasseId = ($bRes != false) ? Database::lastInsertId() : false;
 	}
 	return $nClasseId;
 }// fin ajoute_classe
@@ -551,10 +521,13 @@ ________EOQ;
 function ajoute_cycle($sNomCycle)
 {
 	// ===== verifie si le cycle existe =====
-	$sQuery = "SELECT " .
-			  "  CYCLE_ID " .
-			  " FROM CYCLES " .
-			  " WHERE CYCLE_NOM = " . Database::prepareString($sNomCycle);
+	$sQueryNomCycle = Database::prepareString($sNomCycle);
+	$sQuery = <<< ____EOQ
+		SELECT 
+		CYCLE_ID 
+		FROM CYCLES 
+		WHERE CYCLE_NOM = {$sQueryNomCycle}
+____EOQ;
 	$nCycleId = Database::fetchOneValue($sQuery);
 	// $nCycleId = CYCLE_ID or false
 
@@ -562,15 +535,13 @@ function ajoute_cycle($sNomCycle)
 	if($nCycleId === false)
 	{
 		// on l'ajoute
-		$sQuery = "INSERT INTO CYCLES(CYCLE_NOM) " .
-				  " VALUES(" . Database::prepareString($sNomCycle) .")";
-		Database::execute($sQuery);
-		// puis on recupere son id
-		$sQuery = "SELECT " .
-				  "  CYCLE_ID " .
-				  " FROM CYCLES " .
-				  " WHERE CYCLE_NOM = " . Database::prepareString($sNomCycle);
-		$nCycleId = Database::fetchOneValue($sQuery);
+		$sQuery = <<< ________EOQ
+			INSERT INTO CYCLES(CYCLE_NOM)
+			VALUES({$sQueryNomCycle})
+________EOQ;
+		$bRes = Database::execute($sQuery);
+
+		$nCycleId = ($bRes != false) ? Database::lastInsertId() : false;
 	}
 	return $nCycleId;
 }// fin ajoute_cycle
@@ -586,11 +557,14 @@ function ajoute_cycle($sNomCycle)
 function ajoute_niveau($nIdCycle, $sNomNiveau)
 {
 	// ===== verifie si le niveau pour le cycle d'id $nIdCycle existe =====
-	$sQuery = "SELECT " .
-			  "  NIVEAU_ID " .
-			  " FROM NIVEAUX " .
-			  " WHERE NIVEAU_NOM = " . Database::prepareString($sNomNiveau) .
-			  " AND ID_CYCLE = {$nIdCycle}";
+	$sQueryNomNiveau = Database::prepareString($sNomNiveau);
+	$sQuery = <<< ____EOQ
+		SELECT
+			NIVEAU_ID
+		FROM NIVEAUX
+		WHERE NIVEAU_NOM = {$sQueryNomNiveau}
+		AND ID_CYCLE = {$nIdCycle}
+____EOQ;
 	$nNiveauId = Database::fetchOneValue($sQuery);
 	// $nNiveauId = NIVEAU_ID or false
 
@@ -598,16 +572,13 @@ function ajoute_niveau($nIdCycle, $sNomNiveau)
 	if($nNiveauId === false)
 	{
 		// on l'ajoute en l'attachant au cycle d'id $nIdCycle
-		$sQuery = "INSERT INTO NIVEAUX(NIVEAU_NOM, ID_CYCLE) " .
-				  " VALUES(" . Database::prepareString($sNomNiveau) .", {$nIdCycle})";
-		Database::execute($sQuery);
-		// puis on recupere son id
-		$sQuery = "SELECT " .
-				  "  NIVEAU_ID " .
-				  " FROM NIVEAUX " .
-				  " WHERE NIVEAU_NOM = " . Database::prepareString($sNomNiveau) .
-				  " AND ID_CYCLE = {$nIdCycle}";
-		$nNiveauId = Database::fetchOneValue($sQuery);
+		$sQuery = <<< ________EOQ
+			INSERT INTO NIVEAUX(NIVEAU_NOM, ID_CYCLE) 
+			VALUES({$sQueryNomNiveau}, {$nIdCycle})
+________EOQ;
+		$bRes = Database::execute($sQuery);
+
+		$nNiveauId = ($bRes != false) ? Database::lastInsertId() : false;
 	}
 	return $nNiveauId;
 }// fin ajoute_niveau
@@ -623,28 +594,28 @@ function ajoute_niveau($nIdCycle, $sNomNiveau)
 function ajoute_domaine($nIdCycle, $sNomDomaine)
 {
 	// ===== verifie si le domaine pour le cycle d'id $nIdCycle existe =====
-	$sQuery = "SELECT " .
-			  "  DOMAINE_ID " .
-			  " FROM DOMAINES " .
-			  " WHERE DOMAINE_NOM = " . Database::prepareString($sNomDomaine) .
-			  " AND ID_CYCLE = {$nIdCycle}";
+	$sQueryNomDomaine = Database::prepareString($sNomDomaine);
+	$sQuery = <<< ____EOQ
+		SELECT 
+			DOMAINE_ID
+		FROM DOMAINES 
+		WHERE DOMAINE_NOM = {$sQueryNomDomaine}
+		AND ID_CYCLE = {$nIdCycle}
+____EOQ;
 	$nDomaineId = Database::fetchOneValue($sQuery);
 	// $nDomaineId = DOMAINE_ID or false
 
 	// si le domaine n'existe pas
-	if($nDomaineId == false)
+	if($nDomaineId === false)
 	{
 		// on l'ajoute en l'attachant au cycle d'id $nIdCycle
-		$sQuery = "INSERT INTO DOMAINES(DOMAINE_NOM, ID_CYCLE) " .
-				  " VALUES(" . Database::prepareString($sNomDomaine) .", {$nIdCycle})";
-		Database::execute($sQuery);
-		// puis on recupere son id
-		$sQuery = "SELECT " .
-				  "  DOMAINE_ID " .
-				  " FROM DOMAINES " .
-				  " WHERE DOMAINE_NOM = " . Database::prepareString($sNomDomaine) .
-				  " AND ID_CYCLE = {$nIdCycle}";
-		$nDomaineId = Database::fetchOneValue($sQuery);
+		$sQuery = <<< ________EOQ
+			INSERT INTO DOMAINES(DOMAINE_NOM, ID_CYCLE)
+			VALUES({$sQueryNomDomaine}, {$nIdCycle})
+________EOQ;
+		$bRes = Database::execute($sQuery);
+		
+		$nDomaineId = ($bRes != false) ? Database::lastInsertId() : false;
 	}
 	return $nDomaineId;
 }// fin ajoute_domaine
@@ -660,11 +631,14 @@ function ajoute_domaine($nIdCycle, $sNomDomaine)
 function ajoute_matiere($nIdDomaine, $sNomMatiere)
 {
 	// ===== verifie si la matiere pour le domaine d'id $nIdDomaine existe =====
-	$sQuery = "SELECT " .
-			  "  MATIERE_ID " .
-			  " FROM MATIERES " .
-			  " WHERE MATIERE_NOM = " . Database::prepareString($sNomMatiere) .
-			  " AND ID_DOMAINE = {$nIdDomaine}";
+	$sQueryNomMatiere = Database::prepareString($sNomMatiere);
+	$sQuery = <<< ____EOQ
+		SELECT 
+			MATIERE_ID 
+		FROM MATIERES 
+		WHERE MATIERE_NOM = {$sQueryNomMatiere}
+		AND ID_DOMAINE = {$nIdDomaine}
+____EOQ;
 	$nMatiereId = Database::fetchOneValue($sQuery);
 	// $nMatiereId = MATIERE_ID or false
 
@@ -672,16 +646,13 @@ function ajoute_matiere($nIdDomaine, $sNomMatiere)
 	if($nMatiereId === false)
 	{
 		// on l'ajoute en l'attachant au domaine d'id $nIdDomaine
-		$sQuery = "INSERT INTO MATIERES(MATIERE_NOM, ID_DOMAINE) " .
-				  " VALUES(" . Database::prepareString($sNomMatiere) .", {$nIdDomaine})";
-		Database::execute($sQuery);
-		// puis on recupere son id
-		$sQuery = "SELECT " .
-				  "  MATIERE_ID " .
-				  " FROM MATIERES " .
-				  " WHERE MATIERE_NOM = " . Database::prepareString($sNomMatiere) .
-				  " AND ID_DOMAINE = {$nIdDomaine}";
-		$nMatiereId = Database::fetchOneValue($sQuery);
+		$sQuery = <<< ________EOQ
+			INSERT INTO MATIERES(MATIERE_NOM, ID_DOMAINE) 
+			VALUES({$sQueryNomMatiere}, {$nIdDomaine})
+________EOQ;
+		$bRes = Database::execute($sQuery);
+
+		$nMatiereId = ($bRes != false) ? Database::lastInsertId() : false;
 	}
 	return $nMatiereId;
 }// fin ajoute_matiere
@@ -696,12 +667,15 @@ function ajoute_matiere($nIdDomaine, $sNomMatiere)
  */
 function ajoute_competence($nIdMatiere, $sNomCompetence)
 {
+	$sQueryNomCompetence = Database::prepareString($sNomCompetence);
 	// ===== verifie si la competence pour la matiere d'id $nIdMatiere existe =====
-	$sQuery = "SELECT " .
-			  "  COMPETENCE_ID " .
-			  " FROM COMPETENCES " .
-			  " WHERE COMPETENCE_NOM = " . Database::prepareString($sNomCompetence) .
-			  " AND ID_MATIERE = {$nIdMatiere}";
+	$sQuery = <<< ____EOQ
+		SELECT
+	  		COMPETENCE_ID
+		FROM COMPETENCES
+		WHERE COMPETENCE_NOM = {$sQueryNomCompetence}
+	  	AND ID_MATIERE = {$nIdMatiere}
+____EOQ;
 	$nCompetenceId = Database::fetchOneValue($sQuery);
 	// $nCompetenceId = COMPETENCE_ID or false
 
@@ -709,15 +683,12 @@ function ajoute_competence($nIdMatiere, $sNomCompetence)
 	if($nCompetenceId === false)
 	{
 		// on l'ajoute en l'attachant a la matiere d'id $nIdMatiere
-		$sQuery = "INSERT INTO COMPETENCES(COMPETENCE_NOM, ID_MATIERE) " .
-				  " VALUES(" . Database::prepareString($sNomCompetence) .", {$nIdMatiere})";
-		Database::execute($sQuery);
-		$sQuery = "SELECT " .
-				  "  COMPETENCE_ID " .
-				  " FROM COMPETENCES " .
-				  " WHERE COMPETENCE_NOM = " . Database::prepareString($sNomCompetence) .
-				  " AND ID_MATIERE = {$nIdMatiere}";
-		$nCompetenceId = Database::fetchOneValue($sQuery);
+		$sQuery = <<< ________EOQ
+			INSERT INTO COMPETENCES(COMPETENCE_NOM, ID_MATIERE)
+			VALUES({$sQueryNomCompetence}, {$nIdMatiere})
+________EOQ;
+		$bRes = Database::execute($sQuery);
+		$nCompetenceId = ($bRes != false) ? Database::lastInsertId() : false;
 	}
 	return $nCompetenceId;
 }// fin ajoute_competence

@@ -7,6 +7,13 @@
 // Validation du formulaire
 //==============================================================================
 
+$oForm = new FormValidation();
+
+// soumission via post, typiquement une fois le bouton rechercher appuye.
+$sAnneeScolaire = $oForm->getValue('annee_scolaire', $_POST, 'convert_string', -1);
+$nEcoleId = $oForm->getValue('ecole_id', $_POST, 'convert_int', -1);
+$nProfesseurId = $oForm->getValue('professeur_id', $_POST, 'convert_int', -1);
+
 //==============================================================================
 // Actions du formulaire
 //==============================================================================
@@ -15,27 +22,69 @@
 // Traitement des donnees
 //==============================================================================
 
-// ===== La liste des classes =====
+$sQueryAnneeScolaire = ($sAnneeScolaire != -1) ? " AND CLASSE_ANNEE_SCOLAIRE = " . Database::prepareString($sAnneeScolaire) : "";
+$sQueryEcole = ($nEcoleId != -1) ? " AND ECOLE_ID = {$nEcoleId}" : "";
+$sQueryProfesseur = ($nProfesseurId != -1) ? " AND PROFESSEUR_ID = {$nProfesseurId}" : "";
+
+if($sAnneeScolaire != -1 || $nEcoleId != -1 || $nProfesseurId != -1)
+{
+	// ===== La liste des classes =====
+	$sQuery = <<< ____EOQ
+		SELECT
+			CLASSE_ID,
+			CLASSE_NOM,
+			PROFESSEUR_NOM,
+		 	CLASSE_ANNEE_SCOLAIRE,
+			ECOLE_NOM,
+			ECOLE_VILLE,
+			ECOLE_DEPARTEMENT
+		FROM CLASSES
+			INNER JOIN PROFESSEUR_CLASSE
+				ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
+			INNER JOIN PROFESSEURS
+				ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
+			INNER JOIN ECOLES
+				ON CLASSES.ID_ECOLE = ECOLES.ECOLE_ID
+		WHERE 1=1
+		{$sQueryAnneeScolaire}
+		{$sQueryEcole}
+		{$sQueryProfesseur}
+		ORDER BY CLASSE_NOM ASC
+____EOQ;
+	$aClasses = Database::fetchArray($sQuery);
+	// $aClasses[][COLONNE] = VALEUR
+}
+// ===== La liste des années =====
 $sQuery = <<< EOQ
 	SELECT
-		CLASSE_ID,
-		CLASSE_NOM,
-		PROFESSEUR_NOM,
-	 	CLASSE_ANNEE_SCOLAIRE,
-		ECOLE_NOM,
-		ECOLE_VILLE,
-		ECOLE_DEPARTEMENT
+		DISTINCT CLASSE_ANNEE_SCOLAIRE
 	FROM CLASSES
-		INNER JOIN PROFESSEUR_CLASSE
-			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
-		INNER JOIN PROFESSEURS
-			ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
-		INNER JOIN ECOLES
-			ON CLASSES.ID_ECOLE = ECOLES.ECOLE_ID
-	ORDER BY CLASSE_NOM ASC
+	ORDER BY CLASSE_ANNEE_SCOLAIRE ASC
 EOQ;
-$aClasses = Database::fetchArray($sQuery);
-// $aClasses[][COLONNE] = VALEUR
+$aAnnees = Database::fetchArray($sQuery);
+// $aAnnees[][COLONNE] = VALEUR
+
+// ===== La liste des ecoles =====
+$sQuery = <<< EOQ
+	SELECT
+		ECOLE_ID,
+		CONCAT(ECOLE_VILLE, ' - ', ECOLE_NOM, ' - ', ECOLE_DEPARTEMENT) AS ECOLE_NOM
+	FROM ECOLES
+	ORDER BY ECOLE_VILLE ASC, ECOLE_NOM ASC
+EOQ;
+$aEcoles = Database::fetchArray($sQuery);
+// $aEcoles[][COLONNE] = VALEUR
+
+// ===== La liste des professeurs =====
+$sQuery = <<< EOQ
+	SELECT
+		PROFESSEUR_ID,
+		PROFESSEUR_NOM
+	FROM PROFESSEURS
+	ORDER BY PROFESSEUR_NOM ASC
+EOQ;
+$aProfesseurs = Database::fetchArray($sQuery);
+// $aProfesseurs[][COLONNE] = VALEUR
 
 //==============================================================================
 // Preparation de l'affichage
@@ -62,6 +111,7 @@ $aClasses = Database::fetchArray($sQuery);
 		<tr>
 			<td>
 				Par défaut, cette page liste les classes existantes dans l'application.<br />
+				Veuillez tout d'abord renseigner les critères de recherche d'une classe.<br />
 				<br />
 				Vous pouvez modifier une classe en cliquant sur le nom de la classe.<br />
 				Vous pouvez également ajouter une classe en cliquant sur le + en haut à gauche du tableau.
@@ -70,7 +120,52 @@ $aClasses = Database::fetchArray($sQuery);
 		</tr>
 	</table>
 </div>
-<br /><br />
+
+<form method="post" action="?page=classes" name="formulaire" id="formulaire">
+	<table class="formulaire">
+		<caption>Crit&eacute;res de recherche</caption>
+		<thead></thead>
+		<tfoot></tfoot>
+		<tbody>
+			<tr>
+				<td>Année scolaire</td>
+				<td>
+					<select name="annee_scolaire" onchange="document.getElementById('formulaire').submit();">
+						<option value="-1">-- Sélectionner une année scolaire --</option>
+						<?php foreach($aAnnees as $aAnnee): ?>
+							<option value="<?php echo($aAnnee['CLASSE_ANNEE_SCOLAIRE']); ?>"<?php echo($aAnnee['CLASSE_ANNEE_SCOLAIRE'] == $sAnneeScolaire ? ' selected="selected"' :''); ?>><?php echo($aAnnee['CLASSE_ANNEE_SCOLAIRE']); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Ecoles</td>
+				<td>
+					<select name="ecole_id" onchange="document.getElementById('formulaire').submit();">
+						<option value="-1">-- Sélectionner une école --</option>
+						<?php foreach($aEcoles as $aEcole): ?>
+							<option value="<?php echo($aEcole['ECOLE_ID']); ?>"<?php echo($aEcole['ECOLE_ID'] == $nEcoleId ? ' selected="selected"' :''); ?>><?php echo($aEcole['ECOLE_NOM']); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Professeurs</td>
+				<td>
+					<select name="professeur_id" onchange="document.getElementById('formulaire').submit();">
+						<option value="-1">-- Sélectionner un professeur --</option>
+						<?php foreach($aProfesseurs as $aProfesseur): ?>
+							<option value="<?php echo($aProfesseur['PROFESSEUR_ID']); ?>"<?php echo($aProfesseur['PROFESSEUR_ID'] == $nProfesseurId ? ' selected="selected"' :''); ?>><?php echo($aProfesseur['PROFESSEUR_NOM']); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="action" value="Rechercher" /></td>
+			</tr>
+		</tbody>
+	</table>
+</form>
 
 <?php if($aClasses != false): ?>
 <table class="list_tree">
@@ -119,7 +214,7 @@ $aClasses = Database::fetchArray($sQuery);
 	<caption>Informations</caption>
 	<tr>
 		<td>
-			Aucune classe n'a été renseignée à ce jour.<br />
+			Aucun critère de recherche n'a été renseigné ou aucune classe ne correspond au(x) critère(s) de recherche.<br />
 			<a href="?page=classes&amp;mode=add">Ajouter une classe</a>
 		</td>
 	</tr>

@@ -24,39 +24,8 @@ $nDomaineId = $oForm->getValue('domaine_id', $_POST, 'convert_int', -1);
 // Traitement des donnees
 //==============================================================================
 
-// ===== La liste des cycles =====
-$sQuery = <<< EOQ
-	SELECT
-		CYCLE_NOM,
-		CYCLE_ID
-	FROM CYCLES
-	ORDER BY CYCLE_NOM ASC
-EOQ;
-$aCycles = Database::fetchArray($sQuery);
-// $aCycles[][COLONNE] = VALEUR
-
-// ===== La liste des domaines =====
-$sQuery = <<< EOQ
-	SELECT
-		DOMAINE_ID,
-		DOMAINE_NOM
-	FROM DOMAINES
-	ORDER BY DOMAINE_NOM ASC
-EOQ;
-$aDomaines = Database::fetchArray($sQuery);
-// $aDomaines[][COLONNE] = VALEUR
-
-$sQueryCycleId = "";
-if($nCycleId != -1)
-{
-	$sQueryCycleId = " AND CYCLE_ID = {$nCycleId}";
-}
-
-$sQueryDomaineId = "";
-if($nDomaineId != -1)
-{
-	$sQueryDomaineId = " AND DOMAINE_ID = {$nDomaineId}";
-}
+$sQueryCycleId = ($nCycleId != -1) ? " AND CYCLE_ID = {$nCycleId}" : "";
+$sQueryDomaineId = ($nDomaineId != -1) ? " AND DOMAINE_ID = {$nDomaineId}" : "";
 
 // ===== La liste des matieres =====
 $sQuery = <<< EOQ
@@ -77,6 +46,32 @@ $sQuery = <<< EOQ
 EOQ;
 $aMatieres = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAINE_NOM', 'MATIERE_NOM'));
 // $aMatieres[][COLONNE] = VALEUR
+
+// ===== La liste des cycles =====
+$sQuery = <<< EOQ
+	SELECT
+		CYCLE_NOM,
+		CYCLE_ID
+	FROM CYCLES
+	ORDER BY CYCLE_NOM ASC
+EOQ;
+$aCycles = Database::fetchArray($sQuery);
+// $aCycles[][COLONNE] = VALEUR
+
+// ===== La liste des domaines =====
+$sQuery = <<< EOQ
+	SELECT
+		DOMAINE_ID,
+		CONCAT(CYCLE_NOM, ' - ', DOMAINE_NOM) AS DOMAINE_NOM
+	FROM DOMAINES
+		INNER JOIN CYCLES
+			ON DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
+	WHERE 1=1
+	{$sQueryCycleId}
+	ORDER BY DOMAINE_NOM ASC
+EOQ;
+$aDomaines = Database::fetchArray($sQuery);
+// $aDomaines[][COLONNE] = VALEUR
 
 //==============================================================================
 // Preparation de l'affichage

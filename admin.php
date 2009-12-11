@@ -237,12 +237,13 @@ $aMenuPage = array
 	'notes' => array
 	(
 		''			=>	"admin/notes/list.inc.php",
-		'add'		=>	"admin/notes/add.inc.php",
-		'add_do'	=>	"admin/notes/add_do.inc.php",
-		'edit'		=>	"admin/notes/edit.inc.php",
-		'edit_do'	=>	"admin/notes/edit_do.inc.php",
-		'delete'	=>	"admin/notes/delete.inc.php",
-		'delete_do'	=>	"admin/notes/delete_do.inc.php",
+// interdiction d'ajouter, supprimer ou éditer une note car des modules dépendent des valeurs fixes des notes
+//		'add'		=>	"admin/notes/add.inc.php",
+//		'add_do'	=>	"admin/notes/add_do.inc.php",
+//		'edit'		=>	"admin/notes/edit.inc.php",
+//		'edit_do'	=>	"admin/notes/edit_do.inc.php",
+//		'delete'	=>	"admin/notes/delete.inc.php",
+//		'delete_do'	=>	"admin/notes/delete_do.inc.php",
 	),
 
 	'imports' => array

@@ -34,7 +34,7 @@ switch(strtolower($sAction))
 	// ajoute l'eleve
 	case 'ajouter':
 		if($objForm->hasError() == true) break;
-		// insertion de l'eleve dans la table
+		// insertion de la competence dans la table
 		$sQuery =
 			"INSERT INTO COMPETENCES (COMPETENCE_NOM, ID_MATIERE)" .
 			"VALUES(" .

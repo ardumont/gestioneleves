@@ -30,6 +30,8 @@ if ($_FILES['nom_fichier']['error'])
 			break;
 	}
 	$sNomFichier = "";
+	// Trouver une meilleure gestion de l'erreur
+	die;
 } else {
 	// $_FILES['nom_fichier']['error'] vaut 0 soit UPLOAD_ERR_OK
 	// ce qui signifie qu'il n'y a eu aucune erreur

@@ -469,7 +469,7 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 				<h4><a href="?page=livrets&amp;mode=recap_cycle"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif cycle</a></h4>
 			<h3>Livrets par classe</h3>
 				<h4><a href="?page=livrets&amp;mode=recap_period_all"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif périodique</a></h4>
-<!--
+<!-- 
 				<h4><a href="?page=livrets&amp;mode=recap_annuel_all"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif annuel</a></h4>
 				<h4><a href="?page=livrets&amp;mode=recap_cycle_all"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif cycle</a></h4>
 -->

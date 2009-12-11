@@ -6,7 +6,7 @@
 $oForm = new FormValidation();
 
 // Récupère le résultat de l'import
-$bResImport =  $oForm->getValue('res', $_GET, 'convert_string', -1);
+$bResImport = $oForm->getValue('res', $_GET, 'convert_string', -1);
 
 //==============================================================================
 // Validation du formulaire

@@ -27,24 +27,37 @@ $nMatiereId = $oForm->getValue('matiere_id', $_POST, 'convert_int', -1);
 // Traitement des donnees
 //==============================================================================
 
-$sQueryCycleId = "";
-if($nCycleId != -1)
-{
-	$sQueryCycleId = " AND ID_CYCLE = {$nCycleId}";
-}
+$sQueryCycleId = ($nCycleId != -1) ? " AND ID_CYCLE = {$nCycleId}" : "";
+$sQueryDomaineId = ($nDomaineId != -1) ? " AND ID_DOMAINE = {$nDomaineId}" : "";
+$sQueryMatiereId = ($nMatiereId != -1) ? " AND ID_MATIERE = {$nMatiereId}" : "";
 
-$sQueryDomaineId = "";
-if($nDomaineId != -1)
+if($nCycleId != -1 || $nDomaineId != -1 || $nMatiereId != -1)
 {
-	$sQueryDomaineId = " AND ID_DOMAINE = {$nDomaineId}";
+	// ===== La liste des competences =====
+	$sQuery = <<< ____EOQ
+		SELECT
+			COMPETENCE_ID,
+			COMPETENCE_NOM,
+			MATIERE_ID,
+			MATIERE_NOM,
+			DOMAINE_NOM,
+			CYCLE_NOM
+		FROM COMPETENCES
+			INNER JOIN MATIERES
+				ON COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
+			INNER JOIN DOMAINES
+				ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
+			INNER JOIN CYCLES
+				ON DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
+		WHERE 1=1
+		{$sQueryDomaineId}
+		{$sQueryCycleId}
+		{$sQueryMatiereId}
+		ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
+____EOQ;
+	$aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAINE_NOM', 'MATIERE_NOM', 'COMPETENCE_NOM'));
+	// $aCompetences[][COLONNE] = VALEUR
 }
-
-$sQueryMatiereId = "";
-if($nMatiereId != -1)
-{
-	$sQueryMatiereId = " AND ID_MATIERE = {$nMatiereId}";
-}
-
 // ===== La liste des cycles =====
 $sQuery = <<< EOQ
 	SELECT
@@ -61,8 +74,10 @@ $aCycles = Database::fetchArray($sQuery);
 $sQuery = <<< EOQ
 	SELECT
 		DOMAINE_ID,
-		DOMAINE_NOM
+		CONCAT(CYCLE_NOM, ' - ', DOMAINE_NOM) AS DOMAINE_NOM
 	FROM DOMAINES
+		INNER JOIN CYCLES
+			ON DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
 	WHERE 1=1
 	{$sQueryCycleId}
 	ORDER BY DOMAINE_NOM ASC
@@ -74,27 +89,8 @@ $aDomaines = Database::fetchArray($sQuery);
 $sQuery = <<< EOQ
 	SELECT
 		MATIERE_ID,
-		MATIERE_NOM
+		CONCAT(CYCLE_NOM, ' - ', DOMAINE_NOM, ' - ', MATIERE_NOM) AS MATIERE_NOM
 	FROM MATIERES
-	WHERE 1=1
-	{$sQueryDomaineId}
-	ORDER BY MATIERE_NOM ASC
-EOQ;
-$aMatieres = Database::fetchArray($sQuery);
-// $aMatieres[][COLONNE] = VALEUR
-
-// ===== La liste des competences =====
-$sQuery = <<< EOQ
-	SELECT
-		COMPETENCE_ID,
-		COMPETENCE_NOM,
-		MATIERE_ID,
-		MATIERE_NOM,
-		DOMAINE_NOM,
-		CYCLE_NOM
-	FROM COMPETENCES
-		INNER JOIN MATIERES
-			ON COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
 		INNER JOIN DOMAINES
 			ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
 		INNER JOIN CYCLES
@@ -102,12 +98,10 @@ $sQuery = <<< EOQ
 	WHERE 1=1
 	{$sQueryDomaineId}
 	{$sQueryCycleId}
-	{$sQueryMatiereId}
-	ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
+	ORDER BY MATIERE_NOM ASC
 EOQ;
-
-$aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DOMAINE_NOM', 'MATIERE_NOM', 'COMPETENCE_NOM'));
-// $aCompetences[][COLONNE] = VALEUR
+$aMatieres = Database::fetchArray($sQuery);
+// $aMatieres[][COLONNE] = VALEUR
 
 //==============================================================================
 // Preparation de l'affichage
@@ -226,10 +220,8 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 					<td></td>
 					<!-- Nom du cycle -->
 					<th></th>
-					<!-- Nom du domaine -->
-					<th><?php echo($sDomaineNom); ?></th>
-					<!-- Le reste -->
-					<td colspan="4"></td>
+					<!-- Nom du domaine + le reste -->
+					<th colspan="5"><?php echo($sDomaineNom); ?></th>
 				</tr>
 					<?php foreach($aDomaineNom as $sMatiereNom => $aMatiereNom): ?>
 					<!-- Ligne de la matiere -->
@@ -239,10 +231,8 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 						<th></th>
 						<!-- Nom du domaine -->
 						<th></th>
-						<!-- Nom de la matiere -->
-						<th><?php echo($sMatiereNom); ?></th>
-						<!-- Le reste -->
-						<td colspan="3"></td>
+						<!-- Nom de la matiere + le reste -->
+						<th colspan="4"><?php echo($sMatiereNom); ?></th>
 					</tr>
 						<?php foreach($aMatiereNom as $sCompetenceNom => $aCompetence): ?>
 						<!-- Ligne de la competence -->
@@ -278,12 +268,8 @@ $aCompetences = Database::fetchArrayWithMultiKey($sQuery, array('CYCLE_NOM', 'DO
 	<caption>Informations</caption>
 	<tr>
 		<td>
-			<?php if($nCycleId != -1 || $nMatiereId != -1 || $nDomaineId != -1): ?>
-				Aucune compétence n'a été renseignée pour ces critères de recherche.<br />
-			<?php else:?>
-				Aucune compétence n'a été renseignée à ce jour.<br />
-				<a href="?page=competences&amp;mode=add">Ajouter une compétence</a>
-			<?php endif; ?>
+			Aucun critère de recherche n'a été renseigné ou aucune compétence ne correspond au(x) critère(s) de recherche.<br />
+			<a href="?page=competences&amp;mode=add">Ajouter une compétence</a>
 		</td>
 	</tr>
 </table>
