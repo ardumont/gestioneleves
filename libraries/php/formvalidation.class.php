@@ -991,6 +991,5 @@ class FormValidation
 
 		return $bTestResult;
 	}
-
 }
 ?>
