@@ -1,7 +1,6 @@
 <?php
-
 /**
- *
+ * Classe du gestionnaire d'installation de l'application.
  *
  * @author Lionel SAURON
  * @version 1.0.0_dev0
@@ -184,17 +183,17 @@ class Install
 		// ===== Nettoyage =====
 
 		// On supprime tout les commentaires de type "-- ..." (on match sur le début et fin de ligne)
-		$sSqlInstallContent = preg_replace('/^-- .*$/m', '', $sSqlInstallContent);
+		$sSqlInstallContent = preg_replace('/^\s*-- .*$/m', '', $sSqlInstallContent);
 		$sSqlInstallContent = trim($sSqlInstallContent);
 
 		// ===== Recherche des opérations =====
 
 		// On cherche les titres des opérations à effectuer => "--#TITLE(...)" (on match sur le début de ligne)
 		$aMatches = array();
-		$nOperationsCount = preg_match_all('/^--#TITLE\(([^)]*)\)/m', $sSqlInstallContent, $aMatches, PREG_SET_ORDER);
+		$nOperationsCount = preg_match_all('/^\s*--#TITLE\(([^)]*)\)/m', $sSqlInstallContent, $aMatches, PREG_SET_ORDER);
 
 		// On sépare les opérations en se basant sur le tag
-		$aOperations = preg_split('/^--#TITLE.*$/m', $sSqlInstallContent, -1, PREG_SPLIT_NO_EMPTY);
+		$aOperations = preg_split('/^\s*--#TITLE.*$/m', $sSqlInstallContent, -1, PREG_SPLIT_NO_EMPTY);
 
 		// Vérification. Chaque opération doit avoir un titre.
 		if($nOperationsCount != count($aOperations))
@@ -223,10 +222,10 @@ class Install
 
 			// On cherche les particularités des étapes => "--#STEP(...)" (on match sur le début de ligne)
 			$aMatches = array();
-			$nStepsCount = preg_match_all('/^--#STEP\(([^)]*)\)/m', $pOperation['RAW_OPE'], $aMatches, PREG_SET_ORDER);
+			$nStepsCount = preg_match_all('/^\s*--#STEP\(([^)]*)\)/m', $pOperation['RAW_OPE'], $aMatches, PREG_SET_ORDER);
 
 			// On sépare les étapes en se basant sur le tag
-			$aSteps = preg_split('/^--#STEP.*$/m', $pOperation['RAW_OPE'], -1, PREG_SPLIT_NO_EMPTY);
+			$aSteps = preg_split('/^\s*--#STEP.*$/m', $pOperation['RAW_OPE'], -1, PREG_SPLIT_NO_EMPTY);
 
 			// Vérification.
 			if($nStepsCount != count($aSteps))
