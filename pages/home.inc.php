@@ -62,6 +62,16 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 		<dl>
 			<dt>
 				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+				v1.7.0
+			</dt>
+			<dd>
+				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Mise à jour de l'installation qui contient désormais tous les cycles/domaines/matieres/competences.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de liens permettant de (dé)sélectionner toutes les checkbox de suppression multiple dans la vue des évaluations individuelles.</li>
+				</ul>
+			</dd>
+			<dt>
+				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
 				v1.6.0
 			</dt>
 			<dd>
