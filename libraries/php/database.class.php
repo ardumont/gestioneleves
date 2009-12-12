@@ -81,7 +81,7 @@ class Database
 	 */
 	private static function defaultErrorHandler($aError)
 	{
-		print($aError['code']." : ".$aError['message']."\n#".$aError['sqltext']."#<br>");
+		print($aError['code']." : ".$aError['message']."\n#".$aError['sqltext']."#<br />");
 	}
 
 	/**
@@ -305,6 +305,7 @@ class Database
 		$aResult = array();
 		$aOneRow = array();
 
+
 		$aOneRow = mysql_fetch_array($hStatement, MYSQL_ASSOC);
 		while($aOneRow !== false)
 		{
@@ -312,6 +313,7 @@ class Database
 
 			$aOneRow = mysql_fetch_array($hStatement, MYSQL_ASSOC);
 		}
+
 		return $aResult;
 	}
 
@@ -688,5 +690,5 @@ class Database
 		}
 		return mysql_insert_id($hConnection);
 	}// end lastInsertId
-}
+}// end class Database
 ?>
