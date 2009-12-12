@@ -149,7 +149,7 @@ if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1)
 		ORDER BY ELEVE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
 ____EOQ;
 	$nRowCount = Database::fetchOneValue($sQuery);
-	
+
 	// ===== La liste des evaluations individuelles a ce jour =====
 	$sQuery = <<< ____EOQ
 		SELECT
@@ -292,13 +292,15 @@ $sLinkSucc = "?page=evaluations_individuelles&amp;offset_depart={$nOffsetFin}{$s
 	<caption>Informations</caption>
 	<tr>
 		<td>
-			Aucun critère de recherche n'a été saisi ou aucune évaluation individuelle 
+			Aucun critère de recherche n'a été saisi ou aucune évaluation individuelle
 			n'a été saisie à ce jour pour ces critères.<br />
 			<a href="?page=evaluations_individuelles&amp;mode=add">Ajouter une évaluation individuelle</a>
 		</td>
 	</tr>
 </table>
 <?php else: ?>
+<a href="javascript:void(0);" onclick="$('.evals_inds_id').attr('checked', 'checked');">Sélectionner tout</a>&nbsp;
+<a href="javascript:void(0);" onclick="$('.evals_inds_id').removeAttr('checked');">Désélectionner tout</a>
 <form method="post" action="?page=evaluations_individuelles&amp;mode=delete_multiple">
 	<table class="list_tree">
 		<caption>
@@ -324,7 +326,9 @@ $sLinkSucc = "?page=evaluations_individuelles&amp;offset_depart={$nOffsetFin}{$s
 		<tfoot>
 			<tr>
 				<th><a href="?page=evaluations_individuelles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
-				<th colspan="10"></th>
+				<th colspan="10">
+					<input type="submit" name="suppression_multiple" value="Suppression multiple" />
+				</th>
 			</tr>
 		</tfoot>
 		<tbody>
@@ -348,12 +352,11 @@ $sLinkSucc = "?page=evaluations_individuelles&amp;offset_depart={$nOffsetFin}{$s
 				</td>
 				<!-- Suppression multiple -->
 				<td>
-					<input type="checkbox" name="evals_inds_id[]" value="<?php echo($aEvalInd['EVAL_IND_ID']); ?>" alt="Suppression multiple" title="Suppression multiple"  />
+					<input type="checkbox" name="evals_inds_id[]" class="evals_inds_id" value="<?php echo($aEvalInd['EVAL_IND_ID']); ?>" alt="Suppression multiple" title="Suppression multiple"  />
 				</td>
 			</tr>
 			<?php endforeach; ?>
 		</tbody>
 	</table>
-	<input type="submit" name="suppression_multiple" value="Suppression multiple" />
 </form>
 <?php endif; ?>

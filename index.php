@@ -333,6 +333,8 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/jscalendar-1.0/lang/calendar-en.js"></script>
 	<!-- the following script defines the Calendar.setup helper function, which makes adding a calendar a matter of 1 or 2 lines of code. -->
 	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/jscalendar-1.0/calendar-setup.js"></script>
+	<!-- JQuery -->
+	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/jquery-1.3.2.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="default.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="main.css" media="all" />
@@ -469,7 +471,7 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 				<h4><a href="?page=livrets&amp;mode=recap_cycle"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif cycle</a></h4>
 			<h3>Livrets par classe</h3>
 				<h4><a href="?page=livrets&amp;mode=recap_period_all"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif périodique</a></h4>
-<!-- 
+<!--
 				<h4><a href="?page=livrets&amp;mode=recap_annuel_all"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif annuel</a></h4>
 				<h4><a href="?page=livrets&amp;mode=recap_cycle_all"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif cycle</a></h4>
 -->

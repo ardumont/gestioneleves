@@ -243,32 +243,6 @@ ____EOQ;
 
 <?php if($nEvalColId != null): ?>
 	<form method="post" action="?page=evaluations_individuelles&amp;mode=add_do">
-<!--
-		<table class="list_tree" width="300px">
-			<caption>D&eacute;tail de l'&eacute;valuation collective</caption>
-			<thead></thead>
-			<tfoot></tfoot>
-			<tbody>
-				<tr class="level0_row0">
-					<td>Evaluation collective</td>
-					<td><?php echo($aEvalCollective['EVAL_COL_NOM']); ?></td>
-				</tr>
-				<tr class="level0_row1">
-					<td>Description</td>
-					<td><?php echo($aEvalCollective['EVAL_COL_DESCRIPTION']); ?></td>
-				</tr>
-				<tr class="level0_row0">
-					<td>Classe</td>
-					<td><?php echo($aEvalCollective['CLASSE_NOM']); ?></td>
-				</tr>
-				<tr class="level0_row1">
-					<td>Ann&eacute;e scolaire</td>
-					<td><?php echo($aEvalCollective['CLASSE_ANNEE_SCOLAIRE']); ?></td>
-				</tr>
-			</tbody>
-		</table>
-		<br />
--->
 		<table class="formulaire">
 			<caption>Ajout d'une &eacute;valuation individuelle</caption>
 			<tr>
@@ -326,47 +300,54 @@ ____EOQ;
 		</tr>
 	</table>
 	<?php else: ?>
+	<a href="javascript:void(0);" onclick="$('.evals_inds_id').attr('checked', 'checked');">Sélectionner tout</a>&nbsp;
+	<a href="javascript:void(0);" onclick="$('.evals_inds_id').removeAttr('checked');">Désélectionner tout</a>
 	<form method="post" action="?page=evaluations_individuelles&amp;mode=delete_multiple&amp;retour=add">
-	<table class="list_tree">
-		<caption>Liste des &eacute;valuations individuelles</caption>
-		<thead>
-			<tr>
-				<th>El&egrave;ves</th>
-				<th>Classes</th>
-				<th>Domaines</th>
-				<th>Mati&egrave;res</th>
-				<th>Comp&eacute;tences</th>
-				<th>Notes</th>
-				<th colspan="3">Actions</th>
-			</tr>
-		</thead>
-		<tfoot></tfoot>
-		<tbody>
-			<?php foreach($aEvalInds as $nRowNum => $aEvalInd): ?>
-			<tr class="level0_row<?php echo($nRowNum%2); ?>">
-				<td><?php echo($aEvalInd['ELEVE_NOM']); ?></td>
-				<td><?php echo($aEvalInd['CLASSE_NOM']); ?></td>
-				<td><?php echo($aEvalInd['DOMAINE_NOM']); ?></td>
-				<td><?php echo($aEvalInd['MATIERE_NOM']); ?></td>
-				<td><?php echo($aEvalInd['COMPETENCE_NOM']); ?></td>
-				<td title="<?php echo($aEvalInd['EVAL_IND_COMMENTAIRE']); ?>"><?php echo($aEvalInd['NOTE_NOM']); ?></td>
-				<!-- Edition -->
-				<td>
-					<a href="?page=evaluations_individuelles&amp;mode=edit&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
-				</td>
-				<!-- Suppression -->
-				<td>
-					<a href="?page=evaluations_individuelles&amp;mode=delete&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
-				</td>
-				<!-- Suppression multiple -->
-				<td>
-					<input type="checkbox" name="evals_inds_id[]" value="<?php echo($aEvalInd['EVAL_IND_ID']); ?>" alt="Suppression multiple" title="Suppression multiple"  />
-				</td>
-			</tr>
-			<?php endforeach; ?>
-		</tbody>
-	</table>
-	<input type="submit" name="suppression_multiple" value="Suppression multiple" />
+		<table class="list_tree">
+			<caption>Liste des &eacute;valuations individuelles</caption>
+			<thead>
+				<tr>
+					<th>El&egrave;ves</th>
+					<th>Classes</th>
+					<th>Domaines</th>
+					<th>Mati&egrave;res</th>
+					<th>Comp&eacute;tences</th>
+					<th>Notes</th>
+					<th colspan="3">Actions</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<th colspan="9">
+						<input type="submit" name="suppression_multiple" value="Suppression multiple" />
+					</th>
+				</tr>
+			</tfoot>
+			<tbody>
+				<?php foreach($aEvalInds as $nRowNum => $aEvalInd): ?>
+				<tr class="level0_row<?php echo($nRowNum%2); ?>">
+					<td><?php echo($aEvalInd['ELEVE_NOM']); ?></td>
+					<td><?php echo($aEvalInd['CLASSE_NOM']); ?></td>
+					<td><?php echo($aEvalInd['DOMAINE_NOM']); ?></td>
+					<td><?php echo($aEvalInd['MATIERE_NOM']); ?></td>
+					<td><?php echo($aEvalInd['COMPETENCE_NOM']); ?></td>
+					<td title="<?php echo($aEvalInd['EVAL_IND_COMMENTAIRE']); ?>"><?php echo($aEvalInd['NOTE_NOM']); ?></td>
+					<!-- Edition -->
+					<td>
+						<a href="?page=evaluations_individuelles&amp;mode=edit&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
+					</td>
+					<!-- Suppression -->
+					<td>
+						<a href="?page=evaluations_individuelles&amp;mode=delete&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/delete.png" alt="Supprimer" title="Supprimer" /></a>
+					</td>
+					<!-- Suppression multiple -->
+					<td>
+						<input type="checkbox" class="evals_inds_id" name="evals_inds_id[]" value="<?php echo($aEvalInd['EVAL_IND_ID']); ?>" alt="Suppression multiple" title="Suppression multiple"  />
+					</td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
 	</form>
 	<?php endif; ?>
 <?php endif; ?>
