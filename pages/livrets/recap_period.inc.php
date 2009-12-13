@@ -52,13 +52,6 @@ EOQ;
 $oForm->readArray('query2', Database::fetchOneRow($sQuery));
 $oForm->testError0('query2.EXIST', 'exist', "L'identifiant de la période \"{$nPeriodeId}\" n'est pas valide !");
 
-//if($oForm->hasError() == true)
-//{
-//	// rechargement de la liste des eleves
-//	header("Location: ?page=livrets&mode=recap_period");
-//	return;
-//}
-
 //==============================================================================
 // Actions du formulaire
 //==============================================================================
