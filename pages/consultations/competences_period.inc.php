@@ -3,19 +3,16 @@
 // Preparation des donnees
 //==============================================================================
 
+// Restriction sur l'annee scolaire courante
+$sRestrictionAnneeScolaire =
+	" AND CLASSE_ANNEE_SCOLAIRE = " . sql_annee_scolaire_courante();
+
 //==============================================================================
 // Validation du formulaire
 //==============================================================================
 
 // ===== Modification de la date =====
 $oForm = new FormValidation();
-
-// Récupère éventuellement le cycle à filtrer
-$nCycleId = $oForm->getValue('cycle_id', $_POST, 'convert_int', -1);
-// Récupère éventuellement le domaine à filtrer
-$nDomaineId = $oForm->getValue('domaine_id', $_POST, 'convert_int', -1);
-// Récupère éventuellement la matière à filtrer
-$nMatiereId = $oForm->getValue('matiere_id', $_POST, 'convert_int', -1);
 
 // Periode concernée par la synthése
 $nPeriodeId = $oForm->getValue('periode_id', $_POST, 'convert_int', -1);
@@ -31,76 +28,6 @@ $nCompetenceId = $oForm->getValue('competence_id', $_POST, 'convert_int', -1);
 //==============================================================================
 // Traitement des donnees
 //==============================================================================
-
-$sQueryCycleId = ($nCycleId != -1) ? " AND ID_CYCLE = {$nCycleId}" : "";
-$sQueryDomaineId = ($nDomaineId != -1) ? " AND ID_DOMAINE = {$nDomaineId}" : "";
-$sQueryMatiereId = ($nMatiereId != -1) ? " AND ID_MATIERE = {$nMatiereId}" : "";
-
-// ===== La liste des cycles =====
-$sQuery = <<< EOQ
-	SELECT
-		CYCLE_NOM,
-		CYCLE_ID
-	FROM CYCLES
-	WHERE 1=1
-	ORDER BY CYCLE_NOM ASC
-EOQ;
-$aCycles = Database::fetchArray($sQuery);
-// $aCycles[][COLONNE] = VALEUR
-
-// ===== La liste des domaines =====
-$sQuery = <<< EOQ
-	SELECT
-		DOMAINE_ID,
-		CONCAT(CYCLE_NOM, ' - ', DOMAINE_NOM) AS DOMAINE_NOM
-	FROM DOMAINES
-		INNER JOIN CYCLES
-			ON DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
-	WHERE 1=1
-	{$sQueryCycleId}
-	ORDER BY DOMAINE_NOM ASC
-EOQ;
-$aDomaines = Database::fetchArray($sQuery);
-// $aDomaines[][COLONNE] = VALEUR
-
-// ===== La liste des matieres =====
-$sQuery = <<< EOQ
-	SELECT
-		MATIERE_ID,
-		CONCAT(CYCLE_NOM, ' - ', DOMAINE_NOM, ' - ', MATIERE_NOM) AS MATIERE_NOM
-	FROM MATIERES
-		INNER JOIN DOMAINES
-			ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
-		INNER JOIN CYCLES
-			ON DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
-	WHERE 1=1
-	{$sQueryDomaineId}
-	{$sQueryCycleId}
-	ORDER BY MATIERE_NOM ASC
-EOQ;
-$aMatieres = Database::fetchArray($sQuery);
-// $aMatieres[][COLONNE] = VALEUR
-
-// ===== La liste des competences =====
-$sQuery = <<< EOQ
-	SELECT
-		COMPETENCE_ID,
-		CONCAT(COMPETENCE_NOM) AS COMPETENCE_NOM
-	FROM COMPETENCES
-		INNER JOIN MATIERES
-			ON COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
-		INNER JOIN DOMAINES
-			ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
-		INNER JOIN CYCLES
-			ON DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
-	WHERE 1=1
-	{$sQueryDomaineId}
-	{$sQueryCycleId}
-	{$sQueryMatiereId}
-	ORDER BY CYCLE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
-EOQ;
-$aCompetences = Database::fetchArray($sQuery);
-// $aCompetences[][COLONNE] = VALEUR
 
 // ===== La liste des classes =====
 $sQuery = <<< EOQ
@@ -133,6 +60,26 @@ EOQ;
 $aPeriodes = Database::fetchArray($sQuery);
 // $aPeriodes[][COLONNE] = VALEUR
 
+$sQuery = <<< EOQ
+	SELECT
+		DISTINCT COMPETENCE_ID,
+		COMPETENCE_NOM
+	FROM EVALUATIONS_INDIVIDUELLES
+		INNER JOIN COMPETENCES
+			ON EVALUATIONS_INDIVIDUELLES.ID_COMPETENCE = COMPETENCES.COMPETENCE_ID
+		INNER JOIN EVALUATIONS_COLLECTIVES
+			ON EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL = EVALUATIONS_COLLECTIVES.EVAL_COL_ID
+		INNER JOIN CLASSES
+			ON EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID
+		INNER JOIN PROFESSEUR_CLASSE
+			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
+	WHERE PROFESSEUR_CLASSE.ID_PROFESSEUR = {$_SESSION['PROFESSEUR_ID']}
+	{$sRestrictionAnneeScolaire}
+	ORDER BY COMPETENCE_NOM
+EOQ;
+$aCompetences = Database::fetchArray($sQuery);
+// $aCompetences[][COLONNE] = VALEUR
+
 // Si nous possédons la classe, la période et la compétence, on peut charger la synthèse
 if($nClasseId != -1 && $nPeriodeId != -1 && $nCompetenceId != -1)
 {
@@ -157,7 +104,7 @@ if($nClasseId != -1 && $nPeriodeId != -1 && $nCompetenceId != -1)
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Synthèse périodique de la compétence</h1>
+<h1>Synthèse périodique de la compétence évaluée</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
@@ -177,12 +124,10 @@ if($nClasseId != -1 && $nPeriodeId != -1 && $nCompetenceId != -1)
 		<caption>Fonctionnement</caption>
 		<tr>
 			<td>
-				Cette page permet d'afficher une vue qui synthétise, pour une compétence choisie, les moyennes des évaluations individuelles 
+				Cette page permet d'afficher une vue qui synthétise, pour une compétence évaluée choisie, les moyennes des évaluations individuelles 
 				pour chacun des élèves d'une classe du professeur connecté.<br />
-				Pour cela, sélectionner un cycle ou un domaine ou une matière ou bien encore une combinaison de ces filtres
-				puis cliquer sur le bouton <i>Rechercher</i> pour que la page se rafraîchisse.<br />
-				<br />
-				Une fois la compétence choisie, sélectionner la classe puis la page se rafraichit avec la moyenne pour chaque élève.
+				Pour cela, sélectionner la compétence, la période et la classe puis 
+				cliquer sur le bouton <i>Rechercher</i> pour que la page se rafraîchisse.<br />
 				<br />&nbsp;
 			</td>
 		</tr>
@@ -196,49 +141,10 @@ if($nClasseId != -1 && $nPeriodeId != -1 && $nCompetenceId != -1)
 		<tfoot></tfoot>
 		<tbody>
 			<tr>
-				<td colspan="2" style="font-weight:bold; color:blue;">optionnels</td>
-			</tr>
-			<tr>
-				<td>Cycle</td>
-				<td>
-					<select name="cycle_id" onchange="document.getElementById('formulaire').submit();">
-						<option value="-1">-- Sélectionnez un cycle --</option>
-						<?php foreach($aCycles as $aCycle): ?>
-							<option value="<?php echo($aCycle['CYCLE_ID']); ?>"<?php echo ($nCycleId == $aCycle['CYCLE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aCycle['CYCLE_NOM']); ?></option>
-						<?php endforeach; ?>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>Domaines</td>
-				<td>
-					<select name="domaine_id" onchange="document.getElementById('formulaire').submit();">
-						<option value="-1">-- Sélectionnez un domaine --</option>
-						<?php foreach($aDomaines as $aDomaine): ?>
-							<option value="<?php echo($aDomaine['DOMAINE_ID']); ?>"<?php echo ($nDomaineId == $aDomaine['DOMAINE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aDomaine['DOMAINE_NOM']); ?></option>
-						<?php endforeach; ?>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>Matières</td>
-				<td>
-					<select name="matiere_id" onchange="document.getElementById('formulaire').submit();">
-						<option value="-1">-- Sélectionnez une matière --</option>
-						<?php foreach($aMatieres as $aMatiere): ?>
-							<option value="<?php echo($aMatiere['MATIERE_ID']); ?>"<?php echo ($nMatiereId == $aMatiere['MATIERE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aMatiere['MATIERE_NOM']); ?></option>
-						<?php endforeach; ?>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" style="font-weight:bold; color:red;">obligatoires</td>
-			</tr>
-			<tr>
 				<td>Compétences</td>
 				<td>
 					<select name="competence_id">
-						<option value="-1">-- Sélectionnez une compétence --</option>
+						<option value="-1">-- Sélectionnez une compétence évaluée --</option>
 						<?php foreach($aCompetences as $aCompetence): ?>
 							<option value="<?php echo($aCompetence['COMPETENCE_ID']); ?>"<?php echo ($nCompetenceId == $aCompetence['COMPETENCE_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aCompetence['COMPETENCE_NOM']); ?></option>
 						<?php endforeach; ?>
