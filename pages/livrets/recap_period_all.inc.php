@@ -99,19 +99,19 @@ $aPeriodes = Database::fetchArray($sQuery);
 $sQuery = <<< EOQ
 	SELECT
 		CLASSE_ID,
-		CLASSE_NOM, 
-		PROFESSEUR_NOM, 
-		CLASSE_ANNEE_SCOLAIRE, 
-		ECOLE_NOM, 
-		ECOLE_VILLE, 
-		ECOLE_DEPARTEMENT 
+		CONCAT(PROFESSEUR_NOM, ' - ', CLASSE_ANNEE_SCOLAIRE , ' - ', CLASSE_NOM) AS CLASSE_NOM,
+		PROFESSEUR_NOM,
+		CLASSE_ANNEE_SCOLAIRE,
+		ECOLE_NOM,
+		ECOLE_VILLE,
+		ECOLE_DEPARTEMENT
 	FROM CLASSES
 		INNER JOIN PROFESSEUR_CLASSE
 			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
 		INNER JOIN PROFESSEURS
 			ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
 		INNER JOIN ECOLES
-			ON CLASSES.ID_ECOLE = ECOLES.ECOLE_ID 
+			ON CLASSES.ID_ECOLE = ECOLES.ECOLE_ID
 	ORDER BY CLASSE_NOM ASC
 EOQ;
 $aClasses = Database::fetchArray($sQuery);
@@ -126,7 +126,7 @@ if($nClasseId != -1 && $nPeriodeId != -1)
 	foreach($aEleves as $i => $oEleve)
 	{
 		$aRes = Livret::recap_period($oEleve['ELEVE_ID'], $nPeriodeId);
-	
+
 		$aEleveInfo[$i] = $aRes['ELEVE'];
 		$aClassesEleve[$i] = $aRes['CLASSES_ELEVES'];
 		$aNotes[$i] = $aRes['NOTES'];
