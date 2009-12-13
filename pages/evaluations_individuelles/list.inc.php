@@ -23,6 +23,7 @@ $nOffsetFin = $nOffsetDep + $nOffset;
 $nEleveId = $oForm->getValue('eleve_id', $_GET, 'convert_int', -1);
 $nClasseId = $oForm->getValue('classe_id', $_GET, 'convert_int', -1);
 $nEvalCollId = $oForm->getValue('eval_col_id', $_GET, 'convert_int', -1);
+$nCompetenceId = $oForm->getValue('competence_id', $_GET, 'convert_int', -1);
 
 if($nEleveId == -1)
 {
@@ -38,6 +39,11 @@ if($nClasseId == -1)
 if($nEvalCollId == -1)
 {
 	$nEvalCollId = $oForm->getValue('EVAL_COL_ID', $_POST, 'convert_int', -1);
+}
+
+if($nCompetenceId == -1)
+{
+	$nCompetenceId = $oForm->getValue('COMPETENCE_ID', $_POST, 'convert_int', -1);
 }
 
 //==============================================================================
@@ -74,9 +80,7 @@ $aEvalCols = Database::fetchArray($sQuery);
 $sQuery = <<< EOQ
 	SELECT DISTINCT
 		ELEVE_ID,
-		ELEVE_NOM,
-		CLASSE_ANNEE_SCOLAIRE,
-		CLASSE_NOM
+		CONCAT(CLASSE_ANNEE_SCOLAIRE, ' - ', CLASSE_NOM, ' - ', ELEVE_NOM) AS ELEVE_NOM
 	FROM ELEVES
 		INNER JOIN ELEVE_CLASSE
 			ON ELEVES.ELEVE_ID = ELEVE_CLASSE.ID_ELEVE
@@ -109,12 +113,41 @@ EOQ;
 $aClasses = Database::fetchArray($sQuery);
 // $aClasses[][COLONNE] = VALEUR
 
+// ===== La liste des competences =====
+$sQuery = <<< EOQ
+	SELECT
+		COMPETENCE_ID,
+		CONCAT(COMPETENCE_NOM) AS COMPETENCE_NOM
+	FROM COMPETENCES
+		INNER JOIN MATIERES
+			ON COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
+		INNER JOIN DOMAINES
+			ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
+		INNER JOIN CYCLES
+			ON DOMAINES.ID_CYCLE = CYCLES.CYCLE_ID
+		INNER JOIN NIVEAUX
+			ON NIVEAUX.ID_CYCLE = CYCLES.CYCLE_ID
+		INNER JOIN NIVEAU_CLASSE
+			ON NIVEAUX.NIVEAU_ID = NIVEAU_CLASSE.ID_NIVEAU
+		INNER JOIN CLASSES
+			ON NIVEAU_CLASSE.ID_CLASSE = CLASSES.CLASSE_ID
+		INNER JOIN PROFESSEUR_CLASSE
+			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
+	WHERE 1=1
+	AND PROFESSEUR_CLASSE.ID_PROFESSEUR = {$_SESSION['PROFESSEUR_ID']}
+	{$sRestrictionAnneeScolaire}
+	ORDER BY COMPETENCE_NOM ASC
+EOQ;
+$aCompetences = Database::fetchArray($sQuery);
+// $aCompetences[][COLONNE] = VALEUR
+
 // criteres de recherche
 $sQueryEvalCollId = ($nEvalCollId != -1) ? " AND EVALUATIONS_COLLECTIVES.EVAL_COL_ID = {$nEvalCollId} " : "";
 $sQueryClasseId = ($nClasseId != -1) ? " AND CLASSES.CLASSE_ID = {$nClasseId} " : "";
 $sQueryElevesId = ($nEleveId != -1) ? " AND ELEVES.ELEVE_ID = {$nEleveId} " : "";
+$sQueryCompetenceId  = ($nCompetenceId != -1) ? " AND COMPETENCES.COMPETENCE_ID = {$nCompetenceId} " : "";
 
-if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1)
+if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1 || $nCompetenceId != -1)
 {
 	// ===== La liste des evaluations individuelles a ce jour =====
 	$sQuery = <<< ____EOQ
@@ -146,6 +179,7 @@ if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1)
 		{$sQueryElevesId}
 		{$sQueryEvalCollId}
 		{$sQueryClasseId}
+		{$sQueryCompetenceId}
 		ORDER BY ELEVE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
 ____EOQ;
 	$nRowCount = Database::fetchOneValue($sQuery);
@@ -189,6 +223,7 @@ ____EOQ;
 		{$sQueryElevesId}
 		{$sQueryEvalCollId}
 		{$sQueryClasseId}
+		{$sQueryCompetenceId}
 		ORDER BY ELEVE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
 		LIMIT {$nOffsetDep}, {$nOffsetFin}
 ____EOQ;
@@ -207,6 +242,7 @@ $sEndLink = "";
 $sEndLink .= ($nEleveId != -1) ? "&amp;eleve_id={$nEleveId}" : "";
 $sEndLink .= ($nClasseId != -1) ? "&amp;classe_id={$nClasseId}" : "";
 $sEndLink .= ($nEvalCollId != -1) ? "&amp;eval_col_id={$nEvalCollId}" : "";
+$sEndLink .= ($nCompetenceId != -1) ? "&amp;competence_id={$nCompetenceId}" : "";
 
 $sLinkPrec = "?page=evaluations_individuelles&amp;offset_depart=" . ($nOffsetDep - $nOffset) . "{$sEndLink}";
 $sLinkSucc = "?page=evaluations_individuelles&amp;offset_depart={$nOffsetFin}{$sEndLink}";
@@ -215,7 +251,7 @@ $sLinkSucc = "?page=evaluations_individuelles&amp;offset_depart={$nOffsetFin}{$s
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Liste des évaluations individuelles</h1>
+<h1>Liste des évaluations individuelles de l'année courante</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
@@ -249,7 +285,7 @@ $sLinkSucc = "?page=evaluations_individuelles&amp;offset_depart={$nOffsetFin}{$s
 		<tfoot></tfoot>
 		<tbody>
 			<tr>
-				<td>Liste des évaluations collectives de l'année courante</td>
+				<td>Evaluations collectives</td>
 				<td>
 					<select name="EVAL_COL_ID" onchange="document.getElementById('formulaire_eval_ind').submit();">
 						<option value="-1">-- Sélectionner une évaluation collective --</option>
@@ -260,7 +296,7 @@ $sLinkSucc = "?page=evaluations_individuelles&amp;offset_depart={$nOffsetFin}{$s
 				</td>
 			</tr>
 			<tr>
-				<td>Liste des classes de l'année courante</td>
+				<td>Classes</td>
 				<td>
 					<select name="CLASSE_ID" onchange="document.getElementById('formulaire_eval_ind').submit();">
 						<option value="-1">-- Sélectionner une classe --</option>
@@ -271,12 +307,23 @@ $sLinkSucc = "?page=evaluations_individuelles&amp;offset_depart={$nOffsetFin}{$s
 				</td>
 			</tr>
 			<tr>
-				<td>Liste des élèves de l'année courante</td>
+				<td>Elèves</td>
 				<td>
 					<select name="ELEVE_ID" onchange="document.getElementById('formulaire_eval_ind').submit();">
 						<option value="-1">-- Sélectionner un élève --</option>
 						<?php foreach($aEleves as $aEleve): ?>
-							<option value="<?php echo($aEleve['ELEVE_ID']); ?>"<?php echo($aEleve['ELEVE_ID'] == $nEleveId ? ' selected="selected"' :''); ?>><?php echo($aEleve['CLASSE_ANNEE_SCOLAIRE']. " - " . $aEleve['CLASSE_NOM'] . " - " . $aEleve['ELEVE_NOM']); ?></option>
+							<option value="<?php echo($aEleve['ELEVE_ID']); ?>"<?php echo($aEleve['ELEVE_ID'] == $nEleveId ? ' selected="selected"' :''); ?>><?php echo($aEleve['ELEVE_NOM']); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Compétences</td>
+				<td>
+					<select name="COMPETENCE_ID" onchange="document.getElementById('formulaire_eval_ind').submit();">
+						<option value="-1">-- Sélectionner une compétence --</option>
+						<?php foreach($aCompetences as $aCompetence): ?>
+							<option value="<?php echo($aCompetence['COMPETENCE_ID']); ?>"<?php echo($aCompetence['COMPETENCE_ID'] == $nCompetenceId ? ' selected="selected"' :''); ?>><?php echo($aCompetence['COMPETENCE_NOM']); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</td>
