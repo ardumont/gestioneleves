@@ -145,6 +145,8 @@ if($nClasseId != -1 && $nPeriodeId != -1 && $nCompetenceId != -1)
 	$sClasseNom = $aRes['CLASSE_NOM'];
 	$sCompetenceNom = $aRes['COMPETENCE_NOM'];
 	$aEvalInds = $aRes['EVAL_INDS'];
+} else {
+	$aEvalInds = false;
 }
 
 //==============================================================================
