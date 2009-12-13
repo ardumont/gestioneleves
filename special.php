@@ -123,6 +123,7 @@ $aMenuPage = array
 	'export_livret_eleve_period_all' => "special/export_livret_eleve_period_all.inc.php",
 	'export_livret_eleve_cycle_all'  => "special/export_livret_eleve_cycle_all.inc.php",
 	'consultation_period_competence' => "special/consultation_period_competence.inc.php",
+	'consultation_annuel_competence' => "special/consultation_annuel_competence.inc.php",
 );
 
 //==============================================================================

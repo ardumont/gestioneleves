@@ -10,8 +10,6 @@
 // ===== Création du formulaire =====
 $oForm = new FormValidation();
 
-// Periode concernée par la synthése
-$nPeriodeId = $oForm->getValue('periode_id', $_GET, 'convert_int', -1);
 // La classe
 $nClasseId = $oForm->getValue('classe_id', $_GET, 'convert_int', -1);
 // La compétence sur laquelle porte la synthèse
@@ -26,17 +24,19 @@ $nCompetenceId = $oForm->getValue('competence_id', $_GET, 'convert_int', -1);
 //==============================================================================
 
 // Si nous possédons la classe, la période et la compétence, on peut charger la synthèse
-if($nClasseId != -1 && $nPeriodeId != -1 && $nCompetenceId != -1)
+if($nClasseId != -1 && $nCompetenceId != -1)
 {
 	// Calcule la moyenne pour un élève
-	$aRes = Livret::recap_period_competence($nClasseId, $nPeriodeId, $nCompetenceId);
+	$aRes = Livret::recap_annuel_competence($nClasseId, $nCompetenceId);
 
 	// Détail des informations calculés
 	$aNotes = $aRes['NOTES'];
-	$sPeriodeNom = $aRes['PERIODE_NOM'];
+	$aPeriodes = $aRes['PERIODES'];
 	$sClasseNom = $aRes['CLASSE_NOM'];
 	$sCompetenceNom = $aRes['COMPETENCE_NOM'];
 	$aEvalInds = $aRes['EVAL_INDS'];
+} else {
+	$aEvalInds = false;
 }
 
 //==============================================================================
@@ -67,6 +67,7 @@ if($nClasseId != -1 && $nPeriodeId != -1 && $nCompetenceId != -1)
 				<td>
 					<!-- Les pages d'évaluations individuelles -->
 					<table class="entete_n">
+						<thead></thead>
 						<tfoot></tfoot>
 						<thead>
 							<tr>
@@ -80,22 +81,26 @@ if($nClasseId != -1 && $nPeriodeId != -1 && $nCompetenceId != -1)
 					<table class="display">
 						<tr><!-- 1ère ligne de titre -->
 							<td></td>
-							<td class="colonne1" colspan="1">classe <?php echo $sClasseNom; ?></td>
+							<td class="colonne1" colspan="<?php echo count($aPeriodes); ?>?>">classe <?php echo $sClasseNom; ?></td>
 						</tr>
 						<tr><!-- 2ème ligne de titre -->
 							<td>Livret n°</td>
+							<?php foreach($aPeriodes as $sPeriodeNom):?>
 							<td class="colonne1" style="width: 25px;"><?php echo $sPeriodeNom; ?></td>
+							<?php endforeach; ?>
 						</tr>
 						<?php $i = 0; ?>
-						<?php foreach($aEvalInds as $sNomEleve => $aNotes): ?>
-						<tr class="row<?php echo $i%2; ?>">
-							<td><?php echo $sNomEleve; ?></td>
-							<?php if(isset($aNotes['NOTE_LABEL'])): ?>
-							<td class="<?php echo $aNotes['NOTE_LABEL']; ?>" style="text-align: center;"><?php echo $aNotes['NOTE_LABEL']; ?></td>
-							<?php else: ?>
-								<td class="colonne<?php echo ($i+1)%2; ?>">&nbsp;</td>
-							<?php endif; ?>
-						</tr>
+						<?php foreach($aEvalInds as $sNomEleve => $aEvalsInds): ?>
+							<tr class="row<?php echo $i%2; ?>">
+								<td><?php echo $sNomEleve; ?></td>
+								<?php foreach($aEvalsInds as $sPeriodeNom => $aNotes): ?>
+									<?php if(isset($aNotes['NOTE_LABEL'])): ?>
+									<td class="<?php echo $aNotes['NOTE_LABEL']; ?>" style="text-align: center;"><?php echo $aNotes['NOTE_LABEL']; ?></td>
+									<?php else: ?>
+									<td class="colonne<?php echo ($i+1)%2; ?>">&nbsp;</td>
+									<?php endif; ?>
+							<?php endforeach; ?>
+							</tr>
 						<?php endforeach; ?>
 					</table>
 				</td>

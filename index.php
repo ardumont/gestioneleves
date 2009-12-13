@@ -219,8 +219,8 @@ $aMenuPage = array
 
 	// ----- Consultations -----
 	'consultations' => array(
-		'competences_period' => "consultations/competences_period.inc.php",	
-		'competences_annuel' => "consultations/competences_annuel.inc.php",	
+		'competences_period' => "consultations/competences_period.inc.php",
+		'competences_annuel' => "consultations/competences_annuel.inc.php",
 	),
 );
 
@@ -488,7 +488,7 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 				<h5>&nbsp;</h5>
 			<h3>Consultations</h3>
 				<h4><a href="?page=consultations&amp;mode=competences_period"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Compétences par période</a></h4>
-<!--				<h4><a href="?page=consultations&amp;mode=competences_annuel"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Compétences par année</a></h4>-->
+				<h4><a href="?page=consultations&amp;mode=competences_annuel"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Compétences par année</a></h4>
 				<h5>&nbsp;</h5>
 			<h3>Aide/Info</h3>
 				<h4><a href="?page=contributeurs"><img src="<?php echo(URL_ICONS_16X16); ?>/contributeur.png"/>Contributeurs</a></h4>
