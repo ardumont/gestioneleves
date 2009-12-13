@@ -24,7 +24,12 @@ $oForm = new FormValidation();
 $sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 $sRetour = $oForm->getValue('retour', $_POST, 'is_string', "");
 
-$aEvalIndsToDel = $_POST['evals_inds_id'];
+$aEvalIndsToDel = isset($_POST['evals_inds_id']) && $_POST['evals_inds_id'] != false ? $_POST['ID_ELEVE'] : array();
+
+if($aEvalIndsToDel == false)
+{
+	$oForm->setError('evals_inds_id', 'liste', "La liste des évaluations individuelles doit être remplit avec au moins une entrée.");
+}
 
 //==============================================================================
 // Actions du formulaire

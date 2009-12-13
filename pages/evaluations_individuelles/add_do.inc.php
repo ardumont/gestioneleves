@@ -29,16 +29,26 @@ $nIdNote = $oForm->get(null);
 $sEvalIndCommentaire = $oForm->getValue('EVAL_IND_COMMENTAIRE', $_POST, 'is_string', "");
 
 // Eleves
-$aIdEleves = $_POST['ID_ELEVE'];
+$aIdEleves = isset($_POST['ID_ELEVE']) && $_POST['ID_ELEVE'] != false ? $_POST['ID_ELEVE'] : array();
 
 // Competences
-$aIdCompetences = $_POST['ID_COMPETENCE'];
+$aIdCompetences = isset($_POST['ID_COMPETENCE']) && $_POST['ID_COMPETENCE'] != false ? $_POST['ID_COMPETENCE'] : array();
 
 // Stocke en session les tableaux soumis pour faciliter l'affichage de la page add
 $_SESSION['ID_ELEVE'] = $aIdEleves;
 $_SESSION['ID_COMPETENCE'] = $aIdCompetences;
 $_SESSION['ID_NOTE'] = $nIdNote;
 $_SESSION['EVAL_IND_COMMENTAIRE'] = $sEvalIndCommentaire;
+
+if($aIdEleves == false)
+{
+	$oForm->setError('ID_ELEVE', 'liste', "La liste des élèves doit être remplit avec au moins une entrée.");
+}
+
+if($aIdCompetences == false)
+{
+	$oForm->setError('ID_COMPETENCE', 'liste', "La liste des compétences doit être remplit avec au moins une entrée.");
+}
 
 //==============================================================================
 // Action du formulaire
