@@ -279,7 +279,7 @@ ________EOQ;
 	}// fin recap_annuel
 
 	/**
-	 * Récapitulatif annuel.
+	 * Récapitulatif du cycle pour un élève.
 	 * @param $nEleveId	Elève concerné par le livret
 	 * @return array	Résultat
 	 * ['ELEVE']
@@ -526,7 +526,7 @@ ________EOQ;
 	}// fin recap_cycle
 
 	/**
-	 * Récapitulatif périodique.
+	 * Récapitulatif périodique pour un élève.
 	 * @param $nEleveId	  Elève concerné par le livret
 	 * @param $nPeriodeId Période concernée par le livret
 	 * @return array	  Résultat
@@ -762,12 +762,140 @@ ________EOQ;
 		$aRes['ELEVE'] = $aEleve;
 		$aRes['CLASSES_ELEVES'] = $aClassesEleve;
 		$aRes['NOTES'] = $aNotes;
-//		$aRes['NOTES_VALUES'] = $aNotesValues;
 		$aRes['PERIODES'] = $aPeriodes;
 		$aRes['CLASSES_NIVEAUX'] = $aClassesNiveaux;
 		$aRes['DOMAINES_MATIERES_COMPETENCES'] = $aDomainesMatieresCompetences;
 		$aRes['EVAL_INDS'] = $aEvalInds;
 		$aRes['NOM_PRENOM'] = $aNomPrenom;
+
+		return $aRes;
+	}// fin recap_period
+
+	/**
+	 * Récapitulatif périodique pour une classe sur une période.
+	 * @param $nClasseId		Classe de l'élève
+	 * @param $nPeriodeId		Période concernée par le livret
+	 * @param $nCompetenceId	Compétence
+	 * @return array	Résultat
+	 * ['NOTES']
+	 * ['PERIODE_NOM']
+	 * ['COMPETENCE_NOM']
+	 * ['CLASSE_NOM']
+	 * ['EVAL_INDS']
+	 */
+	public static function recap_period_competence($nClasseId, $nPeriodeId, $nCompetenceId)
+	{
+		//restriction sur l'annee scolaire courante
+		$sRestrictionAnneeScolaire =
+			" AND CLASSE_ANNEE_SCOLAIRE = " . sql_annee_scolaire_courante();
+
+		// ===== Les informations sur les classes =====
+		$sQuery = <<< ________EOQ
+			SELECT
+				CLASSE_NOM
+			FROM CLASSES
+			WHERE CLASSE_ID = {$nClasseId}
+________EOQ;
+		$sClasseNom = Database::fetchOneValue($sQuery);
+		
+		// ===== Les informations sur les notes =====
+		$sQuery = <<< ________EOQ
+			SELECT
+				NOTE_NOM,
+				NOTE_LABEL
+			FROM NOTES
+			ORDER BY NOTE_NOTE DESC
+________EOQ;
+		$aNotes = Database::fetchArray($sQuery);
+
+		// ===== La liste des periodes =====
+		$sQuery = <<< ________EOQ
+			SELECT
+				PERIODE_NOM
+			FROM PERIODES
+			WHERE PERIODE_ID = {$nPeriodeId}
+________EOQ;
+		$sPeriodeNom = Database::fetchOneValue($sQuery);
+
+		// ===== La liste des compétences (filtre sur le cycle et sur l'élève) =====
+		$sQuery = <<< ________EOQ
+			SELECT
+				COMPETENCE_NOM
+			FROM COMPETENCES
+			WHERE COMPETENCE_ID = {$nCompetenceId}
+________EOQ;
+		$sCompetenceNom = Database::fetchOneValue($sQuery);
+
+		// ===== La liste des evaluations individuelles a ce jour pour l'élève =====
+		$sQuery = <<< ________EOQ
+			SELECT
+				ELEVE_NOM,
+				EVAL_IND_ID,
+				COMPETENCE_NOM,
+				CLASSE_NOM,
+				PERIODE_NOM,
+				NOTE_LABEL,
+				NOTE_NOTE,
+				COMPETENCE_ID,
+				PERIODE_ID
+			FROM EVALUATIONS_INDIVIDUELLES
+				INNER JOIN COMPETENCES
+					ON EVALUATIONS_INDIVIDUELLES.ID_COMPETENCE = COMPETENCES.COMPETENCE_ID
+				INNER JOIN NOTES
+					ON EVALUATIONS_INDIVIDUELLES.ID_NOTE = NOTES.NOTE_ID
+				INNER JOIN ELEVES
+					ON EVALUATIONS_INDIVIDUELLES.ID_ELEVE = ELEVES.ELEVE_ID
+				INNER JOIN EVALUATIONS_COLLECTIVES
+					ON EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL = EVALUATIONS_COLLECTIVES.EVAL_COL_ID
+				INNER JOIN CLASSES
+					ON EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID
+				INNER JOIN PERIODES
+					ON EVALUATIONS_COLLECTIVES.ID_PERIODE = PERIODES.PERIODE_ID
+			WHERE PERIODE_ID = {$nPeriodeId}
+			AND COMPETENCE_ID = {$nCompetenceId}
+			AND CLASSE_ID = {$nClasseId}
+			ORDER BY COMPETENCE_NOM ASC
+________EOQ;
+		$aEvalInds = Database::fetchArrayWithMultiKey($sQuery, array('ELEVE_NOM', 'EVAL_IND_ID'));
+		// $aEvalInds[NOM DE L'ELEVE][COLONNE] = VALEUR
+
+		// Parcours de toutes les evaluations individuelles pour la compétence
+		foreach($aEvalInds as $sEleveNom => $aEvalInd)
+		{
+			// Nombre d'évaluations sur l'élève pour la compétence
+			$nNbEval = 0;
+			// Somme des notes des évaluations
+			$nSommeEval = 0;
+			// Pour chaque évaluation
+			foreach($aEvalInd as $nEvalIndId => $aRes)
+			{
+				// Stocke la note pour informations
+				$aEvalIndsMoy[$sEleveNom]["NOTE_LABEL_{$nEvalIndId}"] = $aRes['NOTE_LABEL'];
+
+				// Les competences évaluées à "Non Evaluees" ne comptent pas dans la moyenne
+				if($aRes['NOTE_NOTE'] == 0)
+				{
+					continue;
+				}
+				// Somme des évaluations
+				$nSommeEval += $aRes['NOTE_NOTE'];
+				// Incrémente le nombre d'évaluations
+				$nNbEval++;
+			}
+			// Calcul de la moyenne
+			$nMoy = ($nNbEval != 0) ? $nSommeEval / $nNbEval : 0;
+			// On stocke enfin la moyenne de ces compétences
+			$aEvalIndsMoy[$sEleveNom]['NOTE_LABEL'] = Moyenne::compute_and_label($nMoy);
+		}
+		// fin calcul de la moyenne
+
+		// ===== Génération du tableau résultat =====
+
+		$aRes['NOTES'] = $aNotes;
+		$aRes['PERIODE_NOM'] = $sPeriodeNom;
+		$aRes['COMPETENCE_NOM'] = $sCompetenceNom;
+		$aRes['CLASSE_NOM'] = $sClasseNom;
+		$aRes['EVAL_INDS'] = isset($aEvalIndsMoy) ? $aEvalIndsMoy : array();
 
 		return $aRes;
 	}// fin recap_period

@@ -12,16 +12,16 @@ class Moyenne
 	 */
 	public static function compute($nMoy)
 	{
-		if(0 <= $nMoy && $nMoy < 2.5)
+		if(0 <= $nMoy && $nMoy <= 2.5)
 		{
 			$nNote = 0;
-		} else if(2.5 <= $nMoy && $nMoy < 7.5) {
+		} else if(2.5 < $nMoy && $nMoy <= 7.5) {
 			$nNote = 5;
-		} else if(7.5 <= $nMoy && $nMoy < 12.5) {
+		} else if(7.5 < $nMoy && $nMoy <= 12.5) {
 			$nNote = 10;
-		} else if(12.5 <= $nMoy && $nMoy < 17.5) {
+		} else if(12.5 < $nMoy && $nMoy <= 17.5) {
 			$nNote = 15;
-		} else if(17.5 <= $nMoy) {
+		} else if(17.5 < $nMoy) {
 			$nNote = 20;
 		}
 		return $nNote;

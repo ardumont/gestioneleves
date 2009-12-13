@@ -216,6 +216,12 @@ $aMenuPage = array
 		'recap_period_all' => "livrets/recap_period_all.inc.php",
 		'recap_cycle_all'  => "livrets/recap_cycle_all.inc.php",
 	),
+
+	// ----- Consultations -----
+	'consultations' => array(
+		'competences_period' => "consultations/competences_period.inc.php",	
+		'competences_annuel' => "consultations/competences_annuel.inc.php",	
+	),
 );
 
 //==============================================================================
@@ -461,20 +467,29 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 			<h5>&nbsp;</h5>
 			<h3>Elèves</h3>
 				<h4><a href="?page=eleves"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h5>&nbsp;</h5>
 			<h3>Evaluations collectives</h3>
 				<h4><a href="?page=evaluations_collectives"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h5>&nbsp;</h5>
 			<h3>Evaluations individuelles</h3>
 				<h4><a href="?page=evaluations_individuelles"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
+				<h5>&nbsp;</h5>
 			<h3>Livrets par élève</h3>
 				<h4><a href="?page=livrets&amp;mode=recap_period"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif périodique</a></h4>
 				<h4><a href="?page=livrets&amp;mode=recap_annuel"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif annuel</a></h4>
 				<h4><a href="?page=livrets&amp;mode=recap_cycle"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif cycle</a></h4>
+				<h5>&nbsp;</h5>
 			<h3>Livrets par classe</h3>
 				<h4><a href="?page=livrets&amp;mode=recap_period_all"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif périodique</a></h4>
 <!--
 				<h4><a href="?page=livrets&amp;mode=recap_annuel_all"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif annuel</a></h4>
 				<h4><a href="?page=livrets&amp;mode=recap_cycle_all"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Récapitulatif cycle</a></h4>
 -->
+				<h5>&nbsp;</h5>
+			<h3>Consultations</h3>
+				<h4><a href="?page=consultations&amp;mode=competences_period"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Compétences par période</a></h4>
+<!--				<h4><a href="?page=consultations&amp;mode=competences_annuel"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Compétences par année</a></h4>-->
+				<h5>&nbsp;</h5>
 			<h3>Aide/Info</h3>
 				<h4><a href="?page=contributeurs"><img src="<?php echo(URL_ICONS_16X16); ?>/contributeur.png"/>Contributeurs</a></h4>
 				<h4><a href="admin.php"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Page d'administration</a></h4>
