@@ -360,7 +360,7 @@ if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1 || $nCompetenceId !
 				<?php echo ($nOffsetDep > 0) ? '<a href="' . $sLinkPrec . '">précédent</a>&nbsp;': ''; ?>
 				Liste des évaluations individuelles (<?php echo "{$nOffsetDep} - {$nOffsetFin}"; ?>)&nbsp;
 				<?php echo ($nOffsetFin < $nRowCount) ? '<a href="' . $sLinkSucc . '">suivant</a>' : ''; ?>
-				&nbsp;
+				<br />
 				<?php foreach($aLinks as $i => $sLink): ?>
 					<?php if(($i * $nOffset) == $nOffsetDep): ?>
 						<?php echo ($i+1); ?>
