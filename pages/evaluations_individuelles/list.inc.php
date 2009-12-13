@@ -229,27 +229,29 @@ ____EOQ;
 // Preparation de l'affichage
 //==============================================================================
 
-// Création des liens de pagination
-$sEndLink = "";
-$sEndLink .= ($nEleveId != -1) ? "&amp;eleve_id={$nEleveId}" : "";
-$sEndLink .= ($nClasseId != -1) ? "&amp;classe_id={$nClasseId}" : "";
-$sEndLink .= ($nEvalCollId != -1) ? "&amp;eval_col_id={$nEvalCollId}" : "";
-$sEndLink .= ($nCompetenceId != -1) ? "&amp;competence_id={$nCompetenceId}" : "";
-
-$sLinkPrec = "?page=evaluations_individuelles&amp;offset_depart=" . ($nOffsetDep - $nOffset) . "{$sEndLink}";
-$sLinkSucc = "?page=evaluations_individuelles&amp;offset_depart={$nOffsetFin}{$sEndLink}";
-
-// Calcule le nombre de liens à afficher pour se déplacer rapidement dans la pagination
-$nNbLinks =  (int) ($nRowCount / $nOffset);
-// Calcule notre place dans ce nombre de liens
-$nEmplacementLien = ($nOffsetDep % $nRowCount) / $nOffset;
-
-// Création des liens de pagination
-foreach(range(0, $nNbLinks - 1) as $i)
+if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1 || $nCompetenceId != -1)
 {
-	$aLinks[] = "?page=evaluations_individuelles&amp;offset_depart=" . ($nOffset * $i) . "{$sEndLink}";
-}
+	// Création des liens de pagination
+	$sEndLink = "";
+	$sEndLink .= ($nEleveId != -1) ? "&amp;eleve_id={$nEleveId}" : "";
+	$sEndLink .= ($nClasseId != -1) ? "&amp;classe_id={$nClasseId}" : "";
+	$sEndLink .= ($nEvalCollId != -1) ? "&amp;eval_col_id={$nEvalCollId}" : "";
+	$sEndLink .= ($nCompetenceId != -1) ? "&amp;competence_id={$nCompetenceId}" : "";
 
+	$sLinkPrec = "?page=evaluations_individuelles&amp;offset_depart=" . ($nOffsetDep - $nOffset) . "{$sEndLink}";
+	$sLinkSucc = "?page=evaluations_individuelles&amp;offset_depart={$nOffsetFin}{$sEndLink}";
+
+	// Calcule le nombre de liens à afficher pour se déplacer rapidement dans la pagination
+	$nNbLinks =  (int) ($nRowCount / $nOffset);
+	// Calcule notre place dans ce nombre de liens
+	$nEmplacementLien = ($nOffsetDep % $nRowCount) / $nOffset;
+
+	// Création des liens de pagination
+	foreach(range(0, $nNbLinks) as $i)
+	{
+		$aLinks[] = "?page=evaluations_individuelles&amp;offset_depart=" . ($nOffset * $i) . "{$sEndLink}";
+	}
+}
 //==============================================================================
 // Affichage de la page
 //==============================================================================
