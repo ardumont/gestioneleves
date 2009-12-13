@@ -72,6 +72,8 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impression de l'ihm de consultation des moyennes des évaluations individuelles sur une compétence.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Ajout du critère de recherche sur une compétence dans la liste d'affichage des évaluations individuelles.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Critère de recherche sur une compétence dans la liste d'affichage des évaluations individuelles est filtré selon les cycles des classes du professeur.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Vue des évaluations individuelles : Critère de recherche sur la compétence est filtré sur les compétences déjà évaluées.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Vue de consultation périodique des compétences évaluées : Critère de recherche sur la compétence est filtré sur les compétences déjà évaluées.</li>
 				</ul>
 			</dd>
 			<dt>
