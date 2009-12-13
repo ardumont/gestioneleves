@@ -27,7 +27,7 @@ class Livret
 		}
 		return $sLib;
 	}// fin display_libelle_cycle
-	
+
 	/**
 	 * Récapitulatif annuel.
 	 * @param $nEleveId	Elève concerné par le livret
@@ -797,7 +797,7 @@ ________EOQ;
 			WHERE CLASSE_ID = {$nClasseId}
 ________EOQ;
 		$sClasseNom = Database::fetchOneValue($sQuery);
-		
+
 		// ===== Les informations sur les notes =====
 		$sQuery = <<< ________EOQ
 			SELECT
@@ -854,7 +854,7 @@ ________EOQ;
 			WHERE PERIODE_ID = {$nPeriodeId}
 			AND COMPETENCE_ID = {$nCompetenceId}
 			AND CLASSE_ID = {$nClasseId}
-			ORDER BY COMPETENCE_NOM ASC
+			ORDER BY ELEVE_NOM ASC, COMPETENCE_NOM ASC
 ________EOQ;
 		$aEvalInds = Database::fetchArrayWithMultiKey($sQuery, array('ELEVE_NOM', 'EVAL_IND_ID'));
 		// $aEvalInds[NOM DE L'ELEVE][COLONNE] = VALEUR
