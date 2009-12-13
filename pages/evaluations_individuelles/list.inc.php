@@ -239,6 +239,17 @@ $sEndLink .= ($nCompetenceId != -1) ? "&amp;competence_id={$nCompetenceId}" : ""
 $sLinkPrec = "?page=evaluations_individuelles&amp;offset_depart=" . ($nOffsetDep - $nOffset) . "{$sEndLink}";
 $sLinkSucc = "?page=evaluations_individuelles&amp;offset_depart={$nOffsetFin}{$sEndLink}";
 
+// Calcule le nombre de liens à afficher pour se déplacer rapidement dans la pagination
+$nNbLinks =  (int) ($nRowCount / $nOffset);
+// Calcule notre place dans ce nombre de liens
+$nEmplacementLien = ($nOffsetDep % $nRowCount) / $nOffset;
+
+// Création des liens de pagination
+foreach(range(0, $nNbLinks - 1) as $i)
+{
+	$aLinks[] = "?page=evaluations_individuelles&amp;offset_depart=" . ($nOffset * $i) . "{$sEndLink}";
+}
+
 //==============================================================================
 // Affichage de la page
 //==============================================================================
@@ -347,6 +358,14 @@ $sLinkSucc = "?page=evaluations_individuelles&amp;offset_depart={$nOffsetFin}{$s
 				<?php echo ($nOffsetDep > 0) ? '<a href="' . $sLinkPrec . '">précédent</a>&nbsp;': ''; ?>
 				Liste des évaluations individuelles (<?php echo "{$nOffsetDep} - {$nOffsetFin}"; ?>)&nbsp;
 				<?php echo ($nOffsetFin < $nRowCount) ? '<a href="' . $sLinkSucc . '">suivant</a>' : ''; ?>
+				&nbsp;
+				<?php foreach($aLinks as $i => $sLink): ?>
+					<?php if(($i * $nOffset) == $nOffsetDep): ?>
+						<?php echo ($i+1); ?>
+					<?php else: ?>
+						<a href="<?php echo ($sLink); ?>"><?php echo ($i+1); ?></a>&nbsp;
+					<?php endif; ?>
+				<?php endforeach; ?>
 			</strong>
 		</caption>
 		<thead>
