@@ -12,10 +12,8 @@ $oForm = new FormValidation();
 
 // Récupère éventuellement le cycle à filtrer
 $nCycleId = $oForm->getValue('cycle_id', $_POST, 'convert_int', -1);
-
 // Récupère éventuellement le domaine à filtrer
 $nDomaineId = $oForm->getValue('domaine_id', $_POST, 'convert_int', -1);
-
 // Récupère éventuellement la matière à filtrer
 $nMatiereId = $oForm->getValue('matiere_id', $_POST, 'convert_int', -1);
 
