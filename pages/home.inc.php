@@ -66,10 +66,12 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 			</dt>
 			<dd>
 				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm synthèse périodique d'une compétence pour une classe.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impression synthèse périodique d'une compétence pour une classe.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm synthèse annuel d'une compétence pour une classe.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impression synthèse annuel d'une compétence pour une classe.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Mise à jour de l'installation qui contient désormais tous les cycles/domaines/matieres/competences.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Ajout de liens permettant de (dé)sélectionner toutes les checkbox de suppression multiple dans la vue des évaluations individuelles.</li>
-					<li class="evolution_majeure" title="Evolution majeure">Ajout d'une ihm de consultation des moyennes des évaluations individuelles sur une compétence.</li>
-					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impression de l'ihm de consultation des moyennes des évaluations individuelles sur une compétence.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Ajout du critère de recherche sur une compétence dans la liste d'affichage des évaluations individuelles.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Critère de recherche sur une compétence dans la liste d'affichage des évaluations individuelles est filtré selon les cycles des classes du professeur.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Vue des évaluations individuelles : Critère de recherche sur la compétence est filtré sur les compétences déjà évaluées.</li>
