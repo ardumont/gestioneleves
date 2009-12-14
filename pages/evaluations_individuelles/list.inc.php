@@ -217,7 +217,7 @@ ____EOQ;
 		{$sQueryClasseId}
 		{$sQueryCompetenceId}
 		ORDER BY ELEVE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
-		LIMIT {$nOffsetDep}, {$nOffsetFin}
+		LIMIT {$nOffsetDep}, {$nOffset}
 ____EOQ;
 	$aEvalInds = Database::fetchArray($sQuery);
 	// $aEvalInds[][COLONNE] = VALEUR
