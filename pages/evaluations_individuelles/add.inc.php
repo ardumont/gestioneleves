@@ -302,7 +302,7 @@ ____EOQ;
 	<?php else: ?>
 	<a href="javascript:void(0);" onclick="$('.evals_inds_id').attr('checked', 'checked');">Sélectionner tout</a>&nbsp;
 	<a href="javascript:void(0);" onclick="$('.evals_inds_id').removeAttr('checked');">Désélectionner tout</a>
-	<form method="post" action="?page=evaluations_individuelles&amp;mode=delete_multiple&amp;retour=add">
+	<form method="post" action="?page=evaluations_individuelles&amp;mode=actions_multiples&amp;retour=add">
 		<table class="list_tree">
 			<caption>Liste des &eacute;valuations individuelles</caption>
 			<thead>

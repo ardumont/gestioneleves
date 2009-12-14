@@ -7,30 +7,30 @@
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
-$objForm->read('EVAL_IND_ID', $_POST);
-$objForm->testError0(null, 'exist',			"Il manque le champ \"EVAL_IND_ID\" !");
-$objForm->testError0(null, 'blank',			"Il manque l'id de la comp&eacute;tence individuelle !");
-$objForm->testError0(null, 'convert_int',	"L'id de la comp&eacute;tence individuelle doit &ecirc;tre un entier !");
-$nEvalIndId = $objForm->get(null);
+$oForm->read('EVAL_IND_ID', $_POST);
+$oForm->testError0(null, 'exist',			"Il manque le champ \"EVAL_IND_ID\" !");
+$oForm->testError0(null, 'blank',			"Il manque l'id de la comp&eacute;tence individuelle !");
+$oForm->testError0(null, 'convert_int',	"L'id de la comp&eacute;tence individuelle doit &ecirc;tre un entier !");
+$nEvalIndId = $oForm->get(null);
 
-$objForm->read('ID_NOTE', $_POST);
-$objForm->testError0(null, 'exist',			"Il manque le champ \"ID_NOTE\" !");
-$objForm->testError0(null, 'blank',			"Il manque l'id de la note !");
-$objForm->testError0(null, 'convert_int',	"L'id de la note doit &ecirc;tre un entier !");
-$nEvalIndNoteId = $objForm->get(null);
+$oForm->read('ID_NOTE', $_POST);
+$oForm->testError0(null, 'exist',			"Il manque le champ \"ID_NOTE\" !");
+$oForm->testError0(null, 'blank',			"Il manque l'id de la note !");
+$oForm->testError0(null, 'convert_int',	"L'id de la note doit &ecirc;tre un entier !");
+$nEvalIndNoteId = $oForm->get(null);
 
-$objForm->read('ID_COMPETENCE', $_POST);
-$objForm->testError0(null, 'exist',			"Il manque le champ \"ID_COMPETENCE\" !");
-$objForm->testError0(null, 'blank',			"Il manque l'id de la comp&eacute;tence !");
-$objForm->testError0(null, 'convert_int',	"L'id de la comp&eacute;tence doit &ecirc;tre un entier !");
-$nEvalIndCompetenceId = $objForm->get(null);
+$oForm->read('ID_COMPETENCE', $_POST);
+$oForm->testError0(null, 'exist',			"Il manque le champ \"ID_COMPETENCE\" !");
+$oForm->testError0(null, 'blank',			"Il manque l'id de la comp&eacute;tence !");
+$oForm->testError0(null, 'convert_int',	"L'id de la comp&eacute;tence doit &ecirc;tre un entier !");
+$nEvalIndCompetenceId = $oForm->get(null);
 
 // appreciation de l'eleve
-$sEvalIndCommentaire = $objForm->getValue('EVAL_IND_COMMENTAIRE', $_POST, 'is_string', "");
+$sEvalIndCommentaire = $oForm->getValue('EVAL_IND_COMMENTAIRE', $_POST, 'is_string', "");
 
 //==============================================================================
 // Action du formulaire
@@ -40,7 +40,7 @@ switch(strtolower($sAction))
 {
 	// ----------
 	case 'modifier':
-		if($objForm->hasError() == true) break;
+		if($oForm->hasError() == true) break;
 
 		$sQuery =
 			"UPDATE EVALUATIONS_INDIVIDUELLES " .
@@ -57,7 +57,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	case 'annuler':
-		$objForm->clearError();
+		$oForm->clearError();
 
 		// Rechargement
 		header("Location: ?page=evaluations_individuelles");
@@ -66,7 +66,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:
-		$objForm->clearError();
+		$oForm->clearError();
 
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
@@ -84,7 +84,7 @@ switch(strtolower($sAction))
 //==============================================================================
 
 // On stocke toutes les erreurs de formulaire.
-Message::addErrorFromFormValidation($objForm->getError());
+Message::addErrorFromFormValidation($oForm->getError());
 
 // Rechargement
 header("Location: ?page=evaluations_individuelles&mode=edit&eval_ind_id={$nEvalIndId}");

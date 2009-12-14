@@ -7,15 +7,15 @@
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
-$objForm->read('EVAL_IND_ID', $_POST);
-$objForm->testError0(null, 'exist',			"Il manque le champ \"EVAL_IND_ID\" !");
-$objForm->testError0(null, 'blank',			"Il manque l'id de l'&eacute;valuation individuelle !");
-$objForm->testError0(null, 'convert_int',	"L'id de l'&eacute;valuation individuelle doit &ecirc;tre un entier !");
-$nEvalIndId = $objForm->get(null);
+$oForm->read('EVAL_IND_ID', $_POST);
+$oForm->testError0(null, 'exist',			"Il manque le champ \"EVAL_IND_ID\" !");
+$oForm->testError0(null, 'blank',			"Il manque l'id de l'&eacute;valuation individuelle !");
+$oForm->testError0(null, 'convert_int',	"L'id de l'&eacute;valuation individuelle doit &ecirc;tre un entier !");
+$nEvalIndId = $oForm->get(null);
 
 //==============================================================================
 // Action du formulaire
@@ -25,7 +25,7 @@ switch(strtolower($sAction))
 {
 	// ----------
 	case 'supprimer':
-		if($objForm->hasError() == true) break;
+		if($oForm->hasError() == true) break;
 
 		$sQuery =
 			"DELETE FROM EVALUATIONS_INDIVIDUELLES " .
@@ -39,7 +39,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	case 'annuler':
-		$objForm->clearError();
+		$oForm->clearError();
 
 		// Rechargement
 		header("Location: ?page=evaluations_individuelles");
@@ -48,7 +48,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:
-		$objForm->clearError();
+		$oForm->clearError();
 
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
@@ -66,7 +66,7 @@ switch(strtolower($sAction))
 //==============================================================================
 
 // On stocke toutes les erreurs de formulaire.
-Message::addErrorFromFormValidation($objForm->getError());
+Message::addErrorFromFormValidation($oForm->getError());
 
 // Rechargement
 header("Location: ?page=evaluations_individuelles");

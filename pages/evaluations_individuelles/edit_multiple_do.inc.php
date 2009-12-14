@@ -25,12 +25,29 @@ $sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 $sRetour = $oForm->getValue('retour', $_POST, 'is_string', "");
 $sRetour .= $oForm->getValue('fin_lien_retour', $_POST, 'is_string', "");
 
+$oForm->read('id_note', $_POST);
+$oForm->testError0(null, 'exist',			"Il manque le champ \"ID_NOTE\" !");
+$oForm->testError0(null, 'blank',			"Il manque l'id de la note !");
+$oForm->testError0(null, 'convert_int',	"L'id de la note doit &ecirc;tre un entier !");
+$nNoteId = $oForm->get(null);
+
 $aEvalIndsToDel = isset($_POST['evals_inds_id']) && $_POST['evals_inds_id'] != false ? $_POST['evals_inds_id'] : array();
 
 if($aEvalIndsToDel == false)
 {
 	$oForm->setError('evals_inds_id', 'liste', "La liste des évaluations individuelles doit être remplit avec au moins une entrée.");
 }
+
+// ===== La liste des notes =====
+$sQuery = <<< EOQ
+	SELECT
+		1 EXIST
+	FROM NOTES
+	WHERE NOTE_ID = {$nNoteId}
+EOQ;
+
+$oForm->readArray('query1', Database::fetchOneRow($sQuery));
+$oForm->testError0('query1.EXIST', 'exist', "L'identifiant de la note \"{$nNoteId}\" n'est pas valide !");
 
 //==============================================================================
 // Actions du formulaire
@@ -40,13 +57,14 @@ $sPageReturn = "?page=evaluations_individuelles" . (($sRetour != "") ? "&mode={$
 
 switch(strtolower($sAction))
 {
-	case 'supprimer':
+	case 'editer':
 		if($oForm->hasError() == true) break;
 
 		$sQueryEvalToDel = implode(",", $aEvalIndsToDel);
 
 		$sQuery = <<< ________EOQ
-			DELETE FROM EVALUATIONS_INDIVIDUELLES
+			UPDATE EVALUATIONS_INDIVIDUELLES
+			SET ID_NOTE = {$nNoteId}
 			WHERE EVAL_IND_ID IN ({$sQueryEvalToDel})
 ________EOQ;
 		Database::execute($sQuery);

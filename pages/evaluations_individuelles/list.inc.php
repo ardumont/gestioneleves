@@ -353,7 +353,7 @@ if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1 || $nCompetenceId !
 <?php else: ?>
 <a href="javascript:void(0);" onclick="$('.evals_inds_id').attr('checked', 'checked');">Sélectionner tout</a>&nbsp;
 <a href="javascript:void(0);" onclick="$('.evals_inds_id').removeAttr('checked');">Désélectionner tout</a>
-<form method="post" action="?page=evaluations_individuelles&amp;mode=delete_multiple">
+<form method="post" action="?page=evaluations_individuelles&amp;mode=actions_multiples<?php echo $sEndLink; ?>">
 	<table class="list_tree">
 		<caption>
 			<strong>
@@ -387,7 +387,8 @@ if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1 || $nCompetenceId !
 			<tr>
 				<th><a href="?page=evaluations_individuelles&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 				<th colspan="10">
-					<input type="submit" name="suppression_multiple" value="Suppression multiple" />
+					<input type="submit" name="action" value="Suppression multiple" />
+					<input type="submit" name="action" value="Edition multiple" />
 				</th>
 			</tr>
 		</tfoot>

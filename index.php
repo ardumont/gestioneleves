@@ -196,8 +196,9 @@ $aMenuPage = array
 		'edit_do'            => "evaluations_individuelles/edit_do.inc.php",
 		'delete'             => "evaluations_individuelles/delete.inc.php",
 		'delete_do'          => "evaluations_individuelles/delete_do.inc.php",
-		'delete_multiple'    => "evaluations_individuelles/delete_multiple.inc.php",
+		'actions_multiples'  => "evaluations_individuelles/actions_multiples.inc.php",
 		'delete_multiple_do' => "evaluations_individuelles/delete_multiple_do.inc.php",
+		'edit_multiple_do'   => "evaluations_individuelles/edit_multiple_do.inc.php",
 	),
 
 	// ----- Profil -----

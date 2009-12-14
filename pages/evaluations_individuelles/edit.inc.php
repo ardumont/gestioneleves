@@ -11,9 +11,9 @@
 // Action du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$nEvalIndId = $objForm->getValue('eval_ind_id', $_GET, 'convert_int');
+$nEvalIndId = $oForm->getValue('eval_ind_id', $_GET, 'convert_int');
 
 //==============================================================================
 // Traitement des donnees
@@ -44,7 +44,7 @@ $sQuery = "SELECT" .
 		  " AND MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID " .
 		  " AND EVALUATIONS_INDIVIDUELLES.EVAL_IND_ID = {$nEvalIndId} ";
 $aEvalInd = Database::fetchOneRow($sQuery);
-// $aEvalInd[COLONNE] = VALEUR	
+// $aEvalInd[COLONNE] = VALEUR
 
 // ===== La liste des notes =====
 $sQuery = "SELECT" .
