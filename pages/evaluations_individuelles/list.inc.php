@@ -244,8 +244,6 @@ if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1 || $nCompetenceId !
 
 	// Calcule le nombre de liens à afficher pour se déplacer rapidement dans la pagination
 	$nNbLinks =  (int) ($nRowCount / $nOffset);
-	// Calcule notre place dans ce nombre de liens
-	$nEmplacementLien = ($nOffsetDep % $nRowCount) / $nOffset;
 
 	// Création des liens de pagination
 	foreach(range(0, $nNbLinks) as $i)
@@ -255,7 +253,7 @@ if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1 || $nCompetenceId !
 }
 
 // Construction de l'url de soumission du formulaire
-$sEndLink .= ($nOffset != 0) ? "&amp;offset_depart={$nOffset}" : "";
+$sEndLink .= ($nOffset != 0) ? "&amp;offset_depart={$nOffsetDep}" : "";
 
 //==============================================================================
 // Affichage de la page
