@@ -68,6 +68,8 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 			</dt>
 			<dd>
 				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Simplification de la vue d'ajout des évaluations individuelles.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Amélioration de l'affichage au retour de la soumission d'un nouvel ajout.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'édition multiple à l'aide des checkbox de suppression multiple.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Gestion lors d'actions multiples de retours sur la page apres actions multiples avec les mêmes sélection qu'en partant.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm synthèse périodique d'une compétence pour une classe.</li>
