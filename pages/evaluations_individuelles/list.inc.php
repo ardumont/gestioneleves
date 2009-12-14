@@ -229,10 +229,11 @@ ____EOQ;
 // Preparation de l'affichage
 //==============================================================================
 
+// Création des liens de pagination
+$sEndLink = "";
 if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1 || $nCompetenceId != -1)
 {
 	// Création des liens de pagination
-	$sEndLink = "";
 	$sEndLink .= ($nEleveId != -1) ? "&amp;eleve_id={$nEleveId}" : "";
 	$sEndLink .= ($nClasseId != -1) ? "&amp;classe_id={$nClasseId}" : "";
 	$sEndLink .= ($nEvalCollId != -1) ? "&amp;eval_col_id={$nEvalCollId}" : "";
@@ -252,6 +253,10 @@ if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1 || $nCompetenceId !
 		$aLinks[] = "?page=evaluations_individuelles&amp;offset_depart=" . ($nOffset * $i) . "{$sEndLink}";
 	}
 }
+
+// Construction de l'url de soumission du formulaire
+$sEndLink .= ($nOffset != 0) ? "&amp;offset_depart={$nOffset}" : "";
+
 //==============================================================================
 // Affichage de la page
 //==============================================================================

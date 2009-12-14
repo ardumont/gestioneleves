@@ -26,6 +26,7 @@ $sRetour = $oForm->getValue('retour', $_GET, 'is_string', "");
 // Action à effectuer (suppression ou edition multiple)
 $sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
+$nOffsetDep = $oForm->getValue('offset_depart', $_GET, 'convert_int', -1);
 $nEleveId = $oForm->getValue('eleve_id', $_GET, 'convert_int', -1);
 $nClasseId = $oForm->getValue('classe_id', $_GET, 'convert_int', -1);
 $nEvalCollId = $oForm->getValue('eval_col_id', $_GET, 'convert_int', -1);
@@ -102,13 +103,14 @@ if(count($aEvalInds) == 0)
 // Préparation de l'affichage
 //==============================================================================
 
-if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1 || $nCompetenceId != -1)
+if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1 || $nCompetenceId != -1 || $nOffsetDep != -1)
 {
 	// Création des liens de pagination
 	$sEndLink = "";
 	$sEndLink .= ($nEleveId != -1) ? "&amp;eleve_id={$nEleveId}" : "";
 	$sEndLink .= ($nClasseId != -1) ? "&amp;classe_id={$nClasseId}" : "";
 	$sEndLink .= ($nEvalCollId != -1) ? "&amp;eval_col_id={$nEvalCollId}" : "";
+	$sEndLink .= ($nOffsetDep != -1) ? "&amp;offset_depart={$nOffsetDep}" : "";
 	$sEndLink .= ($nCompetenceId != -1) ? "&amp;competence_id={$nCompetenceId}" : "";
 }
 
@@ -223,11 +225,11 @@ $aNotes = Database::fetchArray($sQuery);
 			</table>
 		</fieldset>
 		<table>
-			<caption>Sélectionner la note pour toutes les évaluations individuelles</caption>
 			<thead></thead>
 			<tfoot></tfoot>
 			<tbody>
 				<tr>
+					<td>Sélectionner la note pour les évaluations</td>
 					<td>
 						<select name="id_note">
 							<option>-- Sélectionner une note --</option>
@@ -238,7 +240,7 @@ $aNotes = Database::fetchArray($sQuery);
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td colspan="2">
 						<input type="hidden" name="retour" value="<?php echo $sRetour; ?>" />
 						<input type="hidden" name="fin_lien_retour" value="<?php echo $sEndLink; ?>" />
 

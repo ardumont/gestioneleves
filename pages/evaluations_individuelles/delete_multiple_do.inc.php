@@ -22,8 +22,8 @@
 $oForm = new FormValidation();
 
 $sAction = $oForm->getValue('action', $_POST, 'is_string', "");
-$sRetour = $oForm->getValue('retour', $_POST, 'is_string', "");
-$sRetour .= $oForm->getValue('fin_lien_retour', $_POST, 'is_string', "");
+$sRetour = $oForm->getValue('fin_lien_retour', $_POST, 'is_string', "");
+$sRetour .= $oForm->getValue('retour', $_POST, 'is_string', "");
 
 $aEvalIndsToDel = isset($_POST['evals_inds_id']) && $_POST['evals_inds_id'] != false ? $_POST['evals_inds_id'] : array();
 
