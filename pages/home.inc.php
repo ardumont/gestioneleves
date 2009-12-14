@@ -68,6 +68,7 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 			</dt>
 			<dd>
 				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout dans l'édition multiple de la possibilité de modifier l'évaluation collective des évaluations individuelles sélectionnées.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Simplification de la vue d'ajout des évaluations individuelles.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Amélioration de l'affichage au retour de la soumission d'un nouvel ajout.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'édition multiple à l'aide des checkbox de suppression multiple.</li>
