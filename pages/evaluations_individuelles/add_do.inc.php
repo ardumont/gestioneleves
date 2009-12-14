@@ -38,7 +38,6 @@ $aIdCompetences = isset($_POST['ID_COMPETENCE']) && $_POST['ID_COMPETENCE'] != f
 $_SESSION['ID_ELEVE'] = $aIdEleves;
 $_SESSION['ID_COMPETENCE'] = $aIdCompetences;
 $_SESSION['ID_NOTE'] = $nIdNote;
-$_SESSION['EVAL_IND_COMMENTAIRE'] = $sEvalIndCommentaire;
 
 if($aIdEleves == false)
 {
@@ -72,10 +71,10 @@ switch(strtolower($sAction))
 				// insertion de l'eleve dans la table
 				$sQuery = <<< ________________EOQ
 					INSERT INTO EVALUATIONS_INDIVIDUELLES (
-						EVAL_IND_COMMENTAIRE, 
-						ID_EVAL_COL, 
-						ID_ELEVE, 
-						ID_NOTE, 
+						EVAL_IND_COMMENTAIRE,
+						ID_EVAL_COL,
+						ID_ELEVE,
+						ID_NOTE,
 						ID_COMPETENCE)
 					VALUES({$sQueryComm}, {$nIdEvalCol}, {$nIdEleve}, {$nIdNote}, {$nIdCompetence})
 ________________EOQ;

@@ -22,10 +22,11 @@ if($nEvalColId == null)
 // Récupère de la session les informations soumises
 $aIdEleves = isset($_SESSION['ID_ELEVE']) ? $_SESSION['ID_ELEVE'] : array();
 $aIdCompetences = isset($_SESSION['ID_COMPETENCE']) ? $_SESSION['ID_COMPETENCE'] : array();
-
+$nNoteId = isset($_SESSION['ID_NOTE']) ? $_SESSION['ID_NOTE'] : -1;
 // Puis détruit la session
 $_SESSION['ID_ELEVE'] = null;
 $_SESSION['ID_COMPETENCE'] = null;
+$_SESSION['ID_NOTE'] = null;
 
 //==============================================================================
 // Validation du formulaire
@@ -145,46 +146,45 @@ ____EOQ;
 
 		$sQueryEleves = "AND ELEVES.ELEVE_ID IN ({$sQueryEleves})";
 		$sQueryCompetences = "AND COMPETENCES.COMPETENCE_ID IN ({$sQueryCompetences})";
-	} else {
-		$sQueryEleves = "";
-		$sQueryCompetences = "";
-	}
 
-	// ===== liste des eval. ind. attachees a cette eval. coll. =====
-	$sQuery = <<< ____EOQ
-		SELECT
-			EVAL_IND_ID,
-			ELEVE_NOM,
-			CLASSE_NOM,
-			NOTE_NOM,
-			EVAL_IND_COMMENTAIRE,
-			COMPETENCE_NOM,
-			MATIERE_NOM,
-			DOMAINE_NOM
-		FROM EVALUATIONS_INDIVIDUELLES
-			INNER JOIN NOTES
-				ON EVALUATIONS_INDIVIDUELLES.ID_NOTE = NOTES.NOTE_ID
-			INNER JOIN ELEVES
-				ON EVALUATIONS_INDIVIDUELLES.ID_ELEVE = ELEVES.ELEVE_ID
-			INNER JOIN EVALUATIONS_COLLECTIVES
-				ON EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL = EVALUATIONS_COLLECTIVES.EVAL_COL_ID
-			INNER JOIN CLASSES
-				ON EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID
-			INNER JOIN COMPETENCES
-				ON EVALUATIONS_INDIVIDUELLES.ID_COMPETENCE = COMPETENCES.COMPETENCE_ID
-			INNER JOIN MATIERES
-				ON COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
-			INNER JOIN DOMAINES
-				ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
-			INNER JOIN PROFESSEUR_CLASSE
-				ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
-		WHERE EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL = {$nEvalColId}
-		{$sQueryEleves}
-		{$sQueryCompetences}
-		ORDER BY ELEVE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
-____EOQ;
-	$aEvalInds = Database::fetchArray($sQuery);
-	// $aEvalInds[][COLONNE] = VALEUR
+		// ===== liste des eval. ind. attachees a cette eval. coll. =====
+		$sQuery = <<< ________EOQ
+			SELECT
+				EVAL_IND_ID,
+				ELEVE_NOM,
+				CLASSE_NOM,
+				NOTE_NOM,
+				EVAL_IND_COMMENTAIRE,
+				COMPETENCE_NOM,
+				MATIERE_NOM,
+				DOMAINE_NOM
+			FROM EVALUATIONS_INDIVIDUELLES
+				INNER JOIN NOTES
+					ON EVALUATIONS_INDIVIDUELLES.ID_NOTE = NOTES.NOTE_ID
+				INNER JOIN ELEVES
+					ON EVALUATIONS_INDIVIDUELLES.ID_ELEVE = ELEVES.ELEVE_ID
+				INNER JOIN EVALUATIONS_COLLECTIVES
+					ON EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL = EVALUATIONS_COLLECTIVES.EVAL_COL_ID
+				INNER JOIN CLASSES
+					ON EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID
+				INNER JOIN COMPETENCES
+					ON EVALUATIONS_INDIVIDUELLES.ID_COMPETENCE = COMPETENCES.COMPETENCE_ID
+				INNER JOIN MATIERES
+					ON COMPETENCES.ID_MATIERE = MATIERES.MATIERE_ID
+				INNER JOIN DOMAINES
+					ON MATIERES.ID_DOMAINE = DOMAINES.DOMAINE_ID
+				INNER JOIN PROFESSEUR_CLASSE
+					ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
+			WHERE EVALUATIONS_INDIVIDUELLES.ID_EVAL_COL = {$nEvalColId}
+			{$sQueryEleves}
+			{$sQueryCompetences}
+			ORDER BY ELEVE_NOM ASC, DOMAINE_NOM ASC, MATIERE_NOM ASC, COMPETENCE_NOM ASC
+________EOQ;
+		$aEvalInds = Database::fetchArray($sQuery);
+		// $aEvalInds[][COLONNE] = VALEUR
+	} else {
+		$aEvalInds = false;
+	}
 }
 
 //==============================================================================
@@ -204,8 +204,9 @@ ____EOQ;
 	<li><?php echo($sErrorMessage); ?></li>
 	<?php endforeach; ?>
 </ul>
-<?php endif; ?>
 <br />
+<?php endif; ?>
+
 <?php if(count($aEvalCols) <= 0): ?>
 <table class="formulaire">
 	<caption>Informations</caption>
@@ -272,7 +273,7 @@ ____EOQ;
 				<td>
 					<select name="ID_NOTE">
 						<?php foreach($aNotes as $nKey => $sValue): ?>
-							<option value="<?php echo($nKey); ?>"><?php echo($sValue); ?></option>
+							<option value="<?php echo($nKey); ?>"<?php echo ($nKey == $nNoteId) ? ' selected="selected"': ''; ?>><?php echo($sValue); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</td>
@@ -290,16 +291,7 @@ ____EOQ;
 		</table>
 	</form>
 
-	<?php if(count($aEvalInds) <= 0): ?>
-	<table class="formulaire">
-		<caption>Informations</caption>
-		<tr>
-			<td>
-				Aucune &eacute;valuation individuelle n'a &eacute;t&eacute; saisie &agrave; ce jour.
-			</td>
-		</tr>
-	</table>
-	<?php else: ?>
+	<?php if($aEvalInds != false): ?>
 	<a href="javascript:void(0);" onclick="$('.evals_inds_id').attr('checked', 'checked');">Sélectionner tout</a>&nbsp;
 	<a href="javascript:void(0);" onclick="$('.evals_inds_id').removeAttr('checked');">Désélectionner tout</a>
 	<form method="post" action="?page=evaluations_individuelles&amp;mode=actions_multiples&amp;retour=add">
