@@ -15,6 +15,10 @@
 // Préparation des données
 //==============================================================================
 
+// Restriction sur l'annee scolaire courante
+$sRestrictionAnneeScolaire =
+	" AND CLASSE_ANNEE_SCOLAIRE = " . sql_annee_scolaire_courante();
+
 //==============================================================================
 // Validation du formulaire
 //==============================================================================
@@ -26,19 +30,30 @@ $sRetour = $oForm->getValue('retour', $_GET, 'is_string', "");
 // Action à effectuer (suppression ou edition multiple)
 $sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
-$nOffsetDep = $oForm->getValue('offset_depart', $_GET, 'convert_int', -1);
 $nEleveId = $oForm->getValue('eleve_id', $_GET, 'convert_int', -1);
 $nClasseId = $oForm->getValue('classe_id', $_GET, 'convert_int', -1);
 $nEvalCollId = $oForm->getValue('eval_col_id', $_GET, 'convert_int', -1);
+$nOffsetDep = $oForm->getValue('offset_depart', $_GET, 'convert_int', -1);
 $nCompetenceId = $oForm->getValue('competence_id', $_GET, 'convert_int', -1);
 
-$aEvalIndsToDel = isset($_POST['evals_inds_id']) && $_POST['evals_inds_id'] != false ? $_POST['evals_inds_id'] : array();
+if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1 || $nCompetenceId != -1 || $nOffsetDep != -1)
+{
+	// Création des liens de pagination
+	$sEndLink = "";
+	$sEndLink .= ($nEleveId != -1) ? "&amp;eleve_id={$nEleveId}" : "";
+	$sEndLink .= ($nClasseId != -1) ? "&amp;classe_id={$nClasseId}" : "";
+	$sEndLink .= ($nEvalCollId != -1) ? "&amp;eval_col_id={$nEvalCollId}" : "";
+	$sEndLink .= ($nOffsetDep != -1) ? "&amp;offset_depart={$nOffsetDep}" : "";
+	$sEndLink .= ($nCompetenceId != -1) ? "&amp;competence_id={$nCompetenceId}" : "";
+}
+
+$aEvalIndsToDel = isset($_POST['evals_inds_id']) ? $_POST['evals_inds_id'] : array();
 
 if($aEvalIndsToDel == false)
 {
 	$oForm->setError('evals_inds_id', 'liste', "La liste des évaluations individuelles doit être remplit avec au moins une entrée.");
 	// Rechargement
-	header("Location: ?page=evaluations_individuelles" . ($sRetour != "") ? "&mode={$sRetour}" : "");
+	header("Location: ?page=evaluations_individuelles" . ($sRetour != "") ? "&mode={$sRetour}{$sEndLink}" : "{$sEndLink}");
 	return;
 }
 
@@ -103,16 +118,24 @@ if(count($aEvalInds) == 0)
 // Préparation de l'affichage
 //==============================================================================
 
-if($nEleveId != -1 || $nClasseId != -1 || $nEvalCollId != -1 || $nCompetenceId != -1 || $nOffsetDep != -1)
-{
-	// Création des liens de pagination
-	$sEndLink = "";
-	$sEndLink .= ($nEleveId != -1) ? "&amp;eleve_id={$nEleveId}" : "";
-	$sEndLink .= ($nClasseId != -1) ? "&amp;classe_id={$nClasseId}" : "";
-	$sEndLink .= ($nEvalCollId != -1) ? "&amp;eval_col_id={$nEvalCollId}" : "";
-	$sEndLink .= ($nOffsetDep != -1) ? "&amp;offset_depart={$nOffsetDep}" : "";
-	$sEndLink .= ($nCompetenceId != -1) ? "&amp;competence_id={$nCompetenceId}" : "";
-}
+// ===== La liste des evaluations collectives à ce jour =====
+$sQuery = <<< EOQ
+	SELECT
+		EVAL_COL_ID,
+		CONCAT(CLASSE_NOM, ' - ', PERIODE_NOM, ' - ', DATE_FORMAT(EVAL_COL_DATE, '%d/%m/%Y'), ' - ', EVAL_COL_NOM) AS EVAL_COL_NOM
+	FROM EVALUATIONS_COLLECTIVES
+		INNER JOIN CLASSES
+			ON EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID
+		INNER JOIN PERIODES
+			ON EVALUATIONS_COLLECTIVES.ID_PERIODE = PERIODES.PERIODE_ID
+		INNER JOIN PROFESSEUR_CLASSE
+			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
+	WHERE PROFESSEUR_CLASSE.ID_PROFESSEUR = {$_SESSION['PROFESSEUR_ID']}
+	{$sRestrictionAnneeScolaire}
+	ORDER BY PERIODE_NOM ASC, EVALUATIONS_COLLECTIVES.EVAL_COL_NOM
+EOQ;
+$aEvalCols = Database::fetchArray($sQuery);
+// $aEvalCols[][COLONNE] = VALEUR
 
 // ===== La liste des notes =====
 $sQuery = <<< EOQ
@@ -229,12 +252,23 @@ $aNotes = Database::fetchArray($sQuery);
 			<tfoot></tfoot>
 			<tbody>
 				<tr>
-					<td>Sélectionner la note pour les évaluations</td>
+					<td>Modifier la note des évaluations</td>
 					<td>
 						<select name="id_note">
 							<option>-- Sélectionner une note --</option>
 							<?php foreach($aNotes as $aNote): ?>
 							<option value="<?php echo $aNote['NOTE_ID']; ?>"><?php echo $aNote['NOTE_LABEL']?></option>
+							<?php endforeach; ?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Modifier l'évaluation collective des évaluations</td>
+					<td>
+						<select name="id_eval_col">
+							<option>-- Sélectionner une évaluation collective --</option>
+							<?php foreach($aEvalCols as $aEvalCol): ?>
+							<option value="<?php echo $aEvalCol['EVAL_COL_ID']; ?>"><?php echo $aEvalCol['EVAL_COL_NOM']; ?></option>
 							<?php endforeach; ?>
 						</select>
 					</td>

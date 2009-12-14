@@ -5,7 +5,7 @@
 
 $nOffset = 30;
 
-//restriction sur l'annee scolaire courante
+// Restriction sur l'annee scolaire courante
 $sRestrictionAnneeScolaire =
 	" AND CLASSE_ANNEE_SCOLAIRE = " . sql_annee_scolaire_courante();
 
@@ -69,7 +69,9 @@ $sQuery = <<< EOQ
 			ON EVALUATIONS_COLLECTIVES.ID_CLASSE = CLASSES.CLASSE_ID
 		INNER JOIN PERIODES
 			ON EVALUATIONS_COLLECTIVES.ID_PERIODE = PERIODES.PERIODE_ID
-	WHERE 1=1
+		INNER JOIN PROFESSEUR_CLASSE
+			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
+	WHERE PROFESSEUR_CLASSE.ID_PROFESSEUR = {$_SESSION['PROFESSEUR_ID']}
 	{$sRestrictionAnneeScolaire}
 	ORDER BY PERIODE_NOM ASC, EVALUATIONS_COLLECTIVES.EVAL_COL_NOM
 EOQ;

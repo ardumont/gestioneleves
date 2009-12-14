@@ -25,11 +25,10 @@ $sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 $sRetour = $oForm->getValue('fin_lien_retour', $_POST, 'convert_string', "");
 $sRetour .= $oForm->getValue('retour', $_POST, 'convert_string', "");
 
-$oForm->read('id_note', $_POST);
-$oForm->testError0(null, 'exist', "Il manque le champ id_note !");
-$oForm->testError0(null, 'blank', "Il manque l'id de la note !");
-$oForm->testError0(null, 'convert_int',	"L'id de la note doit &ecirc;tre un entier !");
-$nNoteId = $oForm->get(null, -1);
+// Id de la nouvelle note de la liste des evaluations individuelles
+$nNoteId = $oForm->getValue('id_note', $_POST, 'convert_int', -1);
+// Id de l'evaluation collective a laquelle l'evaluation individuelle est rattachee
+$nEvalColId = $oForm->getValue('id_eval_col', $_POST, 'convert_int', -1);
 
 $aEvalIndsToDel = isset($_POST['evals_inds_id']) && $_POST['evals_inds_id'] != false ? $_POST['evals_inds_id'] : array();
 if($aEvalIndsToDel == false)
@@ -39,7 +38,6 @@ if($aEvalIndsToDel == false)
 
 if($nNoteId != -1)
 {
-	// ===== La liste des notes =====
 	$sQuery = <<< ____EOQ
 		SELECT
 			1 EXIST
@@ -51,10 +49,24 @@ ____EOQ;
 	$oForm->testError0('query1.EXIST', 'exist', "L'identifiant de la note \"{$nNoteId}\" n'est pas valide !");
 }
 
+if($nEvalColId != -1)
+{
+	$sQuery = <<< ____EOQ
+		SELECT
+			1 EXIST
+		FROM EVALUATIONS_COLLECTIVES
+		WHERE EVAL_COL_ID = {$nEvalColId}
+____EOQ;
+
+	$oForm->readArray('query2', Database::fetchOneRow($sQuery));
+	$oForm->testError0('query2.EXIST', 'exist', "L'identifiant de l'évaluation collective \"{$nEvalColId}\" n'est pas valide !");
+}
+
 //==============================================================================
 // Actions du formulaire
 //==============================================================================
 
+// Calcule la page de retour
 $sPageReturn = "?page=evaluations_individuelles" . (($sRetour != "") ? "&mode={$sRetour}" : "");
 
 switch(strtolower($sAction))
@@ -62,8 +74,10 @@ switch(strtolower($sAction))
 	case 'editer':
 		if($oForm->hasError() == true) break;
 
+		// Récupère la liste des ids des evaluations individuelles à mettre à jour
 		$sQueryEvalToDel = implode(",", $aEvalIndsToDel);
 
+		// Si la note est spécifiée
 		if($nNoteId != -1)
 		{
 			$sQuery = <<< ____________EOQ
@@ -73,6 +87,18 @@ switch(strtolower($sAction))
 ____________EOQ;
 			Database::execute($sQuery);
 		}
+		
+		// Si l'évaluation collective est spécifiée
+		if($nEvalColId != -1)
+		{
+			$sQuery = <<< ____________EOQ
+				UPDATE EVALUATIONS_INDIVIDUELLES
+				SET ID_EVAL_COL = {$nEvalColId}
+				WHERE EVAL_IND_ID IN ({$sQueryEvalToDel})
+____________EOQ;
+			Database::execute($sQuery);
+		}
+
 		// Rechargement
 		header("Location: {$sPageReturn}");
 		return;
