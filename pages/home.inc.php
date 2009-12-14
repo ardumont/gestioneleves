@@ -20,10 +20,12 @@ $sUserName = "";
 
 if(isset($_SESSION['PROFESSEUR_ID']))
 {
-	$sQuery =
-		"SELECT PROFESSEUR_NOM " .
-		"FROM PROFESSEURS " .
-		"WHERE PROFESSEUR_ID = ".$_SESSION['PROFESSEUR_ID'];
+	$sQuery = <<< ____EOQ
+		SELECT
+			PROFESSEUR_NOM
+		FROM PROFESSEURS
+		WHERE PROFESSEUR_ID = {$_SESSION['PROFESSEUR_ID']}
+____EOQ;
 	// recupere le nom du professeur directement dans la variable
 	$sUserName = Database::fetchOneValue($sQuery);
 }
@@ -66,6 +68,8 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 			</dt>
 			<dd>
 				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'édition multiple à l'aide des checkbox de suppression multiple.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Gestion lors d'actions multiples de retours sur la page apres actions multiples avec les mêmes sélection qu'en partant.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm synthèse périodique d'une compétence pour une classe.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm d'impression synthèse périodique d'une compétence pour une classe.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Ajout de l'ihm synthèse annuel d'une compétence pour une classe.</li>
