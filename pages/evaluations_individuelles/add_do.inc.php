@@ -26,7 +26,13 @@ $oForm->testError0(null, 'is_int', "L'id de la note doit être un entier!");
 $nIdNote = $oForm->get(null);
 
 // Appreciation de l'eleve
-$sEvalIndCommentaire = $oForm->getValue('EVAL_IND_COMMENTAIRE', $_POST, 'is_string', "");
+$sEvalIndCommentaire_pre_rempli = $oForm->getValue('eval_ind_commentaire_pre_rempli', $_POST, 'is_string', "");
+$sEvalIndCommentaire = $oForm->getValue('eval_ind_commentaire', $_POST, 'is_string', "");
+
+if($sEvalIndCommentaire == "")
+{
+	$sEvalIndCommentaire = $sEvalIndCommentaire_pre_rempli;
+}
 
 // Eleves
 $aIdEleves = isset($_POST['ID_ELEVE']) && $_POST['ID_ELEVE'] != false ? $_POST['ID_ELEVE'] : array();

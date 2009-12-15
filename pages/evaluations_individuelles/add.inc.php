@@ -23,6 +23,7 @@ if($nEvalColId == null)
 $aIdEleves = isset($_SESSION['ID_ELEVE']) ? $_SESSION['ID_ELEVE'] : array();
 $aIdCompetences = isset($_SESSION['ID_COMPETENCE']) ? $_SESSION['ID_COMPETENCE'] : array();
 $nNoteId = isset($_SESSION['ID_NOTE']) ? $_SESSION['ID_NOTE'] : -1;
+
 // Puis détruit la session
 $_SESSION['ID_ELEVE'] = null;
 $_SESSION['ID_COMPETENCE'] = null;
@@ -39,6 +40,17 @@ $_SESSION['ID_NOTE'] = null;
 //==============================================================================
 // Traitement des donnees
 //==============================================================================
+
+// Commentaires pré-remplis pour accélérer la saisie
+$aCommentairesPreRemplis = array(
+	"A revoir.",
+	"Bon travail.",
+	"Bravo.",
+	"Des efforts restent à faire.",
+	"Excellent travail.",
+	"Peut mieux faire.",
+	"Tu dois te concentrer davantage."
+);
 
 // ===== La liste des evaluations collectives a ce jour pour le select =====
 $sQuery = <<< EOQ
@@ -154,6 +166,7 @@ ____EOQ;
 				ELEVE_NOM,
 				CLASSE_NOM,
 				NOTE_NOM,
+				NOTE_LABEL,
 				EVAL_IND_COMMENTAIRE,
 				COMPETENCE_NOM,
 				MATIERE_NOM,
@@ -279,8 +292,19 @@ ________EOQ;
 				</td>
 			</tr>
 			<tr>
+				<td>Commentaire pré-rempli</td>
+				<td>
+					<select name="eval_ind_commentaire_pre_rempli" onchange="if(this.value != -1) document.getElementById('eval_ind_comm').disabled=1";">
+						<option value="">-- Sélectionner un commentaire pré-rempli --</option>
+						<?php foreach($aCommentairesPreRemplis as $sCommentairePreRempli): ?>
+							<option value="<?php echo($sCommentairePreRempli); ?>"><?php echo($sCommentairePreRempli); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
 				<td>Commentaire</td>
-				<td><textarea cols="50" rows="10" name="EVAL_IND_COMMENTAIRE"></textarea></td>
+				<td><textarea cols="50" rows="10" name="eval_ind_commentaire"></textarea></td>
 			</tr>
 			<tr>
 				<td>
@@ -323,7 +347,7 @@ ________EOQ;
 					<td><?php echo($aEvalInd['DOMAINE_NOM']); ?></td>
 					<td><?php echo($aEvalInd['MATIERE_NOM']); ?></td>
 					<td><?php echo($aEvalInd['COMPETENCE_NOM']); ?></td>
-					<td title="<?php echo($aEvalInd['EVAL_IND_COMMENTAIRE']); ?>"><?php echo($aEvalInd['NOTE_NOM']); ?></td>
+					<td title="<?php echo($aEvalInd['NOTE_NOM'] . (($aEvalInd['EVAL_IND_COMMENTAIRE'] != null) ? " - '" . $aEvalInd['EVAL_IND_COMMENTAIRE'] . "'" : "")); ?>"><?php echo($aEvalInd['NOTE_LABEL']); ?></td>
 					<!-- Edition -->
 					<td>
 						<a href="?page=evaluations_individuelles&amp;mode=edit&amp;eval_ind_id=<?php echo($aEvalInd['EVAL_IND_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
