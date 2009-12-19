@@ -11,10 +11,10 @@
 // Action du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
 // recupere l'id du domaine du formulaire $_GET
-$nDomaineId = $objForm->getValue('domaine_id', $_GET, 'convert_int');
+$nDomaineId = $oForm->getValue('domaine_id', $_GET, 'convert_int');
 
 //==============================================================================
 // Traitement des donnees
@@ -48,7 +48,7 @@ $aDomaine = Database::fetchOneRow($sQuery);
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Suppression du domaine</h1>
+<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Suppression du domaine</h1>
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>

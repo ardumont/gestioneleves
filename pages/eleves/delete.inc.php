@@ -11,12 +11,12 @@
 // Action du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
 // recupere l'id de l'eleve du formulaire $_GET
-$nEleveId = $objForm->getValue('eleve_id', $_GET, 'convert_int');
+$nEleveId = $oForm->getValue('eleve_id', $_GET, 'convert_int');
 // recupere l'id de l'eleve du formulaire $_GET
-$nClasseId = $objForm->getValue('classe_id', $_GET, 'convert_int');
+$nClasseId = $oForm->getValue('classe_id', $_GET, 'convert_int');
 
 //==============================================================================
 // Traitement des donnees

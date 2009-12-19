@@ -169,6 +169,13 @@ $sAgent = $_SERVER['HTTP_USER_AGENT'];
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<meta content="Lionel SAURON" name="author" />
 
+	<!-- fonctions utilitaires de javascript -->
+	<script type="text/javascript" src="../libraries/javascript/utils.inc.js"></script>
+	<!-- JQuery -->
+	<script type="text/javascript" src="../libraries/javascript/jquery-1.3.2.js"></script>
+	<!-- Utilitaires basés sur JQuery -->
+	<script type="text/javascript" src="../libraries/javascript/utils_jquery.inc.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="../default.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="../main.css" media="all" />
 	<!--[if IE]>
@@ -237,7 +244,7 @@ $sAgent = $_SERVER['HTTP_USER_AGENT'];
 		<?php endif; ?>
 	</div>
 	<div id="struct_main">
-		<h1>Installation du gestionnaire d'élèves</h1>
+		<h1><a href="javascript:void(0)" onclick="showOrHideMenu('../images/icons/16x16/arrow_left.png', '../images/icons/16x16/arrow_right.png');"><img id="img_arrow" src="../images/icons/16x16/arrow_left.png" /></a>Installation du gestionnaire d'élèves</h1>
 		<?php if($sPageName !== null): ?>
 			<?php include($sPageName); ?>
 		<?php endif; ?>

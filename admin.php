@@ -122,7 +122,8 @@ ProfilManager::loadRights();
 
 $aMenuPage = array(
 	// ----- General -----
-	'home' => "home.inc.php",
+	'home'      => "home.inc.php",
+	'no_rights' => "error-rights.inc.php",
 
 	// ----- Applications -----
 	'eleves' => array
@@ -462,7 +463,7 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 			</div>
 		</div>
 	</div>
-	<div id="struct_main" class="<?php echo($sPageId); ?>" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');">
+	<div id="struct_main" class="<?php echo($sPageId); ?>">
 		<?php include(PATH_PAGES."/".$sPageName); ?>
 	</div>
 </body>

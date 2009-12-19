@@ -3,10 +3,10 @@
 // Preparation des donnees
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
 // recupere l'id du cycle du formulaire $_GET
-$nCycleId = $objForm->getValue('cycle_id', $_GET, 'convert_int');
+$nCycleId = $oForm->getValue('cycle_id', $_GET, 'convert_int');
 
 //==============================================================================
 // Traitement des donnees
@@ -29,7 +29,7 @@ $aCycle = Database::fetchOneRow($sQuery);
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Suppression du cycle</h1>
+<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Suppression du cycle</h1>
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>

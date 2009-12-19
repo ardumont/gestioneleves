@@ -11,13 +11,13 @@
 // Action du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
 // recupere l'id de l'eleve du formulaire $_GET
-$nCompetenceId = $objForm->getValue('competence_id', $_GET, 'convert_int');
+$nCompetenceId = $oForm->getValue('competence_id', $_GET, 'convert_int');
 
 // recupere l'id de l'eleve du formulaire $_GET
-$nMatiereId = $objForm->getValue('matiere_id', $_GET, 'convert_int');
+$nMatiereId = $oForm->getValue('matiere_id', $_GET, 'convert_int');
 
 //==============================================================================
 // Traitement des donnees
@@ -62,7 +62,7 @@ $aMatieres = Database::fetchArray($sQuery);
 //==============================================================================
 ?>
 
-<h1>Edition de la comp&eacute;tence</h1>
+<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Edition de la comp&eacute;tence</h1>
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>

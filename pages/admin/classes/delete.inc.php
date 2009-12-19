@@ -11,10 +11,10 @@
 // Action du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
 // recupere l'id de l'eleve du formulaire $_GET
-$nClasseId = $objForm->getValue('classe_id', $_GET, 'convert_int');
+$nClasseId = $oForm->getValue('classe_id', $_GET, 'convert_int');
 
 //==============================================================================
 // Traitement des donnees
@@ -46,7 +46,7 @@ $aClasse = Database::fetchOneRow($sQuery);
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Suppression de la classe</h1>
+<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Suppression de la classe</h1>
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>

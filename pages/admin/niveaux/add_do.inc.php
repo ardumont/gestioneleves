@@ -7,23 +7,23 @@
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
 // matiere de la competence
-$objForm->read('ID_CYCLE', $_POST);
-$objForm->testError0(null, 'exist',	"Il manque le champ ID_CYCLE !");
-$objForm->testError0(null, 'blank',	"Il manque l'id du cycle !");
-$objForm->testError0(null, 'is_int',"L'id du cycle doit &ecirc;tre un entier!");
-$nIdCycle = $objForm->get(null);
+$oForm->read('ID_CYCLE', $_POST);
+$oForm->testError0(null, 'exist',	"Il manque le champ ID_CYCLE !");
+$oForm->testError0(null, 'blank',	"Il manque l'id du cycle !");
+$oForm->testError0(null, 'is_int',"L'id du cycle doit &ecirc;tre un entier!");
+$nIdCycle = $oForm->get(null);
 
 // nom du niveau
-$objForm->read('NIVEAU_NOM', $_POST);
-$objForm->testError0(null, 'exist',		"Il manque le champ NIVEAU_NOM !");
-$objForm->testError0(null, 'blank',		"Il manque le nom du niveau !");
-$objForm->testError0(null, 'is_string',	"Le nom du niveau doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
-$sNiveauNom = $objForm->get(null);
+$oForm->read('NIVEAU_NOM', $_POST);
+$oForm->testError0(null, 'exist',		"Il manque le champ NIVEAU_NOM !");
+$oForm->testError0(null, 'blank',		"Il manque le nom du niveau !");
+$oForm->testError0(null, 'is_string',	"Le nom du niveau doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
+$sNiveauNom = $oForm->get(null);
 
 //==============================================================================
 // Action du formulaire
@@ -32,7 +32,7 @@ $sNiveauNom = $objForm->get(null);
 switch(strtolower($sAction))
 {
 	case 'ajouter':
-		if($objForm->hasError() == true) break;
+		if($oForm->hasError() == true) break;
 
 		// insertion du niveau
 		$sQuery =
@@ -50,7 +50,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	case 'annuler':
-		$objForm->clearError();
+		$oForm->clearError();
 
 		// Rechargement
 		header("Location: ?page=niveaux");
@@ -59,7 +59,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:
-		$objForm->clearError();
+		$oForm->clearError();
 
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
@@ -77,7 +77,7 @@ switch(strtolower($sAction))
 //==============================================================================
 
 // On stocke toutes les erreurs de formulaire.
-Message::addErrorFromFormValidation($objForm->getError());
+Message::addErrorFromFormValidation($oForm->getError());
 
 // Rechargement
 header("Location: ?page=niveaux&mode=add");

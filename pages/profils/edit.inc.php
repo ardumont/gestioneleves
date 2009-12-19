@@ -40,7 +40,7 @@ $aThisUser = Database::fetchOneRow($sQuery);
 // Affichage de la page
 //==============================================================================
 ?>
-<h1><img src="<?php echo(URL_ICONS_16X16); ?>/user.png"/><img src="<?php echo(URL_ICONS_16X16); ?>/head_sep.png"/>Mon Profil</h1>
+<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a><img src="<?php echo(URL_ICONS_16X16); ?>/user.png"/><img src="<?php echo(URL_ICONS_16X16); ?>/head_sep.png"/>Mon Profil</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">

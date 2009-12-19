@@ -153,10 +153,9 @@ $aNotes = Database::fetchArray($sQuery);
 //==============================================================================
 // Affichage de la page
 //==============================================================================
-?>
 
-<?php if($sAction == "Suppression multiple"): ?>
-	<h1><img src="<?php echo(URL_ICONS_16X16); ?>/projet.png"/><img src="<?php echo(URL_ICONS_16X16); ?>/head_sep.png"/>Evaluations individuelles : Suppression multiple</h1>
+if($sAction == "Suppression multiple"): ?>
+	<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a><img src="<?php echo(URL_ICONS_16X16); ?>/blank.png"/><img src="<?php echo(URL_ICONS_16X16); ?>/head_sep.png"/>Evaluations individuelles : Suppression multiple</h1>
 
 	<?php if(Message::hasError() == true): ?>
 	<ul class="form_error">
@@ -209,7 +208,7 @@ $aNotes = Database::fetchArray($sQuery);
 		</p>
 	</form>
 <?php elseif($sAction == "Edition multiple"): ?>
-	<h1><img src="<?php echo(URL_ICONS_16X16); ?>/projet.png"/><img src="<?php echo(URL_ICONS_16X16); ?>/head_sep.png"/>Evaluations individuelles : Edition multiple</h1>
+	<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a><img src="<?php echo(URL_ICONS_16X16); ?>/blank.png"/><img src="<?php echo(URL_ICONS_16X16); ?>/head_sep.png"/>Evaluations individuelles : Edition multiple</h1>
 
 	<?php if(Message::hasError() == true): ?>
 	<ul class="form_error">

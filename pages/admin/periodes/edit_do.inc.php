@@ -7,37 +7,37 @@
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
 // la periode a mettre a jour
-$objForm->read('PERIODE_ID', $_POST);
-$objForm->testError0(null, 'exist',			"Il manque le champ \"PERIODE_ID\" !");
-$objForm->testError0(null, 'blank',			"Il manque l'id de la p&eacute;riode !");
-$objForm->testError0(null, 'convert_int',	"L'id de la p&eacute;riode doit &ecirc;tre un entier !");
-$nPeriodeId = $objForm->get(null);
+$oForm->read('PERIODE_ID', $_POST);
+$oForm->testError0(null, 'exist',			"Il manque le champ \"PERIODE_ID\" !");
+$oForm->testError0(null, 'blank',			"Il manque l'id de la p&eacute;riode !");
+$oForm->testError0(null, 'convert_int',	"L'id de la p&eacute;riode doit &ecirc;tre un entier !");
+$nPeriodeId = $oForm->get(null);
 
 // nom de la periode
-$objForm->read('PERIODE_NOM', $_POST);
-$objForm->testError0(null, 'exist',     "Il manque le champ PERIODE_NOM !");
-$objForm->testError0(null, 'blank',     "Il manque le nom de la p&eacute;riode !");
-$objForm->testError0(null, 'is_string', "Le nom de la p&eacute;riode doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
-$sPeriodeNom = $objForm->get(null);
+$oForm->read('PERIODE_NOM', $_POST);
+$oForm->testError0(null, 'exist',     "Il manque le champ PERIODE_NOM !");
+$oForm->testError0(null, 'blank',     "Il manque le nom de la p&eacute;riode !");
+$oForm->testError0(null, 'is_string', "Le nom de la p&eacute;riode doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
+$sPeriodeNom = $oForm->get(null);
 
 // date de debut
-$objForm->read('PERIODE_DATE_DEBUT', $_POST);
-$objForm->testError0(null, 'exist',     "Il manque le champ PERIODE_DATE_DEBUT !");
-$objForm->testError0(null, 'blank',     "Il manque la date de d&eacute;but !");
-$objForm->testError0(null, 'is_string', "La date de d&eacute;but doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
-$sPeriodeDateDebut = $objForm->get(null);
+$oForm->read('PERIODE_DATE_DEBUT', $_POST);
+$oForm->testError0(null, 'exist',     "Il manque le champ PERIODE_DATE_DEBUT !");
+$oForm->testError0(null, 'blank',     "Il manque la date de d&eacute;but !");
+$oForm->testError0(null, 'is_string', "La date de d&eacute;but doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
+$sPeriodeDateDebut = $oForm->get(null);
 
 // date de fin
-$objForm->read('PERIODE_DATE_FIN', $_POST);
-$objForm->testError0(null, 'exist',     "Il manque le champ PERIODE_DATE_FIN !");
-$objForm->testError0(null, 'blank',     "Il manque la date de fin !");
-$objForm->testError0(null, 'is_string', "La date de fin doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
-$sPeriodeDateFin = $objForm->get(null);
+$oForm->read('PERIODE_DATE_FIN', $_POST);
+$oForm->testError0(null, 'exist',     "Il manque le champ PERIODE_DATE_FIN !");
+$oForm->testError0(null, 'blank',     "Il manque la date de fin !");
+$oForm->testError0(null, 'is_string', "La date de fin doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
+$sPeriodeDateFin = $oForm->get(null);
 
 //==============================================================================
 // Action du formulaire
@@ -47,7 +47,7 @@ switch(strtolower($sAction))
 {
 	// ----------
 	case 'modifier':
-		if($objForm->hasError() == true) break;
+		if($oForm->hasError() == true) break;
 
 		// mise a jour des valeurs du cycle
 		$sQuery =
@@ -65,7 +65,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	case 'annuler':
-		$objForm->clearError();
+		$oForm->clearError();
 
 		// Rechargement
 		header("Location: ?page=periodes");
@@ -74,7 +74,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:
-		$objForm->clearError();
+		$oForm->clearError();
 
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
@@ -92,7 +92,7 @@ switch(strtolower($sAction))
 //==============================================================================
 
 // On stocke toutes les erreurs de formulaire.
-Message::addErrorFromFormValidation($objForm->getError());
+Message::addErrorFromFormValidation($oForm->getError());
 
 // Rechargement
 header("Location: ?page=periodes&mode=edit&periode_id={$nPeriodeId}");

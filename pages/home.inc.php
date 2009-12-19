@@ -50,7 +50,7 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 	<br />
 <?php endif; ?>
 
-<h1><?php echo($sGuiTitle); ?></h1>
+<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a><?php echo($sGuiTitle); ?></h1>
 <p>Voil&agrave; le gestionnaire d'&eacute;valuations de vos joyeux diablotins.</p>
 
 <h2>Release notes</h2>

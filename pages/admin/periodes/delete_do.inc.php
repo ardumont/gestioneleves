@@ -7,16 +7,16 @@
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
 // la periode a supprimer
-$objForm->read('PERIODE_ID', $_POST);
-$objForm->testError0(null, 'exist',			"Il manque le champ \"PERIODE_ID\" !");
-$objForm->testError0(null, 'blank',			"Il manque l'id de la p&eacute;riode !");
-$objForm->testError0(null, 'convert_int',	"L'id de la p&eacute;riode doit &ecirc;tre un entier !");
-$nPeriodeId = $objForm->get(null);
+$oForm->read('PERIODE_ID', $_POST);
+$oForm->testError0(null, 'exist',			"Il manque le champ \"PERIODE_ID\" !");
+$oForm->testError0(null, 'blank',			"Il manque l'id de la p&eacute;riode !");
+$oForm->testError0(null, 'convert_int',	"L'id de la p&eacute;riode doit &ecirc;tre un entier !");
+$nPeriodeId = $oForm->get(null);
 
 //==============================================================================
 // Action du formulaire
@@ -26,7 +26,7 @@ switch(strtolower($sAction))
 {
 	// ----------
 	case 'supprimer':
-		if($objForm->hasError() == true) break;
+		if($oForm->hasError() == true) break;
 
 		// supprime la periode
 		$sQuery =
@@ -41,7 +41,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	case 'annuler':
-		$objForm->clearError();
+		$oForm->clearError();
 
 		// Rechargement
 		header("Location: ?page=periodes");
@@ -50,7 +50,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:
-		$objForm->clearError();
+		$oForm->clearError();
 
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
@@ -68,7 +68,7 @@ switch(strtolower($sAction))
 //==============================================================================
 
 // On stocke toutes les erreurs de formulaire.
-Message::addErrorFromFormValidation($objForm->getError());
+Message::addErrorFromFormValidation($oForm->getError());
 
 // Rechargement
 header("Location: ?page=periodes");

@@ -36,7 +36,7 @@ $aPeriodes = Database::fetchArray($sQuery);
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Liste des p&eacute;riodes</h1>
+<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Liste des p&eacute;riodes</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">

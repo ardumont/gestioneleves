@@ -7,21 +7,21 @@
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
-$objForm->read('COMPETENCE_ID', $_POST);
-$objForm->testError0(null, 'exist',		"Il manque le champ \"COMPETENCE_ID\" !");
-$objForm->testError0(null, 'blank',		"Il manque l'id de la comp&eacute;tence !");
-$objForm->testError0(null, 'convert_int',	"L'id de la comp&eacute;tence doit &ecirc;tre un entier !");
-$nCompetenceId = $objForm->get(null);
+$oForm->read('COMPETENCE_ID', $_POST);
+$oForm->testError0(null, 'exist',		"Il manque le champ \"COMPETENCE_ID\" !");
+$oForm->testError0(null, 'blank',		"Il manque l'id de la comp&eacute;tence !");
+$oForm->testError0(null, 'convert_int',	"L'id de la comp&eacute;tence doit &ecirc;tre un entier !");
+$nCompetenceId = $oForm->get(null);
 
-$objForm->read('MATIERE_ID', $_POST);
-$objForm->testError0(null, 'exist',			"Il manque le champ \"MATIERE_ID\" !");
-$objForm->testError0(null, 'blank',			"Il manque l'id de la mati&egrave;re !");
-$objForm->testError0(null, 'convert_int',	"L'id de la mati&egrave;re doit &ecirc;tre un entier !");
-$nMatiereId = $objForm->get(null);
+$oForm->read('MATIERE_ID', $_POST);
+$oForm->testError0(null, 'exist',			"Il manque le champ \"MATIERE_ID\" !");
+$oForm->testError0(null, 'blank',			"Il manque l'id de la mati&egrave;re !");
+$oForm->testError0(null, 'convert_int',	"L'id de la mati&egrave;re doit &ecirc;tre un entier !");
+$nMatiereId = $oForm->get(null);
 
 //==============================================================================
 // Action du formulaire
@@ -31,7 +31,7 @@ switch(strtolower($sAction))
 {
 	// ----------
 	case 'supprimer':
-		if($objForm->hasError() == true) break;
+		if($oForm->hasError() == true) break;
 
 		// supprime uniquement le lien entre l'eleve et la classe
 		$sQuery =
@@ -47,7 +47,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	case 'annuler':
-		$objForm->clearError();
+		$oForm->clearError();
 
 		// Rechargement
 		header("Location: ?page=competences");
@@ -56,7 +56,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:
-		$objForm->clearError();
+		$oForm->clearError();
 
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
@@ -74,7 +74,7 @@ switch(strtolower($sAction))
 //==============================================================================
 
 // On stocke toutes les erreurs de formulaire.
-Message::addErrorFromFormValidation($objForm->getError());
+Message::addErrorFromFormValidation($oForm->getError());
 
 // Rechargement
 header("Location: ?page=competences");

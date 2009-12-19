@@ -7,23 +7,23 @@
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
 // matiere de la competence
-$objForm->read('ID_MATIERE', $_POST);
-$objForm->testError0(null, 'exist',	"Il manque le champ ID_MATIERE !");
-$objForm->testError0(null, 'blank',	"Il manque la mati&eacute;re de la comp&eacute;tence !");
-$objForm->testError0(null, 'is_int',"L'id de la mati&eacute;re de la comp&eacute;tence doit &ecirc;tre un entier!");
-$nIdMatiere = $objForm->get(null);
+$oForm->read('ID_MATIERE', $_POST);
+$oForm->testError0(null, 'exist',	"Il manque le champ ID_MATIERE !");
+$oForm->testError0(null, 'blank',	"Il manque la mati&eacute;re de la comp&eacute;tence !");
+$oForm->testError0(null, 'is_int',"L'id de la mati&eacute;re de la comp&eacute;tence doit &ecirc;tre un entier!");
+$nIdMatiere = $oForm->get(null);
 
 // nom de la competence
-$objForm->read('COMPETENCE_NOM', $_POST);
-$objForm->testError0(null, 'exist',		"Il manque le champ COMPETENCE_NOM !");
-$objForm->testError0(null, 'blank',		"Il manque le nom de la comp&eacute;tence !");
-$objForm->testError0(null, 'is_string',	"Le nom de la comp&eacute;tence doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
-$sCompetenceNom = $objForm->get(null);
+$oForm->read('COMPETENCE_NOM', $_POST);
+$oForm->testError0(null, 'exist',		"Il manque le champ COMPETENCE_NOM !");
+$oForm->testError0(null, 'blank',		"Il manque le nom de la comp&eacute;tence !");
+$oForm->testError0(null, 'is_string',	"Le nom de la comp&eacute;tence doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
+$sCompetenceNom = $oForm->get(null);
 
 //==============================================================================
 // Action du formulaire
@@ -33,7 +33,7 @@ switch(strtolower($sAction))
 {
 	// ajoute l'eleve
 	case 'ajouter':
-		if($objForm->hasError() == true) break;
+		if($oForm->hasError() == true) break;
 		// insertion de la competence dans la table
 		$sQuery =
 			"INSERT INTO COMPETENCES (COMPETENCE_NOM, ID_MATIERE)" .
@@ -50,7 +50,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	case 'annuler':
-		$objForm->clearError();
+		$oForm->clearError();
 
 		// Rechargement
 		header("Location: ?page=competences&mode=add");
@@ -59,7 +59,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:
-		$objForm->clearError();
+		$oForm->clearError();
 
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
@@ -77,7 +77,7 @@ switch(strtolower($sAction))
 //==============================================================================
 
 // On stocke toutes les erreurs de formulaire.
-Message::addErrorFromFormValidation($objForm->getError());
+Message::addErrorFromFormValidation($oForm->getError());
 
 // Rechargement
 header("Location: ?page=competences&mode=add");

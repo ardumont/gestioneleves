@@ -8,16 +8,16 @@
 //==============================================================================
 
 // ===== Les recherches pour l'ajout d'un eleve mais d'abord la classe a laquelle on affecte cet eleve  =====
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
 // recupere le nom de l'action du formulaire pour la recherche d'un eleve
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
 // au retour de l'insertion d'un eleve, on recoit la classe de l'eleve
-$nClasseId = $objForm->getValue('classe_id', $_GET, 'convert_int');
+$nClasseId = $oForm->getValue('classe_id', $_GET, 'convert_int');
 
 // au retour de la soumission du formulaire de recherche d'un eleve
-$sNomEleve = $objForm->getValue('ELEVE_NOM', $_POST, 'is_string');
+$sNomEleve = $oForm->getValue('ELEVE_NOM', $_POST, 'is_string');
 
 //==============================================================================
 // Action du formulaire
@@ -27,7 +27,7 @@ switch(strtolower($sAction))
 {
 	// recherche du nom d'un eleve
 	case 'rechercher':
-		if($objForm->hasError() == true) break;
+		if($oForm->hasError() == true) break;
 
 		$sQuery =
 			"SELECT " .
@@ -41,7 +41,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:// il ne se passe rien au cas ou l'action est vide
-		$objForm->clearError();
+		$oForm->clearError();
 		break;
 }
 
@@ -114,7 +114,7 @@ if ($nClasseId != null)
 //==============================================================================
 
 ?>
-<h1>Ajout d'un &eacute;l&egrave;ve</h1>
+<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Ajout d'un &eacute;l&egrave;ve</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">

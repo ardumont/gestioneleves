@@ -26,7 +26,7 @@ $aConstributeurs = array(
 	"Sauron Lionel"       => "0,1,0,0,0,0,0,0",
 );
 ?>
-<h1>Liste des contributeurs</h1>
+<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Liste des contributeurs</h1>
 <br />
 
 <table class="list_tree" style="text-align:center;">

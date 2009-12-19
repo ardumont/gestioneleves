@@ -7,16 +7,16 @@
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
 // nom du cycle
-$objForm->read('CYCLE_NOM', $_POST);
-$objForm->testError0(null, 'exist',     "Il manque le champ CYCLE_NOM !");
-$objForm->testError0(null, 'blank',     "Il manque le nom du cycle !");
-$objForm->testError0(null, 'is_string', "Le nom du cycle doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
-$sCycleNom = $objForm->get(null);
+$oForm->read('CYCLE_NOM', $_POST);
+$oForm->testError0(null, 'exist',     "Il manque le champ CYCLE_NOM !");
+$oForm->testError0(null, 'blank',     "Il manque le nom du cycle !");
+$oForm->testError0(null, 'is_string', "Le nom du cycle doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
+$sCycleNom = $oForm->get(null);
 
 //==============================================================================
 // Action du formulaire
@@ -25,7 +25,7 @@ $sCycleNom = $objForm->get(null);
 switch(strtolower($sAction))
 {
 	case 'ajouter':
-		if($objForm->hasError() == true) break;
+		if($oForm->hasError() == true) break;
 
 		// insertion du nouveau cycle
 		$sQuery =
@@ -42,7 +42,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	case 'annuler':
-		$objForm->clearError();
+		$oForm->clearError();
 
 		// Rechargement
 		header("Location: ?page=cycles&mode=add");
@@ -51,7 +51,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:
-		$objForm->clearError();
+		$oForm->clearError();
 
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
@@ -69,7 +69,7 @@ switch(strtolower($sAction))
 //==============================================================================
 
 // On stocke toutes les erreurs de formulaire.
-Message::addErrorFromFormValidation($objForm->getError());
+Message::addErrorFromFormValidation($oForm->getError());
 
 // Rechargement
 header("Location: ?page=cycles&mode=add");

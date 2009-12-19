@@ -7,44 +7,44 @@
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
 // niveau de la classe
-$objForm->read('ID_NIVEAU', $_POST);
-$objForm->testError0(null, 'exist',     "Il manque le champ ID_NIVEAU !");
-$objForm->testError0(null, 'blank',     "Il manque le niveau de la nouvelle classe !");
-$objForm->testError0(null, 'is_int', "L'id du niveau de la classe doit &ecirc;tre un entier!");
-$nIdNiveau = $objForm->get(null);
+$oForm->read('ID_NIVEAU', $_POST);
+$oForm->testError0(null, 'exist',     "Il manque le champ ID_NIVEAU !");
+$oForm->testError0(null, 'blank',     "Il manque le niveau de la nouvelle classe !");
+$oForm->testError0(null, 'is_int', "L'id du niveau de la classe doit &ecirc;tre un entier!");
+$nIdNiveau = $oForm->get(null);
 
 // professeur de la classe
-$objForm->read('ID_PROFESSEUR', $_POST);
-$objForm->testError0(null, 'exist',     "Il manque le champ ID_PROFESSEUR !");
-$objForm->testError0(null, 'blank',     "Il manque le professeur de la nouvelle classe !");
-$objForm->testError0(null, 'is_int', 	"L'id du professeur doit &ecirc;tre un entier!");
-$nIdProfesseur = $objForm->get(null);
+$oForm->read('ID_PROFESSEUR', $_POST);
+$oForm->testError0(null, 'exist',     "Il manque le champ ID_PROFESSEUR !");
+$oForm->testError0(null, 'blank',     "Il manque le professeur de la nouvelle classe !");
+$oForm->testError0(null, 'is_int', 	"L'id du professeur doit &ecirc;tre un entier!");
+$nIdProfesseur = $oForm->get(null);
 
 // ecole de la classe
-$objForm->read('ID_ECOLE', $_POST);
-$objForm->testError0(null, 'exist',     "Il manque le champ ID_ECOLE !");
-$objForm->testError0(null, 'blank',     "Il manque l'&eacute;cole de la nouvelle classe !");
-$objForm->testError0(null, 'is_int', 	"L'id de l'&eacute;cole de la classe doit &ecirc;tre un entier !");
-$nIdEcole = $objForm->get(null);
+$oForm->read('ID_ECOLE', $_POST);
+$oForm->testError0(null, 'exist',     "Il manque le champ ID_ECOLE !");
+$oForm->testError0(null, 'blank',     "Il manque l'&eacute;cole de la nouvelle classe !");
+$oForm->testError0(null, 'is_int', 	"L'id de l'&eacute;cole de la classe doit &ecirc;tre un entier !");
+$nIdEcole = $oForm->get(null);
 
 // nom de la classe
-$objForm->read('CLASSE_NOM', $_POST);
-$objForm->testError0(null, 'exist',     "Il manque le champ CLASSE_NOM !");
-$objForm->testError0(null, 'blank',     "Il manque le nom de la nouvelle classe !");
-$objForm->testError0(null, 'is_string', "Le nom de la nouvelle classe doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
-$sClasseNom = $objForm->get(null);
+$oForm->read('CLASSE_NOM', $_POST);
+$oForm->testError0(null, 'exist',     "Il manque le champ CLASSE_NOM !");
+$oForm->testError0(null, 'blank',     "Il manque le nom de la nouvelle classe !");
+$oForm->testError0(null, 'is_string', "Le nom de la nouvelle classe doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
+$sClasseNom = $oForm->get(null);
 
 // annee scolaire
-$objForm->read('CLASSE_ANNEE_SCOLAIRE', $_POST);
-$objForm->testError0(null, 'exist',     "Il manque l'ann&eacute;e scolaire !");
-$objForm->testError0(null, 'blank',     "Il manque l'ann&eacute;e scolaire !");
-$objForm->testError0(null, 'is_string', "L'ann&eacute;e scolaire doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
-$sClasseAnneeScolaire = $objForm->get(null);
+$oForm->read('CLASSE_ANNEE_SCOLAIRE', $_POST);
+$oForm->testError0(null, 'exist',     "Il manque l'ann&eacute;e scolaire !");
+$oForm->testError0(null, 'blank',     "Il manque l'ann&eacute;e scolaire !");
+$oForm->testError0(null, 'is_string', "L'ann&eacute;e scolaire doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
+$sClasseAnneeScolaire = $oForm->get(null);
 
 //==============================================================================
 // Action du formulaire
@@ -54,7 +54,7 @@ switch(strtolower($sAction))
 {
 	// ajoute l'eleve
 	case 'ajouter':
-		if($objForm->hasError() == true) break;
+		if($oForm->hasError() == true) break;
 		// insertion de l'eleve dans la table
 		$sQuery =
 			"INSERT INTO CLASSES (CLASSE_NOM, CLASSE_ANNEE_SCOLAIRE, ID_ECOLE)" .
@@ -96,7 +96,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	case 'annuler':
-		$objForm->clearError();
+		$oForm->clearError();
 
 		// Rechargement
 		header("Location: ?page=classes&mode=add");
@@ -105,7 +105,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:
-		$objForm->clearError();
+		$oForm->clearError();
 
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
@@ -123,7 +123,7 @@ switch(strtolower($sAction))
 //==============================================================================
 
 // On stocke toutes les erreurs de formulaire.
-Message::addErrorFromFormValidation($objForm->getError());
+Message::addErrorFromFormValidation($oForm->getError());
 
 // Rechargement
 header("Location: ?page=classes&mode=add");

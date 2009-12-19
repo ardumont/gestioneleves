@@ -11,10 +11,10 @@
 // Action du formulaire
 //==============================================================================
 
-$objFormEleve = new FormValidation();
+$oForm = new FormValidation();
 
 // recupere l'id de l'eleve du formulaire $_GET
-$nEleveId = $objFormEleve->getValue('eleve_id', $_GET, 'convert_int');
+$nEleveId = $oForm->getValue('eleve_id', $_GET, 'convert_int');
 
 //==============================================================================
 // Traitement des donnees
@@ -43,7 +43,7 @@ $aEleve = Database::fetchOneRow($sQuery);
 // Affichage de la page
 //==============================================================================
 ?>
-<h1>Suppression de l'&eacute;l&egrave;ve</h1>
+<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Suppression de l'&eacute;l&egrave;ve</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">

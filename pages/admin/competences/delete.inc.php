@@ -11,13 +11,13 @@
 // Action du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
 // recupere l'id de l'eleve du formulaire $_GET
-$nCompetenceId = $objForm->getValue('competence_id', $_GET, 'convert_int');
+$nCompetenceId = $oForm->getValue('competence_id', $_GET, 'convert_int');
 
 // recupere l'id de l'eleve du formulaire $_GET
-$nMatiereId = $objForm->getValue('matiere_id', $_GET, 'convert_int');
+$nMatiereId = $oForm->getValue('matiere_id', $_GET, 'convert_int');
 
 //==============================================================================
 // Traitement des donnees
