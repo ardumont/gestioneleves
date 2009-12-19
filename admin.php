@@ -1,10 +1,4 @@
 <?php
-/**
- * Page d'indexation pour le module d'administration.
- * @author $Author$
- * @version $Version$
- */
-
 //=============================================================================
 // Gestionnaires d'erreurs
 //=============================================================================
@@ -84,19 +78,17 @@ require_once("config/main.conf.php");
 require_once("config/constantes.conf.php");
 
 // ===== Les autres fichiers de configurations =====
-require_once(PATH_CONFIG."/database.conf.php");
-require_once(PATH_CONFIG."/export.conf.php");
+require_once(PATH_CONFIG . "/database.conf.php");
+require_once(PATH_CONFIG . "/export.conf.php");
 
 // ===== Les librairies et les classes =====
-require_once(PATH_PHP_LIB."/utils.lib.php");
-require_once(PATH_PHP_LIB."/prettyprint.class.php");
-require_once(PATH_PHP_LIB."/imports.lib.php");
-require_once(PATH_PHP_LIB."/database.class.php");
-require_once(PATH_PHP_LIB."/formvalidation.class.php");
-require_once(PATH_PHP_LIB."/message.class.php");
-
-//require_once(PATH_ROOT."/libraries/metier/project.class.php");
-//require_once(PATH_ROOT."/libraries/metier/task.class.php");
+require_once(PATH_PHP_LIB . "/utils.lib.php");
+require_once(PATH_PHP_LIB . "/prettyprint.class.php");
+require_once(PATH_PHP_LIB . "/imports.lib.php");
+require_once(PATH_PHP_LIB . "/database.class.php");
+require_once(PATH_PHP_LIB . "/formvalidation.class.php");
+require_once(PATH_PHP_LIB . "/message.class.php");
+require_once(PATH_APP_LIB . "/profilmanager.class.php");
 
 // ===== Les gestionnaires d'erreurs =====
 set_error_handler("globalScriptErrorHandler");
@@ -120,12 +112,15 @@ Message::loadFromSession($_SESSION['ERROR_MESSAGE']);
 // On précise à la base qu'on travaille en UTF-8
 Database::execute("SET NAMES UTF8");
 
+// ===== Le gestionnaire de profil =====
+
+ProfilManager::loadRights();
+
 //==============================================================================
 // Preparation des donnees
 //==============================================================================
 
-$aMenuPage = array
-(
+$aMenuPage = array(
 	// ----- General -----
 	'home' => "home.inc.php",
 
@@ -135,6 +130,7 @@ $aMenuPage = array
 		''			=>	"admin/eleves/list.inc.php",
 	),
 
+	// ----- Les professeurs -----
 	'professeurs' => array
 	(
 		''			=>	"admin/professeurs/list.inc.php",
@@ -146,6 +142,7 @@ $aMenuPage = array
 		'edit_do'	=>	"admin/professeurs/edit_do.inc.php",
 	),
 
+	// ----- Les classes -----
 	'classes' => array
 	(
 		''			=>	"admin/classes/list.inc.php",
@@ -157,6 +154,7 @@ $aMenuPage = array
 		'edit_do'	=>	"admin/classes/edit_do.inc.php",
 	),
 
+	// ----- Les écoles -----
 	'ecoles' => array
 	(
 		''			=>	"admin/ecoles/list.inc.php",
@@ -168,6 +166,7 @@ $aMenuPage = array
 		'edit_do'	=>	"admin/ecoles/edit_do.inc.php",
 	),
 
+	// ----- Les domaines -----
 	'domaines' => array
 	(
 		''			=>	"admin/domaines/list.inc.php",
@@ -179,6 +178,7 @@ $aMenuPage = array
 		'edit_do'	=>	"admin/domaines/edit_do.inc.php",
 	),
 
+	// ----- Les matieres -----
 	'matieres' => array
 	(
 		''			=>	"admin/matieres/list.inc.php",
@@ -190,6 +190,7 @@ $aMenuPage = array
 		'delete_do'	=>	"admin/matieres/delete_do.inc.php",
 	),
 
+	// ----- Les competences -----
 	'competences' => array
 	(
 		''			=>	"admin/competences/list.inc.php",
@@ -201,6 +202,7 @@ $aMenuPage = array
 		'delete_do'	=>	"admin/competences/delete_do.inc.php",
 	),
 
+	// ----- Les cycles -----
 	'cycles' => array
 	(
 		''			=>	"admin/cycles/list.inc.php",
@@ -212,6 +214,7 @@ $aMenuPage = array
 		'delete_do'	=>	"admin/cycles/delete_do.inc.php",
 	),
 
+	// ----- Les niveaux -----
 	'niveaux' => array
 	(
 		''			=>	"admin/niveaux/list.inc.php",
@@ -223,6 +226,7 @@ $aMenuPage = array
 		'delete_do'	=>	"admin/niveaux/delete_do.inc.php",
 	),
 
+	// ----- Les périodes -----
 	'periodes' => array
 	(
 		''			=>	"admin/periodes/list.inc.php",
@@ -234,6 +238,7 @@ $aMenuPage = array
 		'delete_do'	=>	"admin/periodes/delete_do.inc.php",
 	),
 
+	// ----- Les notes -----
 	'notes' => array
 	(
 		''			=>	"admin/notes/list.inc.php",
@@ -246,6 +251,7 @@ $aMenuPage = array
 //		'delete_do'	=>	"admin/notes/delete_do.inc.php",
 	),
 
+	// ----- Les modules d'imports -----
 	'imports' => array
 	(
 		'imports_csv'           => "admin/imports/imports_csv.inc.php",
@@ -255,6 +261,19 @@ $aMenuPage = array
 		'imports_xml_classe'    => "admin/imports/imports_xml_classe.inc.php",
 		'imports_xml_classe_do' => "admin/imports/imports_xml_classe_do.inc.php",
 	),
+
+	// ----- Les profils et droits -----
+	'profils' => array
+	(
+		''          => "admin/profils/list.inc.php",
+		'add'       => "admin/profils/add.inc.php",
+		'add_do'    => "admin/profils/add_do.inc.php",
+		'edit'      => "admin/profils/edit.inc.php",
+		'edit_do'   => "admin/profils/edit_do.inc.php",
+		'delete'    => "admin/profils/delete.inc.php",
+		'delete_do' => "admin/profils/delete_do.inc.php",
+	),
+
 );
 
 //==============================================================================
@@ -322,100 +341,128 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 	<!--[if IE]>
 	<link rel="stylesheet" type="text/css" href="main-ie.css" media="all" />
 	<! endif -->
+	<!-- JQuery -->
+	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/jquery-1.3.2.js"></script>
+	<!-- fonctions utilitaires de javascript -->
+	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/utils.inc.js"></script>
+	<!-- Utilitaires basés sur JQuery -->
+	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/utils_jquery.inc.js"></script>
 </head>
 <!-- ================================================== -->
 <body>
-	<!-- pour ameliorer l'affichage. -->
-	<script type="text/javascript">
-		/**
-		 * Montre un bloc d'id 'id' s'il est cache,
-		 * le cache s'il est visible.
-		 */
-		function showOrHide(id)
-		{
-			var objElement = document.getElementById(id);
-
-			objElement.style.display = (objElement.style.display != 'none') ? 'none' : '';
-		}
-
-		/**
-		 * Montre l'objet d'id 'id'.
-		 */
-		function showId(id)
-		{
-			var objElement = document.getElementById(id);
-			objElement.style.display = '';
-		}
-
-		/**
-		 * Cache l'objet d'id id.
-		 */
-		function hideId(id)
-		{
-			var objElement = document.getElementById(id);
-			objElement.style.display = 'none';
-		}
-
-		/**
-		 * Affiche les ids du tableau aIds.
-		 */
-		function showIds(aIds)
-		{
-			for(var i=0; i<aIds.length; i++)
-			{
-				showId(aIds[i]);
-			}
-		}
-
-		/**
-		 * Cache les ids du tableau aIds.
-		 */
-		function hideIds(aIds)
-		{
-			for(var i=0; i<aIds.length; i++)
-			{
-				hideId(aIds[i]);
-			}
-		}
-	</script>
 	<div id="struct_left_panel">
 		<div id="struct_identity">
-			<h1>Retour</h1>
-			<h4><a href="index.php?page=home"><img src="<?php echo(URL_ICONS_16X16); ?>/home.png"/>Accueil principal</a></h4>
+			<h1><a href="javascript:void(0);" style="color:white;" onclick="$('#identite').toggle('slow');">Retour</a></h1>
+			<div id="identite">
+				<h4>
+					<a href="index.php?page=home">
+						<img src="<?php echo(URL_ICONS_16X16); ?>/home.png" />Accueil principal
+					</a>
+				</h4>
+			</div>
 		</div>
 		<div id="struct_menu">
-			<h1>Menu</h1>
-			<h4><a href="?page=home"><img src="<?php echo(URL_ICONS_16X16); ?>/home.png"/>La page d'accueil</a></h4>
-			<h3>Professeurs</h3>
-				<h4><a href="?page=professeurs"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-			<h3>Elèves</h3>
-				<h4><a href="?page=eleves"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-			<h3>Comp&eacute;tences</h3>
-				<h4><a href="?page=competences"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-			<h3>Classes</h3>
-				<h4><a href="?page=classes"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-			<h3>Cycles</h3>
-				<h4><a href="?page=cycles"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-			<h3>Domaines</h3>
-				<h4><a href="?page=domaines"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-			<h3>Ecoles</h3>
-				<h4><a href="?page=ecoles"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-			<h3>Mati&egrave;res</h3>
-				<h4><a href="?page=matieres"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-			<h3>Niveaux</h3>
-				<h4><a href="?page=niveaux"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-			<h3>Notes</h3>
-				<h4><a href="?page=notes"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-			<h3>P&eacute;riodes</h3>
-				<h4><a href="?page=periodes"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Lister</a></h4>
-			<h3>Import Cycles</h3>
-				<h4><a href="?page=imports&amp;mode=imports_csv"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Import CSV</a></h4>
-				<h4><a href="?page=imports&amp;mode=imports_xml"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Import XML</a></h4>
-			<h3>Import Classes</h3>
-				<h4><a href="?page=imports&amp;mode=imports_xml_classe"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png"/>Import XML</a></h4>
+			<h1><a href="javascript:void(0);" style="color:white;" onclick="$('#administration').toggle('slow');">Administration</a></h1>
+			<div id="administration">
+				<h4>
+					<a href="?page=home">
+						<img src="<?php echo(URL_ICONS_16X16); ?>/home.png" />La page d'accueil
+					</a>
+				</h4>
+				<h2><a href="javascript:void(0);" style="color:white;" onclick="$('#administrer').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Administrer</a></h2>
+				<div id="administrer">
+					<h4>
+						<a href="?page=profils">
+							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Profils
+						</a>
+					</h4>
+				</div>
+				<h2><a href="javascript:void(0);" style="color:white;" onclick="$('#gestion').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Gestion</a></h2>
+				<div id="gestion">
+					<h4>
+						<a href="?page=professeurs">
+							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Professeurs
+						</a>
+					</h4>
+					<h4>
+						<a href="?page=ecoles">
+							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Ecoles
+						</a>
+					</h4>
+					<h4>
+						<a href="?page=classes">
+							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Classes
+						</a>
+					</h4>
+					<h4>
+						<a href="?page=eleves">
+							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Elèves
+						</a>
+					</h4>
+					<h4>
+						<a href="?page=cycles">
+							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Cycles
+						</a>
+					</h4>
+					<h4>
+						<a href="?page=niveaux">
+							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Niveaux
+						</a>
+					</h4>
+					<h4>
+						<a href="?page=domaines">
+							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Domaines
+						</a>
+					</h4>
+					<h4>
+						<a href="?page=matieres">
+							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Mati&egrave;res
+						</a>
+					</h4>
+					<h4>
+						<a href="?page=competences">
+							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Comp&eacute;tences
+						</a>
+					</h4>
+					<h4>
+						<a href="?page=notes">
+							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Notes
+						</a>
+					</h4>
+					<h4>
+						<a href="?page=periodes">
+							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />P&eacute;riodes
+						</a>
+					</h4>
+				</div>
+				<h2><a href="javascript:void(0);" style="color:white;" onclick="$('#imports').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Import</a></h2>
+				<div id="imports">
+					<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#imports_cycle').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Cycles</a></h3>
+					<div id="imports_cycle">
+						<h4>
+							<a href="?page=imports&amp;mode=imports_csv">
+								<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Import CSV
+							</a>
+						</h4>
+						<h4>
+							<a href="?page=imports&amp;mode=imports_xml">
+								<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Import XML
+							</a>
+						</h4>
+					</div>
+					<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#imports_classe').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Classes</a></h3>
+					<div id="imports_classe">
+						<h4>
+							<a href="?page=imports&amp;mode=imports_xml_classe">
+								<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Import XML
+							</a>
+						</h4>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div id="struct_main" class="<?php echo($sPageId); ?>">
+	<div id="struct_main" class="<?php echo($sPageId); ?>" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');">
 		<?php include(PATH_PAGES."/".$sPageName); ?>
 	</div>
 </body>
