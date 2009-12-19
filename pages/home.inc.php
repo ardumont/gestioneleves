@@ -34,13 +34,12 @@ ____EOQ;
 // Preparation de l'affichage
 //==============================================================================
 
-$sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
+$sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " {$sUserName}," : "," );
 
 //==============================================================================
 // Affichage de la page
 //==============================================================================
-?>
-<?php if(Message::hasError() == true): ?>
+if(Message::hasError() == true): ?>
 	<h1>Erreur lors de l'authentification</h1>
 	<ul class="form_error">
 		<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
@@ -62,6 +61,19 @@ $sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " $sUserName," : "," );
 	<dd>
 		<a href="javascript:" onclick="showOrHideAllSubVersion(this);">Tout cacher/montrer</a>
 		<dl>
+			<dt>
+				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+				v1.8.0
+			</dt>
+			<dd>
+				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Amélioration de l'ergonomie générale de l'ihm.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Renommage des objets formulaires dans les différentes pages de l'application.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Reformatage du menu du module d'administration.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Reformatage du menu du module principal de l'application.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Mise en place des profils</li>
+				</ul>
+			</dd>
 			<dt>
 				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
 				v1.7.0

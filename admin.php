@@ -100,7 +100,7 @@ setlocale(LC_TIME, 'french', 'fr');
 date_default_timezone_set('Europe/Paris');
 
 // ===== Session =====
-session_name('ADMIN_PAGE');
+session_name('MAIN_PAGE');
 session_start();
 
 // ===== Connection e la base =====
