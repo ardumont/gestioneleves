@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Classe pour gérer les profils et les droits s'y rattachant.
+ * ProjectSion : Classe pour gérer les profils et les droits s'y rattachant.
  *
  * @author Lionel SAURON
  * @version 1.0.0
@@ -13,28 +13,39 @@ class ProfilManager
 	 *
 	 * PHP n'autorise pas les tableaux avec le mot clef 'const'.
 	 */
-	 public static $USER_RIGHTS = array
-	 (
-		'application_list',		'application_add',		'application_edit',		'application_delete',
-		'project_list',			'project_view',			'project_add',			'project_edit',
-		'project_delete',		'task_add',				'task_edit',			'task_delete',
-		'task_change_project', 	'task_change_parent',	'activity_list',		'activity_edit',
-		'summary_user', 	 	'summary_team',			'summary_project',		'summary_project_detail',
-	 );
+	 public static $USER_RIGHTS = array(
+		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
+		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
+		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
+		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
+ 		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
+		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
+ 		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
+		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
+	);
 
 	 /**
 	 * Liste de tous les droits "Admin" possibles.
 	 *
 	 * PHP n'autorise pas les tableaux avec le mot clef 'const'.
 	 */
-	 public static $ADMIN_RIGHTS = array
-	 (
-		'profil_list',				'profil_add',				'profil_edit',			'profil_delete',
-		'user_list',				'user_add',					'user_edit',			'user_active',
-		'ttask_list',				'ttask_add',				'ttask_edit',			'ttask_delete',
-		'bank_holiday_list', 		'bank_holiday_add',			'bank_holiday_edit',	'bank_holiday_delete',
-	 	'admin_calcul_denormalise', 'admin_calcul_arborescence',
-	 );
+	 public static $ADMIN_RIGHTS = array(
+		'profil_list', 'profil_add', 'profil_edit', 'profil_delete',
+		'professeur_list', 'professeur_add', 'professeur_edit', 'professeur_delete',
+		'ecole_list', 'ecole_add', 'ecole_edit', 'ecole_delete',
+		'classe_list', 'classe_add', 'classe_edit', 'classe__delete',
+		'eleve_list',
+		'cycle_list', 'cycle_add', 'cycle_edit', 'cycle_delete',
+ 		'niveau_list', 'niveau_add', 'niveau_edit', 'niveau_delete',
+ 		'domaine_list', 'domaine_add', 'domaine_edit', 'domaine_delete',
+ 		'matiere_list', 'matiere_add', 'matiere_edit', 'matiere_delete',
+	 	'competence_list', 'competence_add', 'competence_edit', 'competence_delete',
+ 		'note_list',
+ 		'periode_list', 'periode_add', 'periode_edit', 'periode_delete',
+	 	'import_csv_cycle',
+	    'import_xml_cycle',
+	    'import_xml_classe'
+    );
 
 	/**
 	 * Liste des droits possédés par la personne.
@@ -44,7 +55,7 @@ class ProfilManager
 	/**
 	 * Lecture des droits depuis la session ou la BDD.
 	 *
-	 * N'étant pas une application militaire, ni une application
+	 * ProjectSion n'étant pas une application militaire, ni une application
 	 * destinée à gérer tout les projets d'une entreprise (en une seule fois),
 	 * on stocke les droits en session pour éviter un accès en BDD.
 	 */
@@ -117,23 +128,18 @@ _EOQ_;
 	}
 
 	/**
-	 * Fonction de test pour savoir si l'utilisateur possède au moins un droit d'administration.
-	 * @return <bool>	true, l'utilisateur possède des droits d'administration
-	 * 					false, sinon
+	 * Test si l'utilisateur possède au moins un droit d'administration.
+	 * @return <code>true</code> ou <code>false</code>
 	 */
 	public static function hasAdminRight()
 	{
-		// Parcours des droits d'administration
-		foreach(self::$ADMIN_RIGHTS as $sAdminRight)
-		{
-			// Dès qu'on trouve un droit d'administration, on s'arrête et on renvoie vrai
-			if(self::hasRight($sAdminRight))
-			{
-				return true;
-			}
-		}
-		// ici, aucun droit d'administration
-		return false;
+		// Comparaison des droits admin et des droits possédés
+		$aCommonRights = array_intersect(self::$s_aRights, self::$ADMIN_RIGHTS);
+
+		// A t'on un droit d'administration ?
+		$bAdminRight = (count($aCommonRights) > 0) ? true : false;
+
+		return $bAdminRight;
 	}
 }
 ?>
