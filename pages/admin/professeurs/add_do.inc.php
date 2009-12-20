@@ -23,16 +23,47 @@ $oForm = new FormValidation();
 
 $sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
-// nom de la classe
+// Nom du professeur
 $oForm->read('PROFESSEUR_NOM', $_POST);
-$oForm->testError0(null, 'exist',     "Il manque le champ PROFESSEUR_NOM !");
-$oForm->testError0(null, 'blank',     "Il manque le nom du nouveau professeur !");
-$oForm->testError0(null, 'is_string', "Le nom du nouveau professeur doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
+$oForm->testError0(null, 'exist', "Il manque le champ PROFESSEUR_NOM !");
+$oForm->testError0(null, 'blank', "Il manque le nom du nouveau professeur !");
+$oForm->testError0(null, 'is_string', "Le nom du nouveau professeur doit être une chaîne de caractères !");
 $sProfesseurNom = $oForm->get(null);
 
+// Id du profil
+$oForm->read('profil_id', $_POST);
+$oForm->testError0(null, 'exist', "Il manque le champ profil_id !");
+$oForm->testError0(null, 'blank', "Il manque l'id du profil !");
+$oForm->testError0(null, 'is_string', "L'id du profil du nouveau professeur doit être un entier !");
+$nIdProfil = $oForm->get(null);
+
+// On ne fait plus de test s'il y a eu une erreur.
+$oForm->setStopAll($oForm->hasError());
+
+// Vérification de l'existence de toutes les tâches saisies
+$sQuery = <<< EOQ
+	SELECT
+		1 EXIST
+	FROM PROFILS
+	WHERE PROFIL_ID = {$nIdProfil}
+EOQ;
+
+$oForm->readArray('query1', Database::fetchOneRow($sQuery));
+$oForm->testError0('query1.EXIST', 'exist', "L'identifiant du profil \"{$nIdProfil}\" n'est pas valide !");
+
 //==============================================================================
-// Action du formulaire
+// Actions du formulaire
 //==============================================================================
+
+if($oForm->hasError() == true)
+{
+	// On stocke toutes les erreurs de formulaire.
+	Message::addErrorFromFormValidation($oForm->getError());
+
+	// Retourne sur la page appelante
+	header("Location: ?page=professeurs&mode=add");
+	return;
+}
 
 switch(strtolower($sAction))
 {
@@ -40,11 +71,13 @@ switch(strtolower($sAction))
 	case 'ajouter':
 		if($oForm->hasError() == true) break;
 
+		// Préparation du nom du professeur
 		$sQueryProfNom = Database::prepareString($sProfesseurNom);
-		// insertion de l'eleve dans la table
+
+		// Insertion de l'eleve dans la table
 		$sQuery = <<< ________EOQ
-			INSERT INTO PROFESSEURS(PROFESSEUR_NOM)
-			VALUES({$sQueryProfNom})
+			INSERT INTO PROFESSEURS(PROFESSEUR_NOM, PROFESSEUR_PROFIL_ID)
+			VALUES({$sQueryProfNom}, {$nIdProfil})
 ________EOQ;
 		Database::execute($sQuery);
 

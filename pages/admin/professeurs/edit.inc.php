@@ -68,13 +68,27 @@ if($oForm->hasError() == true)
 $sQuery = <<< EOQ
 	SELECT
   		PROFESSEUR_ID,
-  		PROFESSEUR_NOM
+  		PROFESSEUR_NOM,
+  		PROFESSEUR_PROFIL_ID
   	FROM PROFESSEURS
+  		INNER JOIN PROFILS
+  			ON PROFESSEUR_PROFIL_ID = PROFIL_ID
   	WHERE PROFESSEUR_ID={$nProfesseurId}
 	ORDER BY PROFESSEUR_NOM ASC
 EOQ;
 $aProfesseur = Database::fetchOneRow($sQuery);
 // $aProfesseur[Nom de colonne] = Valeur de colonne
+
+// ===== La liste des profils =====
+$sQuery = <<< EOQ
+	SELECT
+		PROFIL_ID,
+		PROFIL_NAME
+	FROM PROFILS
+	ORDER BY PROFIL_NAME
+EOQ;
+$aProfils = Database::fetchArray($sQuery);
+// $aProfils[][Nom de colonne] = Valeur
 
 //==============================================================================
 // Preparation de l'affichage
@@ -97,8 +111,18 @@ $aProfesseur = Database::fetchOneRow($sQuery);
 	<table class="formulaire">
 		<caption>D&eacute;tail du professeur</caption>
 		<tr>
-			<td>Nom du professeur</td>
+			<td>Nom</td>
 			<td><input type="text" name="PROFESSEUR_NOM" value="<?php echo($aProfesseur['PROFESSEUR_NOM']); ?>" size="<?php echo(PROFESSEUR_NOM); ?>" maxlength="<?php echo(PROFESSEUR_NOM); ?>" /></td>
+		</tr>
+		<tr>
+			<td>Profil</td>
+			<td>
+				<select name="profil_id">
+					<?php foreach($aProfils as $aProfil): ?>
+						<option value="<?php echo($aProfil['PROFIL_ID']); ?>"<?php echo ($aProfesseur['PROFESSEUR_PROFIL_ID'] == $aProfil['PROFIL_ID']) ? ' selected="selected"' : ''; ?>><?php echo($aProfil['PROFIL_NAME']); ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<td>

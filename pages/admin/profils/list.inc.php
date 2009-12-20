@@ -19,8 +19,6 @@ if($bHasRight == false)
 // Validation du formulaire
 //==============================================================================
 
-// ===== Vérification des valeurs =====
-
 //==============================================================================
 // Actions du formulaire
 //==============================================================================
@@ -30,20 +28,18 @@ if($bHasRight == false)
 //==============================================================================
 
 // ===== La liste des profils =====
-
-$sQuery = <<< _EOQ_
+$sQuery = <<< EOQ
 	SELECT
 		PROFIL_ID,
 		PROFIL_NAME,
 		PROFIL_COMMENT,
 		COUNT(PROFESSEUR_PROFIL_ID) USER_COUNT
 	FROM PROFILS
-		LEFT OUTER JOIN PROFESSEURS 
+		LEFT OUTER JOIN PROFESSEURS
 			ON PROFESSEUR_PROFIL_ID = PROFIL_ID
 	GROUP BY PROFIL_ID
 	ORDER BY PROFIL_NAME
-_EOQ_;
-
+EOQ;
 $aProfils = Database::fetchArray($sQuery);
 // $aProfils[][Nom de colonne] = Valeur
 

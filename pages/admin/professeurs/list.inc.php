@@ -45,7 +45,8 @@ if($nNiveauId != -1 || $nEcoleId != -1 || $sAnneeScolaire != -1)
 	$sQuery = <<< ____EOQ
 		SELECT
 			DISTINCT PROFESSEUR_ID,
-			PROFESSEUR_NOM
+			PROFESSEUR_NOM,
+			PROFIL_NAME
 		FROM PROFESSEURS
 			INNER JOIN PROFESSEUR_CLASSE
 				ON PROFESSEURS.PROFESSEUR_ID = PROFESSEUR_CLASSE.ID_PROFESSEUR
@@ -57,6 +58,8 @@ if($nNiveauId != -1 || $nEcoleId != -1 || $sAnneeScolaire != -1)
 				ON NIVEAU_CLASSE.ID_NIVEAU = NIVEAUX.NIVEAU_ID
 			INNER JOIN ECOLES
 				ON CLASSES.ID_ECOLE = ECOLES.ECOLE_ID
+			INNER JOIN PROFILS
+				ON PROFIL_ID = PROFESSEUR_PROFIL_ID
 		WHERE 1=1
 		{$sQueryNiveau}
 		{$sQueryEcole}
@@ -187,21 +190,26 @@ $aEcoles = Database::fetchArray($sQuery);
 		<tr>
 			<th><a href="?page=professeurs&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
 			<th>Professeurs</th>
+			<th>Profils</th>
 			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
 	<tfoot>
 		<tr>
 			<th><a href="?page=professeurs&amp;mode=add"><img src="<?php echo(URL_ICONS_16X16); ?>/add.png" alt="Ajouter" title="Ajouter"/></a></th>
-			<th colspan="3"></th>
+			<th colspan="4"></th>
 		</tr>
 	</tfoot>
 	<tbody>
 		<?php foreach($aProfesseurs as $nRowNum => $aProfesseur): ?>
 		<tr class="level0_row<?php echo($nRowNum%2); ?>">
 			<td></td>
+			<!-- Professeur -->
 			<td>
-				<a href="?page=professeurs&amp;mode=edit&amp;professeur_id=<?php echo($aProfesseur['PROFESSEUR_ID']); ?>"><?php echo($aProfesseur['PROFESSEUR_NOM']); ?></a></td>
+				<a href="?page=professeurs&amp;mode=edit&amp;professeur_id=<?php echo($aProfesseur['PROFESSEUR_ID']); ?>"><?php echo($aProfesseur['PROFESSEUR_NOM']); ?></a>
+			</td>
+			<!-- Profils -->
+			<td><?php echo($aProfesseur['PROFIL_NAME']); ?></td>
 			<!-- Edition -->
 			<td>
 				<a href="?page=professeurs&amp;mode=edit&amp;professeur_id=<?php echo($aProfesseur['PROFESSEUR_ID']); ?>"><img src="<?php echo(URL_ICONS_16X16); ?>/edit.png" alt="Editer" title="Editer" /></a>
