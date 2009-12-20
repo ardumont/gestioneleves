@@ -67,6 +67,7 @@ if(Message::hasError() == true): ?>
 			</dt>
 			<dd>
 				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Mise à jour des ihms de gestion des professeurs pour y ajouter la gestion du profil.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Mise en place des ihms d'édition, d'ajout, suppression des profils.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Création des profils 'Professeur' et 'Directeur/Directrice'.</li>
 					<li class="evolution_mineure" title="Evolution mineure">Modification du message de fin d'installation pour préciser le login/mdp par défaut.</li>

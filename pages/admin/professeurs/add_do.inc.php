@@ -76,8 +76,8 @@ switch(strtolower($sAction))
 
 		// Insertion de l'eleve dans la table
 		$sQuery = <<< ________EOQ
-			INSERT INTO PROFESSEURS(PROFESSEUR_NOM, PROFESSEUR_PROFIL_ID)
-			VALUES({$sQueryProfNom}, {$nIdProfil})
+			INSERT INTO PROFESSEURS(PROFESSEUR_NOM, PROFESSEUR_PROFIL_ID, PROFESSEUR_PWD)
+			VALUES({$sQueryProfNom}, {$nIdProfil}, MD5({$sQueryProfNom}))
 ________EOQ;
 		Database::execute($sQuery);
 
