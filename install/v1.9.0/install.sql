@@ -333,10 +333,10 @@ INSERT INTO `PROFILS_REL_RIGHTS`(`PROFIL_ID`, `PROFIL_RIGHT`) VALUES
 --#STEP(TRANSACTION)
 -- Ajout des droits pour le profil 'Directeur/Directrice'
 INSERT INTO `PROFILS_REL_RIGHTS`(`PROFIL_ID`, `PROFIL_RIGHT`) VALUES
-(3, 'profil_list'), 
-(3, 'profil_add'), 
-(3, 'profil_edit'),  
-(3, 'profil_delete'), 
+(3, 'admin_profil_list'), 
+(3, 'admin_profil_add'), 
+(3, 'admin_profil_edit'),  
+(3, 'admin_profil_delete'), 
 (3, 'professeur_list'),  
 (3, 'professeur_add'),
 (3, 'professeur_edit'), 
@@ -348,8 +348,8 @@ INSERT INTO `PROFILS_REL_RIGHTS`(`PROFIL_ID`, `PROFIL_RIGHT`) VALUES
 (3, 'classe_list'), 
 (3, 'classe_add'), 
 (3, 'classe_edit'), 
-(3, 'classe__delete'),
-(3, 'eleve_list'),
+(3, 'classe_delete'),
+(3, 'admin_eleve_list'),
 (3, 'cycle_list'), 
 (3, 'cycle_add'), 
 (3, 'cycle_edit'),

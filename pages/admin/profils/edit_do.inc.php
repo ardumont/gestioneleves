@@ -3,7 +3,7 @@
 // Vérification des droits d'accès
 //==============================================================================
 
-$bHasRight = ProfilManager::hasRight('profil_edit');
+$bHasRight = ProfilManager::hasRight('admin_profil_edit');
 if($bHasRight == false)
 {
 	// Redirection

@@ -174,7 +174,7 @@ ____EOQ;
 		// ===== liste des eval. ind. attachees a cette eval. coll. =====
 		$sQuery = <<< ________EOQ
 			SELECT
-				EVAL_IND_ID,
+				DISTINCT EVAL_IND_ID,
 				ELEVE_NOM,
 				CLASSE_NOM,
 				NOTE_NOM,

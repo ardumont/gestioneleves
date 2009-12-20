@@ -27,11 +27,11 @@ class ProfilManager
 	 * PHP n'autorise pas les tableaux avec le mot clef 'const'.
 	 */
 	 public static $ADMIN_RIGHTS = array(
-		'profil_list', 'profil_add', 'profil_edit', 'profil_delete',
+		'admin_profil_list', 'admin_profil_add', 'admin_profil_edit', 'admin_profil_delete',
 		'professeur_list', 'professeur_add', 'professeur_edit', 'professeur_delete',
 		'ecole_list', 'ecole_add', 'ecole_edit', 'ecole_delete',
-		'classe_list', 'classe_add', 'classe_edit', 'classe__delete',
-		'eleve_list',
+		'classe_list', 'classe_add', 'classe_edit', 'classe_delete',
+		'admin_eleve_list',
 		'cycle_list', 'cycle_add', 'cycle_edit', 'cycle_delete',
  		'niveau_list', 'niveau_add', 'niveau_edit', 'niveau_delete',
  		'domaine_list', 'domaine_add', 'domaine_edit', 'domaine_delete',

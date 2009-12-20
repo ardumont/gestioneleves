@@ -3,7 +3,7 @@
 // Vérification des droits d'accès
 //==============================================================================
 
-$bHasRight = ProfilManager::hasRight('eleve_list');
+$bHasRight = ProfilManager::hasRight('admin_eleve_list');
 if($bHasRight == false)
 {
 	// Redirection

@@ -282,10 +282,10 @@ $aMenuPage = array(
 //==============================================================================
 
 // ===== Navigation entre les pages =====
-$objFormNavigation = new FormValidation();
+$oForm = new FormValidation();
 
-$sPageId = $objFormNavigation->getValue('page', $_GET, 'is_string', "home");
-$sMode   = $objFormNavigation->getValue('mode', $_GET, 'is_string', "");
+$sPageId = $oForm->getValue('page', $_GET, 'is_string', "home");
+$sMode   = $oForm->getValue('mode', $_GET, 'is_string', "");
 
 //==============================================================================
 // Actions du formulaire
@@ -310,8 +310,8 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 	}
 
 	// ===== Le fichier existe ? =====
-	if((file_exists(PATH_PAGES."/".$sPageName) == false)
-	|| (is_file(PATH_PAGES."/".$sPageName) == false))
+	if( (file_exists(PATH_PAGES."/".$sPageName) == false) ||
+		(is_file(PATH_PAGES."/".$sPageName) == false))
 	{
 		$sPageName = "error404.inc.php";
 	}
@@ -320,6 +320,15 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 //==============================================================================
 // Traitement des donnees
 //==============================================================================
+
+// A t-on les droits pour visualiser cette page ?
+$bHasAdminRight = ProfilManager::hasAdminRight();
+if($bHasAdminRight == false)
+{
+	// Redirection
+	header("Location: index.php?page=no_rights");
+	return;
+}
 
 //==============================================================================
 // Preparation de l'affichage
@@ -370,6 +379,7 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 						<img src="<?php echo(URL_ICONS_16X16); ?>/home.png" />La page d'accueil
 					</a>
 				</h4>
+				<?php if(ProfilManager::hasRight('admin_profil_list')): ?>
 				<h2><a href="javascript:void(0);" style="color:white;" onclick="$('#administrer').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Administrer</a></h2>
 				<div id="administrer">
 					<h4>
@@ -378,79 +388,130 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 						</a>
 					</h4>
 				</div>
+				<?php endif; ?>
+				<?php $bAdminProfList = ProfilManager::hasRight('professeur_list'); ?>
+				<?php $bAdminEcoleList = ProfilManager::hasRight('ecole_list'); ?>
+				<?php $bAdminClasseList = ProfilManager::hasRight('classe_list'); ?>
+				<?php $bAdminEleveList = ProfilManager::hasRight('admin_eleve_list'); ?>
+				<?php $bAdminCycleList = ProfilManager::hasRight('cycle_list'); ?>
+				<?php $bAdminNiveauList = ProfilManager::hasRight('niveau_list'); ?>
+				<?php $bAdminDomaineList = ProfilManager::hasRight('domaine_list'); ?>
+				<?php $bAdminMatiereList = ProfilManager::hasRight('matiere_list'); ?>
+				<?php $bAdminCompetenceList = ProfilManager::hasRight('competence_list'); ?>
+				<?php $bAdminNoteList = ProfilManager::hasRight('note_list'); ?>
+				<?php $bAdminPeriodeList = ProfilManager::hasRight('periode_list'); ?>
+
+				<?php if($bAdminProfList || $bAdminEcoleList || $bAdminClasseList || $bAdminEleveList ||
+						 $bAdminCycleList || $bAdminNiveauList || $bAdminDomaineList || $bAdminMatiereList ||
+						 $bAdminCompetenceList || $bAdminNoteList || $bAdminPeriodeList): ?>
 				<h2><a href="javascript:void(0);" style="color:white;" onclick="$('#gestion').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Gestion</a></h2>
 				<div id="gestion">
+					<?php if($bAdminProfList): ?>
 					<h4>
 						<a href="?page=professeurs">
 							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Professeurs
 						</a>
 					</h4>
+					<?php endif; ?>
+					<?php if($bAdminEcoleList): ?>
 					<h4>
 						<a href="?page=ecoles">
 							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Ecoles
 						</a>
 					</h4>
+					<?php endif; ?>
+					<?php if($bAdminClasseList): ?>
 					<h4>
 						<a href="?page=classes">
 							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Classes
 						</a>
 					</h4>
+					<?php endif; ?>
+					<?php if($bAdminEleveList): ?>
 					<h4>
 						<a href="?page=eleves">
 							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Elèves
 						</a>
 					</h4>
+					<?php endif; ?>
+					<?php if($bAdminCycleList): ?>
 					<h4>
 						<a href="?page=cycles">
 							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Cycles
 						</a>
 					</h4>
+					<?php endif; ?>
+					<?php if($bAdminNiveauList): ?>
 					<h4>
 						<a href="?page=niveaux">
 							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Niveaux
 						</a>
 					</h4>
+					<?php endif; ?>
+					<?php if($bAdminDomaineList): ?>
 					<h4>
 						<a href="?page=domaines">
 							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Domaines
 						</a>
 					</h4>
+					<?php endif; ?>
+					<?php if($bAdminMatiereList): ?>
 					<h4>
 						<a href="?page=matieres">
 							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Mati&egrave;res
 						</a>
 					</h4>
+					<?php endif; ?>
+					<?php if($bAdminCompetenceList): ?>
 					<h4>
 						<a href="?page=competences">
 							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Comp&eacute;tences
 						</a>
 					</h4>
+					<?php endif; ?>
+					<?php if($bAdminNoteList): ?>
 					<h4>
 						<a href="?page=notes">
 							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Notes
 						</a>
 					</h4>
+					<?php endif; ?>
+					<?php if($bAdminPeriodeList): ?>
 					<h4>
 						<a href="?page=periodes">
 							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />P&eacute;riodes
 						</a>
 					</h4>
+					<?php endif; ?>
 				</div>
+				<?php endif; ?>
+
+				<?php $bAdminImportCsvCycle = ProfilManager::hasRight('import_csv_cycle'); ?>
+				<?php $bAdminImportXmlCycle = ProfilManager::hasRight('import_xml_cycle'); ?>
+				<?php $bAdminImportXmlClasse = ProfilManager::hasRight('import_xml_classe'); ?>
+				<?php if($bAdminImportCsvCycle || $bAdminImportXmlCycle || $bAdminImportXmlClasse): ?>
 				<h2><a href="javascript:void(0);" style="color:white;" onclick="$('#imports').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Import</a></h2>
 				<div id="imports">
+					<?php if($bAdminImportCsvCycle || $bAdminImportXmlCycle): ?>
 					<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#imports_cycle').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Cycles</a></h3>
 					<div id="imports_cycle">
+						<?php if($bAdminImportCsvCycle): ?>
 						<h4>
 							<a href="?page=imports&amp;mode=imports_csv">
 								<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Import CSV
 							</a>
 						</h4>
+						<?php endif; ?>
+						<?php if($bAdminImportXmlCycle): ?>
 						<h4>
 							<a href="?page=imports&amp;mode=imports_xml">
 								<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Import XML
 							</a>
 						</h4>
+						<?php endif; ?>
 					</div>
+					<?php endif; ?>
+					<?php if($bAdminImportXmlClasse): ?>
 					<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#imports_classe').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Classes</a></h3>
 					<div id="imports_classe">
 						<h4>
@@ -459,7 +520,9 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 							</a>
 						</h4>
 					</div>
+					<?php endif; ?>
 				</div>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

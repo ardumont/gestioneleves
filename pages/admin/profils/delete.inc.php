@@ -3,7 +3,7 @@
 // Vérification des droits d'accès
 //==============================================================================
 
-$bHasRight = ProfilManager::hasRight('profil_delete');
+$bHasRight = ProfilManager::hasRight('admin_profil_delete');
 if($bHasRight == false)
 {
 	// Redirection
