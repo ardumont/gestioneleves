@@ -1,5 +1,17 @@
 <?php
 //==============================================================================
+// Vérification des droits d'accès
+//==============================================================================
+
+$bHasRight = ProfilManager::hasRight('profil_edit');
+if($bHasRight == false)
+{
+	// Redirection
+	header("Location: ?page=no_rights");
+	return;
+}
+
+//==============================================================================
 // Préparation des données
 //==============================================================================
 
@@ -40,7 +52,14 @@ $aThisUser = Database::fetchOneRow($sQuery);
 // Affichage de la page
 //==============================================================================
 ?>
-<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a><img src="<?php echo(URL_ICONS_16X16); ?>/user.png"/><img src="<?php echo(URL_ICONS_16X16); ?>/head_sep.png"/>Mon Profil</h1>
+<h1>
+	<a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');">
+		<img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" />
+	</a>
+	<img src="<?php echo(URL_ICONS_16X16); ?>/user.png" />
+	<img src="<?php echo(URL_ICONS_16X16); ?>/head_sep.png" />
+	Mon Profil
+</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">

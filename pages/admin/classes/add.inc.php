@@ -1,5 +1,17 @@
 <?php
 //==============================================================================
+// Vérification des droits d'accès
+//==============================================================================
+
+$bHasRight = ProfilManager::hasRight('classe_add');
+if($bHasRight == false)
+{
+	// Redirection
+	header("Location: ?page=no_rights");
+	return;
+}
+
+//==============================================================================
 // Preparation des donnees
 //==============================================================================
 
@@ -50,19 +62,19 @@ $aProfesseurs = Database::fetchColumnWithKey($sQuery);
 $sQuery = <<< EOQ
 	SELECT
 		CLASSE_ID,
-		CLASSE_NOM, 
-		PROFESSEUR_NOM, 
-		CLASSE_ANNEE_SCOLAIRE, 
-		ECOLE_NOM, 
-		ECOLE_VILLE, 
-		ECOLE_DEPARTEMENT 
+		CLASSE_NOM,
+		PROFESSEUR_NOM,
+		CLASSE_ANNEE_SCOLAIRE,
+		ECOLE_NOM,
+		ECOLE_VILLE,
+		ECOLE_DEPARTEMENT
 	FROM CLASSES
 		INNER JOIN PROFESSEUR_CLASSE
 			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
 		INNER JOIN PROFESSEURS
 			ON PROFESSEUR_CLASSE.ID_PROFESSEUR = PROFESSEURS.PROFESSEUR_ID
 		INNER JOIN ECOLES
-			ON CLASSES.ID_ECOLE = ECOLES.ECOLE_ID 
+			ON CLASSES.ID_ECOLE = ECOLES.ECOLE_ID
 	ORDER BY CLASSE_NOM ASC
 EOQ;
 $aClasses = Database::fetchArray($sQuery);

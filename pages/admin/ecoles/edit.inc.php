@@ -1,5 +1,17 @@
 <?php
 //==============================================================================
+// Vérification des droits d'accès
+//==============================================================================
+
+$bHasRight = ProfilManager::hasRight('ecole_edit');
+if($bHasRight == false)
+{
+	// Redirection
+	header("Location: ?page=no_rights");
+	return;
+}
+
+//==============================================================================
 // Preparation des donnees
 //==============================================================================
 
@@ -64,7 +76,7 @@ $aEcole = Database::fetchOneRow($sQuery);
 		</tr>
 		<tr>
 			<td>
-				<input type="hidden" name="ECOLE_ID" value="<?php echo($aEcole['ECOLE_ID']) ?>" />	
+				<input type="hidden" name="ECOLE_ID" value="<?php echo($aEcole['ECOLE_ID']) ?>" />
 				<input type="submit" name="action" value="Modifier" />
 			</td>
 			<td>

@@ -1,5 +1,17 @@
 <?php
 //==============================================================================
+// Vérification des droits d'accès
+//==============================================================================
+
+$bHasRight = ProfilManager::hasRight('eleve_add');
+if($bHasRight == false)
+{
+	// Redirection
+	header("Location: ?page=no_rights");
+	return;
+}
+
+//==============================================================================
 // Preparation des donnees
 //==============================================================================
 
@@ -7,39 +19,39 @@
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
 // si le champ ELEVE_NOM est specifie alors il s'agit d'un ajout d'un nouvel
 // via la zone de texte de saisie
 // pas de test de verification a cause du module de recherche
-$sNomEleve = $objForm->getValue('ELEVE_NOM', $_POST, 'is_string');
+$sNomEleve = $oForm->getValue('ELEVE_NOM', $_POST, 'is_string');
 
 // recuperation de l'id de l'eleve une fois qu'il a ete trouve
 // (via module de recherche)
-$nEleveId = $objForm->getValue('ELEVE_ID', $_POST, 'convert_int');
+$nEleveId = $oForm->getValue('ELEVE_ID', $_POST, 'convert_int');
 
 // creer la liaison entre cet eleve et sa nouvelle classe
-$objForm->read('CLASSE_ID', $_POST);
-$objForm->testError0(null, 'exist',	"Il manque le champ CLASSE_ID !");
-$objForm->testError0(null, 'blank',	"Il manque l'id de la classe !");
-$objForm->testError0(null, 'is_int',"L'id de la classe doit &ecirc;tre un entier !");
-$nClasseId = $objForm->get(null);
+$oForm->read('CLASSE_ID', $_POST);
+$oForm->testError0(null, 'exist',	"Il manque le champ CLASSE_ID !");
+$oForm->testError0(null, 'blank',	"Il manque l'id de la classe !");
+$oForm->testError0(null, 'is_int',"L'id de la classe doit &ecirc;tre un entier !");
+$nClasseId = $oForm->get(null);
 
 // creer la liaison entre cet eleve et sa nouvelle classe
-$objForm->read('ELEVE_ID', $_POST);
-$nEleveId = $objForm->get(null);
+$oForm->read('ELEVE_ID', $_POST);
+$nEleveId = $oForm->get(null);
 
 // si l'eleve n'existe pas
 if($nEleveId == null)
 {
 	// creer la liaison entre cet eleve et sa nouvelle classe
-	$objForm->read('ELEVE_DATE_NAISSANCE', $_POST);
-	$objForm->testError0(null, 'exist',		"Il manque le champ ELEVE_DATE_NAISSANCE !");
-	$objForm->testError0(null, 'blank',		"Il manque la date de naissance !");
-	$objForm->testError0(null, 'is_string',	"La date de naissance doit &ecirc;tre une cha&icirc;ne de caract&egrave;res !");
-	$sEleveDateNaissance = $objForm->get(null);
+	$oForm->read('ELEVE_DATE_NAISSANCE', $_POST);
+	$oForm->testError0(null, 'exist',		"Il manque le champ ELEVE_DATE_NAISSANCE !");
+	$oForm->testError0(null, 'blank',		"Il manque la date de naissance !");
+	$oForm->testError0(null, 'is_string',	"La date de naissance doit &ecirc;tre une cha&icirc;ne de caract&egrave;res !");
+	$sEleveDateNaissance = $oForm->get(null);
 }
 
 // validation du formulaire
@@ -60,7 +72,7 @@ switch(strtolower($sAction))
 {
 	// ajoute l'eleve
 	case 'ajouter':
-		if($objForm->hasError() == true) break;
+		if($oForm->hasError() == true) break;
 
 		// si on a pas envoye l'id d'un eleve, il faut creer ce nouvel eleve
 		if($nEleveId == null)
@@ -121,7 +133,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	case 'annuler':
-		$objForm->clearError();
+		$oForm->clearError();
 
 		// Rechargement
 		header("Location: ?page=eleves&mode=add");
@@ -130,7 +142,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:
-		$objForm->clearError();
+		$oForm->clearError();
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
 
@@ -147,7 +159,7 @@ switch(strtolower($sAction))
 //==============================================================================
 
 // On stocke toutes les erreurs de formulaire.
-Message::addErrorFromFormValidation($objForm->getError());
+Message::addErrorFromFormValidation($oForm->getError());
 
 // Rechargement
 header("Location: ?page=eleves&mode=add");

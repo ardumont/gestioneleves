@@ -34,13 +34,13 @@ ____EOQ;
 // Preparation de l'affichage
 //==============================================================================
 
-$sGuiTitle = "Bienvenue" . ( isset($sUserName) ? " {$sUserName}," : "," );
+$sGuiTitle = "Bienvenue" . ( ($sUserName != "") ? " {$sUserName}," : "," );
 
 //==============================================================================
 // Affichage de la page
 //==============================================================================
 if(Message::hasError() == true): ?>
-	<h1>Erreur lors de l'authentification</h1>
+	<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Erreur lors de l'authentification</h1>
 	<ul class="form_error">
 		<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
 		<li><?php echo($sErrorMessage); ?></li>
@@ -63,6 +63,18 @@ if(Message::hasError() == true): ?>
 		<dl>
 			<dt>
 				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+				v1.9.0
+			</dt>
+			<dd>
+				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Mise en place des ihms d'édition, d'ajout, suppression des profils.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Création des profils 'Professeur' et 'Directeur/Directrice'.</li>
+					<li class="evolution_mineure" title="Evolution mineure">Modification du message de fin d'installation pour préciser le login/mdp par défaut.</li>
+					<li class="bug_mineur" title="Bug mineur">Correction du mauvais domaine pour la matière "art".</li>
+				</ul>
+			</dd>
+			<dt>
+				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
 				v1.8.0
 			</dt>
 			<dd>
@@ -71,7 +83,7 @@ if(Message::hasError() == true): ?>
 					<li class="evolution_majeure" title="Evolution majeure">Renommage des objets formulaires dans les différentes pages de l'application.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Reformatage du menu du module d'administration.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Reformatage du menu du module principal de l'application.</li>
-					<li class="evolution_majeure" title="Evolution majeure">Mise en place des profils</li>
+					<li class="evolution_majeure" title="Evolution majeure">Mise en place des profils.</li>
 				</ul>
 			</dd>
 			<dt>

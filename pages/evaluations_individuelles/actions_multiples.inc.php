@@ -2,14 +2,14 @@
 //==============================================================================
 // Vérification des droits d'accès
 //==============================================================================
-//
-//$bHasRight = ProfilManager::hasRight('project_delete');
-//if($bHasRight == false)
-//{
-//	// Redirection
-//	header("Location: ?page=no_rights");
-//	return;
-//}
+
+$bHasRight = (ProfilManager::hasRight('eval_ind_edit') || ProfilManager::hasRight('eval_ind_delete'));
+if($bHasRight == false)
+{
+	// Redirection
+	header("Location: ?page=no_rights");
+	return;
+}
 
 //==============================================================================
 // Préparation des données

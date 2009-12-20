@@ -1,5 +1,17 @@
 <?php
 //==============================================================================
+// Vérification des droits d'accès
+//==============================================================================
+
+$bHasRight = ProfilManager::hasRight('eval_col_delete');
+if($bHasRight == false)
+{
+	// Redirection
+	header("Location: ?page=no_rights");
+	return;
+}
+
+//==============================================================================
 // Preparation des donnees
 //==============================================================================
 
@@ -11,10 +23,10 @@
 // Action du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
 // recupere l'id de l'eleve du formulaire $_GET
-$nEvalColId = $objForm->getValue('eval_col_id', $_GET, 'convert_int');
+$nEvalColId = $oForm->getValue('eval_col_id', $_GET, 'convert_int');
 
 //==============================================================================
 // Traitement des donnees

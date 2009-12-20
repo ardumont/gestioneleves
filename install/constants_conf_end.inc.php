@@ -34,6 +34,8 @@ require_once(PATH_CONF_INSTALL."/main.conf.php");
 
 <p>L'installation du Gestionnaire d'élèves est terminée.</p>
 
-<p>Si vous avez déjà des utilisateurs, vous pouvez directement vous rendre sur la <a href="<?php echo(SITE_URL); ?>/">page d'accueil de l'application</a>.</p>
+<p>Si vous avez déjà des utilisateurs, vous pouvez directement vous rendre sur la <a href="<?php echo(SITE_URL); ?>/">page
+d'accueil de l'application</a>.</p>
 <p>Sinon, avant d'utiliser l'application, vous devrez avant tout la paramétrer.<br />
-Pour cela rendez-vous sur la <a href="<?php echo(SITE_URL); ?>/admin.php">page d'administration de l'application</a></p>
+Pour cela, connectez-vous avec l'utilisateur 'administrateur' (mot de passe 'admin') et rendez-vous sur la
+<a href="<?php echo(SITE_URL); ?>/admin.php">page d'administration de l'application</a> pour y ajouter de nouveaux utilisateurs.</p>

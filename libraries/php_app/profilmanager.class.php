@@ -1,7 +1,6 @@
 <?php
-
 /**
- * ProjectSion : Classe pour gérer les profils et les droits s'y rattachant.
+ * Classe pour gérer les profils et les droits s'y rattachant.
  *
  * @author Lionel SAURON
  * @version 1.0.0
@@ -15,13 +14,11 @@ class ProfilManager
 	 */
 	 public static $USER_RIGHTS = array(
 		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
-		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
-		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
-		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
- 		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
-		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
- 		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
-		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
+		'consultation_list',
+		'eval_ind_list', 'eval_ind_add', 'eval_ind_edit', 'eval_ind_delete',
+ 		'eval_col_list', 'eval_col_add', 'eval_col_edit', 'eval_col_delete',
+		'livret_list', 'livret_add', 'livret_edit', 'livret_delete',
+ 		'profil_list', 'profil_add', 'profil_edit', 'profil_delete',
 	);
 
 	 /**
@@ -62,7 +59,7 @@ class ProfilManager
 	public static function loadRights()
 	{
 		// A t'on un utilisateur ? Non => On sort
-		if(isset($_SESSION['user_id']) == false) return;
+		if(isset($_SESSION['PROFESSEUR_ID']) == false) return;
 
 		// Recherche des droits en session.
 		if(isset($_SESSION['PROFIL_RIGHTS']) == true)
@@ -73,28 +70,29 @@ class ProfilManager
 		else
 		{
 			// Initialisation des variables SQL
-			$nUserId = $_SESSION['user_id'];
+			$nUserId = $_SESSION['PROFESSEUR_ID'];
 
 			// Lecture du profil en BDD
-			$sQuery = <<< _EOQ_
+			$sQuery = <<< ____________EOQ
 				SELECT
-					USER_PROFIL_ID
-				FROM USERS
-				WHERE USER_ID = {$nUserId}
-_EOQ_;
+					PROFESSEUR_PROFIL_ID
+				FROM PROFESSEURS
+				WHERE PROFESSEUR_ID = {$nUserId}
+____________EOQ;
 
 			$nProfilId = Database::fetchOneValue($sQuery);
 
 			if($nProfilId != 1)
 			{
 				// Lecture des droits en BDD
-				$sQuery = <<< _EOQ_
+				$sQuery = <<< ________________EOQ
 					SELECT
 						PROFIL_RIGHT
-					FROM USERS, PROFILS_REL_RIGHTS
-					WHERE USER_PROFIL_ID = PROFIL_ID
-					  AND USER_ID = {$nUserId}
-_EOQ_;
+					FROM PROFESSEURS
+						INNER JOIN PROFILS_REL_RIGHTS
+							ON PROFESSEUR_PROFIL_ID = PROFIL_ID
+					WHERE PROFESSEUR_ID = {$nUserId}
+________________EOQ;
 
 				self::$s_aRights = Database::fetchColumn($sQuery);
 			}
@@ -107,10 +105,10 @@ _EOQ_;
 			// Sauvegarde des droits en session
 			$_SESSION['PROFIL_RIGHTS'] = self::$s_aRights;
 		}
-	}
+	}// end loadRights
 
 	/**
-	 * Vérification des droits
+	 * Vérification des droits.
 	 *
 	 * @param $sRightNeed(string) Nom du droit à vérifier.
 	 * @return <code>true</code> ou <code>false</code>
@@ -125,10 +123,10 @@ _EOQ_;
 		}
 
 		return $bHasRight;
-	}
+	}// end hasRight
 
 	/**
-	 * Test si l'utilisateur possède au moins un droit d'administration.
+	 * Teste si l'utilisateur possède au moins un droit d'administration.
 	 * @return <code>true</code> ou <code>false</code>
 	 */
 	public static function hasAdminRight()
@@ -137,9 +135,8 @@ _EOQ_;
 		$aCommonRights = array_intersect(self::$s_aRights, self::$ADMIN_RIGHTS);
 
 		// A t'on un droit d'administration ?
-		$bAdminRight = (count($aCommonRights) > 0) ? true : false;
+		$bAdminRight = (count($aCommonRights) > 0);
 
 		return $bAdminRight;
-	}
-}
-?>
+	}// end hasAdminRight
+}// end class ProfilManager

@@ -1,5 +1,17 @@
 <?php
 //==============================================================================
+// Vérification des droits d'accès
+//==============================================================================
+
+$bHasRight = ProfilManager::hasRight('eval_col_edit');
+if($bHasRight == false)
+{
+	// Redirection
+	header("Location: ?page=no_rights");
+	return;
+}
+
+//==============================================================================
 // Preparation des donnees
 //==============================================================================
 
@@ -7,36 +19,36 @@
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
-$objForm->read('EVAL_COL_ID', $_POST);
-$objForm->testError0(null, 'exist',			"Il manque le champ \"EVAL_COL_ID\" !");
-$objForm->testError0(null, 'blank',			"Il manque l'id de l'&eacute;valuation collective !");
-$objForm->testError0(null, 'convert_int',	"L'id de l'&eacute;valuation collective doit &ecirc;tre un entier !");
-$nEvalColId = $objForm->get(null);
+$oForm->read('EVAL_COL_ID', $_POST);
+$oForm->testError0(null, 'exist',			"Il manque le champ \"EVAL_COL_ID\" !");
+$oForm->testError0(null, 'blank',			"Il manque l'id de l'&eacute;valuation collective !");
+$oForm->testError0(null, 'convert_int',	"L'id de l'&eacute;valuation collective doit &ecirc;tre un entier !");
+$nEvalColId = $oForm->get(null);
 
-$objForm->read('PERIODE_ID', $_POST);
-$objForm->testError0(null, 'exist',			"Il manque le champ \"PERIODE_ID\" !");
-$objForm->testError0(null, 'blank',			"Il manque l'id de la p&eacute;riode !");
-$objForm->testError0(null, 'convert_int',	"L'id de la p&eacute;riode doit &ecirc;tre un entier !");
-$nPeriodeId = $objForm->get(null);
+$oForm->read('PERIODE_ID', $_POST);
+$oForm->testError0(null, 'exist',			"Il manque le champ \"PERIODE_ID\" !");
+$oForm->testError0(null, 'blank',			"Il manque l'id de la p&eacute;riode !");
+$oForm->testError0(null, 'convert_int',	"L'id de la p&eacute;riode doit &ecirc;tre un entier !");
+$nPeriodeId = $oForm->get(null);
 
-$objForm->read('EVAL_COL_NOM', $_POST);
-$objForm->testError0(null, 'exist',		"Il manque le champ \"EVAL_COL_NOM\" !");
-$objForm->testError0(null, 'blank',		"Il manque le nom de l'&eacute;valuation collective !");
-$objForm->testError0(null, 'is_string',	"Le nom de l'&eacute;valuation collective doit &ecirc;tre une cha&icirc;ne de caract&egrave;res !");
-$sEvalColNom = $objForm->get(null);
+$oForm->read('EVAL_COL_NOM', $_POST);
+$oForm->testError0(null, 'exist',		"Il manque le champ \"EVAL_COL_NOM\" !");
+$oForm->testError0(null, 'blank',		"Il manque le nom de l'&eacute;valuation collective !");
+$oForm->testError0(null, 'is_string',	"Le nom de l'&eacute;valuation collective doit &ecirc;tre une cha&icirc;ne de caract&egrave;res !");
+$sEvalColNom = $oForm->get(null);
 
 // description de l'evaluation collective
-$sEvalColDescription = $objForm->getValue('EVAL_COL_DESCRIPTION', $_POST, 'is_string', "");
+$sEvalColDescription = $oForm->getValue('EVAL_COL_DESCRIPTION', $_POST, 'is_string', "");
 
-$objForm->read('EVAL_COL_DATE', $_POST);
-$objForm->testError0(null, 'exist',		"Il manque le champ \"EVAL_COL_DATE\" !");
-$objForm->testError0(null, 'blank',		"Il manque la date de l'&eacute;valuation collective !");
-$objForm->testError0(null, 'is_string',	"La date de l'&eacute;valuation collective de l'&eacute;l&egrave;ve doit &ecirc;tre une cha&icirc;ne de caract&egrave;res au format dd/MM/YYYY!");
-$sEvalColDate = $objForm->get(null);
+$oForm->read('EVAL_COL_DATE', $_POST);
+$oForm->testError0(null, 'exist',		"Il manque le champ \"EVAL_COL_DATE\" !");
+$oForm->testError0(null, 'blank',		"Il manque la date de l'&eacute;valuation collective !");
+$oForm->testError0(null, 'is_string',	"La date de l'&eacute;valuation collective de l'&eacute;l&egrave;ve doit &ecirc;tre une cha&icirc;ne de caract&egrave;res au format dd/MM/YYYY!");
+$sEvalColDate = $oForm->get(null);
 
 //==============================================================================
 // Action du formulaire
@@ -46,7 +58,7 @@ switch(strtolower($sAction))
 {
 	// ----------
 	case 'modifier':
-		if($objForm->hasError() == true) break;
+		if($oForm->hasError() == true) break;
 
 		$sQuery =
 			"UPDATE EVALUATIONS_COLLECTIVES " .
@@ -64,7 +76,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	case 'annuler':
-		$objForm->clearError();
+		$oForm->clearError();
 
 		// Rechargement
 		header("Location: ?page=evaluations_collectives");
@@ -73,7 +85,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:
-		$objForm->clearError();
+		$oForm->clearError();
 
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
@@ -91,7 +103,7 @@ switch(strtolower($sAction))
 //==============================================================================
 
 // On stocke toutes les erreurs de formulaire.
-Message::addErrorFromFormValidation($objForm->getError());
+Message::addErrorFromFormValidation($oForm->getError());
 
 // Rechargement
 header("Location: ?page=evaluations_collectives&mode=edit&eval_col_id={$nEvalColId}");

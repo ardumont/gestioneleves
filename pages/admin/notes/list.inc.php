@@ -1,5 +1,17 @@
 <?php
 //==============================================================================
+// Vérification des droits d'accès
+//==============================================================================
+
+$bHasRight = ProfilManager::hasRight('note_list');
+if($bHasRight == false)
+{
+	// Redirection
+	header("Location: ?page=no_rights");
+	return;
+}
+
+//==============================================================================
 // Preparation des donnees
 //==============================================================================
 
@@ -19,10 +31,10 @@
 $sQuery = <<< EOQ
 	SELECT
 		NOTE_ID,
-		NOTE_NOM, 
-		NOTE_LABEL, 
-		NOTE_NOTE 
-	FROM NOTES 
+		NOTE_NOM,
+		NOTE_LABEL,
+		NOTE_NOTE
+	FROM NOTES
 	ORDER BY NOTE_NOTE DESC
 EOQ;
 $aNotes = Database::fetchArray($sQuery);

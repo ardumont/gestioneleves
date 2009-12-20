@@ -1,5 +1,17 @@
 <?php
 //==============================================================================
+// Vérification des droits d'accès
+//==============================================================================
+
+$bHasRight = ProfilManager::hasRight('livret_list');
+if($bHasRight == false)
+{
+	// Redirection
+	header("Location: index.php?page=no_rights");
+	return;
+}
+
+//==============================================================================
 // Preparation des donnees
 //==============================================================================
 
@@ -92,7 +104,7 @@ if($nClasseId != -1 && $nPeriodeId != -1)
 	foreach($aEleves as $i => $oEleve)
 	{
 		$aRes = Livret::recap_period($oEleve['ELEVE_ID'], $nPeriodeId);
-	
+
 		$aElevesInfo[$i] = $aRes['ELEVE'];
 		$aClassesEleve[$i] = $aRes['CLASSES_ELEVES'];
 		$aNotes[$i] = $aRes['NOTES'];

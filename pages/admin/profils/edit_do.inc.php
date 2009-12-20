@@ -3,13 +3,13 @@
 // Vérification des droits d'accès
 //==============================================================================
 
-//$bHasRight = ProfilManager::hasRight('profil_edit');
-//if($bHasRight == false)
-//{
-//	// Redirection
-//	header("Location: ?page=no_rights");
-//	return;
-//}
+$bHasRight = ProfilManager::hasRight('profil_edit');
+if($bHasRight == false)
+{
+	// Redirection
+	header("Location: ?page=no_rights");
+	return;
+}
 
 //==============================================================================
 // Préparation des données

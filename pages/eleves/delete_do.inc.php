@@ -1,5 +1,17 @@
 <?php
 //==============================================================================
+// Vérification des droits d'accès
+//==============================================================================
+
+$bHasRight = ProfilManager::hasRight('eleve_delete');
+if($bHasRight == false)
+{
+	// Redirection
+	header("Location: ?page=no_rights");
+	return;
+}
+
+//==============================================================================
 // Preparation des donnees
 //==============================================================================
 
@@ -7,21 +19,21 @@
 // Validation du formulaire
 //==============================================================================
 
-$objForm = new FormValidation();
+$oForm = new FormValidation();
 
-$sAction = $objForm->getValue('action', $_POST, 'is_string', "");
+$sAction = $oForm->getValue('action', $_POST, 'is_string', "");
 
-$objForm->read('ELEVE_ID', $_POST);
-$objForm->testError0(null, 'exist',		"Il manque le champ \"ELEVE_ID\" !");
-$objForm->testError0(null, 'blank',		"Il manque l'id de l'&eacute;l&egrave !");
-$objForm->testError0(null, 'convert_int',	"L'id de l'&eacute;l&egrave;ve doit &ecirc;tre un entier !");
-$nEleveId = $objForm->get(null);
+$oForm->read('ELEVE_ID', $_POST);
+$oForm->testError0(null, 'exist',		"Il manque le champ \"ELEVE_ID\" !");
+$oForm->testError0(null, 'blank',		"Il manque l'id de l'&eacute;l&egrave !");
+$oForm->testError0(null, 'convert_int',	"L'id de l'&eacute;l&egrave;ve doit &ecirc;tre un entier !");
+$nEleveId = $oForm->get(null);
 
-$objForm->read('CLASSE_ID', $_POST);
-$objForm->testError0(null, 'exist',		"Il manque le champ \"CLASSE_ID\" !");
-$objForm->testError0(null, 'blank',		"Il manque l'id de la classe de l'&eacute;l&egrave;ve !");
-$objForm->testError0(null, 'convert_int',	"L'id de la classe de l'&eacute;l&egrave;ve doit &ecirc;tre un entier !");
-$nClasseId = $objForm->get(null);
+$oForm->read('CLASSE_ID', $_POST);
+$oForm->testError0(null, 'exist',		"Il manque le champ \"CLASSE_ID\" !");
+$oForm->testError0(null, 'blank',		"Il manque l'id de la classe de l'&eacute;l&egrave;ve !");
+$oForm->testError0(null, 'convert_int',	"L'id de la classe de l'&eacute;l&egrave;ve doit &ecirc;tre un entier !");
+$nClasseId = $oForm->get(null);
 
 //==============================================================================
 // Action du formulaire
@@ -31,7 +43,7 @@ switch(strtolower($sAction))
 {
 	// ----------
 	case 'supprimer':
-		if($objForm->hasError() == true) break;
+		if($oForm->hasError() == true) break;
 
 		// supprime uniquement le lien entre l'eleve et la classe
 		$sQuery =
@@ -64,7 +76,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	case 'annuler':
-		$objForm->clearError();
+		$oForm->clearError();
 
 		// Rechargement
 		header("Location: ?page=eleves&classe_id={$nClasseId}");
@@ -73,7 +85,7 @@ switch(strtolower($sAction))
 
 	// ----------
 	default:
-		$objForm->clearError();
+		$oForm->clearError();
 
 		Message::addError("L'action \"{$sAction}\" est inconnue !");
 }
@@ -91,7 +103,7 @@ switch(strtolower($sAction))
 //==============================================================================
 
 // On stocke toutes les erreurs de formulaire.
-Message::addErrorFromFormValidation($objForm->getError());
+Message::addErrorFromFormValidation($oForm->getError());
 
 // Rechargement
 header("Location: ?page=eleves&classe_id={$nClasseId}");

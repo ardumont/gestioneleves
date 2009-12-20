@@ -137,9 +137,11 @@ if(($bDatabaseReady == true) && ($bNeedMoreUpgrade == true))
 	<br />
 	 Cependant, si vous ne souhaitez pas réaliser maintenant ces mises à jour, vous pouvez arrêter ici<br />
 	 et reprendre plus tard en relançant l'installation.<br />
+	 </p>
 <?php endif; ?>
 
 <div>
+	<br />
 	<a href="?step=4">Précédent</a>
 	<?php if($bDatabaseReady == true): ?>
 		<?php if($bNeedMoreUpgrade == false): ?>

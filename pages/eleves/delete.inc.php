@@ -1,5 +1,17 @@
 <?php
 //==============================================================================
+// Vérification des droits d'accès
+//==============================================================================
+
+$bHasRight = ProfilManager::hasRight('eleve_delete');
+if($bHasRight == false)
+{
+	// Redirection
+	header("Location: ?page=no_rights");
+	return;
+}
+
+//==============================================================================
 // Preparation des donnees
 //==============================================================================
 
@@ -61,7 +73,7 @@ $aEleve = Database::fetchOneRow($sQuery);
 		<p>
 			Ceci supprimera l'&eacute;l&egrave;ve "<?php echo($aEleve['ELEVE_NOM']); ?>" de la classe "<?php echo($aEleve['CLASSE_NOM']); ?>".<br />
 			Si l'&eacute;l&egrave;ve n'est plus rattach&eacute; &agrave; d'autres classes, il sera alors d&eacute;finitivement supprim&eacute;.
-		</p>		
+		</p>
 	</fieldset>
 	<p>
 		<input type="hidden" name="ELEVE_ID" value="<?php echo($aEleve['ELEVE_ID']) ?>" />

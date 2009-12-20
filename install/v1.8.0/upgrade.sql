@@ -41,10 +41,8 @@ ALTER TABLE PROFESSEURS
 
 --#STEP(TRANSACTION)
 -- Le profil de l'administrateur général
-INSERT INTO PROFILS
-	(PROFIL_ID, PROFIL_NAME, PROFIL_COMMENT)
-VALUES
-	(1, 'Administrateur', 'Profil de l''administrateur général de l''application');
+INSERT INTO PROFILS (PROFIL_ID, PROFIL_NAME, PROFIL_COMMENT)
+VALUES (1, 'Administrateur', 'Profil de l''administrateur général de l''application');
 
 --#STEP(TRANSACTION)
 UPDATE PROFESSEURS

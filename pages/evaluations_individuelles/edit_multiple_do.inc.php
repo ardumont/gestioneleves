@@ -3,13 +3,13 @@
 // Vérification des droits d'accès
 //==============================================================================
 
-//$bHasRight = ProfilManager::hasRight('project_delete');
-//if($bHasRight == false)
-//{
-//	// Redirection
-//	header("Location: ?page=no_rights");
-//	return;
-//}
+$bHasRight = ProfilManager::hasRight('eval_ind_edit');
+if($bHasRight == false)
+{
+	// Redirection
+	header("Location: ?page=no_rights");
+	return;
+}
 
 //==============================================================================
 // Préparation des données
@@ -87,7 +87,7 @@ switch(strtolower($sAction))
 ____________EOQ;
 			Database::execute($sQuery);
 		}
-		
+
 		// Si l'évaluation collective est spécifiée
 		if($nEvalColId != -1)
 		{

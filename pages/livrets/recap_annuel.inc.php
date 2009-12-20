@@ -1,9 +1,21 @@
 <?php
 //==============================================================================
+// Vérification des droits d'accès
+//==============================================================================
+
+$bHasRight = ProfilManager::hasRight('livret_list');
+if($bHasRight == false)
+{
+	// Redirection
+	header("Location: ?page=no_rights");
+	return;
+}
+
+//==============================================================================
 // Preparation des donnees
 //==============================================================================
 
-//restriction sur l'annee scolaire courante
+// Restriction sur l'annee scolaire courante
 $sRestrictionAnneeScolaire =
 	" AND CLASSE_ANNEE_SCOLAIRE = " . sql_annee_scolaire_courante();
 
