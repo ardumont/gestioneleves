@@ -13,12 +13,12 @@ class ProfilManager
 	 * PHP n'autorise pas les tableaux avec le mot clef 'const'.
 	 */
 	 public static $USER_RIGHTS = array(
+ 		'profil_list', 'profil_add', 'profil_edit', 'profil_delete',
 		'eleve_list', 'eleve_add', 'eleve_edit', 'eleve_active',
-		'consultation_list',
 		'eval_ind_list', 'eval_ind_add', 'eval_ind_edit', 'eval_ind_delete',
  		'eval_col_list', 'eval_col_add', 'eval_col_edit', 'eval_col_delete',
 		'livret_list', 'livret_add', 'livret_edit', 'livret_delete',
- 		'profil_list', 'profil_add', 'profil_edit', 'profil_delete',
+		'consultation_list',
 	);
 
 	 /**

@@ -52,7 +52,7 @@ _EOQ_;
 $oForm->readArray('query1', Database::fetchOneRow($sQuery));
 $oForm->testError0('query1.EXIST', 'exist', "L'identifiant du profil \"{$nProfilId}\" n'est pas valide !");
 
-$oForm->testError1('profil_id',    		'min_value_equal', 10, "Ce profil est un profil système. Il ne peut pas être supprimé !");
+$oForm->testError1('profil_id',    		'min_value_equal',  1, "Ce profil est un profil système. Il ne peut pas être supprimé !");
 $oForm->testError1('query1.USER_COUNT', 'equal', 			0, "Des utilisateurs utilisent ce profil. Suppression impossible !");
 
 // S'il y a eu une erreur, on ne va pas plus loin.

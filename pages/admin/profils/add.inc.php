@@ -64,133 +64,115 @@ if($bHasRight == false)
 		</tbody>
 	</table>
 	<fieldset>
-		<legend>Droits standard pour le profil</legend>
+		<legend>Droits standards pour le profil</legend>
 		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Applications</caption>
+			<caption>Profil</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_application_use">Utiliser</label></th>
-					<td><input id="form_rights_application_use" type="checkbox" name="profil_rights[application_use]" checked="checked" disabled="disabled" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_application_list">Lister/Voir</label></th>
-					<td><input id="form_rights_application_list" type="checkbox" name="profil_rights[application_list]" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_application_add">Ajouter</label></th>
-					<td><input id="form_rights_application_add" type="checkbox" name="profil_rights[application_add]" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_application_edit">Modifier</label></th>
-					<td><input id="form_rights_application_edit" type="checkbox" name="profil_rights[application_edit]" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_application_delete">Supprimer</label></th>
-					<td><input id="form_rights_application_delete" type="checkbox" name="profil_rights[application_delete]" /></td>
+					<th><label for="form_rights_profil_use">Utiliser</label></th>
+					<td><input id="form_rights_profil_use" type="checkbox" name="profil_rights[profil_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 			</tbody>
 		</table>
 		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Projets</caption>
+			<caption>Eleves</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_project_use">Utiliser</label></th>
-					<td><input id="form_rights_project_use" type="checkbox" name="profil_rights[project_use]" checked="checked" disabled="disabled" /></td>
+					<th><label for="form_rights_eleve_use">Utiliser</label></th>
+					<td><input id="form_rights_eleve_use" type="checkbox" name="profil_rights[eleve_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_project_list">Lister</label></th>
-					<td><input id="form_rights_project_list" type="checkbox" name="profil_rights[project_list]" /></td>
+					<th><label for="form_rights_eleve_list">Lister</label></th>
+					<td><input id="form_rights_eleve_list" type="checkbox" name="profil_rights[eleve_list]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_project_view">Voir</label></th>
-					<td><input id="form_rights_project_view" type="checkbox" name="profil_rights[project_view]" /></td>
+					<th><label for="form_rights_eleve_add">Ajouter</label></th>
+					<td><input id="form_rights_eleve_add" type="checkbox" name="profil_rights[eleve_add]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_project_add">Ajouter</label></th>
-					<td><input id="form_rights_project_add" type="checkbox" name="profil_rights[project_add]" /></td>
+					<th><label for="form_rights_eleve_edit">Modifier</label></th>
+					<td><input id="form_rights_eleve_edit" type="checkbox" name="profil_rights[eleve_edit]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_project_edit">Modifier</label></th>
-					<td><input id="form_rights_project_edit" type="checkbox" name="profil_rights[project_edit]" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_project_delete">Supprimer</label></th>
-					<td><input id="form_rights_project_delete" type="checkbox" name="profil_rights[project_delete]" /></td>
+					<th><label for="form_rights_eleve_active">Activer/Désactiver</label></th>
+					<td><input id="form_rights_eleve_active" type="checkbox" name="profil_rights[eleve_active]" /></td>
 				</tr>
 			</tbody>
 		</table>
 		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Tâches</caption>
+			<caption>Evalusations Individuelles</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_task_use">Utiliser</label></th>
-					<td><input id="form_rights_task_use" type="checkbox" name="profil_rights[task_use]" checked="checked" disabled="disabled" /></td>
+					<th><label for="form_rights_eval_ind_use">Utiliser</label></th>
+					<td><input id="form_rights_eval_ind_use" type="checkbox" name="profil_rights[eval_ind_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_task_list">Lister/Voir</label></th>
-					<td><input id="form_rights_task_list" type="checkbox" name="profil_rights[task_list]" checked="checked" disabled="disabled" /></td>
+					<th><label for="form_rights_eval_ind_list">Lister</label></th>
+					<td><input id="form_rights_eval_ind_list" type="checkbox" name="profil_rights[eval_ind_list]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_task_add">Ajouter</label></th>
-					<td><input id="form_rights_task_add" type="checkbox" name="profil_rights[task_add]" /></td>
+					<th><label for="form_rights_eval_ind_add">Ajouter</label></th>
+					<td><input id="form_rights_eval_ind_add" type="checkbox" name="profil_rights[eval_ind_add]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_task_edit">Modifier</label></th>
-					<td><input id="form_rights_task_edit" type="checkbox" name="profil_rights[task_edit]" /></td>
+					<th><label for="form_rights_eval_ind_edit">Modifier</label></th>
+					<td><input id="form_rights_eval_ind_edit" type="checkbox" name="profil_rights[eval_ind_edit]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_task_delete">Supprimer</label></th>
-					<td><input id="form_rights_task_delete" type="checkbox" name="profil_rights[task_delete]" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_task_change_project">Changer de projet</label></th>
-					<td><input id="form_rights_task_change_project" type="checkbox" name="profil_rights[task_change_project]" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_task_change_parent">Attacher sur une autre tâche</label></th>
-					<td><input id="form_rights_task_change_parent" type="checkbox" name="profil_rights[task_change_parent]" /></td>
+					<th><label for="form_rights_eval_ind_delete">Supprimer</label></th>
+					<td><input id="form_rights_eval_ind_delete" type="checkbox" name="profil_rights[eval_ind_delete]" /></td>
 				</tr>
 			</tbody>
 		</table>
 		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Activité/Congés</caption>
+			<caption>Evaluations collectives</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_activity_use">Utiliser</label></th>
-					<td><input id="form_rights_activity_use" type="checkbox" name="profil_rights[activity_use]" checked="checked" disabled="disabled" /></td>
+					<th><label for="form_rights_eval_col_use">Utiliser</label></th>
+					<td><input id="form_rights_eval_col_use" type="checkbox" name="profil_rights[eval_col_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_activity_list">Lister/Voir</label></th>
-					<td><input id="form_rights_activity_list" type="checkbox" name="profil_rights[activity_list]" /></td>
+					<th><label for="form_rights_eval_col_list">Lister</label></th>
+					<td><input id="form_rights_eval_col_list" type="checkbox" name="profil_rights[eval_col_list]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_activity_edit">Saisir</label></th>
-					<td><input id="form_rights_activity_edit" type="checkbox" name="profil_rights[activity_edit]" /></td>
+					<th><label for="form_rights_eval_col_add">Ajouter</label></th>
+					<td><input id="form_rights_eval_col_add" type="checkbox" name="profil_rights[eval_col_add]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_eval_col_edit">Modifier</label></th>
+					<td><input id="form_rights_eval_col_edit" type="checkbox" name="profil_rights[eval_col_edit]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_eval_col_delete">Supprimer</label></th>
+					<td><input id="form_rights_eval_col_delete" type="checkbox" name="profil_rights[eval_col_delete]" /></td>
+				</tr>
+				<tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Livrets</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_livret_use">Utiliser</label></th>
+					<td><input id="form_rights_livret_use" type="checkbox" name="profil_rights[livret_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_livret_list">Lister</label></th>
+					<td><input id="form_rights_livret_list" type="checkbox" name="profil_rights[livret_list]" checked="checked" disabled="disabled" /></td>
 				</tr>
 			</tbody>
 		</table>
-		<table class="formulaire">
-			<caption>Vues récapitulatives</caption>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Consultations</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_summary_user">Utilisateur</label></th>
-					<td><input id="form_rights_summary_user" type="checkbox" name="profil_rights[summary_user]" /></td>
+					<th><label for="form_rights_consultation_use">Utiliser</label></th>
+					<td><input id="form_rights_consultation_use" type="checkbox" name="profil_rights[consultation_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_summary_team">Equipe</label></th>
-					<td><input id="form_rights_summary_team" type="checkbox" name="profil_rights[summary_team]" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_summary_project">Projets</label></th>
-					<td><input id="form_rights_summary_project" type="checkbox" name="profil_rights[summary_project]" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_summary_project_detail">Projets détaillés</label></th>
-					<td><input id="form_rights_summary_project_detail" type="checkbox" name="profil_rights[summary_project_detail]" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_summary_vision_globale">Vision globale des applications</label></th>
-					<td><input id="form_rights_summary_vision_globale" type="checkbox" name="profil_rights[summary_vision_globale]" /></td>
+					<th><label for="form_rights_consultation_list">Lister</label></th>
+					<td><input id="form_rights_consultation_list" type="checkbox" name="profil_rights[consultation_list]" checked="checked" disabled="disabled" /></td>
 				</tr>
 			</tbody>
 		</table>
@@ -201,112 +183,316 @@ if($bHasRight == false)
 			<caption>Profils/Droits</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_profil_use">Utiliser</label></th>
-					<td><input id="form_rights_profil_use" type="checkbox" name="profil_rights[profil_use]" checked="checked" disabled="disabled" /></td>
+					<th><label for="form_rights_admin_profil_use">Utiliser</label></th>
+					<td><input id="form_rights_admin_profil_use" type="checkbox" name="admin_profil_rights[admin_profil_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_profil_list">Lister/Voir</label></th>
-					<td><input id="form_rights_profil_list" type="checkbox" name="profil_rights[profil_list]" /></td>
+					<th><label for="form_rights_admin_profil_list">Lister</label></th>
+					<td><input id="form_rights_admin_profil_list" type="checkbox" name="admin_profil_rights[admin_profil_list]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_profil_add">Ajouter</label></th>
-					<td><input id="form_rights_profil_add" type="checkbox" name="profil_rights[profil_add]" /></td>
+					<th><label for="form_rights_admin_profil_add">Ajouter</label></th>
+					<td><input id="form_rights_admin_profil_add" type="checkbox" name="admin_profil_rights[admin_profil_add]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_profil_edit">Modifier</label></th>
-					<td><input id="form_rights_profil_edit" type="checkbox" name="profil_rights[profil_edit]" /></td>
+					<th><label for="form_rights_admin_profil_edit">Modifier</label></th>
+					<td><input id="form_rights_admin_profil_edit" type="checkbox" name="admin_profil_rights[admin_profil_edit]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_profil_delete">Supprimer</label></th>
-					<td><input id="form_rights_profil_delete" type="checkbox" name="profil_rights[profil_delete]" /></td>
-				</tr>
-			</tbody>
-		</table>
-		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Utilisateurs</caption>
-			<tbody>
-				<tr>
-					<th><label for="form_rights_user_use">Utiliser</label></th>
-					<td><input id="form_rights_user_use" type="checkbox" name="profil_rights[user_use]" checked="checked" disabled="disabled" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_user_list">Lister/Voir</label></th>
-					<td><input id="form_rights_user_list" type="checkbox" name="profil_rights[user_list]" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_user_add">Ajouter</label></th>
-					<td><input id="form_rights_user_add" type="checkbox" name="profil_rights[user_add]" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_user_edit">Modifier</label></th>
-					<td><input id="form_rights_user_edit" type="checkbox" name="profil_rights[user_edit]" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_user_active">Activer/Désactiver</label></th>
-					<td><input id="form_rights_user_active" type="checkbox" name="profil_rights[user_active]" /></td>
+					<th><label for="form_rights_admin_profil_delete">Supprimer</label></th>
+					<td><input id="form_rights_admin_profil_delete" type="checkbox" name="admin_profil_rights[admin_profil_delete]" /></td>
 				</tr>
 			</tbody>
 		</table>
 		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Tâches templates</caption>
+			<caption>Professeurs</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_ttask_use">Utiliser</label></th>
-					<td><input id="form_rights_ttask_use" type="checkbox" name="profil_rights[ttask_use]" checked="checked" disabled="disabled" /></td>
+					<th><label for="form_rights_professeur_use">Utiliser</label></th>
+					<td><input id="form_rights_professeur_use" type="checkbox" name="profil_rights[professeur_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_ttask_list">Lister/Voir</label></th>
-					<td><input id="form_rights_ttask_list" type="checkbox" name="profil_rights[ttask_list]" /></td>
+					<th><label for="form_rights_professeur_list">Lister</label></th>
+					<td><input id="form_rights_professeur_list" type="checkbox" name="profil_rights[professeur_list]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_ttask_add">Ajouter</label></th>
-					<td><input id="form_rights_ttask_add" type="checkbox" name="profil_rights[ttask_add]" /></td>
+					<th><label for="form_rights_professeur_add">Ajouter</label></th>
+					<td><input id="form_rights_professeur_add" type="checkbox" name="profil_rights[professeur_add]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_ttask_edit">Modifier</label></th>
-					<td><input id="form_rights_ttask_edit" type="checkbox" name="profil_rights[ttask_edit]" /></td>
+					<th><label for="form_rights_professeur_edit">Modifier</label></th>
+					<td><input id="form_rights_professeur_edit" type="checkbox" name="profil_rights[professeur_edit]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_ttask_delete">Supprimer</label></th>
-					<td><input id="form_rights_ttask_delete" type="checkbox" name="profil_rights[ttask_delete]" /></td>
+					<th><label for="form_rights_professeur_active">Supprimer</label></th>
+					<td><input id="form_rights_professeur_active" type="checkbox" name="profil_rights[professeur_active]" /></td>
 				</tr>
 			</tbody>
 		</table>
 		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Jours fériés</caption>
+			<caption>Ecoles</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_bank_holiday_use">Utiliser</label></th>
-					<td><input id="form_rights_bank_holiday_use" type="checkbox" name="profil_rights[bank_holiday_use]" checked="checked" disabled="disabled" /></td>
+					<th><label for="form_rights_ecole_use">Utiliser</label></th>
+					<td><input id="form_rights_ecole_use" type="checkbox" name="profil_rights[ecole_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_bank_holiday_list">Lister/Voir</label></th>
-					<td><input id="form_rights_bank_holiday_list" type="checkbox" name="profil_rights[bank_holiday_list]" /></td>
+					<th><label for="form_rights_ecole_list">Lister</label></th>
+					<td><input id="form_rights_ecole_list" type="checkbox" name="profil_rights[ecole_list]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_bank_holiday_add">Ajouter</label></th>
-					<td><input id="form_rights_bank_holiday_add" type="checkbox" name="profil_rights[bank_holiday_add]" /></td>
+					<th><label for="form_rights_ecole_add">Ajouter</label></th>
+					<td><input id="form_rights_ecole_add" type="checkbox" name="profil_rights[ecole_add]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_bank_holiday_edit">Modifier</label></th>
-					<td><input id="form_rights_bank_holiday_edit" type="checkbox" name="profil_rights[bank_holiday_edit]" /></td>
+					<th><label for="form_rights_ecole_edit">Modifier</label></th>
+					<td><input id="form_rights_ecole_edit" type="checkbox" name="profil_rights[ecole_edit]" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_bank_holiday_delete">Supprimer</label></th>
-					<td><input id="form_rights_bank_holiday_delete" type="checkbox" name="profil_rights[bank_holiday_delete]" /></td>
+					<th><label for="form_rights_ecole_delete">Supprimer</label></th>
+					<td><input id="form_rights_ecole_delete" type="checkbox" name="profil_rights[ecole_delete]" /></td>
 				</tr>
 			</tbody>
 		</table>
 		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Administration générale Droits</caption>
+			<caption>Classes</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_admin_calcul_denormalise">Champs dénormalisés</label></th>
-					<td><input id="form_rights_admin_calcul_denormalise" type="checkbox" name="profil_rights[admin_calcul_denormalise]" /></td>
+					<th><label for="form_rights_classe_use">Utiliser</label></th>
+					<td><input id="form_rights_classe_use" type="checkbox" name="profil_rights[classe_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_admin_calcul_arborescence">Arborescences des projets</label></th>
-					<td><input id="form_rights_admin_calcul_arborescence" type="checkbox" name="profil_rights[admin_calcul_arborescence]" /></td>
+					<th><label for="form_rights_classe_list">Lister</label></th>
+					<td><input id="form_rights_classe_list" type="checkbox" name="profil_rights[classe_list]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_classe_add">Ajouter</label></th>
+					<td><input id="form_rights_classe_add" type="checkbox" name="profil_rights[classe_add]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_classe_edit">Modifier</label></th>
+					<td><input id="form_rights_classe_edit" type="checkbox" name="profil_rights[classe_edit]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_classe_delete">Supprimer</label></th>
+					<td><input id="form_rights_classe_delete" type="checkbox" name="profil_rights[classe_delete]" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Eleves</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_admin_eleve_use">Utiliser</label></th>
+					<td><input id="form_rights_admin_eleve_use" type="checkbox" name="profil_rights[admin_eleve_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_admin_eleve_list">Lister</label></th>
+					<td><input id="form_rights_admin_eleve_list" type="checkbox" name="profil_rights[admin_eleve_list]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_admin_eleve_add">Ajouter</label></th>
+					<td><input id="form_rights_admin_eleve_add" type="checkbox" name="profil_rights[admin_eleve_add]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_admin_eleve_edit">Modifier</label></th>
+					<td><input id="form_rights_admin_eleve_edit" type="checkbox" name="profil_rights[admin_eleve_edit]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_admin_eleve_delete">Supprimer</label></th>
+					<td><input id="form_rights_admin_eleve_delete" type="checkbox" name="profil_rights[admin_eleve_delete]" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Cycles</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_cycle_use">Utiliser</label></th>
+					<td><input id="form_rights_cycle_use" type="checkbox" name="profil_rights[cycle_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_cycle_list">Lister</label></th>
+					<td><input id="form_rights_cycle_list" type="checkbox" name="profil_rights[cycle_list]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_cycle_add">Ajouter</label></th>
+					<td><input id="form_rights_cycle_add" type="checkbox" name="profil_rights[cycle_add]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_cycle_edit">Modifier</label></th>
+					<td><input id="form_rights_cycle_edit" type="checkbox" name="profil_rights[cycle_edit]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_cycle_delete">Supprimer</label></th>
+					<td><input id="form_rights_cycle_delete" type="checkbox" name="profil_rights[cycle_delete]" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Niveaux</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_niveau_use">Utiliser</label></th>
+					<td><input id="form_rights_niveau_use" type="checkbox" name="profil_rights[niveau_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_niveau_list">Lister</label></th>
+					<td><input id="form_rights_niveau_list" type="checkbox" name="profil_rights[niveau_list]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_niveau_add">Ajouter</label></th>
+					<td><input id="form_rights_niveau_add" type="checkbox" name="profil_rights[niveau_add]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_niveau_edit">Modifier</label></th>
+					<td><input id="form_rights_niveau_edit" type="checkbox" name="profil_rights[niveau_edit]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_niveau_delete">Supprimer</label></th>
+					<td><input id="form_rights_niveau_delete" type="checkbox" name="profil_rights[niveau_delete]" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Domaines</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_domaine_use">Utiliser</label></th>
+					<td><input id="form_rights_domaine_use" type="checkbox" name="profil_rights[domaine_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_domaine_list">Lister</label></th>
+					<td><input id="form_rights_domaine_list" type="checkbox" name="profil_rights[domaine_list]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_domaine_add">Ajouter</label></th>
+					<td><input id="form_rights_domaine_add" type="checkbox" name="profil_rights[domaine_add]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_domaine_edit">Modifier</label></th>
+					<td><input id="form_rights_domaine_edit" type="checkbox" name="profil_rights[domaine_edit]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_domaine_delete">Supprimer</label></th>
+					<td><input id="form_rights_domaine_delete" type="checkbox" name="profil_rights[domaine_delete]" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Matières</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_matiere_use">Utiliser</label></th>
+					<td><input id="form_rights_matiere_use" type="checkbox" name="profil_rights[matiere_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_matiere_list">Lister</label></th>
+					<td><input id="form_rights_matiere_list" type="checkbox" name="profil_rights[matiere_list]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_matiere_add">Ajouter</label></th>
+					<td><input id="form_rights_matiere_add" type="checkbox" name="profil_rights[matiere_add]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_matiere_edit">Modifier</label></th>
+					<td><input id="form_rights_matiere_edit" type="checkbox" name="profil_rights[matiere_edit]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_matiere_delete">Supprimer</label></th>
+					<td><input id="form_rights_matiere_delete" type="checkbox" name="profil_rights[matiere_delete]" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Compétences</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_competence_use">Utiliser</label></th>
+					<td><input id="form_rights_competence_use" type="checkbox" name="profil_rights[competence_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_competence_list">Lister</label></th>
+					<td><input id="form_rights_competence_list" type="checkbox" name="profil_rights[competence_list]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_competence_add">Ajouter</label></th>
+					<td><input id="form_rights_competence_add" type="checkbox" name="profil_rights[competence_add]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_competence_edit">Modifier</label></th>
+					<td><input id="form_rights_competence_edit" type="checkbox" name="profil_rights[competence_edit]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_competence_delete">Supprimer</label></th>
+					<td><input id="form_rights_competence_delete" type="checkbox" name="profil_rights[competence_delete]" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Notes</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_note_use">Utiliser</label></th>
+					<td><input id="form_rights_note_use" type="checkbox" name="profil_rights[note_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_note_list">Lister</label></th>
+					<td><input id="form_rights_note_list" type="checkbox" name="profil_rights[note_list]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_note_add">Ajouter</label></th>
+					<td><input id="form_rights_note_add" type="checkbox" name="profil_rights[note_add]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_note_edit">Modifier</label></th>
+					<td><input id="form_rights_note_edit" type="checkbox" name="profil_rights[note_edit]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_note_delete">Supprimer</label></th>
+					<td><input id="form_rights_note_delete" type="checkbox" name="profil_rights[note_delete]" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Périodes</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_periode_use">Utiliser</label></th>
+					<td><input id="form_rights_periode_use" type="checkbox" name="profil_rights[periode_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_periode_list">Lister</label></th>
+					<td><input id="form_rights_periode_list" type="checkbox" name="profil_rights[periode_list]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_periode_add">Ajouter</label></th>
+					<td><input id="form_rights_periode_add" type="checkbox" name="profil_rights[periode_add]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_periode_edit">Modifier</label></th>
+					<td><input id="form_rights_periode_edit" type="checkbox" name="profil_rights[periode_edit]" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_periode_delete">Supprimer</label></th>
+					<td><input id="form_rights_periode_delete" type="checkbox" name="profil_rights[periode_delete]" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Imports</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_import_csv_cycle">CSV cycles</label></th>
+					<td><input id="form_rights_import_csv_cycle" type="checkbox" name="profil_rights[import_csv_cycle]" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_import_xml_cycle">XML cycles</label></th>
+					<td><input id="form_rights_import_xml_cycle" type="checkbox" name="profil_rights[import_xml_cycle]" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_import_xml_classe">XML Classes</label></th>
+					<td><input id="form_rights_import_xml_classe" type="checkbox" name="profil_rights[import_xml_classe]" disabled="disabled" /></td>
 				</tr>
 			</tbody>
 		</table>

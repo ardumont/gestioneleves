@@ -151,4 +151,3 @@ Message::addErrorFromFormValidation($oForm->getError());
 // Rechargement
 header("Location: ?page=profils&mode=add");
 return;
-?>

@@ -166,4 +166,3 @@ Message::addErrorFromFormValidation($oForm->getError());
 // Rechargement
 header("Location: ?page=profils&mode=edit");
 return;
-?>

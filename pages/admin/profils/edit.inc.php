@@ -70,12 +70,12 @@ if($oForm->hasError('profil_id') == true)
 	return;
 }
 
-$sQuery = <<< _EOQ_
+$sQuery = <<< EOQ
 	SELECT
 		1 EXIST
 	FROM PROFILS
 	WHERE PROFIL_ID = {$nProfilId}
-_EOQ_;
+EOQ;
 
 $oForm->readArray('query1', Database::fetchOneRow($sQuery));
 $oForm->testError0('query1.EXIST', 'exist', "L'identifiant du profil \"{$nProfilId}\" n'est pas valide !");
@@ -99,23 +99,23 @@ if($oForm->hasError() == true)
 //==============================================================================
 
 // ===== Information sur la donnée à traiter =====
-$sQuery = <<< _EOQ_
+$sQuery = <<< EOQ
 	SELECT
 		PROFIL_NAME,
 		PROFIL_COMMENT
 	FROM PROFILS
 	WHERE PROFIL_ID = {$nProfilId}
-_EOQ_;
+EOQ;
 
 $aThisProfil = Database::fetchOneRow($sQuery);
 // $aThisProfil[Nom de colonne] = Valeur
 
-$sQuery = <<< _EOQ_
+$sQuery = <<< EOQ
 	SELECT
 		PROFIL_RIGHT
 	FROM PROFILS_REL_RIGHTS
 	WHERE PROFIL_ID = {$nProfilId}
-_EOQ_;
+EOQ;
 
 $aRights = Database::fetchColumn($sQuery);
 // $aRights[] = Valeur
@@ -158,133 +158,115 @@ $sGuiAdminDisabled = ($nProfilId == 1) ? "disabled=\"disabled\"" : "";
 		</tbody>
 	</table>
 	<fieldset>
-		<legend>Droits standard pour le profil</legend>
+		<legend>Droits standards pour le profil</legend>
 		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Applications</caption>
+			<caption>Profil</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_application_use">Utiliser</label></th>
-					<td><input id="form_rights_application_use" type="checkbox" name="profil_rights[application_use]" checked="checked" disabled="disabled" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_application_list">Lister/Voir</label></th>
-					<td><input id="form_rights_application_list" type="checkbox" name="profil_rights[application_list]" <?php echo(isGuiChecked('application_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_application_add">Ajouter</label></th>
-					<td><input id="form_rights_application_add" type="checkbox" name="profil_rights[application_add]" <?php echo(isGuiChecked('application_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_application_edit">Modifier</label></th>
-					<td><input id="form_rights_application_edit" type="checkbox" name="profil_rights[application_edit]" <?php echo(isGuiChecked('application_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_application_delete">Supprimer</label></th>
-					<td><input id="form_rights_application_delete" type="checkbox" name="profil_rights[application_delete]" <?php echo(isGuiChecked('application_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_profil_use">Utiliser</label></th>
+					<td><input id="form_rights_profil_use" type="checkbox" name="profil_rights[profil_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 			</tbody>
 		</table>
 		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Projets</caption>
+			<caption>Eleves</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_project_use">Utiliser</label></th>
-					<td><input id="form_rights_project_use" type="checkbox" name="profil_rights[project_use]" checked="checked" disabled="disabled" /></td>
+					<th><label for="form_rights_eleve_use">Utiliser</label></th>
+					<td><input id="form_rights_eleve_use" type="checkbox" name="profil_rights[eleve_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_project_list">Lister</label></th>
-					<td><input id="form_rights_project_list" type="checkbox" name="profil_rights[project_list]" <?php echo(isGuiChecked('project_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_eleve_list">Lister</label></th>
+					<td><input id="form_rights_eleve_list" type="checkbox" name="profil_rights[eleve_list]" <?php echo(isGuiChecked('eleve_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_project_view">Voir</label></th>
-					<td><input id="form_rights_project_view" type="checkbox" name="profil_rights[project_view]" <?php echo(isGuiChecked('project_view')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_eleve_add">Ajouter</label></th>
+					<td><input id="form_rights_eleve_add" type="checkbox" name="profil_rights[eleve_add]" <?php echo(isGuiChecked('eleve_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_project_add">Ajouter</label></th>
-					<td><input id="form_rights_project_add" type="checkbox" name="profil_rights[project_add]" <?php echo(isGuiChecked('project_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_eleve_edit">Modifier</label></th>
+					<td><input id="form_rights_eleve_edit" type="checkbox" name="profil_rights[eleve_edit]" <?php echo(isGuiChecked('eleve_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_project_edit">Modifier</label></th>
-					<td><input id="form_rights_project_edit" type="checkbox" name="profil_rights[project_edit]" <?php echo(isGuiChecked('project_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_project_delete">Supprimer</label></th>
-					<td><input id="form_rights_project_delete" type="checkbox" name="profil_rights[project_delete]" <?php echo(isGuiChecked('project_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_eleve_active">Activer/Désactiver</label></th>
+					<td><input id="form_rights_eleve_active" type="checkbox" name="profil_rights[eleve_active]" <?php echo(isGuiChecked('eleve_active')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 			</tbody>
 		</table>
 		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Tâches</caption>
+			<caption>Evalusations Individuelles</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_task_use">Utiliser</label></th>
-					<td><input id="form_rights_task_use" type="checkbox" name="profil_rights[task_use]" checked="checked" disabled="disabled" /></td>
+					<th><label for="form_rights_eval_ind_use">Utiliser</label></th>
+					<td><input id="form_rights_eval_ind_use" type="checkbox" name="profil_rights[eval_ind_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_task_list">Lister/Voir</label></th>
-					<td><input id="form_rights_task_list" type="checkbox" name="profil_rights[task_list]" checked="checked" disabled="disabled" /></td>
+					<th><label for="form_rights_eval_ind_list">Lister</label></th>
+					<td><input id="form_rights_eval_ind_list" type="checkbox" name="profil_rights[eval_ind_list]" <?php echo(isGuiChecked('eval_ind_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_task_add">Ajouter</label></th>
-					<td><input id="form_rights_task_add" type="checkbox" name="profil_rights[task_add]" <?php echo(isGuiChecked('task_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_eval_ind_add">Ajouter</label></th>
+					<td><input id="form_rights_eval_ind_add" type="checkbox" name="profil_rights[eval_ind_add]" <?php echo(isGuiChecked('eval_ind_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_task_edit">Modifier</label></th>
-					<td><input id="form_rights_task_edit" type="checkbox" name="profil_rights[task_edit]" <?php echo(isGuiChecked('task_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_eval_ind_edit">Modifier</label></th>
+					<td><input id="form_rights_eval_ind_edit" type="checkbox" name="profil_rights[eval_ind_edit]" <?php echo(isGuiChecked('eval_ind_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_task_delete">Supprimer</label></th>
-					<td><input id="form_rights_task_delete" type="checkbox" name="profil_rights[task_delete]" <?php echo(isGuiChecked('task_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_task_change_project">Changer de projet</label></th>
-					<td><input id="form_rights_task_change_project" type="checkbox" name="profil_rights[task_change_project]" <?php echo(isGuiChecked('task_change_project')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_task_change_parent">Attacher sur une autre tâche</label></th>
-					<td><input id="form_rights_task_change_parent" type="checkbox" name="profil_rights[task_change_parent]" <?php echo(isGuiChecked('task_change_parent')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_eval_ind_delete">Supprimer</label></th>
+					<td><input id="form_rights_eval_ind_delete" type="checkbox" name="profil_rights[eval_ind_delete]" <?php echo(isGuiChecked('eval_ind_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 			</tbody>
 		</table>
 		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Activité/Congés</caption>
+			<caption>Evaluations collectives</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_activity_use">Utiliser</label></th>
-					<td><input id="form_rights_activity_use" type="checkbox" name="profil_rights[activity_use]" checked="checked" disabled="disabled" /></td>
+					<th><label for="form_rights_eval_col_use">Utiliser</label></th>
+					<td><input id="form_rights_eval_col_use" type="checkbox" name="profil_rights[eval_col_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_activity_list">Lister/Voir</label></th>
-					<td><input id="form_rights_activity_list" type="checkbox" name="profil_rights[activity_list]" <?php echo(isGuiChecked('activity_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_eval_col_list">Lister/Voir</label></th>
+					<td><input id="form_rights_eval_col_list" type="checkbox" name="profil_rights[eval_col_list]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_activity_edit">Saisir</label></th>
-					<td><input id="form_rights_activity_edit" type="checkbox" name="profil_rights[activity_edit]" <?php echo(isGuiChecked('activity_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_eval_col_add">Ajouter</label></th>
+					<td><input id="form_rights_eval_col_add" type="checkbox" name="profil_rights[eval_col_add]" <?php echo(isGuiChecked('eval_col_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_eval_col_edit">Modifier</label></th>
+					<td><input id="form_rights_eval_col_edit" type="checkbox" name="profil_rights[eval_col_edit]" <?php echo(isGuiChecked('eval_col_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_eval_col_delete">Supprimer</label></th>
+					<td><input id="form_rights_eval_col_delete" type="checkbox" name="profil_rights[eval_col_delete]" <?php echo(isGuiChecked('eval_col_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Livrets</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_livret_use">Utiliser</label></th>
+					<td><input id="form_rights_livret_use" type="checkbox" name="profil_rights[livret_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_livret_list">Lister/Voir</label></th>
+					<td><input id="form_rights_livret_list" type="checkbox" name="profil_rights[livret_list]" checked="checked" disabled="disabled" /></td>
 				</tr>
 			</tbody>
 		</table>
-		<table class="formulaire">
-			<caption>Vues récapitulatives</caption>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Consultations</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_summary_user">Utilisateur</label></th>
-					<td><input id="form_rights_summary_user" type="checkbox" name="profil_rights[summary_user]" <?php echo(isGuiChecked('summary_user')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_consultation_use">Utiliser</label></th>
+					<td><input id="form_rights_consultation_use" type="checkbox" name="profil_rights[consultation_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_summary_team">Equipe</label></th>
-					<td><input id="form_rights_summary_team" type="checkbox" name="profil_rights[summary_team]" <?php echo(isGuiChecked('summary_team')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_summary_project">Projets</label></th>
-					<td><input id="form_rights_summary_project" type="checkbox" name="profil_rights[summary_project]" <?php echo(isGuiChecked('summary_project')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_summary_project_detail">Projets détaillés</label></th>
-					<td><input id="form_rights_summary_project_detail" type="checkbox" name="profil_rights[summary_project_detail]" <?php echo(isGuiChecked('summary_project_detail')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_summary_vision_globale">Vision globale des applications</label></th>
-					<td><input id="form_rights_summary_vision_globale" type="checkbox" name="profil_rights[summary_vision_globale]" <?php echo(isGuiChecked('summary_vision_globale')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_consultation_list">Lister/Voir</label></th>
+					<td><input id="form_rights_consultation_list" type="checkbox" name="profil_rights[consultation_list]" checked="checked" disabled="disabled" /></td>
 				</tr>
 			</tbody>
 		</table>
@@ -295,112 +277,316 @@ $sGuiAdminDisabled = ($nProfilId == 1) ? "disabled=\"disabled\"" : "";
 			<caption>Profils/Droits</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_profil_use">Utiliser</label></th>
-					<td><input id="form_rights_profil_use" type="checkbox" name="profil_rights[profil_use]" checked="checked" disabled="disabled" /></td>
+					<th><label for="form_rights_admin_profil_use">Utiliser</label></th>
+					<td><input id="form_rights_admin_profil_use" type="checkbox" name="admin_profil_rights[admin_profil_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_profil_list">Lister/Voir</label></th>
-					<td><input id="form_rights_profil_list" type="checkbox" name="profil_rights[profil_list]" <?php echo(isGuiChecked('profil_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_admin_profil_list">Lister/Voir</label></th>
+					<td><input id="form_rights_admin_profil_list" type="checkbox" name="admin_profil_rights[admin_profil_list]" <?php echo(isGuiChecked('admin_profil_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_profil_add">Ajouter</label></th>
-					<td><input id="form_rights_profil_add" type="checkbox" name="profil_rights[profil_add]" <?php echo(isGuiChecked('profil_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_admin_profil_add">Ajouter</label></th>
+					<td><input id="form_rights_admin_profil_add" type="checkbox" name="admin_profil_rights[admin_profil_add]" <?php echo(isGuiChecked('admin_profil_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_profil_edit">Modifier</label></th>
-					<td><input id="form_rights_profil_edit" type="checkbox" name="profil_rights[profil_edit]" <?php echo(isGuiChecked('profil_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_admin_profil_edit">Modifier</label></th>
+					<td><input id="form_rights_admin_profil_edit" type="checkbox" name="admin_profil_rights[admin_profil_edit]" <?php echo(isGuiChecked('admin_profil_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_profil_delete">Supprimer</label></th>
-					<td><input id="form_rights_profil_delete" type="checkbox" name="profil_rights[profil_delete]" <?php echo(isGuiChecked('profil_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
-				</tr>
-			</tbody>
-		</table>
-		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Utilisateurs</caption>
-			<tbody>
-				<tr>
-					<th><label for="form_rights_user_use">Utiliser</label></th>
-					<td><input id="form_rights_user_use" type="checkbox" name="profil_rights[user_use]" checked="checked" disabled="disabled" /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_user_list">Lister/Voir</label></th>
-					<td><input id="form_rights_user_list" type="checkbox" name="profil_rights[user_list]" <?php echo(isGuiChecked('user_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_user_add">Ajouter</label></th>
-					<td><input id="form_rights_user_add" type="checkbox" name="profil_rights[user_add]" <?php echo(isGuiChecked('user_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_user_edit">Modifier</label></th>
-					<td><input id="form_rights_user_edit" type="checkbox" name="profil_rights[user_edit]" <?php echo(isGuiChecked('user_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
-				</tr>
-				<tr>
-					<th><label for="form_rights_user_active">Activer/Désactiver</label></th>
-					<td><input id="form_rights_user_active" type="checkbox" name="profil_rights[user_active]" <?php echo(isGuiChecked('user_active')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_admin_profil_delete">Supprimer</label></th>
+					<td><input id="form_rights_admin_profil_delete" type="checkbox" name="admin_profil_rights[admin_profil_delete]" <?php echo(isGuiChecked('admin_profil_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 			</tbody>
 		</table>
 		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Tâches templates</caption>
+			<caption>Professeurs</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_ttask_use">Utiliser</label></th>
-					<td><input id="form_rights_ttask_use" type="checkbox" name="profil_rights[ttask_use]" checked="checked" disabled="disabled" /></td>
+					<th><label for="form_rights_professeur_use">Utiliser</label></th>
+					<td><input id="form_rights_professeur_use" type="checkbox" name="profil_rights[professeur_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_ttask_list">Lister/Voir</label></th>
-					<td><input id="form_rights_ttask_list" type="checkbox" name="profil_rights[ttask_list]" <?php echo(isGuiChecked('ttask_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_professeur_list">Lister/Voir</label></th>
+					<td><input id="form_rights_professeur_list" type="checkbox" name="profil_rights[professeur_list]" <?php echo(isGuiChecked('professeur_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_ttask_add">Ajouter</label></th>
-					<td><input id="form_rights_ttask_add" type="checkbox" name="profil_rights[ttask_add]" <?php echo(isGuiChecked('ttask_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_professeur_add">Ajouter</label></th>
+					<td><input id="form_rights_professeur_add" type="checkbox" name="profil_rights[professeur_add]" <?php echo(isGuiChecked('professeur_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_ttask_edit">Modifier</label></th>
-					<td><input id="form_rights_ttask_edit" type="checkbox" name="profil_rights[ttask_edit]" <?php echo(isGuiChecked('ttask_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_professeur_edit">Modifier</label></th>
+					<td><input id="form_rights_professeur_edit" type="checkbox" name="profil_rights[professeur_edit]" <?php echo(isGuiChecked('professeur_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_ttask_delete">Supprimer</label></th>
-					<td><input id="form_rights_ttask_delete" type="checkbox" name="profil_rights[ttask_delete]" <?php echo(isGuiChecked('ttask_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_professeur_active">Supprimer</label></th>
+					<td><input id="form_rights_professeur_active" type="checkbox" name="profil_rights[professeur_active]" <?php echo(isGuiChecked('professeur_active')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 			</tbody>
 		</table>
 		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Jours fériés</caption>
+			<caption>Ecoles</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_bank_holiday_use">Utiliser</label></th>
-					<td><input id="form_rights_bank_holiday_use" type="checkbox" name="profil_rights[bank_holiday_use]" checked="checked" disabled="disabled" /></td>
+					<th><label for="form_rights_ecole_use">Utiliser</label></th>
+					<td><input id="form_rights_ecole_use" type="checkbox" name="profil_rights[ecole_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_bank_holiday_list">Lister/Voir</label></th>
-					<td><input id="form_rights_bank_holiday_list" type="checkbox" name="profil_rights[bank_holiday_list]" <?php echo(isGuiChecked('bank_holiday_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_ecole_list">Lister/Voir</label></th>
+					<td><input id="form_rights_ecole_list" type="checkbox" name="profil_rights[ecole_list]" <?php echo(isGuiChecked('ecole_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_bank_holiday_add">Ajouter</label></th>
-					<td><input id="form_rights_bank_holiday_add" type="checkbox" name="profil_rights[bank_holiday_add]" <?php echo(isGuiChecked('bank_holiday_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_ecole_add">Ajouter</label></th>
+					<td><input id="form_rights_ecole_add" type="checkbox" name="profil_rights[ecole_add]" <?php echo(isGuiChecked('ecole_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_bank_holiday_edit">Modifier</label></th>
-					<td><input id="form_rights_bank_holiday_edit" type="checkbox" name="profil_rights[bank_holiday_edit]" <?php echo(isGuiChecked('bank_holiday_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_ecole_edit">Modifier</label></th>
+					<td><input id="form_rights_ecole_edit" type="checkbox" name="profil_rights[ecole_edit]" <?php echo(isGuiChecked('ecole_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_bank_holiday_delete">Supprimer</label></th>
-					<td><input id="form_rights_bank_holiday_delete" type="checkbox" name="profil_rights[bank_holiday_delete]" <?php echo(isGuiChecked('bank_holiday_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_ecole_delete">Supprimer</label></th>
+					<td><input id="form_rights_ecole_delete" type="checkbox" name="profil_rights[ecole_delete]" <?php echo(isGuiChecked('ecole_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
 				</tr>
 			</tbody>
 		</table>
 		<table class="formulaire" style="float:left; margin-right:10px;">
-			<caption>Administration générale Droits</caption>
+			<caption>Classes</caption>
 			<tbody>
 				<tr>
-					<th><label for="form_rights_admin_calcul_denormalise">Champs dénormalisés</label></th>
-					<td><input id="form_rights_admin_calcul_denormalise" type="checkbox" name="profil_rights[admin_calcul_denormalise]" <?php echo(isGuiChecked('admin_calcul_denormalise')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_classe_use">Utiliser</label></th>
+					<td><input id="form_rights_classe_use" type="checkbox" name="profil_rights[classe_use]" checked="checked" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<th><label for="form_rights_admin_calcul_arborescence">Arborescences des projets</label></th>
-					<td><input id="form_rights_admin_calcul_arborescence" type="checkbox" name="profil_rights[admin_calcul_arborescence]" <?php echo(isGuiChecked('admin_calcul_arborescence')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+					<th><label for="form_rights_classe_list">Lister/Voir</label></th>
+					<td><input id="form_rights_classe_list" type="checkbox" name="profil_rights[classe_list]" <?php echo(isGuiChecked('classe_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_classe_add">Ajouter</label></th>
+					<td><input id="form_rights_classe_add" type="checkbox" name="profil_rights[classe_add]" <?php echo(isGuiChecked('classe_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_classe_edit">Modifier</label></th>
+					<td><input id="form_rights_classe_edit" type="checkbox" name="profil_rights[classe_edit]" <?php echo(isGuiChecked('classe_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_classe_delete">Supprimer</label></th>
+					<td><input id="form_rights_classe_delete" type="checkbox" name="profil_rights[classe_delete]" <?php echo(isGuiChecked('classe_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Eleves</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_admin_eleve_use">Utiliser</label></th>
+					<td><input id="form_rights_admin_eleve_use" type="checkbox" name="profil_rights[admin_eleve_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_admin_eleve_list">Lister/Voir</label></th>
+					<td><input id="form_rights_admin_eleve_list" type="checkbox" name="profil_rights[admin_eleve_list]" <?php echo(isGuiChecked('admin_eleve_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_admin_eleve_add">Ajouter</label></th>
+					<td><input id="form_rights_admin_eleve_add" type="checkbox" name="profil_rights[admin_eleve_add]" <?php echo(isGuiChecked('admin_eleve_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_admin_eleve_edit">Modifier</label></th>
+					<td><input id="form_rights_admin_eleve_edit" type="checkbox" name="profil_rights[admin_eleve_edit]" <?php echo(isGuiChecked('admin_eleve_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_admin_eleve_delete">Supprimer</label></th>
+					<td><input id="form_rights_admin_eleve_delete" type="checkbox" name="profil_rights[admin_eleve_delete]" <?php echo(isGuiChecked('admin_eleve_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Cycles</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_cycle_use">Utiliser</label></th>
+					<td><input id="form_rights_cycle_use" type="checkbox" name="profil_rights[cycle_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_cycle_list">Lister/Voir</label></th>
+					<td><input id="form_rights_cycle_list" type="checkbox" name="profil_rights[cycle_list]" <?php echo(isGuiChecked('cycle_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_cycle_add">Ajouter</label></th>
+					<td><input id="form_rights_cycle_add" type="checkbox" name="profil_rights[cycle_add]" <?php echo(isGuiChecked('cycle_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_cycle_edit">Modifier</label></th>
+					<td><input id="form_rights_cycle_edit" type="checkbox" name="profil_rights[cycle_edit]" <?php echo(isGuiChecked('cycle_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_cycle_delete">Supprimer</label></th>
+					<td><input id="form_rights_cycle_delete" type="checkbox" name="profil_rights[cycle_delete]" <?php echo(isGuiChecked('cycle_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Niveaux</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_niveau_use">Utiliser</label></th>
+					<td><input id="form_rights_niveau_use" type="checkbox" name="profil_rights[niveau_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_niveau_list">Lister/Voir</label></th>
+					<td><input id="form_rights_niveau_list" type="checkbox" name="profil_rights[niveau_list]" <?php echo(isGuiChecked('niveau_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_niveau_add">Ajouter</label></th>
+					<td><input id="form_rights_niveau_add" type="checkbox" name="profil_rights[niveau_add]" <?php echo(isGuiChecked('niveau_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_niveau_edit">Modifier</label></th>
+					<td><input id="form_rights_niveau_edit" type="checkbox" name="profil_rights[niveau_edit]" <?php echo(isGuiChecked('niveau_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_niveau_delete">Supprimer</label></th>
+					<td><input id="form_rights_niveau_delete" type="checkbox" name="profil_rights[niveau_delete]" <?php echo(isGuiChecked('niveau_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Domaines</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_domaine_use">Utiliser</label></th>
+					<td><input id="form_rights_domaine_use" type="checkbox" name="profil_rights[domaine_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_domaine_list">Lister/Voir</label></th>
+					<td><input id="form_rights_domaine_list" type="checkbox" name="profil_rights[domaine_list]" <?php echo(isGuiChecked('domaine_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_domaine_add">Ajouter</label></th>
+					<td><input id="form_rights_domaine_add" type="checkbox" name="profil_rights[domaine_add]" <?php echo(isGuiChecked('domaine_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_domaine_edit">Modifier</label></th>
+					<td><input id="form_rights_domaine_edit" type="checkbox" name="profil_rights[domaine_edit]" <?php echo(isGuiChecked('domaine_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_domaine_delete">Supprimer</label></th>
+					<td><input id="form_rights_domaine_delete" type="checkbox" name="profil_rights[domaine_delete]" <?php echo(isGuiChecked('domaine_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Matières</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_matiere_use">Utiliser</label></th>
+					<td><input id="form_rights_matiere_use" type="checkbox" name="profil_rights[matiere_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_matiere_list">Lister/Voir</label></th>
+					<td><input id="form_rights_matiere_list" type="checkbox" name="profil_rights[matiere_list]" <?php echo(isGuiChecked('matiere_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_matiere_add">Ajouter</label></th>
+					<td><input id="form_rights_matiere_add" type="checkbox" name="profil_rights[matiere_add]" <?php echo(isGuiChecked('matiere_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_matiere_edit">Modifier</label></th>
+					<td><input id="form_rights_matiere_edit" type="checkbox" name="profil_rights[matiere_edit]" <?php echo(isGuiChecked('matiere_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_matiere_delete">Supprimer</label></th>
+					<td><input id="form_rights_matiere_delete" type="checkbox" name="profil_rights[matiere_delete]" <?php echo(isGuiChecked('matiere_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Compétences</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_competence_use">Utiliser</label></th>
+					<td><input id="form_rights_competence_use" type="checkbox" name="profil_rights[competence_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_competence_list">Lister/Voir</label></th>
+					<td><input id="form_rights_competence_list" type="checkbox" name="profil_rights[competence_list]" <?php echo(isGuiChecked('competence_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_competence_add">Ajouter</label></th>
+					<td><input id="form_rights_competence_add" type="checkbox" name="profil_rights[competence_add]" <?php echo(isGuiChecked('competence_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_competence_edit">Modifier</label></th>
+					<td><input id="form_rights_competence_edit" type="checkbox" name="profil_rights[competence_edit]" <?php echo(isGuiChecked('competence_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_competence_delete">Supprimer</label></th>
+					<td><input id="form_rights_competence_delete" type="checkbox" name="profil_rights[competence_delete]" <?php echo(isGuiChecked('competence_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Notes</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_note_use">Utiliser</label></th>
+					<td><input id="form_rights_note_use" type="checkbox" name="profil_rights[note_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_note_list">Lister/Voir</label></th>
+					<td><input id="form_rights_note_list" type="checkbox" name="profil_rights[note_list]" <?php echo(isGuiChecked('note_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_note_add">Ajouter</label></th>
+					<td><input id="form_rights_note_add" type="checkbox" name="profil_rights[note_add]" <?php echo(isGuiChecked('note_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_note_edit">Modifier</label></th>
+					<td><input id="form_rights_note_edit" type="checkbox" name="profil_rights[note_edit]" <?php echo(isGuiChecked('note_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_note_delete">Supprimer</label></th>
+					<td><input id="form_rights_note_delete" type="checkbox" name="profil_rights[note_delete]" <?php echo(isGuiChecked('note_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Périodes</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_periode_use">Utiliser</label></th>
+					<td><input id="form_rights_periode_use" type="checkbox" name="profil_rights[periode_use]" checked="checked" disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_periode_list">Lister/Voir</label></th>
+					<td><input id="form_rights_periode_list" type="checkbox" name="profil_rights[periode_list]" <?php echo(isGuiChecked('periode_list')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_periode_add">Ajouter</label></th>
+					<td><input id="form_rights_periode_add" type="checkbox" name="profil_rights[periode_add]" <?php echo(isGuiChecked('periode_add')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_periode_edit">Modifier</label></th>
+					<td><input id="form_rights_periode_edit" type="checkbox" name="profil_rights[periode_edit]" <?php echo(isGuiChecked('periode_edit')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_periode_delete">Supprimer</label></th>
+					<td><input id="form_rights_periode_delete" type="checkbox" name="profil_rights[periode_delete]" <?php echo(isGuiChecked('periode_delete')); ?> <?php echo($sGuiAdminDisabled); ?> /></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="formulaire" style="float:left; margin-right:10px;">
+			<caption>Imports</caption>
+			<tbody>
+				<tr>
+					<th><label for="form_rights_import_csv_cycle">CSV cycles</label></th>
+					<td><input id="form_rights_import_csv_cycle" type="checkbox" name="profil_rights[import_csv_cycle]" <?php echo(isGuiChecked('periode_delete')); ?> <?php echo($sGuiAdminDisabled); ?> disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_import_xml_cycle">XML cycles</label></th>
+					<td><input id="form_rights_import_xml_cycle" type="checkbox" name="profil_rights[import_xml_cycle]" <?php echo(isGuiChecked('periode_delete')); ?> <?php echo($sGuiAdminDisabled); ?> disabled="disabled" /></td>
+				</tr>
+				<tr>
+					<th><label for="form_rights_import_xml_classe">XML Classes</label></th>
+					<td><input id="form_rights_import_xml_classe" type="checkbox" name="profil_rights[import_xml_classe]" <?php echo(isGuiChecked('periode_delete')); ?> <?php echo($sGuiAdminDisabled); ?> disabled="disabled" /></td>
 				</tr>
 			</tbody>
 		</table>
