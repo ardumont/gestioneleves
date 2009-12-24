@@ -368,8 +368,8 @@ $sEndLink .= ($nOffset != 0) ? "&amp;offset_depart={$nOffsetDep}" : "";
 	</tr>
 </table>
 <?php else: ?>
-<a href="javascript:void(0);" onclick="$('.evals_inds_id').attr('checked', 'checked');">Sélectionner tout</a>&nbsp;
-<a href="javascript:void(0);" onclick="$('.evals_inds_id').removeAttr('checked');">Désélectionner tout</a>
+<a href="javascript:void(0);" onclick="$('input[type=checkbox]').attr('checked', 'checked');">Sélectionner tout</a>&nbsp;
+<a href="javascript:void(0);" onclick="$('input[type=checkbox]').removeAttr('checked');">Désélectionner tout</a>
 <form method="post" action="?page=evaluations_individuelles&amp;mode=actions_multiples<?php echo $sEndLink; ?>">
 	<table class="list_tree">
 		<caption>
@@ -430,7 +430,7 @@ $sEndLink .= ($nOffset != 0) ? "&amp;offset_depart={$nOffsetDep}" : "";
 				</td>
 				<!-- Suppression multiple -->
 				<td>
-					<input type="checkbox" name="evals_inds_id[]" class="evals_inds_id" value="<?php echo($aEvalInd['EVAL_IND_ID']); ?>" alt="Suppression multiple" title="Suppression multiple"  />
+					<input type="checkbox" name="evals_inds_id[]" value="<?php echo($aEvalInd['EVAL_IND_ID']); ?>" alt="Suppression multiple" title="Suppression multiple"  />
 				</td>
 			</tr>
 			<?php endforeach; ?>
