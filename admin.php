@@ -112,7 +112,7 @@ Message::loadFromSession($_SESSION['ERROR_MESSAGE']);
 // On précise à la base qu'on travaille en UTF-8
 Database::execute("SET NAMES UTF8");
 
-// ===== Le gestionnaire de profil =====
+// ===== Le gestionnaire de profils =====
 
 ProfilManager::loadRights();
 

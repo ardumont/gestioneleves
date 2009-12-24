@@ -141,7 +141,7 @@ Database::openConnection(DATABASE_LOGIN, DATABASE_PASSWORD, DATABASE_NAME, DATAB
 // On précise à la base qu'on travaille en UTF-8
 Database::execute("SET NAMES UTF8");
 
-// ===== Le gestionnaire de profil =====
+// ===== Le gestionnaire de profils =====
 
 ProfilManager::loadRights();
 

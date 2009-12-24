@@ -84,6 +84,7 @@ require_once(PATH_PHP_LIB."/utils.lib.php");
 require_once(PATH_PHP_LIB."/database.class.php");
 require_once(PATH_PHP_LIB."/formvalidation.class.php");
 require_once(PATH_PHP_LIB."/message.class.php");
+require_once(PATH_APP_LIB . "/profilmanager.class.php");
 
 require_once(PATH_METIER . "/livret.class.php");
 require_once(PATH_METIER . "/moyenne.class.php");
@@ -108,6 +109,10 @@ Database::execute("SET NAMES UTF8");
 
 // ===== Chargement des erreurs sauvegardes =====
 Message::loadFromSession($_SESSION['ERROR_MESSAGE']);
+
+// ===== Le gestionnaire de profils =====
+
+ProfilManager::loadRights();
 
 //==============================================================================
 // Preparation des donnees
