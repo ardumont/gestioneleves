@@ -80,7 +80,7 @@ $aProfils = Database::fetchArray($sQuery);
 	</tfoot>
 	<tbody<?php echo (count($aProfils) > 25) ? ' class="div_scrollable_large"' : ''; ?>>
 		<?php foreach($aProfils as $nRowNum => $aOneProfil): ?>
-		<tr class="row<?php echo($nRowNum % 2); ?>">
+		<tr class="level0_row<?php echo($nRowNum % 2); ?>">
 			<td></td>
 			<td><a href="?page=profils&amp;mode=edit&amp;profil_id=<?php echo($aOneProfil['PROFIL_ID']); ?>"><?php echo($aOneProfil['PROFIL_NAME']); ?></a></td>
 			<td><?php echo($aOneProfil['PROFIL_COMMENT']); ?></td>

@@ -272,17 +272,6 @@ if(array_key_exists($sPageId, $aMenuPage) == true)
 	}
 }
 
-// ===== La liste des utilisateurs (pour la combobox) =====
-$sQuery = <<< EOQ
-	SELECT
-		PROFESSEUR_ID,
-		PROFESSEUR_NOM
-	FROM PROFESSEURS
-	ORDER BY PROFESSEUR_NOM
-EOQ;
-$aUsers = Database::fetchColumnWithKey($sQuery);
-// $aUsers[Id] = Nom
-
 //==============================================================================
 // Traitement des données
 //==============================================================================
@@ -367,204 +356,18 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 	<?php endif; ?>
 	<div id="struct_left_panel">
 		<div id="struct_identity">
-			<?php if(!isset($_SESSION['PROFESSEUR_ID'])): /* utilisateur non connecté */ ?>
-			<h1><a href="javascript:void(0);" style="color:white;" onclick="$('#identification').toggle('slow');">Identification</a></h1>
-			<div id="identification">
-				<form method="post" action="?page=login_do">
-					<table>
-						<tr>
-							<td><label for="form_auth_name">Professeur</label></td>
-							<td>
-								<select id="form_auth_name" name="professeur_id">
-								<?php foreach($aUsers as $nKey => $sValue): ?>
-								<option value="<?php echo($nKey); ?>"<?php echo ( isset($_SESSION['PROFESSEUR_ID']) && ( $nKey == $_SESSION['PROFESSEUR_ID'] ) ) ? ' selected="selected"' : '';?>><?php echo($sValue); ?></option>
-								<?php endforeach; ?>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td><label for="form_auth_password">Mot de passe</label></td>
-							<td><input type="password" size="15" maxlength="15" name="professeur_password" /></td>
-						</tr>
-					</table>
-					<div>
-						<!-- pour le trou du cul d'ie qui sinon n'integre pas le champ action dans le formulaire -->
-						<input type="hidden" name="action" value="Valider" />
-						<input type="submit" name="action" value="Valider" />
-					</div>
-				</form>
-			</div>
-			<?php else: /* Utilisateur connecté */ ?>
-			<h1><a href="javascript:void(0);" style="color:white;" onclick="$('#identification').toggle('slow');"><?php echo $_SESSION['PROFESSEUR_NOM']; ?></a></h1>
-			<div id="identification">
-				<h4>
-					<a href="?page=profils&amp;mode=edit&amp;professeur_id=<?php echo $_SESSION['PROFESSEUR_ID']; ?>">
-						<img src="<?php echo(URL_ICONS_16X16); ?>/user.png" />Modification du profil
-					</a>
-				</h4>
-				<h4>
-					<a href="?page=logout_do">
-						<img src="<?php echo(URL_ICONS_16X16); ?>/out.png" />Se d&eacute;connecter
-					</a>
-				</h4>
-			</div>
-			<?php endif; ?>
+			<?php require_once(PATH_PAGES."/menu/user_identity.inc.php"); ?>
 		</div>
 		<div id="struct_menu">
-			<h1><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_identite').toggle('slow');">Menu</a></h1>
-			<div id="menu_identite">
-			<?php if(isset($_SESSION['PROFESSEUR_ID'])): /* utilisateur non connecté */?>
-				<h4>
-					<a href="?page=home">
-						<img src="<?php echo(URL_ICONS_16X16); ?>/home.png" />Accueil
-					</a>
-				</h4>
-				<h5>&nbsp;</h5>
-				<?php if(ProfilManager::hasRight('eleve_list')): ?>
-				<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_eleves').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Elèves</a></h3>
-				<div id="menu_eleves">
-					<h4>
-						<a href="?page=eleves">
-							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Lister
-						</a>
-					</h4>
-					<h5>&nbsp;</h5>
-				</div>
-				<?php endif; ?>
-				<?php if(ProfilManager::hasRight('eval_col_list')): ?>
-				<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_evaluations_collectives').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Evaluations collectives</a></h3>
-				<div id="menu_evaluations_collectives">
-					<h4>
-						<a href="?page=evaluations_collectives">
-							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Lister
-						</a>
-					</h4>
-					<h5>&nbsp;</h5>
-				</div>
-				<?php endif; ?>
-				<?php if(ProfilManager::hasRight('eval_ind_list')): ?>
-				<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_evaluations_individuelles').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Evaluations individuelles</a></h3>
-				<div id="menu_evaluations_individuelles">
-					<h4>
-						<a href="?page=evaluations_individuelles">
-							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Lister
-						</a>
-					</h4>
-					<h5>&nbsp;</h5>
-				</div>
-				<?php endif; ?>
-				<?php if(ProfilManager::hasRight('livret_list')): ?>
-				<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_livrets_par_eleves').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Livrets par élève</a></h3>
-				<div id="menu_livrets_par_eleves">
-					<h4>
-						<a href="?page=livrets&amp;mode=recap_period">
-							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Récapitulatif périodique
-						</a>
-					</h4>
-					<h4>
-						<a href="?page=livrets&amp;mode=recap_annuel">
-							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Récapitulatif annuel
-						</a>
-					</h4>
-					<h4>
-						<a href="?page=livrets&amp;mode=recap_cycle">
-							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Récapitulatif cycle
-						</a>
-					</h4>
-					<h5>&nbsp;</h5>
-				</div>
-				<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_livrets_par_classes').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Livrets par classe</a></h3>
-				<div id="menu_livrets_par_classes">
-					<h4>
-						<a href="?page=livrets&amp;mode=recap_period_all">
-							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Récapitulatif périodique
-						</a>
-					</h4>
-					<h5>&nbsp;</h5>
-				</div>
-				<?php endif; ?>
-				<?php if(ProfilManager::hasRight('consultation_list')): ?>
-				<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_consultations').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Consultations</a></h3>
-				<div id="menu_consultations">
-					<h4>
-						<a href="?page=consultations&amp;mode=competences_period">
-							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Compétences par période
-						</a>
-					</h4>
-					<h4>
-						<a href="?page=consultations&amp;mode=competences_annuel">
-							<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Compétences par année
-						</a>
-					</h4>
-					<h5>&nbsp;</h5>
-				</div>
-				<?php endif; ?>
-				<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_aide').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/hhelp.png" />Aide/Info</a></h3>
-				<div id="menu_aide">
-					<h4>
-						<a href="?page=contributeurs">
-							<img src="<?php echo(URL_ICONS_16X16); ?>/contributeur.png" />Contributeurs
-						</a>
-					</h4>
-					<?php if(ProfilManager::hasAdminRight()): ?>
-					<h4>
-						<a href="admin.php">
-							<img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Page d'administration
-						</a>
-					</h4>
-					<?php endif; ?>
-				</div>
-			<?php else: ?>
-				<br />Identification requise
+			<?php if(isset($_SESSION['PROFESSEUR_ID']) == true): /* Utilisateur connecté */ ?>
+				<?php require_once(PATH_PAGES."/menu/user_menu.inc.php"); ?>
+			<?php else:  /* Utilisateur non connecté */ ?>
+				<h1>Menu</h1>
+				<p>Identification requise</p>
 			<?php endif; ?>
-			</div>
 		</div>
 		<div id="struct_licence">
-			<table>
-				<tr>
-					<td colspan="2">
-						<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
-							<img src="./images/pub/button-cc.gif" alt="Creative Commons License" />
-						</a>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="http://validator.w3.org/check?uri=referer" rel="nofollow">
-							<img src="./images/pub/button-xhtml.png" alt="Valid XHTML 1.0" />
-						</a>
-					</td>
-					<td>
-						<a href="http://jigsaw.w3.org/css-validator/">
-							<img src="./images/pub/button-css.png" alt="Valid CSS" />
-						</a>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="http://httpd.apache.org/">
-							<img src="./images/pub/button-apache.png" alt="Powered By Apache" />
-						</a>
-					</td>
-					<td>
-						<a href="http://www.php.net/">
-							<img src="./images/pub/button-php.png" alt="Powered By PHP" />
-						</a>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="http://www.mysql.com/">
-							<img src="./images/pub/button-mysql.png" alt="Powered By Mysql" />
-						</a>
-					</td>
-					<td>
-						<a href="http://www.mozilla-europe.org/fr/firefox/">
-							<img src="./images/pub/button-firefox.png" alt="Developped for Firefox" />
-						</a>
-					</td>
-				</tr>
-			</table>
+			<?php require_once(PATH_PAGES."/menu/licence.inc.php"); ?>
 		</div>
 		<?php if(preg_match("/microsoft internet explorer/i", $sAgent) || preg_match("/msie/i", $sAgent)): ?>
 			<div style="text-align:left;color:red;">

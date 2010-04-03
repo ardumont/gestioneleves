@@ -1,5 +1,5 @@
 /*==============================================================================
-|| Les mises en forme principales.
+|| La structure principale du site.
 ==============================================================================*/
 
 html
@@ -17,26 +17,33 @@ body
 {
 	position: fixed;
 	width: 200px;
+	font-size: 0.9em;
 }
 
-#struct_identity,
-#struct_menu
+#struct_identity
 {
-	border: 1px solid #666;
+	border: 1px solid #666666;
 	padding: 5px;
 	margin-bottom: 10px;
-	-moz-border-radius-bottomleft: 8px;  
-	-webkit-border-bottom-left-radius: 8px;
-	-moz-border-radius-bottomright: 8px;
-	-webkit-border-bottom-right-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+}
+
+#struct_menu
+{
+	border: 1px solid #666666;
+	padding: 5px;
+	margin-bottom: 10px;
+	-moz-border-radius: 8px; 
+	-webkit-border-radius: 8px;
 }
 
 #struct_licence
 {
-	border: 1px solid #666;
+	border: 1px solid #666666;
 	padding: 5px;
 	margin-bottom: 10px;
-	background-color: #EEE;
+	background-color: #EEEEEE;
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	text-align : center;
@@ -44,32 +51,16 @@ body
 
 #struct_main
 {
-	font-size: 1em;
-}
-
-#struct_licence table
-{
-	width: 100%;
-	padding: 0px;
-}
-
-#struct_licence img
-{
-	border: 0px;
-	height: 15px;
-	width: 80px;
-}
-
-#struct_main
-{
 	margin-left: 210px; /* = width de struct_left_panel + 10px */
-	border: 1px solid #666;
+	border: 1px solid #666666;
 	padding: 5px;
-	-moz-border-radius-topleft: 8px;  
-	-webkit-border-top-left-radius: 8px;
-	-moz-border-radius-topright: 8px;
-	-webkit-border-top-right-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
 }
+
+/*==============================================================================
+|| Les mises en forme générales.
+==============================================================================*/
 
 /* Ne pas mettre de bordure sur les images servant de liens */
 a img
@@ -77,9 +68,95 @@ a img
 	border: 0;
 }
 
+/*======================================
+|| h1 : entête de menu, de page, de popup
+======================================*/
+#struct_main h1,
+#struct_identity h1,
+#struct_menu h1
+{
+	margin: -5px -5px 0 -5px;
+	padding: 0 5px 6px 5px;
+	font-size: 1.5em;
+	background: #666666 url(images/bckgrd/h_gloss.png) repeat-x;
+	font-weight: bold;
+	color: white;
+	-moz-border-radius-topleft: 8px;  
+	-webkit-border-top-left-radius: 8px;
+	-moz-border-radius-topright: 8px;
+	-webkit-border-top-right-radius: 8px;
+}
+
+/*======================================
+|| Les icones utilisées pour la décoration
+======================================*/
+/* le nom doit commencer par "icon_16" pour être utilisé par le css des menus */
+.icon_16_home					{background: url(images/icons/16x16/home.png)					no-repeat left center;}
+.icon_16_user					{background: url(images/icons/16x16/user.png)					no-repeat left center;}
+.icon_16_out					{background: url(images/icons/16x16/out.png)					no-repeat left center;}
+.icon_16_app					{background: url(images/icons/16x16/app.png)					no-repeat left center;}
+.icon_16_projet 				{background: url(images/icons/16x16/projet.png)					no-repeat left center;}
+.icon_16_conges					{background: url(images/icons/16x16/conges.png)					no-repeat left center;}
+.icon_16_activite				{background: url(images/icons/16x16/activite.png)				no-repeat left center;}
+.icon_16_tache					{background: url(images/icons/16x16/tache.png)					no-repeat left center;}
+.icon_16_activite_mens			{background: url(images/icons/16x16/activite_mens.png)			no-repeat left center;}
+.icon_16_activite_mens_det		{background: url(images/icons/16x16/activite_mens_det.png)		no-repeat left center;}
+.icon_16_activite_period		{background: url(images/icons/16x16/activite_period.png)		no-repeat left center;}
+.icon_16_activite_period_det	{background: url(images/icons/16x16/activite_period_det.png)	no-repeat left center;}
+.icon_16_help					{background: url(images/icons/16x16/help.png)					no-repeat left center;}
+.icon_16_contributeur			{background: url(images/icons/16x16/contributeur.png)			no-repeat left center;}
+.icon_16_admin					{background: url(images/icons/16x16/admin.png)					no-repeat left center;}
+.icon_16_profil					{background: url(images/icons/16x16/profil.png)					no-repeat left center;}
+.icon_16_comput					{background: url(images/icons/16x16/comput.png)					no-repeat left center;}
+
+.icon_16_hediter				{background: url(images/icons/16x16/hediter.png)				no-repeat left center;}
+.icon_16_hconsulter				{background: url(images/icons/16x16/hconsulter.png)				no-repeat left center;}
+.icon_16_hactivite				{background: url(images/icons/16x16/hactivite.png)				no-repeat left center;}
+.icon_16_hhelp					{background: url(images/icons/16x16/hhelp.png)					no-repeat left center;}
+
+.header_separator				{background: url(images/icons/16x16/head_sep.png)				no-repeat center center;}
+
+/*======================================
+|| Les elements de formulaire.
+======================================*/
+
+select,
+input,
+button
+{
+	border: 1px solid #555555;
+	color: #666666;
+	font-size: 0.9em;
+}
+
+textarea
+{
+	border: 1px solid #555;
+	color: #666666;
+	font-size: 1.3em;
+}
+
+/* Les input "hidden" ne doivent pas avoir de mise en forme, sinon on aura des '.' dans l'affichage */
+input[type=hidden]
+{
+    border: 0;
+}
+
+/* Le bouton par défaut du formulaire */
+input[type=submit].default_submit
+{
+	font-weight: bold;
+	border-width: 2px;
+}
+ 
 /*==============================================================================
 || Les messages d'erreur et d'avertissement.
 ==============================================================================*/
+
+body.popup_stop_scroll
+{
+	overflow:hidden;
+}
 
 #struct_popup_mask
 {
@@ -102,117 +179,89 @@ a img
 	right: 30%;
 	z-index: 1001;
 	background-color: #FFFFFF;
-	border: 2px solid #777;
+	border: 2px solid #777777;
 	padding: 5px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
 }
-
-body.popup_stop_scroll
-{
-	overflow:hidden;
-}
-
-/*==============================================================================
-|| La boite d'identification.
-==============================================================================*/
 
 #struct_popup h1
 {
 	margin: -5px -5px 0 -5px;
 	padding: 0 5px 0 5px;
 	font-size: 1.5em;
-	background-color: #777;
+	background-color: #777777;
 	background-image: url(images/icons/16x16/hghead.png);
 	font-weight: bold;
 	color: white;
-}
-/*======================================
-|| Alternance entre les lignes d'un tableau.
-======================================*/
-
-#struct_main tr.ligne0,
-#struct_main tr.ligne0 a
-{
-	background-color: #0195f8;
-	color: white;
-}
-
-#struct_main tr.ligne1,
-#struct_main tr.ligne1 a
-{
-	background-color: #6fb7ff;
-	color: white;
-}
-
-#struct_main tr.ligne10,
-#struct_main tr.ligne10 a
-{
-	background-color: #6fb7ff;
-	color: white;
-}
-
-#struct_main tr.ligne11,
-#struct_main tr.ligne11 a
-{
-	background-color: #60b0f0;
-	color: white;
-}
-
-#struct_main thead tr
-{
-	background-color: #025AA9;
-	color: white;
-}
-
-#struct_main .solde
-{
-	background-color: #DDDDDD;;
-	color: black;
+	-moz-border-radius-topleft: 8px;  
+	-webkit-border-top-left-radius: 8px;
+	-moz-border-radius-topright: 8px;
+	-webkit-border-top-right-radius: 8px;
 }
 
 /*==============================================================================
-|| Le menu et les entetes de fenetre
+|| Le menu
 ==============================================================================*/
 
-/* h1 : entete de menu et de page */
-
-#struct_main h1
-{
-	margin: -5px 2px -5px 2px;
-	padding: 0 5px 2px 5px;
-	font-size: 1.5em;
-	background-color: #666;
-	background-image: url(images/bckgrd/h_gloss.png);
-	font-weight: bold;
-	color: white;
-}
-
-#struct_identity h1,
-#struct_menu h1
-{
-	margin: -5px -5px -5px -5px;
-	padding: 0 5px 6px 5px;
-	font-size: 1.5em;
-	background-color: #666;
-	background-image: url(images/bckgrd/h_gloss.png);
-	font-weight: bold;
-	color: white;
-}
-
+/* Surcharge de "Les mises en forme générales" */
 #struct_identity h1,
 #struct_menu h1
 {
 	text-align : center;
 }
 
+#struct_menu ul,
+#struct_identity ul
+{
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+
+#struct_menu ul li,
+#struct_identity ul li
+{
+	list-style-type: none;
+	margin: 0 -5px 2px -5px;
+	padding: 3px 5px 0 5px;
+	background: url(images/bckgrd/separateur.png) repeat-x;
+	font-weight: bold; 
+}
+
+#struct_menu a,
+#struct_identity a
+{
+	display: block;
+	color: #111133;
+	text-decoration: none; 
+}
+
+#struct_identity a:hover,
+#struct_menu a:hover
+{
+	color: #555577;
+}
+
+#struct_identity *[class^="icon_16"],
+#struct_menu *[class^="icon_16"]
+{
+	height: 16px;
+	padding-left: 23px;
+}
+
+
+
+
+
 /* h2/h3 : entete de sous-menu */
 #struct_menu h2
 {
 	margin: -5px -5px 0px -5px;
-	padding: 2px 5px 7px 5px;
+	padding: 2px 5px 2px 5px;
 	font-size: 1.1em;
 	background-color: #666;
 	font-weight: bold;
-	text-align : left;
+	text-align: left;
 	color: white;
 }
 
@@ -221,12 +270,12 @@ body.popup_stop_scroll
 	margin: -5px -5px 0px -5px;
 	padding: 0px 5px 5px 5px;
 	font-size: 1em;
-	background-color: #777;
+	background-color: #999;
 	font-weight: bold;
 	color: white;
 }
 
-/* h4 : entree de menu */
+/* h4 : entree menu */
 #struct_identity h4,
 #struct_menu h4
 {
@@ -236,6 +285,13 @@ body.popup_stop_scroll
 	background-color: #fff;
 	background-image: url(images/bckgrd/separateur.png);
 }
+/*
+#struct_menu h4:hover,
+#struct_identity h4:hover
+{
+	background-color: #3ba0c3;
+}
+*/
 
 /* h5 : separateur */
 #struct_menu h5
@@ -246,13 +302,6 @@ body.popup_stop_scroll
 	background-color: #fff;
 }
 
-#struct_identity img,
-#struct_menu  img
-{
-	vertical-align : text-top;
-	padding: 0px 7px 0px 0px;
-}
-
 #struct_main img
 {
 	text-align: left;
@@ -260,70 +309,97 @@ body.popup_stop_scroll
 	padding: 0px 7px 0px 0px;
 }
 
-#struct_identity a,
-#struct_menu a
-{
-	color: #113;
-	text-decoration:none; 
-}
+/*==============================================================================
+|| La boite de licence
+==============================================================================*/
 
-#struct_identity a:hover,
-#struct_menu a:hover
+#struct_licence table
 {
-	color: #557;
-	text-decoration:none; 	
-}
-
-#struct_main a
-{
-	color: #025AA9;
-}
-
-#struct_main a:hover
-{
-	color: #0000ff;
+	width: 100%;
+	padding: 0px;
 }
 
 /*==============================================================================
-|| Les mises en forme generales pour le corps du site.
+|| Le corps du site
 ==============================================================================*/
 
-/* #struct_main h1 */ /* Voir "La boite d'identification" */
+/* #struct_main h1 : Voir "Les mises en forme générales" */
 
 /*========== Les liens ==========*/
-/* Voir "Le menu" */
+
+#struct_main a[href]
+{
+	color: #205BB3;
+}
+
+#struct_main a[href]:hover
+{
+	color: #0000FF;
+}
+
+/*========== Les icones ==========*/
+
+#struct_main h1 span.header_separator,
+#struct_main h1 span[class^="icon_16"]
+{
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+}
 
 /*======================================
-|| Les elements de formulaire.
+|| Tableaux de type "list" : 1 seul niveau.
 ======================================*/
 
-#struct_left_panel #struct_identity table tr td select,
-#struct_left_panel #struct_identity table tr td input,
-#struct_identity select,
-#struct_identity input,
-/* ----- */
-#struct_main select,
-#struct_main input,
-#struct_main button
+#struct_main table.list
 {
-	border: 1px solid #555;
-	color: #666666;
-	font-size: 0.9em;
+	border-collapse: collapse;
+	color: white;
 }
 
-#struct_main textarea
+#struct_main table.list a
 {
-	border: 1px solid #555;
-	color: #666666;
-	font-size: 1.3em;
+	color: inherit;
 }
 
-/* Attention les input de type hidden ne doivent pas en faire partie sinon on aura des '.' dans l'affichage */
-#struct_identity input[type=hidden],
-#struct_main input[type=hidden]
+#struct_main table.list caption
 {
-    border:0;
+	background-color: #205bb3;
 }
+
+#struct_main table.list thead tr
+{
+	background-color: #205bb3;
+}
+
+#struct_main table.list tfoot
+{
+	color: black;
+}
+
+/* Alternance des couleurs generiques (style application)*/
+#struct_main table.list tr.row0 
+{
+	background-color: #3b85cc;
+	background-image: url(images/bckgrd/separateur_app.png);
+	background-repeat: repeat-x;
+}
+
+#struct_main table.list tr.row1
+{
+	background-color: #307bc3;
+	background-image: url(images/bckgrd/separateur_app.png);
+	background-repeat: repeat-x;	
+}
+
+
+#struct_main table.list tr.row_total {background-color: #8398ce;}
+
+
+/* Colonne application */
+#struct_main table.list tr.app0 {background-color: #3b85cc;}
+#struct_main table.list tr.app1 {background-color: #307bc3;}
+
 
 /*======================================
 || Tableau de type "information".
@@ -332,7 +408,7 @@ body.popup_stop_scroll
 #struct_main table.info
 {
 	border-collapse: collapse;
-	background-color: #0066FF;
+	background-color: #3b85cc;
 	color: white;
 }
 
@@ -343,12 +419,12 @@ body.popup_stop_scroll
 
 #struct_main table.info caption
 {
-	background-color: #025AA9;
+	background-color: #205bb3;
 }
 
 #struct_main table.info th
 {
-	background-color: #025AA9;
+	background-color: #205bb3;
 	text-align: left;
 }
 
@@ -369,12 +445,12 @@ body.popup_stop_scroll
 
 #struct_main table.list_tree caption
 {
-	background-color: #025AA9;
+	background-color: #205bb3;
 }
 
 #struct_main table.list_tree thead tr
 {
-	background-color: #025AA9;
+	background-color: #205bb3;
 }
 
 #struct_main table.list_tree tbody tr.caption
@@ -395,35 +471,134 @@ body.popup_stop_scroll
 	text-align:left;
 }
 
+#struct_main table.list_tree tr td
+{
+	white-space: nowrap;
+}
+
 #struct_main table.list_tree tr.level0_row0 {background-color: #3092c4;}
 #struct_main table.list_tree tr.level0_row1 {background-color: #3b9dcc;}
-#struct_main table.list_tree tr.level1_row0 {background-color: #4169E1;}
-#struct_main table.list_tree tr.level1_row1 {background-color: #4682B4;}
-#struct_main table.list_tree tr.level2_row0 {background-color: #6495ED;}
-#struct_main table.list_tree tr.level2_row1 {background-color: #00BFFF;}
+#struct_main table.list_tree tr.level1_row0 {background-color: #4c97be;}
+#struct_main table.list_tree tr.level1_row1 {background-color: #56a1c5;}
+#struct_main table.list_tree tr.level2_row0 {background-color: #6aa3c2;}
+#struct_main table.list_tree tr.level2_row1 {background-color: #71acc8;}
 
-#struct_main table.list_tree tr.level3_row0 {background-color: #9966FF; color: black;}
-#struct_main table.list_tree tr.level3_row1 {background-color: #0099FF; color: black;}
-#struct_main table.list_tree tr.level4_row0 {background-color: #99CCFF; color: black;}
-#struct_main table.list_tree tr.level4_row1 {background-color: #CCCCFF; color: black;}
+#struct_main table.list_tree tr.level3_row0 {background-color: #98bccc; color: black;}
+#struct_main table.list_tree tr.level3_row1 {background-color: #b3ced8; color: black;}
+#struct_main table.list_tree tr.level4_row0 {background-color: #cbe1e6; color: black;}
+#struct_main table.list_tree tr.level4_row1 {background-color: #dfe9ee; color: black;}
 
-#struct_main table.list_tree tr.level5_row0 {background-color: #FF99FF; color: black;}
-#struct_main table.list_tree tr.level5_row1 {background-color: #FFCCFF; color: black;}
-#struct_main table.list_tree tr.level6_row0 {background-color: #FFFFFF; color: black;}
-#struct_main table.list_tree tr.level6_row1 {background-color: #FFFFCC; color: black;}
-#struct_main table.list_tree tr.level7_row0 {background-color: #FFFFFF; color: black;}
-#struct_main table.list_tree tr.level7_row1 {background-color: #FFFFFF; color: black;}
+#struct_main table.list_tree tr.level5_row0 {background-color: #e2e9ea; color: #111111;}
+#struct_main table.list_tree tr.level5_row1 {background-color: #ecf0f1; color: #111111;}
+#struct_main table.list_tree tr.level6_row0 {background-color: #FFFFFF; color: #222222;}
+#struct_main table.list_tree tr.level6_row1 {background-color: #EEEEEE; color: #222222;}
+#struct_main table.list_tree tr.level7_row0 {background-color: #FFFFFF; color: #333333;}
+#struct_main table.list_tree tr.level7_row1 {background-color: #FFFFFF; color: #444444;}
 
 /*======================================
 || Tableau special calendrier.
 ======================================*/
 
-#struct_main table.list_tree  th.tab_top_left
+#struct_main table.calendar
+{
+	border-collapse: collapse;
+	color: white;
+}
+
+#struct_main table.calendar a,
+#struct_main table.calendar input, 
+#struct_main table.calendar select
+{
+	color: inherit;
+}
+
+/* Enleve le decalage a gauche du au border-collapse : Firefox respecte les specifications, mais c'est moche : IE ne respecte rien */
+#struct_main table.calendar caption
+{
+	background-color: #205bb3;
+	margin-left: -1px;
+}
+
+#struct_main table.calendar caption img
+{
+	vertical-align: middle;
+}
+
+#struct_main table.calendar caption a.today { }
+
+#struct_main table.calendar tr,
+#struct_main table.calendar caption
+{
+	font-size: 0.9em;	
+}
+
+#struct_main table.calendar tfoot tr
+{
+	font-size: 1.1em;	
+}
+
+#struct_main table.calendar tr select
+{
+	font-size: 1.0em;	
+}
+
+#struct_main table.calendar thead tr
+{
+	background-color: #205bb3;
+}
+
+/* Alternance des couleurs generiques */
+#struct_main table.calendar tr.row0,
+#struct_main table.calendar tr.row0 select,
+#struct_main table.calendar tr.row0 input
+{
+	background-color: #3b9dcc;
+	background-image: url(images/bckgrd/separateur_projet.png);
+	background-repeat: repeat-x;
+}
+
+/* Alternance des couleurs generiques */
+#struct_main table.calendar tr.row1,
+#struct_main table.calendar tr.row1 select,
+#struct_main table.calendar tr.row1 input
+{
+	background-color: #3092c4;
+	background-image: url(images/bckgrd/separateur_projet.png);
+	background-repeat: repeat-x;
+}
+
+#struct_main table.calendar tbody th
+{
+	text-align: left;
+	font-weight: normal;
+}
+
+#struct_main table.calendar tfoot
+{
+	color: #666666;
+}
+
+/* Onglet ajout element */
+#struct_main table.calendar th.tab_top_left
+{
+	background-image: url(images/bckgrd/tab_top_r.png);
+	background-repeat: no-repeat;
+	background-position: bottom left;
+}
+
+#struct_main table.list_tree th.tab_top_left
 {
 	background-image: url(images/bckgrd/tab_top_r.png);
 	background-repeat: no-repeat;
 	background-position: bottom left;
 	padding: 0px 0px 0px 20px;
+}
+
+#struct_main table.calendar th.tab_bottom_left
+{
+	background-image: url(images/bckgrd/tab_bottom_r.png);
+	background-repeat: no-repeat;
+	background-position: bottom left;
 }
 
 #struct_main table.list_tree th.tab_bottom_left
@@ -434,18 +609,142 @@ body.popup_stop_scroll
 	padding: 0px 0px 0px 20px;
 }
 
-#struct_main table.list_tree  th.tab_top_right
+#struct_main table.calendar th.tab_top_right,
+#struct_main table.list_tree th.tab_top_right
 {
 	background-image: url(images/bckgrd/tab_top_l.png);
 	background-repeat: no-repeat;
 	background-position: bottom left;
 }
 
-#struct_main table.list_tree  th.tab_bottom_right
+#struct_main table.calendar th.tab_bottom_right,
+#struct_main table.list_tree th.tab_bottom_right
 {
 	background-image: url(images/bckgrd/tab_bottom_l.png);
 	background-repeat: no-repeat;
 	background-position: bottom left;	
+}
+
+/* Barre de navigation par semaine */
+#struct_main div.navigation
+{
+	border: 1px solid #666;
+	padding: 5px;
+	margin-bottom: 10px;
+	background-color: #EEE;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	text-align: left;
+	vertical-align: middle;
+	white-space: nowrap;
+	display: inline;
+}
+
+#struct_main table.calendar th.navigation,
+#struct_main table.calendar caption.navigation
+{
+	text-align: left;
+	vertical-align: middle;
+}
+
+#struct_main table.calendar th.navigation img,
+#struct_main table.calendar caption.navigation img,
+#struct_main div.navigation img
+{
+	padding: 0;
+}
+
+#struct_main table.calendar th.navigation a,
+#struct_main table.calendar caption.navigation a
+{
+	text-decoration: none; 
+}
+
+#struct_main table.calendar tr
+{
+    white-space: nowrap;
+}
+
+/* Alternance des couleurs entre les taches par type de colonne */
+/* Alternance des couleurs entre les taches (application) */
+#struct_main table.calendar th.app0
+{
+	background-color: #3b85cc;
+	background-image: url(images/bckgrd/separateur_app.png);
+	background-repeat: repeat-x;
+}
+
+/* Alternance des couleurs entre les taches (application) */
+#struct_main table.calendar th.app1
+{
+	background-color: #307bc3;
+	background-image: url(images/bckgrd/separateur_app.png);
+	background-repeat: repeat-x;	
+}
+
+/* Alternance des couleurs entre les taches (projet) */
+#struct_main table.calendar th.proj0
+{
+	background-color: #3b9dcc;
+	background-image: url(images/bckgrd/separateur_projet.png);
+	background-repeat: repeat-x;
+}
+
+/* Alternance des couleurs entre les taches (projet) */
+#struct_main table.calendar th.proj1
+{
+	background-color: #3092c4;
+	background-image: url(images/bckgrd/separateur_projet.png);
+	background-repeat: repeat-x;	
+}
+
+/* Alternance des couleurs entre les taches */
+#struct_main table.calendar tr.task0,
+#struct_main table.calendar tr.task0 select,
+#struct_main table.calendar tr.task0 input
+{
+	background-color: #3ba0c3;
+	background-image: url(images/bckgrd/separateur_tache.png);
+	background-repeat: repeat-x;
+
+}
+
+/* Alternance des couleurs entre les taches */
+#struct_main table.calendar tr.task1,
+#struct_main table.calendar tr.task1 select,
+#struct_main table.calendar tr.task1 input
+{
+	background-color: #3295b5;
+	background-image: url(images/bckgrd/separateur_tache.png);
+	background-repeat: repeat-x;
+}
+
+/* >V2| -----------------------------*/
+
+/*========== On met en couleur Samedi=6 et Dimanche=0 ==========*/
+
+#struct_main table.calendar tr td.day_1,
+#struct_main table.calendar tr td.day_2,
+#struct_main table.calendar tr td.day_3,
+#struct_main table.calendar tr td.day_4,
+#struct_main table.calendar tr td.day_5
+{
+	color: white;
+}
+
+#struct_main table.calendar tr th.day_6,
+#struct_main table.calendar tr th.day_0,
+#struct_main table.calendar tr td.day_6,
+#struct_main table.calendar tr td.day_6 input[type=text],
+#struct_main table.calendar tr td.day_0,
+#struct_main table.calendar tr td.day_0 input[type=text],
+#struct_main table.calendar tr td.day_6:hover,
+#struct_main table.calendar tr td.day_0:hover
+#struct_main table.calendar tr td.day_6 input:hover,
+#struct_main table.calendar tr td.day_0 input:hover
+{
+	background-color: #DDDDDD;
+	color: black;
 }
 
 /*======================================
@@ -478,20 +777,49 @@ body.popup_stop_scroll
 || Ecran "home" : pour la gestion des evolutions.
 ==============================================================================*/
 
-#struct_main.home li.bug_majeur {list-style-image: url(images/icons/16x16/puce_rouge.png);}
-#struct_main.home li.bug_mineur {list-style-image: url(images/icons/16x16/puce_terredesienne.png);}
-#struct_main.home li.bug_faible {list-style-image: url(images/icons/16x16/puce_jaune.png);}
+#struct_main li.bug_majeur {list-style-image: url(images/icons/16x16/puce_rouge.png);}
+#struct_main li.bug_mineur {list-style-image: url(images/icons/16x16/puce_terredesienne.png);}
+#struct_main li.bug_faible {list-style-image: url(images/icons/16x16/puce_jaune.png);}
 
-#struct_main.home li.evolution_majeure {list-style-image: url(images/icons/16x16/puce_verte.png);}
-#struct_main.home li.evolution_mineure {list-style-image: url(images/icons/16x16/puce_vertclair.png);}
-#struct_main.home li.evolution_faible   {list-style-image: url(images/icons/16x16/puce_jaunecitron.png);}
+#struct_main li.evolution_majeure {list-style-image: url(images/icons/16x16/puce_verte.png);}
+#struct_main li.evolution_mineure {list-style-image: url(images/icons/16x16/puce_vertclair.png);}
+#struct_main li.evolution_faible  {list-style-image: url(images/icons/16x16/puce_jaunecitron.png);}
 
 /*==============================================================================
 || Ecran "activity".
 ==============================================================================*/
 
+#struct_main.activities table.calendar input[type=text]
+{
+	width: 1em;
+}
+
 .display_value
 {
+	text-align: center;
+}
+
+/*==============================================================================
+|| Ecran "holidays".
+==============================================================================*/
+
+#struct_main.holidays table.calendar thead .solde
+{
+	background-color: #666666;
+	color: white;
+}
+
+#struct_main.holidays table.calendar tbody tr.row0 .solde
+{
+	background-color: #DDDDDD;
+	color: black;
+	text-align: center;
+}
+
+#struct_main.holidays table.calendar tbody tr.row1 .solde
+{
+	background-color: #999999;
+	color: black;
 	text-align: center;
 }
 
@@ -501,7 +829,7 @@ body.popup_stop_scroll
 }
 
 /*==============================================================================
-|| Barre de défilement vertical sur certains ecrans
+|| Barre de defilement vertical sur certains ecrans
 ==============================================================================*/
 
 .div_scrollable_small
@@ -529,118 +857,15 @@ body.popup_stop_scroll
 || Suivi du curseur sur les tableaux
 ==============================================================================*/
 
+#struct_main table.calendar tbody tr:hover,
+#struct_main table.calendar tbody tr:hover select,
+#struct_main table.calendar tbody tr:hover input,
 #struct_main table.list_tree tbody tr:hover,
-tr.row0:hover,
-tr.row1:hover,
-.colonne1:hover,
-.colonne2:hover,
-.colonne3:hover,
-.domaine:hover,
-.matiere:hover
+#struct_main table.list tr.row0:hover,
+#struct_main table.list tr.row1:hover,
+#struct_main table.list tr.app0:hover,
+#struct_main table.list tr.app1:hover,
+#struct_main table.list tr.row_total:hover
 {
-	background-color: #888;
-}
-
-/*==============================================================================
-|| Récapitulatif annuel ou périodique
-==============================================================================*/
-
-table.entete_n tr td
-{
-	border: 1px solid black;
-}
-
-table.display tr td
-{
-	border: 1px solid black;
-	text-align: left;
-}
-
-/* colonne des périodes */
-.colonne1
-{
-	background-color: #A0A0A0;
-	color: white;
-}
-
-.colonne2
-{
-	background-color: #B8B8B8;
-	color: white;
-}
-
-.colonne3
-{
-	background-color: #D0D0D0;
-	color: white;
-}
-
-.domaine
-{
-	font-size: 1.1em;
-	font-weight: bold;
-	background-color: #E0E0E0;
-	color: black;
-}
-
-.matiere
-{
-	font-size: 1em;
-	font-weight: bold;
-	background-color: #F0F0F0;
-	color: black;
-	text-align: left;
-}
-
-/* Legende des notes */
-.A
-{
-	background-color: green;
-	color: white;
-	text-align: center;
-}
-
-.AR
-{
-	background-color: yellow;
-	color: black;
-	text-align: center;
-}
-
-.ECA
-{
-	background-color: orange;
-	color: white;
-	text-align: center;
-}
-
-.NA
-{
-	background-color: red;
-	color: white;
-	text-align: center;
-}
-
-.NE
-{
-	background-color: white;
-	color: black;
-	text-align: center;
-}
-
-/* Alternance de couleurs */
-tr.row0, tr.row1
-{
-	font-size: 1em;
-	color: white;
-}
-
-tr.row0
-{
-	background-color: #3092c4;
-}
-
-tr.row1
-{
-	background-color: #3b9dcc;
+	background-color: #999;
 }

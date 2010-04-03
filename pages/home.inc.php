@@ -71,6 +71,8 @@ if(Message::hasError() == true): ?>
 					<li class="evolution_majeure" title="Evolution majeure">Mise en place des ihms d'édition, d'ajout, suppression des profils.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Création des profils 'Professeur' et 'Directeur/Directrice'.</li>
 					<li class="evolution_mineure" title="Evolution mineure">Modification du message de fin d'installation pour préciser le login/mdp par défaut.</li>
+					<li class="evolution_mineure" title="Evolution mineure">Mise à jour librairie javascript.</li>
+					<li class="evolution_mineure" title="Evolution mineure">Factorisation de code pour amélioration de maintenance future.</li>
 					<li class="bug_mineur" title="Bug mineur">Correction du mauvais domaine pour la matière "art".</li>
 				</ul>
 			</dd>
