@@ -343,7 +343,7 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 	<!-- fonctions utilitaires de javascript -->
 	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/utils.inc.js"></script>
 	<!-- JQuery -->
-	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/jquery-1.3.2.js"></script>
+	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/jquery.js"></script>
 	<!-- Utilitaires basés sur JQuery -->
 	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/utils_jquery.inc.js"></script>
 
