@@ -7,11 +7,6 @@
 // Préparation des données
 //==============================================================================
 
-// ===== Navigation entre les pages =====
-$oForm = new FormValidation();
-
-$sPageId = $oForm->getValue('page', $_GET, 'is_string', "home");
-
 //==============================================================================
 // Validation du formulaire
 //==============================================================================
@@ -105,7 +100,7 @@ $sPageId = $oForm->getValue('page', $_GET, 'is_string', "home");
 		</div>
 	</div>
 	<!-- ==================== -->
-	<div id="struct_main" class="<?php echo($sPageId); ?>">
+	<div id="struct_main">
 		<h1><img src="./images/icons/16x16/error.png" /><img src="./images/icons/16x16/head_sep.png" />Désolé, mais une erreur trop importante a eu lieu.</h1>
 		<p>Il semblerait que l'installation de l'application n'ait pas été effectuée.<br />
 		Afin de pouvoir utiliser cette application, veuillez suivre les indications de l'installeur.</p>
