@@ -252,7 +252,8 @@ ____EOQ;
 			<caption>Informations</caption>
 			<tr>
 				<td>
-					Aucun élève affecté à cette classe.
+					Aucun élève affecté à cette classe.<br />
+					<a href="?page=eleves&amp;mode=add">Ajouter un élève à cette classe.</a>
 				</td>
 			</tr>
 		</table>

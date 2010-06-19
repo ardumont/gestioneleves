@@ -66,6 +66,7 @@ $aClassesNiveaux = $aRes['CLASSES_NIVEAUX'];
 $aDomainesMatieresCompetences = $aRes['DOMAINES_MATIERES_COMPETENCES'];
 $aEvalInds = $aRes['EVAL_INDS'];
 $aNomPrenom = $aRes['NOM_PRENOM'];
+$aCommentaires = $aRes['COMMENTAIRES'];
 
 //==============================================================================
 // Preparation de l'affichage
@@ -199,7 +200,6 @@ $sGuiTitle = "Livret d'évaluation";
 			<?php endforeach; ?>
 		<?php endforeach; ?>
 	</table>
-
 	<?php foreach($aClassesNiveaux as $i => $aClasseNiveau): /* Pour chaque classe de l'élève */ ?>
 		<!-- Saut de ligne -->
 		<div style="page-break-after:always;"></div>
@@ -219,7 +219,7 @@ $sGuiTitle = "Livret d'évaluation";
 				<?php foreach($aPeriodes as $aPeriode): /* Pour chaque période */ ?>
 				<tr style="width: 500px; height: 250px;">
 					<td style="width: 20%"><?php echo $aPeriode['PERIODE_NOM']; ?></td>
-					<td style="width: 80%"></td>
+					<td style="width: 80%"><pre><?php echo $aCommentaires[$aClasseNiveau['CLASSE_ID']][$aPeriode['PERIODE_ID']]['COMMENTAIRE_VALEUR']?></pre></td>
 				</tr>
 				<?php endforeach; ?>
 			</tbody>

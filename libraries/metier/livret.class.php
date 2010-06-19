@@ -305,6 +305,7 @@ ________EOQ;
 			SELECT DISTINCT
 				ELEVE_NOM,
 				CLASSE_ANNEE_SCOLAIRE,
+				CLASSE_ID,
 				CLASSE_NOM,
 				ECOLE_NOM,
 				ECOLE_VILLE,
@@ -367,6 +368,7 @@ ________EOQ;
 		// ===== La liste des periodes =====
 		$sQuery = <<< ________EOQ
 			SELECT
+				PERIODE_ID,
 				PERIODE_NOM
 			FROM PERIODES
 			ORDER BY PERIODE_NOM ASC
@@ -377,6 +379,7 @@ ________EOQ;
 		// ===== La liste des classes =====
 		$sQuery = <<< ________EOQ
 			SELECT
+				CLASSE_ID,
 				CLASSE_NOM,
 				NIVEAU_NOM
 			FROM CLASSES
@@ -448,6 +451,24 @@ ________EOQ;
 ________EOQ;
 		$aEvalInds = Database::fetchArrayWithMultiKey($sQuery, array('DOMAINE_NOM', 'MATIERE_NOM', 'COMPETENCE_NOM', 'CLASSE_NOM', 'NIVEAU_NOM', 'PERIODE_NOM'), false);
 		// $aEvalInds[NOM DU DOMAINE][NOM DE LA MATIERE][NOM DE LA COMPETENCE][NOM DE LA CLASSE][NOM DU NIVEAU][NOM DE LA PERIODE][COLONNE] = VALEUR
+
+		// Récupération des commentaires pour chaque période de chaque année du cycle de l'élève
+		$sQuery = <<< ________EOQ
+			SELECT COMMENTAIRES.ID_CLASSE, PERIODE_ID, PERIODE_NOM, COMMENTAIRE_VALEUR
+			FROM CYCLES 
+				INNER JOIN NIVEAUX
+					ON CYCLES.CYCLE_ID = NIVEAUX.ID_CYCLE
+				INNER JOIN NIVEAU_CLASSE
+					ON NIVEAU_CLASSE.ID_NIVEAU = NIVEAUX.NIVEAU_ID
+				INNER JOIN COMMENTAIRES
+					ON NIVEAU_CLASSE.ID_CLASSE = COMMENTAIRES.ID_CLASSE
+				INNER JOIN PERIODES
+					ON PERIODES.PERIODE_ID = COMMENTAIRES.ID_PERIODE
+			WHERE ID_ELEVE = {$nEleveId}
+			AND COMMENTAIRES.ID_CLASSE =  {$aEleve['CLASSE_ID']}
+________EOQ;
+		$aCommentaires = Database::fetchArrayWithMultiKey($sQuery, array('ID_CLASSE', 'PERIODE_ID'));
+		// $aCommentaires[ID_CLASSE][PERIODE_ID][Nom de colonne] = Valeur de colonne
 
 		// Lancement du calcul de la moyenne pour la période
 		// Parcours de tous les domaines
@@ -523,7 +544,8 @@ ________EOQ;
 		$aRes['DOMAINES_MATIERES_COMPETENCES'] = $aDomainesMatieresCompetences;
 		$aRes['EVAL_INDS'] = $aEvalInds;
 		$aRes['NOM_PRENOM'] = $aNomPrenom;
-
+		$aRes['COMMENTAIRES'] = $aCommentaires;
+		
 		return $aRes;
 	}// fin recap_cycle
 

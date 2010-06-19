@@ -2,7 +2,7 @@
 <dl>
 	<dt>
 		<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
-		Version v1
+		Version v2
 	</dt>
 	<dd>
 		<a href="javascript:" onclick="showOrHideAllSubVersion(this);">Tout cacher/montrer</a>
@@ -17,6 +17,15 @@
 					<li class="evolution_majeure" title="Evolution majeure">Amélioration de l'ergonomie de l'installeur.</li>
 				</ul>
 			</dd>
+		</dl>
+	</dd>
+	<dt>
+		<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+		Version v1
+	</dt>
+	<dd>
+		<a href="javascript:" onclick="showOrHideAllSubVersion(this);">Tout cacher/montrer</a>
+		<dl>
 			<dt>
 				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
 				v1.9.0
