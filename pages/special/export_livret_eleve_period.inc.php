@@ -87,6 +87,16 @@ $aDomainesMatieresCompetences = $aRes['DOMAINES_MATIERES_COMPETENCES'];
 $aEvalInds = $aRes['EVAL_INDS'];
 $aNomPrenom = $aRes['NOM_PRENOM'];
 
+// Récupération du commentaire sur la période de l'élève
+$sQuery = <<< EOQ
+	SELECT COMMENTAIRE_VALEUR
+	FROM COMMENTAIRES
+	WHERE ID_ELEVE = {$nEleveId}
+	AND ID_PERIODE = {$nPeriodeId}
+	AND ID_CLASSE =  {$aClassesNiveaux['CLASSE_ID']}
+EOQ;
+$sCommentaire = Database::fetchOneValue($sQuery);
+
 //==============================================================================
 // Preparation de l'affichage
 //==============================================================================
@@ -226,7 +236,7 @@ $sGuiTitle = "Livret d'évaluation";
 		<tbody>
 			<tr style="width: 500px; height: 300px;">
 				<td style="width: 20%"><?php echo $aPeriodes['PERIODE_NOM']; ?></td>
-				<td style="width: 80%">&nbsp;</td>
+				<td style="width: 80%"><pre><?php echo $sCommentaire; ?></pre>&nbsp;</td>
 			</tr>
 		</tbody>
 	</table>

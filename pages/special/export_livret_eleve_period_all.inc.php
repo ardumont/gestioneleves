@@ -92,6 +92,7 @@ $sQuery = <<< EOQ
 		INNER JOIN PROFESSEUR_CLASSE
 			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
 	WHERE PROFESSEUR_CLASSE.ID_PROFESSEUR = {$_SESSION['PROFESSEUR_ID']}
+	AND ELEVE_ACTIF=1
 	{$sRestrictionAnneeScolaire}
 	{$sQueryRestClasse}
 	ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC, ELEVE_NOM ASC
@@ -113,6 +114,16 @@ if($nClasseId != -1 && $nPeriodeId != -1)
 		$aDomainesMatieresCompetences[$i] = $aRes['DOMAINES_MATIERES_COMPETENCES'];
 		$aEvalInds[$i] = $aRes['EVAL_INDS'];
 		$aNomPrenom[$i] = $aRes['NOM_PRENOM'];
+
+		// Récupération du commentaire sur la période de l'élève
+		$sQuery = <<< ________EOQ
+			SELECT COMMENTAIRE_VALEUR
+			FROM COMMENTAIRES
+			WHERE ID_ELEVE = {$oEleve['ELEVE_ID']}
+			AND ID_PERIODE = {$nPeriodeId}
+			AND ID_CLASSE =  {$nClasseId}
+________EOQ;
+		$aCommentaires[$i] = Database::fetchOneValue($sQuery);
 	}
 }
 
@@ -252,7 +263,7 @@ $sGuiTitle = "Livret d'évaluation";
 		<tbody>
 			<tr style="width: 500px; height: 250px;">
 				<td style="width: 20%"><?php echo $aPeriodes[$i]['PERIODE_NOM']; ?></td>
-				<td style="width: 80%">&nbsp;</td>
+				<td style="width: 80%"><pre><?php echo $aCommentaires[$i]; ?></pre>&nbsp;</td>
 			</tr>
 		</tbody>
 	</table>

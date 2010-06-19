@@ -67,6 +67,17 @@ $aDomainesMatieresCompetences = $aRes['DOMAINES_MATIERES_COMPETENCES'];
 $aEvalInds = $aRes['EVAL_INDS'];
 $aNomPrenom = $aRes['NOM_PRENOM'];
 
+// Récupération des commentaires pour chaque période de l'élève
+$sQuery = <<< EOQ
+	SELECT PERIODE_NOM, COMMENTAIRE_VALEUR, PERIODE_ID
+	FROM COMMENTAIRES
+		INNER JOIN PERIODES
+			ON PERIODES.PERIODE_ID = COMMENTAIRES.ID_PERIODE
+	WHERE ID_ELEVE = {$nEleveId}
+	AND ID_CLASSE =  {$aEleve['CLASSE_ID']}
+EOQ;
+$aCommentaires = Database::fetchArrayWithKey($sQuery, 'PERIODE_NOM');
+
 //==============================================================================
 // Preparation de l'affichage
 //==============================================================================
@@ -217,9 +228,12 @@ $sGuiTitle = "Livret d'évaluation";
 			<tfoot></tfoot>
 			<tbody>
 				<?php foreach($aPeriodes as $aPeriode): /* Pour chaque période */ ?>
+					<?php $sPeriodeNom = $aPeriode['PERIODE_NOM']; ?>
+					<?php $nPeriodId = $aPeriode['PERIODE_ID']; ?>
+					<?php $sCommentaire = $aCommentaires[$sPeriodeNom]['COMMENTAIRE_VALEUR']; ?>
 				<tr style="width: 500px; height: 250px;">
 					<td style="width: 20%"><?php echo $aPeriode['PERIODE_NOM']; ?></td>
-					<td style="width: 80%"></td>
+					<td style="width: 80%"><pre><?php echo $sCommentaire; ?>&nbsp;</pre></td>
 				</tr>
 				<?php endforeach; ?>
 			</tbody>

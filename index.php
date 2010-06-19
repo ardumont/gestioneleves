@@ -224,7 +224,6 @@ $aMenuPage = array
 		'competences_annuel' => "consultations/competences_annuel.inc.php",
 	),
 );
-
 //==============================================================================
 // Validation du formulaire
 //==============================================================================
@@ -294,8 +293,7 @@ $aTemp = Database::fetchOneRow("SHOW COLUMNS FROM PARAMETRES LIKE 'DATE_VERSION'
 if($aTemp !== false)
 {
 	$nDateVersion = Database::fetchOneValue("SELECT UNIX_TIMESTAMP(DATE_VERSION) FROM PARAMETRES");
-	$nDateFileHome = filemtime(PATH_PAGES."/home.inc.php");
-
+	$nDateFileHome = filemtime(PATH_PAGES."/release_notes.inc.php");
 	if($nDateVersion != $nDateFileHome)
 	{
 		$bNeedInstall = true;

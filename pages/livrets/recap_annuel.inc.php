@@ -74,6 +74,7 @@ $sQuery = <<< EOQ
 		INNER JOIN PROFESSEUR_CLASSE
 			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
 	WHERE PROFESSEUR_CLASSE.ID_PROFESSEUR = {$_SESSION['PROFESSEUR_ID']}
+	AND ELEVE_ACTIF=1
 	{$sRestrictionAnneeScolaire}
 	ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC, ELEVE_NOM ASC
 EOQ;
@@ -97,6 +98,17 @@ if($nEleveId != -1)
 	$aDomainesMatieresCompetences = $aRes['DOMAINES_MATIERES_COMPETENCES'];
 	$aEvalInds = $aRes['EVAL_INDS'];
 	$aNomPrenom = $aRes['NOM_PRENOM'];
+
+	// Récupération des commentaires pour chaque période de l'élève
+	$sQuery = <<< ____EOQ
+		SELECT PERIODE_NOM, COMMENTAIRE_VALEUR, PERIODE_ID
+		FROM COMMENTAIRES
+			INNER JOIN PERIODES
+				ON PERIODES.PERIODE_ID = COMMENTAIRES.ID_PERIODE
+		WHERE ID_ELEVE = {$nEleveId}
+		AND ID_CLASSE =  {$aEleveInfo['CLASSE_ID']}
+____EOQ;
+	$aCommentaires = Database::fetchArrayWithKey($sQuery, 'PERIODE_NOM');
 }
 
 //==============================================================================
@@ -229,6 +241,42 @@ if($nEleveId != -1)
 								<?php endforeach; ?>
 							<?php endforeach; ?>
 						<?php endforeach; ?>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Saisir un commentaire pour chaque période pour l'élève '<?php echo $aEleveInfo['ELEVE_NOM']; ?>' :
+				</td>
+			</tr>
+			<tr><!-- Les appréciations -->
+				<td>
+					<table>
+						<thead>
+							<tr>
+								<th>Période</th>
+								<th>Appréciations</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach($aPeriodesInfo as $nRow => $aRows): ?>
+								<?php $sPeriodeNom = $aRows['PERIODE_NOM']; ?>
+								<?php $nPeriodId = $aRows['PERIODE_ID']; ?>
+								<?php $sCommentaire = $aCommentaires[$sPeriodeNom]['COMMENTAIRE_VALEUR']; ?>
+							<tr>
+								<td><?php echo $sPeriodeNom; ?></td>
+								<td>
+									<form id="form_insert_<?php echo $nPeriodId; ?>">
+										<input type="hidden" name="eleve_id" value="<?php echo $nEleveId; ?>" />
+										<input type="hidden" name="periode_id" value="<?php echo $nPeriodId; ?>" />
+										<input type="hidden" name="classe_id" value="<?php echo $aEleveInfo['CLASSE_ID']; ?>" />
+										<input type="hidden" name="commentaire_hidden" value="<?php echo $sCommentaire; ?>" />
+										<textarea name="commentaire_saisie" rows="5" cols="50" onblur="submitAjaxUpdateCommentaire('form_insert_<?php echo $nPeriodId; ?>');"><?php echo $sCommentaire; ?></textarea>
+									</form>
+								</td>
+							</tr>
+							<?php endforeach; ?>
+						</tbody>
 					</table>
 				</td>
 			</tr>

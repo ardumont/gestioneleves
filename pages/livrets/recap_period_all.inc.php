@@ -89,6 +89,7 @@ $sQuery = <<< EOQ
 		INNER JOIN PROFESSEUR_CLASSE
 			ON CLASSES.CLASSE_ID = PROFESSEUR_CLASSE.ID_CLASSE
 	WHERE PROFESSEUR_CLASSE.ID_PROFESSEUR = {$_SESSION['PROFESSEUR_ID']}
+	AND ELEVE_ACTIF=1
 	{$sRestrictionAnneeScolaire}
 	{$sQueryRestClasse}
 	ORDER BY CLASSE_ANNEE_SCOLAIRE DESC, CLASSE_NOM ASC, ELEVE_NOM ASC
@@ -147,6 +148,16 @@ if($nClasseId != -1 && $nPeriodeId != -1)
 		$aDomainesMatieresCompetences[$i] = $aRes['DOMAINES_MATIERES_COMPETENCES'];
 		$aEvalInds[$i] = $aRes['EVAL_INDS'];
 		$aNomPrenom[$i] = $aRes['NOM_PRENOM'];
+
+		// Récupération du commentaire sur la période de l'élève
+		$sQuery = <<< ________EOQ
+			SELECT COMMENTAIRE_VALEUR
+			FROM COMMENTAIRES
+			WHERE ID_ELEVE = {$oEleve['ELEVE_ID']}
+			AND ID_PERIODE = {$nPeriodeId}
+			AND ID_CLASSE =  {$nClasseId}
+________EOQ;
+		$aCommentaires[$i] = Database::fetchOneValue($sQuery);
 	}
 }
 
@@ -282,6 +293,19 @@ if($nClasseId != -1 && $nPeriodeId != -1)
 								<?php endforeach; ?>
 							<?php endforeach; ?>
 						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<br />
+						Saisir un commentaire pour l'élève '<?php echo $aEleve['ELEVE_NOM']; ?>' :<br />
+						<form id="form_insert_<?php echo $i; ?>">
+							<input type="hidden" name="eleve_id" value="<?php echo $aEleve['ELEVE_ID']; ?>" />
+							<input type="hidden" name="periode_id" value="<?php echo $nPeriodeId; ?>" />
+							<input type="hidden" name="classe_id" value="<?php echo $nClasseId; ?>" />
+							<input type="hidden" name="commentaire_hidden" value="<?php echo $aCommentaires[$i]; ?>" />
+							<textarea name="commentaire_saisie" rows="5" cols="50" onblur="submitAjaxUpdateCommentaire('form_insert_<?php echo $i; ?>');"><?php echo $aCommentaires[$i]; ?></textarea>
+						</form>
 					</td>
 				</tr>
 			</tbody>
