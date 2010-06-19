@@ -66,17 +66,7 @@ $aClassesNiveaux = $aRes['CLASSES_NIVEAUX'];
 $aDomainesMatieresCompetences = $aRes['DOMAINES_MATIERES_COMPETENCES'];
 $aEvalInds = $aRes['EVAL_INDS'];
 $aNomPrenom = $aRes['NOM_PRENOM'];
-
-// Récupération des commentaires pour chaque période de l'élève
-$sQuery = <<< EOQ
-	SELECT PERIODE_NOM, COMMENTAIRE_VALEUR, PERIODE_ID
-	FROM COMMENTAIRES
-		INNER JOIN PERIODES
-			ON PERIODES.PERIODE_ID = COMMENTAIRES.ID_PERIODE
-	WHERE ID_ELEVE = {$nEleveId}
-	AND ID_CLASSE =  {$aEleve['CLASSE_ID']}
-EOQ;
-$aCommentaires = Database::fetchArrayWithKey($sQuery, 'PERIODE_NOM');
+$aCommentaires = $aRes['COMMENTAIRES'];
 
 //==============================================================================
 // Preparation de l'affichage
