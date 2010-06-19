@@ -101,6 +101,11 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 				<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Récapitulatif périodique
 			</a>
 		</h4>
+		<h4>
+			<a href="?page=livrets&amp;mode=recap_annuel_all">
+				<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Récapitulatif annuel
+			</a>
+		</h4>
 		<h5>&nbsp;</h5>
 	</div>
 	<?php endif; ?>

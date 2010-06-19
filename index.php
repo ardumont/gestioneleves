@@ -215,7 +215,6 @@ $aMenuPage = array
 		'recap_cycle'      => "livrets/recap_cycle.inc.php",
 		'recap_annuel_all' => "livrets/recap_annuel_all.inc.php",
 		'recap_period_all' => "livrets/recap_period_all.inc.php",
-		'recap_cycle_all'  => "livrets/recap_cycle_all.inc.php",
 	),
 
 	// ----- Consultations -----
