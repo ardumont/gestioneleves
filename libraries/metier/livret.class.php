@@ -53,6 +53,7 @@ class Livret
 			SELECT DISTINCT
 				ELEVE_NOM,
 				CLASSE_ANNEE_SCOLAIRE,
+				CLASSE_ID,
 				CLASSE_NOM,
 				ECOLE_NOM,
 				ECOLE_VILLE,
@@ -117,6 +118,7 @@ ________EOQ;
 		// ===== La liste des periodes =====
 		$sQuery = <<< ________EOQ
 			SELECT
+				PERIODE_ID,
 				PERIODE_NOM
 			FROM PERIODES
 			ORDER BY PERIODE_NOM ASC
@@ -610,6 +612,7 @@ ________EOQ;
 		// ===== La liste des periodes =====
 		$sQuery = <<< ________EOQ
 			SELECT
+				PERIODE_ID,
 				PERIODE_NOM
 			FROM PERIODES
 			WHERE PERIODE_ID = {$nPeriodeId}
@@ -621,6 +624,7 @@ ________EOQ;
 		// ===== La liste des classes =====
 		$sQuery = <<< ________EOQ
 			SELECT
+			    CLASSE_ID,
 				CLASSE_NOM,
 				NIVEAU_NOM
 			FROM CLASSES
@@ -854,6 +858,7 @@ ________EOQ;
 			WHERE PERIODE_ID = {$nPeriodeId}
 			AND COMPETENCE_ID = {$nCompetenceId}
 			AND CLASSE_ID = {$nClasseId}
+			AND ELEVE_ACTIF=1
 			ORDER BY ELEVE_NOM ASC, COMPETENCE_NOM ASC
 ________EOQ;
 		$aEvalInds = Database::fetchArrayWithMultiKey($sQuery, array('ELEVE_NOM', 'EVAL_IND_ID'));
@@ -981,6 +986,7 @@ ________EOQ;
 					ON EVALUATIONS_COLLECTIVES.ID_PERIODE = PERIODES.PERIODE_ID
 			WHERE COMPETENCE_ID = {$nCompetenceId}
 			AND CLASSE_ID = {$nClasseId}
+			AND ELEVE_ACTIF=1
 			ORDER BY ELEVE_NOM ASC, COMPETENCE_NOM ASC
 ________EOQ;
 		$aEvalInds = Database::fetchArrayWithMultiKey($sQuery, array('ELEVE_NOM', 'PERIODE_NOM', 'EVAL_IND_ID'));
