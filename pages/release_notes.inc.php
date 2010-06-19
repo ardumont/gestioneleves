@@ -14,6 +14,7 @@
 			<dd>
 				<ul>
 					<li class="evolution_majeure" title="Evolution majeure">Gestion de la saisie d'appréciations des professeurs sur les élèves (avec report lors de l'impression du livret).</li>
+					<li class="evolution_majeure" title="Evolution majeure">Ajout du rapport annuel de tous les élèves d'une classe + Livret d'impression.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Amélioration de l'ergonomie de l'installeur.</li>
 					<li class="evolution_majeure" title="Evolution majeure">Amélioration de la charge graphique.</li>
 				</ul>
