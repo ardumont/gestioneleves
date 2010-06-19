@@ -22,3 +22,31 @@ function showOrHideMenu(image_left, image_right)
 		$("#img_arrow").attr("src", image_right);
 	}
 }// fin showOrHideMenu
+
+/**
+ * Montre un bloc d'id 'id' s'il est cache,
+ * le cache s'il est visible.
+ */
+function showOrHide(id)
+{
+	$('#' + id).toggle('slow');
+}// fin showOrHide
+
+/**
+ * Soumission du formulaire en ajax.
+ * @param sIdFormulaire	Id du formulaire
+ */
+function submitAjaxUpdateCommentaire(sIdFormulaire)
+{
+	// Soumission d'une requete POST en asynchrone 
+	$.ajax({
+		  type: 'POST',
+		  url: "ajax.php?page=commentaires&mode=add_or_update",
+		  data:$('#' + sIdFormulaire).serialize()
+//		  success:
+//			  function(data)
+//			  {
+//				  alert("Data Loaded: " + data);
+//			  }
+		});														
+}// fin submitAjaxUpdateCommentaire
