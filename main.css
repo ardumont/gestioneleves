@@ -888,7 +888,7 @@ tr.row1:hover,
 }
 
 /*==============================================================================
-|| RŽcapitulatif annuel ou pŽriodique
+|| Rï¿½capitulatif annuel ou pï¿½riodique
 ==============================================================================*/
 
 table.entete_n tr td
@@ -902,7 +902,7 @@ table.display tr td
 	text-align: left;
 }
 
-/* colonne des pŽriodes */
+/* colonne des pï¿½riodes */
 .colonne1
 {
 	background-color: #A0A0A0;
@@ -989,4 +989,71 @@ tr.row0
 tr.row1
 {
 	background-color: #3b9dcc;
+}
+
+
+/* Les input "hidden" ne doivent pas avoir de mise en forme, sinon on aura des '.' dans l'affichage */
+input[type=hidden]
+{
+    border: 0;
+}
+
+/* Le bouton par dÃ©faut du formulaire */
+input[type=submit].default_submit
+{
+	font-weight: bold;
+	border-width: 2px;
+}
+
+/* Pour l'astÃ©risque des champs obligatoires */
+label abbr.required_field
+{
+	color: #FF0000;
+	font-weight: bold;
+	vertical-align: super;
+	font-size: 0.8em;
+}
+
+/* Le tableau "form" sert juste de structure au formulaire. On enleve la mise en forme des th */
+fieldset table.form th
+{
+	text-align: left;
+	font-weight: normal;
+}
+
+/*======================================
+|| Les zones "info", "warning", "error"
+======================================*/
+
+div[class^="messagebox"],
+ul[class^="messagebox"],
+ul.form_error
+{
+	min-height: 32px;	/* = height icon */
+	padding: 1em 1em 0 37px; /* = width icon + 5px */
+	margin: 0 0 1em 0;
+	border-radius: 8px;
+    -moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+}
+
+ul[class^="messagebox"] li,
+ul.form_error li
+{
+	margin-left: 1em;
+}
+
+.messagebox_info
+{
+    background: #DDDDFF url(images/icons/32x32/messagebox_info.png) no-repeat left top;
+    border: 1px solid #0000FF;
+    color: #000000;
+}
+
+.messagebox_error,
+ul.form_error
+{
+    background: #FFDDDD url(images/icons/32x32/messagebox_critical.png) no-repeat left top;
+    border: 1px solid #FF0000;
+    color: #000000;
 }
