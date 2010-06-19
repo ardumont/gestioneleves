@@ -347,10 +347,14 @@ if($bHasAdminRight == false)
 
 	<link rel="stylesheet" type="text/css" href="default.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="main.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="main2.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="admin.css" media="all" />
-	<!--[if IE]>
+	<!--[if gt IE 6]>
 	<link rel="stylesheet" type="text/css" href="main-ie.css" media="all" />
-	<! endif -->
+	<![endif]-->
+	<!--[if lte IE 6]>
+	<link rel="stylesheet" type="text/css" href="main-ie6.css" media="all" />
+	<![endif]-->
 	<!-- JQuery -->
 	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/jquery.js"></script>
 	<!-- fonctions utilitaires de javascript -->

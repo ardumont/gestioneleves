@@ -1,16 +1,14 @@
 /*==============================================================================
-|| Correctifs pour Internet Explorer.
+|| Correctifs pour Internet Explorer 7 et sup.
 ==============================================================================*/
 
 /*==============================================================================
-|| Les mises en forme principales.
+|| La structure principale du site.
 ==============================================================================*/
 
 #struct_left_panel
 {
-	/* menu non figé sous ie */
-	position: absolute;
-	/* Sinon le panneau de gauche n'est pas vraiment à  gauche */
+	/* Sinon le panneau de gauche n'est pas vraiment a gauche */
 	left: 8px;
 }
 
@@ -20,23 +18,19 @@
 
 #struct_popup_mask
 {
+	/* Equivalent IE de "opacity: 0.6" */
 	filter: alpha(opacity = 60);
+
+	/* IE ne comprend pas le "overflow: hidden" sur le body
+		donc on fixe le mask pour eviter les scroll */
+	position: fixed;
 }
 
-/*==============================================================================
-|| La boite d'identification.
-==============================================================================*/
-
-#struct_identity h1,
-#struct_menu h1,
-#struct_main h1
+#struct_popup
 {
-	/* IE ne comprend pas margin-top -5px */
-	margin-top: 0;
-	position: relative;
-	background-image: url(images/bckgrd/h_gloss_ie.png);
-	background-repeat: repeat-x;
-	top: -5px;
+	/* IE ne comprend pas le "overflow: hidden" sur le body
+		donc on fixe la popup pour eviter les scroll */
+	position: fixed;
 }
 
 /*==============================================================================
@@ -49,7 +43,7 @@
 
 #struct_main table.list a
 {
-	/* IE ne comprend pas le color: inherit; */
+	/* IE ne comprend pas le "color: inherit" */
 	color: white;
 }
 
@@ -59,7 +53,7 @@
 
 #struct_main table.list_tree a
 {
-	/* IE ne comprend pas le color: inherit; */
+	/* IE ne comprend pas le "color: inherit" */
 	color: white;
 }
 
@@ -71,6 +65,7 @@
 #struct_main table.calendar input, 
 #struct_main table.calendar select
 {
+	/* IE ne comprend pas le "color: inherit" */
 	color: white;
 }
 

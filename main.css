@@ -59,7 +59,7 @@ body
 }
 
 /*==============================================================================
-|| Les mises en forme générales.
+|| Les mises en forme generales.
 ==============================================================================*/
 
 /* Ne pas mettre de bordure sur les images servant de liens */
@@ -69,7 +69,7 @@ a img
 }
 
 /*======================================
-|| h1 : entête de menu, de page, de popup
+|| h1 : entete de menu, de page, de popup
 ======================================*/
 #struct_main h1,
 #struct_identity h1,
@@ -88,9 +88,9 @@ a img
 }
 
 /*======================================
-|| Les icones utilisées pour la décoration
+|| Les icones utilisees pour la decoration
 ======================================*/
-/* le nom doit commencer par "icon_16" pour être utilisé par le css des menus */
+/* le nom doit commencer par "icon_16" pour etre utilise par le css des menus */
 .icon_16_home					{background: url(images/icons/16x16/home.png)					no-repeat left center;}
 .icon_16_user					{background: url(images/icons/16x16/user.png)					no-repeat left center;}
 .icon_16_out					{background: url(images/icons/16x16/out.png)					no-repeat left center;}
@@ -142,7 +142,7 @@ input[type=hidden]
     border: 0;
 }
 
-/* Le bouton par défaut du formulaire */
+/* Le bouton par defaut du formulaire */
 input[type=submit].default_submit
 {
 	font-weight: bold;
@@ -204,7 +204,7 @@ body.popup_stop_scroll
 || Le menu
 ==============================================================================*/
 
-/* Surcharge de "Les mises en forme générales" */
+/* Surcharge de "Les mises en forme generales" */
 #struct_identity h1,
 #struct_menu h1
 {
@@ -323,7 +323,7 @@ body.popup_stop_scroll
 || Le corps du site
 ==============================================================================*/
 
-/* #struct_main h1 : Voir "Les mises en forme générales" */
+/* #struct_main h1 : Voir "Les mises en forme generales" */
 
 /*========== Les liens ==========*/
 
@@ -888,7 +888,7 @@ tr.row1:hover,
 }
 
 /*==============================================================================
-|| R�capitulatif annuel ou p�riodique
+|| Recapitulatif annuel ou periodique
 ==============================================================================*/
 
 table.entete_n tr td
@@ -902,7 +902,7 @@ table.display tr td
 	text-align: left;
 }
 
-/* colonne des p�riodes */
+/* colonne des periodes */
 .colonne1
 {
 	background-color: #A0A0A0;
@@ -998,14 +998,14 @@ input[type=hidden]
     border: 0;
 }
 
-/* Le bouton par défaut du formulaire */
+/* Le bouton par defaut du formulaire */
 input[type=submit].default_submit
 {
 	font-weight: bold;
 	border-width: 2px;
 }
 
-/* Pour l'astérisque des champs obligatoires */
+/* Pour l'asterisque des champs obligatoires */
 label abbr.required_field
 {
 	color: #FF0000;

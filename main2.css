@@ -1,0 +1,28 @@
+#struct_main input, #struct_main select, 
+#struct_main textarea, #struct_main button {
+	border-radius: 5px;
+    -moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	
+}
+
+#struct_main table.list, 
+#struct_main table.list_tree, 
+#struct_main table.formulaire,
+#struct_main table.info
+{
+ 	border: 1px solid;
+	border-radius: 8px;
+    -moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+}
+
+#struct_main table.list_tree caption
+{
+ 	border: 0;
+	border-radius-topleft: 8px;
+	border-radius-topright: 8px;
+	-moz-border-radius-topleft: 8px;
+	-moz-border-radius-topright: 8px;
+	-webkit-border-radius-topleft: 8px;
+	-webkit-border-radius-topright: 8px;
+}

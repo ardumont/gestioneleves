@@ -1,0 +1,150 @@
+/*==============================================================================
+|| Correctifs pour Internet Explorer 6 et inf.
+==============================================================================*/
+
+/*==============================================================================
+|| La structure principale du site.
+==============================================================================*/
+
+#struct_left_panel
+{
+	/* Menu non fige sous ie */
+	position: absolute;
+	
+	/* Sinon le panneau de gauche n'est pas vraiment à gauche */
+	left: 8px;
+}
+
+/*==============================================================================
+|| Les mises en forme generales.
+==============================================================================*/
+
+/*======================================
+|| h1 : entête de menu, de page, de popup
+======================================*/
+
+#struct_identity h1,
+#struct_menu h1,
+#struct_main h1
+{
+	/* IE ne gère pas les png avec un calque alpha */
+	background: #666666 none;
+}
+
+/*======================================
+|| Les elements de formulaire.
+======================================*/
+
+/* IE ne comprend pas "input[type=submit]"
+   donc on espère que l'on utilisera pas la classe sur un autre type d'input */
+input.default_submit
+{
+	font-weight: bold;
+	border-width: 2px;
+}
+
+/*======================================
+|| Les zones "info", "warning", "error"
+======================================*/
+
+/* IE ne comprend pas "[class^="messagebox"]"
+	Donc on doit faire les different cas */
+div.messagebox_info,
+div.messagebox_error,
+ul.messagebox_info,
+ul.messagebox_error
+{
+	
+	height: 32px; /* IE gere le height comme un min-height */
+	padding: 1em 1em 0 37px;
+	margin: 0 0 1em 0;
+}
+
+/* IE ne comprend pas le "margin-left: 1em" sur les "li"
+	Donc on transforme ca en "padding-left" sur l'element parent */
+ul.messagebox_info,
+ul.messagebox_error,
+ul.form_error
+{
+	padding-left: 55px; /* Attention du coup, il faut ajouter le 1em au 37px deja existant (cf ci-dessus) */
+}
+
+/*==============================================================================
+|| Les messages d'erreur et d'avertissement.
+==============================================================================*/
+
+#struct_popup_mask
+{
+	/* Equivalent IE de "opacity: 0.6" */
+	filter: alpha(opacity = 60);
+
+	/* IE ne comprend pas le "right: 0" et le "bottom: 0" */
+	width: expression(screen.width);
+	height: expression(screen.height);
+}
+
+/*==============================================================================
+|| Le menu
+==============================================================================*/
+
+#struct_menu ul li,
+#struct_identity ul li
+{
+	/* IE ne gere pas les png avec un calque alpha */
+	background: none;
+}
+
+/* IE ne comprend pas a[class^="icon_16"] donc on applique la mise ne forme pour tous */
+#struct_menu a,
+#struct_identity a
+{
+	height: 16px;
+	padding-left: 23px;
+}
+
+/*==============================================================================
+|| Les mises en forme generales pour le corps du site.
+==============================================================================*/
+
+/*======================================
+|| Tableaux de type "list" : 1 seul niveau.
+======================================*/
+
+#struct_main table.list a
+{
+	/* IE ne comprend pas le "color: inherit" */
+	color: white;
+}
+
+/*======================================
+|| Tableau de type "list_tree" : liste a plusieurs niveaux.
+======================================*/
+
+#struct_main table.list_tree a
+{
+	/* IE ne comprend pas le "color: inherit" */
+	color: white;
+}
+
+/*======================================
+|| Tableau special calendrier.
+======================================*/
+
+#struct_main table.calendar a,
+#struct_main table.calendar input, 
+#struct_main table.calendar select
+{
+	/* IE ne comprend pas le "color: inherit" */
+	color: white;
+}
+
+/*==============================================================================
+|| page avec scrollbar sur la zone de texte (desactive car ie ne comprend pas)
+==============================================================================*/
+
+/* Impossible de faire un scroll vertical sous IE sans devoir rajouter un div autour de la table.... Tant pis pour lui. */
+.div_scrollable_small, .div_scrollable_medium, .div_scrollable_large 
+{
+	height: auto;
+	overflow: none;
+}
