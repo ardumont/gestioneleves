@@ -179,21 +179,14 @@ ________EOQ;
 <?php if($nClasseId != -1 && $nPeriodeId != -1): ?>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="special.php?page=export_livret_eleve_period_all&amp;classe_id=<?php echo $nClasseId; ?>&amp;periode_id=<?php echo $nPeriodeId; ?>">Version imprimable</a>
 <?php endif ?>
-<div id="help" style="display: none;">
-	<table class="formulaire">
-		<caption>Fonctionnement</caption>
-		<tr>
-			<td>
-				Par défaut, cette page permet d'afficher un récapitulatif de l'activité périodique de tous les élèves de votre classe.<br />
-				Vous sélectionnez la classe et la période désirée puis vous lancez l'affichage en cliquant sur
-				le bouton <i>Afficher</i>.
-				<br />
-				Pour générer une version imprimable, cliquer sur le lien <i>Version imprimable</i> puis, après affichage de
-				la nouvelle page, lancer une impression avec votre imprimante.
-				<br />&nbsp;
-			</td>
-		</tr>
-	</table>
+<div id="help" class="messagebox_info" style="display: none;">
+	Par défaut, cette page permet d'afficher un récapitulatif de l'activité périodique de tous les élèves de votre classe.<br />
+	Vous sélectionnez la classe et la période désirée puis vous lancez l'affichage en cliquant sur
+	le bouton <i>Afficher</i>.
+	<br />
+	Pour générer une version imprimable, cliquer sur le lien <i>Version imprimable</i> puis, après affichage de
+	la nouvelle page, lancer une impression avec votre imprimante.
+	<br />&nbsp;
 </div>
 
 <form method="post" action="?page=livrets&amp;mode=recap_period_all" name="formulaire_list" id="formulaire_list">

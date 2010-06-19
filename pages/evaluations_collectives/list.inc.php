@@ -112,18 +112,11 @@ $aEvalCols = Database::fetchArray($sQuery);
 <?php endif; ?>
 
 <a href="javascript:void(0);" onclick="showOrHide('help')">Aide</a>
-<div id="help" style="display: none;">
-	<table class="formulaire">
-		<caption>Fonctionnement</caption>
-		<tr>
-			<td>
-				Par défaut, cette page affiche toutes les évaluations collectives saisies à ce jour par le professeur connecté.<br />
-				Vous pouvez toutefois ne filtrer que par classe ou par période.<br />
-				Pour cela, sélectionner une classe ou une période puis cliquer sur le bouton <i>Rechercher</i>.
-				<br />&nbsp;
-			</td>
-		</tr>
-	</table>
+<div id="help" class="messagebox_info" style="display: none;">
+	Par défaut, cette page affiche toutes les évaluations collectives saisies à ce jour par le professeur connecté.<br />
+	Vous pouvez toutefois ne filtrer que par classe ou par période.<br />
+	Pour cela, sélectionner une classe ou une période puis cliquer sur le bouton <i>Rechercher</i>.
+	<br />&nbsp;
 </div>
 
 <form method="post" action="?page=evaluations_collectives" name="formulaire_eval_col" id="formulaire_eval_col">

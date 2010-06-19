@@ -94,20 +94,13 @@ $aDepts = Database::fetchArray($sQuery);
 
 <br />
 <a href="javascript:void(0);" onclick="showOrHide('help')">Aide</a>
-<div id="help" style="display: none;">
-	<table class="formulaire">
-		<caption>Fonctionnement</caption>
-		<tr>
-			<td>
-				Par défaut, cette page liste les écoles existantes dans la base de données de l'application.<br />
-				Veuillez tout d'abord renseigner les critères de recherche d'une école.<br />
-				<br />
-				Vous pouvez modifier une école en cliquant sur son nom.<br />
-				Vous pouvez également ajouter une école en cliquant sur le + en haut à gauche du tableau.
-				<br />&nbsp;
-			</td>
-		</tr>
-	</table>
+<div id="help" class="messagebox_info" style="display: none;">
+	Par défaut, cette page liste les écoles existantes dans la base de données de l'application.<br />
+	Veuillez tout d'abord renseigner les critères de recherche d'une école.<br />
+	<br />
+	Vous pouvez modifier une école en cliquant sur son nom.<br />
+	Vous pouvez également ajouter une école en cliquant sur le + en haut à gauche du tableau.
+	<br />&nbsp;
 </div>
 
 <form method="post" action="?page=ecoles" name="formulaire" id="formulaire">

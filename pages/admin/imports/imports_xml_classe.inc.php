@@ -65,24 +65,17 @@ $sXMLExemple = htmlentities(utf8_decode($sXMLExemple));
 
 <br />
 <a href="javascript:void(0);" onclick="showOrHide('help')">Aide</a>
-<div id="help" style="display: none;">
-	<table class="formulaire">
-		<caption>Fonctionnement</caption>
-		<tr>
-			<td>
-				Le but est de faciliter la cr&eacute;ation des Classe/Ecole/Eleve.<br />
-				Pour cela, vous pouvez
-				<ul>
-					<li>soit saisir dans chacune des ihms dans cet ordre les classes, écoles, et élèves.</li>
-					<li>soit importer un fichier xml &eacute;dit&eacute; &agrave; la main avec une structure similaire :
-						<pre style="font-size: 1.1em;"><?php echo $sXMLExemple; ?></pre>
-						L'imbrication des tags montre bien la d&eacute;pendance de chacun des &eacute;l&eacute;ments.
-						Attention &agrave; l'encodage du fichier qui doit &ecirc;tre en UTF-8.
-					</li>
-				</ul>
-			</td>
-		</tr>
-	</table>
+<div id="help" class="messagebox_info" style="display: none;">
+	Le but est de faciliter la cr&eacute;ation des Classe/Ecole/Eleve.<br />
+	Pour cela, vous pouvez
+	<ul>
+		<li>soit saisir dans chacune des ihms dans cet ordre les classes, écoles, et élèves.</li>
+		<li>soit importer un fichier xml &eacute;dit&eacute; &agrave; la main avec une structure similaire :
+			<pre style="font-size: 1.1em;"><?php echo $sXMLExemple; ?></pre>
+			L'imbrication des tags montre bien la d&eacute;pendance de chacun des &eacute;l&eacute;ments.
+			Attention &agrave; l'encodage du fichier qui doit &ecirc;tre en UTF-8.
+		</li>
+	</ul>
 </div>
 <br />
 

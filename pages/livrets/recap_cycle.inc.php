@@ -118,20 +118,13 @@ if($nEleveId != -1)
 <?php if($nEleveId != -1): ?>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="special.php?page=export_livret_eleve_cycle&amp;eleve_id=<?php echo $nEleveId; ?>">Version imprimable</a>
 <?php endif ?>
-<div id="help" style="display: none;">
-	<table class="formulaire">
-		<caption>Fonctionnement</caption>
-		<tr>
-			<td>
-				Par défaut, cette page permet d'afficher un récapitulatif de l'activité annuelle d'un élève de votre classe.<br />
-				Vous sélectionnez l'élève de votre classe puis vous lancez l'affichage en cliquant sur le bouton <i>Afficher</i>.
-				<br />
-				Pour générer une version imprimable, cliquer sur le lien <i>Version imprimable</i> puis, après affichage de
-				la nouvelle page, lancer une impression avec votre imprimante.
-				<br />&nbsp;
-			</td>
-		</tr>
-	</table>
+<div id="help" class="messagebox_info" style="display: none;">
+	Par défaut, cette page permet d'afficher un récapitulatif de l'activité annuelle d'un élève de votre classe.<br />
+	Vous sélectionnez l'élève de votre classe puis vous lancez l'affichage en cliquant sur le bouton <i>Afficher</i>.
+	<br />
+	Pour générer une version imprimable, cliquer sur le lien <i>Version imprimable</i> puis, après affichage de
+	la nouvelle page, lancer une impression avec votre imprimante.
+	<br />&nbsp;
 </div>
 
 <form method="post" action="?page=livrets&amp;mode=recap_cycle" name="formulaire_list" id="formulaire_list">

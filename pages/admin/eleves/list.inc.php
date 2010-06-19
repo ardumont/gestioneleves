@@ -122,22 +122,15 @@ ____EOQ;
 <br />
 
 <a href="javascript:void(0);" onclick="showOrHide('help')">Aide</a>
-<div id="help" style="display: none;">
-	<table class="formulaire">
-		<caption>Fonctionnement</caption>
-		<tr>
-			<td>
-				Par défaut, cette page affiche tous les élèves par classe du professeur connecté.<br />
-				Vous pouvez sélectionner une classe parmi la liste proposée puis cliquez sur le bouton <i>Rechercher</i>.<br />
-				<br />
-				Vous ne pouvez pas éditez ou ajouter de nouveaux élèves sur cette page.<br />
-				Cette page ne sert qu'à lister les élèves et leur rattachement à une classe.<br />
-				Pour éditer ou ajouter un nouvel élève, rendez-vous sur la page <a href="index.php?page=eleves">de
-				gestion des élèves</a>.
-				<br />&nbsp;
-			</td>
-		</tr>
-	</table>
+<div id="help" class="messagebox_info" style="display: none;">
+	Par défaut, cette page affiche tous les élèves par classe du professeur connecté.<br />
+	Vous pouvez sélectionner une classe parmi la liste proposée puis cliquez sur le bouton <i>Rechercher</i>.<br />
+	<br />
+	Vous ne pouvez pas éditez ou ajouter de nouveaux élèves sur cette page.<br />
+	Cette page ne sert qu'à lister les élèves et leur rattachement à une classe.<br />
+	Pour éditer ou ajouter un nouvel élève, rendez-vous sur la page <a href="index.php?page=eleves">de
+	gestion des élèves</a>.
+	<br />&nbsp;
 </div>
 
 <form method="post" action="?page=eleves" name="formulaire_eleve" id="formulaire_eleve">

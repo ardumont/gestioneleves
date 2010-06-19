@@ -60,21 +60,13 @@ $aPeriodes = Database::fetchArray($sQuery);
 
 <br />
 <a href="javascript:void(0);" onclick="showOrHide('help')">Aide</a>
-<div id="help" style="display: none;">
-	<table class="formulaire">
-		<caption>Fonctionnement</caption>
-		<tr>
-			<td>
-				Par défaut, cette page affiche l'ensemble des périodes existantes dans l'application.<br />
-				<br />
-				Vous pouvez modifier une période en cliquant sur son nom.<br />
-				Vous pouvez également ajouter une période en cliquant sur le + en haut à gauche du tableau.
-				<br />&nbsp;
-			</td>
-		</tr>
-	</table>
+<div id="help" class="messagebox_info" style="display: none;">
+	Par défaut, cette page affiche l'ensemble des périodes existantes dans l'application.<br />
+	<br />
+	Vous pouvez modifier une période en cliquant sur son nom.<br />
+	Vous pouvez également ajouter une période en cliquant sur le + en haut à gauche du tableau.
+	<br />&nbsp;
 </div>
-<br /><br />
 
 <?php if($aPeriodes != false): ?>
 <table class="list_tree">

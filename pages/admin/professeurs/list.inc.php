@@ -120,19 +120,11 @@ $aEcoles = Database::fetchArray($sQuery);
 <?php endif; ?>
 <br />
 <a href="javascript:void(0);" onclick="showOrHide('help')">Aide</a>
-<div id="help" style="display: none;">
-	<table class="formulaire">
-		<caption>Fonctionnement</caption>
-		<tr>
-			<td>
-				Par défaut, cette page affiche les professeurs référencés dans l'application.<br />
-				Veuillez tout d'abord renseigner les critères de recherche d'un professeur.<br />
-				Vous pouvez modifier un professeur en cliquant sur le nom du professeur.<br />
-				Pour ajouter un professeur, cliquer sur le plus en haut à gauche du tableau.
-				<br />&nbsp;
-			</td>
-		</tr>
-	</table>
+<div id="help" class="messagebox_info" style="display: none;">
+	Par défaut, cette page affiche les professeurs référencés dans l'application.<br />
+	Veuillez tout d'abord renseigner les critères de recherche d'un professeur.<br />
+	Vous pouvez modifier un professeur en cliquant sur le nom du professeur.<br />
+	Pour ajouter un professeur, cliquer sur le plus en haut à gauche du tableau.
 </div>
 
 <form method="post" action="?page=professeurs" name="formulaire" id="formulaire">

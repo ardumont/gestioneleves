@@ -60,18 +60,11 @@ $aNotes = Database::fetchArray($sQuery);
 
 <br />
 <a href="javascript:void(0);" onclick="showOrHide('help')">Aide</a>
-<div id="help" style="display: none;">
-	<table class="formulaire">
-		<caption>Fonctionnement</caption>
-		<tr>
-			<td>
-				Par défaut, cette page affiche l'ensemble des notes existantes dans l'application.<br />
-				<br />
-				Vous ne pouvez pas modifier les notes, ni en ajouter ou en supprimer.<br />
-				En effet, des modules de l'application en dépendent (le calcul des moyennes, l'affichage des livrets, etc...).<br />&nbsp;
-			</td>
-		</tr>
-	</table>
+<div id="help" class="messagebox_info" style="display: none;">
+	Par défaut, cette page affiche l'ensemble des notes existantes dans l'application.<br />
+	<br />
+	Vous ne pouvez pas modifier les notes, ni en ajouter ou en supprimer.<br />
+	En effet, des modules de l'application en dépendent (le calcul des moyennes, l'affichage des livrets, etc...).<br />&nbsp;
 </div>
 <br /><br />
 

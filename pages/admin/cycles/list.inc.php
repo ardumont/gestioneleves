@@ -58,19 +58,12 @@ $aCycles = Database::fetchArray($sQuery);
 
 <br />
 <a href="javascript:void(0);" onclick="showOrHide('help')">Aide</a>
-<div id="help" style="display: none;">
-	<table class="formulaire">
-		<caption>Fonctionnement</caption>
-		<tr>
-			<td>
-				Par défaut, cette page liste les cycles existants dans l'application.<br />
-				<br />
-				Vous pouvez modifier un cycle en cliquant sur le nom du cycle.<br />
-				Vous pouvez également ajouter un cycle en cliquant sur le + en haut à gauche du tableau.
-				<br />&nbsp;
-			</td>
-		</tr>
-	</table>
+<div id="help" class="messagebox_info" style="display: none;">
+	Par défaut, cette page liste les cycles existants dans l'application.<br />
+	<br />
+	Vous pouvez modifier un cycle en cliquant sur le nom du cycle.<br />
+	Vous pouvez également ajouter un cycle en cliquant sur le + en haut à gauche du tableau.
+	<br />&nbsp;
 </div>
 <br /><br />
 

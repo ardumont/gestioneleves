@@ -132,19 +132,12 @@ if($nClasseId != -1 && $nPeriodeId != -1 && $nCompetenceId != -1)
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="special.php?page=consultation_period_competence&amp;classe_id=<?php echo $nClasseId; ?>&amp;periode_id=<?php echo $nPeriodeId; ?>&amp;competence_id=<?php echo $nCompetenceId; ?>">Version imprimable</a>
 <?php endif ?>
 
-<div id="help" style="display: none;">
-	<table class="formulaire">
-		<caption>Fonctionnement</caption>
-		<tr>
-			<td>
-				Cette page permet d'afficher une vue qui synthétise, pour une compétence évaluée choisie, les moyennes des évaluations individuelles
-				pour chacun des élèves d'une classe du professeur connecté.<br />
-				Pour cela, sélectionner la compétence, la période et la classe puis
-				cliquer sur le bouton <i>Rechercher</i> pour que la page se rafraîchisse.<br />
-				<br />&nbsp;
-			</td>
-		</tr>
-	</table>
+<div id="help" class="messagebox_info" style="display: none;">
+	Cette page permet d'afficher une vue qui synthétise, pour une compétence évaluée choisie, les moyennes des évaluations individuelles
+	pour chacun des élèves d'une classe du professeur connecté.<br />
+	Pour cela, sélectionner la compétence, la période et la classe puis
+	cliquer sur le bouton <i>Rechercher</i> pour que la page se rafraîchisse.<br />
+	<br />&nbsp;
 </div>
 
 <form method="post" action="?page=consultations&amp;mode=competences_period" name="formulaire" id="formulaire">

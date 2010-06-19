@@ -117,20 +117,13 @@ $aProfesseurs = Database::fetchArray($sQuery);
 <?php endif; ?>
 <br />
 <a href="javascript:void(0);" onclick="showOrHide('help')">Aide</a>
-<div id="help" style="display: none;">
-	<table class="formulaire">
-		<caption>Fonctionnement</caption>
-		<tr>
-			<td>
-				Par défaut, cette page liste les classes existantes dans l'application.<br />
-				Veuillez tout d'abord renseigner les critères de recherche d'une classe.<br />
-				<br />
-				Vous pouvez modifier une classe en cliquant sur le nom de la classe.<br />
-				Vous pouvez également ajouter une classe en cliquant sur le + en haut à gauche du tableau.
-				<br />&nbsp;
-			</td>
-		</tr>
-	</table>
+<div id="help" class="messagebox_info" style="display: none;">
+	Par défaut, cette page liste les classes existantes dans l'application.<br />
+	Veuillez tout d'abord renseigner les critères de recherche d'une classe.<br />
+	<br />
+	Vous pouvez modifier une classe en cliquant sur le nom de la classe.<br />
+	Vous pouvez également ajouter une classe en cliquant sur le + en haut à gauche du tableau.
+	<br />&nbsp;
 </div>
 
 <form method="post" action="?page=classes" name="formulaire" id="formulaire">
