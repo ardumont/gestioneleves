@@ -148,16 +148,7 @@ if($nClasseId != -1 && $nPeriodeId != -1)
 		$aDomainesMatieresCompetences[$i] = $aRes['DOMAINES_MATIERES_COMPETENCES'];
 		$aEvalInds[$i] = $aRes['EVAL_INDS'];
 		$aNomPrenom[$i] = $aRes['NOM_PRENOM'];
-
-		// Récupération du commentaire sur la période de l'élève
-		$sQuery = <<< ________EOQ
-			SELECT COMMENTAIRE_VALEUR
-			FROM COMMENTAIRES
-			WHERE ID_ELEVE = {$oEleve['ELEVE_ID']}
-			AND ID_PERIODE = {$nPeriodeId}
-			AND ID_CLASSE =  {$nClasseId}
-________EOQ;
-		$aCommentaires[$i] = Database::fetchOneValue($sQuery);
+		$aCommentaires[$i] = $aRes['COMMENTAIRES'];
 	}
 }
 

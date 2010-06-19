@@ -586,6 +586,7 @@ ________EOQ;
 		// ===== Les informations sur l'élève =====
 		$sQuery = <<< ________EOQ
 			SELECT DISTINCT
+				ELEVE_ID,
 				ELEVE_NOM,
 				CLASSE_ANNEE_SCOLAIRE,
 				CLASSE_NOM,
@@ -616,6 +617,7 @@ ________EOQ;
 		$sQuery = <<< ________EOQ
 			SELECT DISTINCT
 				PROFESSEUR_NOM,
+				CLASSE_ID,
 				CLASSE_NOM,
 				CLASSE_ANNEE_SCOLAIRE
 			FROM ELEVES
@@ -742,6 +744,16 @@ ________EOQ;
 		$aEvalInds = Database::fetchArrayWithMultiKey($sQuery, array('DOMAINE_NOM', 'MATIERE_NOM', 'COMPETENCE_NOM', 'CLASSE_NOM', 'NIVEAU_NOM', 'PERIODE_NOM'), false);
 		// $aEvalInds[NOM DU DOMAINE][NOM DE LA MATIERE][NOM DE LA COMPETENCE][NOM DE LA CLASSE][NOM DU NIVEAU][NOM DE LA PERIODE][COLONNE] = VALEUR
 
+		// Récupération du commentaire sur la période de l'élève
+		$sQuery = <<< ________EOQ
+			SELECT COMMENTAIRE_VALEUR
+			FROM COMMENTAIRES
+			WHERE ID_ELEVE = {$nEleveId}
+			AND ID_PERIODE = {$nPeriodeId}
+			AND ID_CLASSE =  {$aClassesEleve['CLASSE_ID']}
+________EOQ;
+		$aCommentaires = Database::fetchOneValue($sQuery);
+		
 		// Lancement du calcul de la moyenne pour la période
 		// Parcours de tous les domaines
 		foreach($aDomainesMatieresCompetences as $sDomaine => $aMatieres)
@@ -806,6 +818,7 @@ ________EOQ;
 		$aRes['DOMAINES_MATIERES_COMPETENCES'] = $aDomainesMatieresCompetences;
 		$aRes['EVAL_INDS'] = $aEvalInds;
 		$aRes['NOM_PRENOM'] = $aNomPrenom;
+		$aRes['COMMENTAIRES'] = $aCommentaires;
 
 		return $aRes;
 	}// fin recap_period
