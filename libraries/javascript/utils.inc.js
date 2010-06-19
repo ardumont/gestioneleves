@@ -1,14 +1,14 @@
 
-/**
- * Montre un bloc d'id 'id' s'il est cache,
- * le cache s'il est visible.
- */
-function showOrHide(id)
-{
-	var objElement = document.getElementById(id);
-	
-	objElement.style.display = (objElement.style.display != 'none') ? 'none' : '';
-}
+///**
+// * Montre un bloc d'id 'id' s'il est cache,
+// * le cache s'il est visible.
+// */
+//function showOrHide(id)
+//{
+//	var objElement = document.getElementById(id);
+//	
+//	objElement.style.display = (objElement.style.display != 'none') ? 'none' : '';
+//}
 
 /**
  * Montre l'objet d'id 'id'.
