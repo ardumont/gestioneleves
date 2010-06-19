@@ -14,6 +14,7 @@
 			<dd>
 				<ul>
 					<li class="evolution_majeure" title="Evolution majeure">Gestion de la saisie de commentaires sur les périodes des élèves.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Amélioration de l'ergonomie de l'installeur.</li>
 				</ul>
 			</dd>
 			<dt>

@@ -1,60 +1,12 @@
 <?php
 //==============================================================================
-// Les fonctions pour cette page
-//==============================================================================
-
-/**
- * Permet de tester si on va pouvoir créer/modifier un fichier de configuration
- *
- * Le tableau retourné contient 2 valeurs :
- * - 'EXIST'    => Pour indiquer si le fichier existe
- * - 'WRITABLE' => Pour indiquer si le fichier pourra être créer/modifier
- *
- * @author Lionel SAURON
- * @version 1.0
- * @public
- *
- * @param $sConfigFileName(string) Le nom du fichier à tester
- * @return (array) Tableau résultat
- */
-function testConfigFile($sConfigFileName)
-{
-	$aConfigFile = array
-	(
-		'EXIST'    => false,
-		'WRITABLE' => false,
-	);
-
-	// ===== Existe t'il ? =====
-	if(is_file($sConfigFileName) == true)
-	{
-		$aConfigFile['EXIST'] = true;
-	}
-
-	// ===== Peut t'on modifier le fichier, ou le créer ? =====
-
-	// Attention si le fichier n'existe pas, il faut si on peut ecrire dans le dossier
-	if($aConfigFile['EXIST'] == false)
-	{
-		$sConfigFileName = dirname($sConfigFileName);
-	}
-
-	if((file_exists($sConfigFileName) == true) && (is_writable($sConfigFileName) == true))
-	{
-		$aConfigFile['WRITABLE'] = true;
-	}
-
-	return $aConfigFile;
-}
-
-//==============================================================================
 // Préparation des données
 //==============================================================================
 
 define('PHP_VERSION_WANTED', "5.1.0");
 
-$sMainConfigFileName     = PATH_CONF_INSTALL."/main.conf.php";
-$sDatabaseConfigFileName = PATH_CONF_INSTALL."/database.conf.php";
+$sMainConfigFileName     = PATH_INSTALL_ROOT."/config/main.conf.php";
+$sDatabaseConfigFileName = PATH_INSTALL_ROOT."/config/database.conf.php";
 
 //==============================================================================
 // Validation du formulaire
@@ -84,8 +36,8 @@ $bAllTestOk = ($bMagicQuotesRuntime == false) ? $bAllTestOk : false;
 
 // ===== Test des fichiers de configuration =====
 
-$aMainConfigResult     = testConfigFile($sMainConfigFileName);
-$aDatabaseConfigResult = testConfigFile($sDatabaseConfigFileName);
+$aMainConfigResult     = Install::checkConfigFileWritable($sMainConfigFileName);
+$aDatabaseConfigResult = Install::checkConfigFileWritable($sDatabaseConfigFileName);
 
 $bAllTestOk = ($aMainConfigResult['WRITABLE'] == true)     ? $bAllTestOk : false;
 $bAllTestOk = ($aDatabaseConfigResult['WRITABLE'] == true) ? $bAllTestOk : false;
@@ -94,43 +46,51 @@ $bAllTestOk = ($aDatabaseConfigResult['WRITABLE'] == true) ? $bAllTestOk : false
 // Préparation de l'affichage
 //==============================================================================
 
+$GuiResultOk = "<img src=\"".URL_INSTALL_ROOT."/images/icons/16x16/action-success.png\" alt=\"Réussi\" />";
+$GuiResultKo = "<img src=\"".URL_INSTALL_ROOT."/images/icons/16x16/action-fail.png\" alt=\"Echec\" />";
+
 //==============================================================================
 // Affichage de la page
 //==============================================================================
 ?>
 <h2>Etape 1 - Vérification des pré-requis</h2>
 
-<table class="formulaire">
-	<caption>Pré-requis pour l'application</caption>
-	<tbody>
+<fieldset class="inline">
+	<legend>Pré-requis pour l'application</legend>
+	<table class="form">
 		<tr>
-			<th>PHP Version &gt;= <?php echo(PHP_VERSION_WANTED); ?></th>
-			<td><?php echo($bPhpVersionResult ? "OK !" : "KO !"); ?></td>
-			<td>(<?php echo(PHP_VERSION); ?>)</td>
+			<th>PHP Version &gt;= <?php echo(PHP_VERSION_WANTED); ?> :</th>
+			<td>
+				<?php echo($bPhpVersionResult ? $GuiResultOk : $GuiResultKo); ?>
+				(<?php echo(PHP_VERSION); ?>)
+			</td>
 		</tr>
-	</tbody>
-</table>
+	</table>
+</fieldset>
 <br />
-<table class="formulaire">
-	<caption>Pré-requis pour l'installation</caption>
-	<tbody>
+<fieldset class="inline">
+	<legend>Pré-requis pour l'installation</legend>
+	<table class="form">
 		<tr>
-			<th>Fichier de configuration principale</th>
-			<td><?php echo($aMainConfigResult['WRITABLE'] ? "OK !" : "KO !"); ?></td>
-			<td>(<?php echo($aMainConfigResult['EXIST'] ? "Modification" : "Création"); ?>)</td>
+			<th>Fichier de configuration principale :</th>
+			<td>
+				<?php echo($aMainConfigResult['WRITABLE'] ? $GuiResultOk : $GuiResultKo); ?>
+				(<?php echo($aMainConfigResult['EXIST'] ? "Modification" : "Création"); ?>)
+			</td>
 		</tr>
 		<tr>
-			<th>Fichier de configuration de la base</th>
-			<td><?php echo($aDatabaseConfigResult['WRITABLE'] ? "OK !" : "KO !"); ?></td>
-			<td>(<?php echo($aDatabaseConfigResult['EXIST'] ? "Modification" : "Création"); ?>)</td>
+			<th>Fichier de configuration de la base :</th>
+			<td>
+				<?php echo($aDatabaseConfigResult['WRITABLE'] ? $GuiResultOk : $GuiResultKo); ?>
+				(<?php echo($aDatabaseConfigResult['EXIST'] ? "Modification" : "Création"); ?>)
+			</td>
 		</tr>
 		<tr>
-			<th>magic_quotes_runtime = Off</th>
-			<td><?php echo($bMagicQuotesRuntime ? "KO !" : "OK !"); ?></td>
-			<td></td>
+			<th>magic_quotes_runtime = Off :</th>
+			<td><?php echo($bMagicQuotesRuntime ? $GuiResultKo : $GuiResultOk); ?></td>
 		</tr>
-	</tbody>
-</table>
+	</table>
+</fieldset>
 <?php if(($aMainConfigResult['WRITABLE'] == false) || ($aDatabaseConfigResult['WRITABLE'] == false)): ?>
 	<p>Le dossier de configuration ou les fichiers qu'il contient ne sont pas accessibles en écriture.<br />
 	Ce script ne peut créer/modifier les fichiers de configuration.

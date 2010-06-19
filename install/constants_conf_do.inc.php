@@ -3,30 +3,24 @@
 // Initialisation de la page
 //==============================================================================
 
-// ===== Fichier de configuration principal =====
-require_once(PATH_CONF_INSTALL."/main.conf.php");
+// ===== Les fichiers de configuration =====
 
-// ===== Les autres fichiers de configurations =====
+// Le fichier principal
+require_once(PATH_INSTALL_ROOT."/config/main.conf.php");
+
+// Les autres fichiers de configurations
 require_once(PATH_CONFIG."/database.conf.php");
 
-// ===== Les librairies et les classes =====
-require_once(PATH_PHP_LIB."/utils.lib.php");
-require_once(PATH_PHP_LIB."/database.class.php");
-require_once(PATH_PHP_LIB."/formvalidation.class.php");
-require_once(PATH_PHP_LIB."/message.class.php");
+// ===== La base de données =====
 
-require_once(PATH_PHP_LIB."/install.class.php");
+// Le gestionnaire d'erreurs de la base (cf index.php)
+Database::setErrorHandler("nullDatabaseErrorHandler");
 
-// ===== Session =====
-session_name('INSTALL_PAGE');
-session_start();
-
-// ===== Connexion à la base =====
-Database::setErrorHandler("nullDatabaseErrorHandler"); // Le gestionnaires d'erreurs (cf index.php)
-
+// Connexion à la base
 Database::openConnection(DATABASE_LOGIN, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_SERVER);
 
-Database::execute("SET NAMES UTF8"); // On précise à la base qu'on travaille en UTF-8
+// On précise à la base qu'on travaille en UTF-8
+Database::execute("SET NAMES UTF8");
 
 //==============================================================================
 // Préparation des données
@@ -72,3 +66,5 @@ Database::execute($sQuery);
 // Rechargement
 header("Location: ?step=5&mode=end");
 return;
+
+?>

@@ -32,12 +32,26 @@ ob_start('ob_gzhandler');
 
 // ===== Les fichiers de configuration =====
 
-// On ne peut pas inclure les lib ici,
-//  car on doit partir du principe que l'on ne peut rien faire sur ce serveur.
+// On ne peut pas inclure les fichiers de configuration ici.
+// Ils n'existent peut être pas, ou ne sont pas corrects.
 
 // ===== Constantes pour l'installeur =====
 
-define('PATH_CONF_INSTALL', "../config");
+define('PATH_INSTALL_ROOT',	"..");
+define('URL_INSTALL_ROOT',	"..");
+
+// ===== Les librairies et les classes =====
+
+// On doit partir du principe que l'on ne peut rien faire sur ce serveur.
+// Les librairies qui peuvent être incluses doivent être autonomes.
+
+require_once(PATH_INSTALL_ROOT."/libraries/php/utils.lib.php");
+require_once(PATH_INSTALL_ROOT."/libraries/php/database.class.php");
+require_once(PATH_INSTALL_ROOT."/libraries/php/formvalidation.class.php");
+require_once(PATH_INSTALL_ROOT."/libraries/php/install.class.php");
+require_once(PATH_INSTALL_ROOT."/libraries/php/message.class.php");
+
+require_once(PATH_INSTALL_ROOT."/libraries/php_app/display.lib.php");
 
 // ===== Format et timezone =====
 
@@ -45,6 +59,17 @@ define('PATH_CONF_INSTALL', "../config");
 setlocale(LC_TIME, 'french', 'fr', 'fr_FR', 'fr_FR.UTF8', 'fra', 'fra_fra');
 // timezone
 date_default_timezone_set('Europe/Paris');
+
+// ===== La session =====
+
+session_name('INSTALL_PAGE');
+session_start();
+
+// Chargement des erreurs sauvegardés
+if(isset($_SESSION['ERROR_MESSAGE']))
+{
+	Message::loadFromSession($_SESSION['ERROR_MESSAGE']);
+}
 
 //==============================================================================
 // Préparation des données
@@ -59,16 +84,9 @@ $aNavigationPageData = array
 
 	'step2' => array
 	(
-		''    => "main_conf_check.inc.php",
+		''    => "main_conf_ask.inc.php",
 		'do'  => "main_conf_do.inc.php",
 		'end' => "main_conf_end.inc.php",
-	),
-
-	'step3'  => array
-	(
-		''    => "database_conf_ask.inc.php",
-		'do'  => "database_conf_do.inc.php",
-		'end' => "database_conf_end.inc.php",
 	),
 
 	'step4'  => array
@@ -120,6 +138,7 @@ if(array_key_exists('mode', $_GET) == true)
 //==============================================================================
 
 // ===== Recherche de la page à afficher =====
+
 $sPageName = null;
 
 if(array_key_exists($sPageId, $aNavigationPageData) == true)
@@ -128,6 +147,7 @@ if(array_key_exists($sPageId, $aNavigationPageData) == true)
 	$aNavigationModeData = $aNavigationPageData[$sPageId];
 
 	// ===== Y a t'il des modes pour cette page ? =====
+
 	if(is_array($aNavigationModeData) == true)
 	{
 		if(array_key_exists($sMode, $aNavigationModeData) == true)
@@ -141,6 +161,7 @@ if(array_key_exists($sPageId, $aNavigationPageData) == true)
 	}
 
 	// ===== Le fichier existe ? =====
+
 	if(is_file($sPageName) == false)
 	{
 		$sPageName = null;
@@ -165,30 +186,39 @@ $sAgent = $_SERVER['HTTP_USER_AGENT'];
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
 <head>
-	<title>Installation du gestionnaire d'élèves</title>
+	<title>Installation du Gestionnaire d'élèves</title>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<meta content="Lionel SAURON" name="author" />
 
-	<!-- fonctions utilitaires de javascript -->
-	<script type="text/javascript" src="../libraries/javascript/utils.inc.js"></script>
-	<!-- JQuery -->
-	<script type="text/javascript" src="../libraries/javascript/jquery-1.3.2.js"></script>
-	<!-- Utilitaires basés sur JQuery -->
-	<script type="text/javascript" src="../libraries/javascript/utils_jquery.inc.js"></script>
-
-	<link rel="stylesheet" type="text/css" href="../default.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="../main.css" media="all" />
-	<!--[if IE]>
-	<link rel="stylesheet" type="text/css" href="../main-ie.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="<?php echo URL_INSTALL_ROOT; ?>/default.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="<?php echo URL_INSTALL_ROOT; ?>/main.css" media="all" />
+	<!--[if gt IE 6]>
+	<link rel="stylesheet" type="text/css" href="<?php echo URL_INSTALL_ROOT; ?>/main-ie.css" media="all" />
 	<![endif]-->
+	<!--[if lte IE 6]>
+	<link rel="stylesheet" type="text/css" href="<?php echo URL_INSTALL_ROOT; ?>/main-ie6.css" media="all" />
+	<![endif]-->
+
+	<script type="text/javascript" src="<?php echo URL_INSTALL_ROOT; ?>/libraries/javascript/IEFixButton.js"></script>
+	<!-- fonctions utilitaires de javascript -->
+	<script type="text/javascript" src="<?php echo URL_INSTALL_ROOT; ?>/libraries/javascript/utils.inc.js"></script>
+	<!-- JQuery -->
+	<script type="text/javascript" src="<?php echo URL_INSTALL_ROOT; ?>/libraries/javascript/jquery.js"></script>
+	<!-- Utilitaires basés sur JQuery -->
+	<script type="text/javascript" src="<?php echo URL_INSTALL_ROOT; ?>/libraries/javascript/utils_jquery.inc.js"></script>
+
+	<script type="text/javascript">
+		IEFixButton.fixAllFormsOnLoad();
+	</script>
 </head>
 <!-- ================================================== -->
 <body>
 	<div id="struct_left_panel">
 		<div id="struct_identity">
-			<h1>Installeur</h1><br />
-			Installation en cours
+			<h1>Installeur</h1>
+			<p>Installation en cours</p>
 		</div>
+		<!-- ==================== -->
 		<div id="struct_licence">
 			<table>
 				<tr>
@@ -236,6 +266,7 @@ $sAgent = $_SERVER['HTTP_USER_AGENT'];
 				</tr>
 			</table>
 		</div>
+		<!-- ==================== -->
 		<?php if(preg_match("/microsoft internet explorer/i", $sAgent) || preg_match("/msie/i", $sAgent)): ?>
 			<div style="text-align:left;color:red;">
 				Ce site est optimisé pour Mozilla Firefox ou tout navigateur respectant <a href="http://www.w3c.org/">les standards web</a> (chromium, chrome, epiphany, icecat, konqueror, opera, seamonkey, etc...).<br />
@@ -243,8 +274,9 @@ $sAgent = $_SERVER['HTTP_USER_AGENT'];
 			</div>
 		<?php endif; ?>
 	</div>
+	<!-- ==================== -->
 	<div id="struct_main">
-		<h1><a href="javascript:void(0)" onclick="showOrHideMenu('../images/icons/16x16/arrow_left.png', '../images/icons/16x16/arrow_right.png');"><img id="img_arrow" src="../images/icons/16x16/arrow_left.png" /></a>Installation du gestionnaire d'élèves</h1>
+		<h1><a href="javascript:void(0)" onclick="showOrHideMenu('../images/icons/16x16/arrow_left.png', '../images/icons/16x16/arrow_right.png');"><img id="img_arrow" src="../images/icons/16x16/arrow_left.png" /></a>Installation du Gestionnaire d'élèves</h1>
 		<?php if($sPageName !== null): ?>
 			<?php include($sPageName); ?>
 		<?php endif; ?>
@@ -256,7 +288,15 @@ $sAgent = $_SERVER['HTTP_USER_AGENT'];
 // Cloture de la page
 //==============================================================================
 
+// ===== La session =====
+
+// Sauvegarde des erreurs
+$_SESSION['ERROR_MESSAGE'] = Message::saveToSession();
+
+session_write_close();
+
 // ===== Bufferisation de sortie =====
+
 ob_end_flush();
 
 ?>

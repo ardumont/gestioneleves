@@ -3,36 +3,24 @@
 // Initialisation de la page
 //==============================================================================
 
-// ===== Fichier de configuration principal =====
-require_once(PATH_CONF_INSTALL."/main.conf.php");
+// ===== Les fichiers de configuration =====
 
-// ===== Les autres fichiers de configurations =====
+// Le fichier principal
+require_once(PATH_INSTALL_ROOT."/config/main.conf.php");
+
+// Les autres fichiers de configurations
 require_once(PATH_CONFIG."/database.conf.php");
 
-// ===== Les librairies et les classes =====
-require_once(PATH_PHP_LIB."/utils.lib.php");
-require_once(PATH_PHP_LIB."/database.class.php");
-require_once(PATH_PHP_LIB."/formvalidation.class.php");
-require_once(PATH_PHP_LIB."/message.class.php");
+// ===== La base de données =====
 
-require_once(PATH_PHP_LIB."/install.class.php");
+// Le gestionnaire d'erreurs de la base (cf index.php)
+Database::setErrorHandler("nullDatabaseErrorHandler");
 
-// ===== Session =====
-session_name('INSTALL_PAGE');
-session_start();
-
-// ===== Connexion à la base =====
-Database::setErrorHandler("nullDatabaseErrorHandler"); // Le gestionnaires d'erreurs (cf index.php)
-
+// Connexion à la base
 Database::openConnection(DATABASE_LOGIN, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_SERVER);
 
-Database::execute("SET NAMES UTF8"); // On précise à la base qu'on travaille en UTF-8
-
-// ===== Chargement des erreurs sauvegardés =====
-if(isset($_SESSION['ERROR_MESSAGE']))
-{
-	Message::loadFromSession($_SESSION['ERROR_MESSAGE']);
-}
+// On précise à la base qu'on travaille en UTF-8
+Database::execute("SET NAMES UTF8");
 
 //==============================================================================
 // Préparation des données
@@ -224,7 +212,7 @@ if($bReInstall == true)
 // Affichage de la page
 //==============================================================================
 ?>
-<h2>Etape 4 - La base de données MYSQL</h2>
+<h2>Etape 3 - La base de données MYSQL</h2>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
@@ -237,7 +225,7 @@ if($bReInstall == true)
 <?php if($bTooOldVersion == true): ?>
 	<p>Votre base de données est en version v<?php echo($sCurrentVersion); ?>.<br />
 	Ce script ne peut traiter une mise à jour qu'à partir de la version v<?php echo($aStepVersions[0]); ?>.<br />
-	<strong>Contactez l'équipe chargée du developpement pour avoir la procédure permettant d'effectuer une mise à jour.</strong></p>
+	<strong>Contactez l'équipe chargé du developpement pour avoir la procédure permettant d'effectuer une mise à jour.</strong></p>
 <?php elseif($bReInstall == true): ?>
 	<p>Il y a eu une erreur lors de l'installation de la version <?php echo($sInstallVersion); ?>.<br />
 	Vous pouvez essayer de <em>reprendre l'installation</em> là où elle s'est arretée.</p>
@@ -254,26 +242,43 @@ if($bReInstall == true)
 <?php endif; ?>
 
 <form method="post" action="?step=4&amp;mode=do">
-	<fieldset>
+	<fieldset class="inline">
 		<legend>Opération sur la base de données MYSQL</legend>
-		<input id="form_database_new_install" type="radio" name="action" value="new_install" <?php echo($sGuiNewInstallChecked); ?> />
-		<label for="form_database_new_install">Installation complète / Réinstallation</label> <?php echo($sGuiNewInstallInformation); ?><br />
-		<input id="form_database_upgrade" type="radio" name="action" value="upgrade" <?php echo($sGuiUpgradeDisabled); ?> <?php echo($sGuiUpgradeChecked); ?> />
-		<label for="form_database_upgrade">Mise à jour</label> <?php echo($sGuiUpgradeInformation); ?><br />
-		<?php if($bNothingToDo == true): ?>
-			<input id="form_database_nothing" type="radio" name="action" value="nothing" checked="checked" />
-			<label for="form_database_nothing">Ne rien faire</label><br />
-		<?php endif; ?>
-		<?php if($bReInstall == true): ?>
-			<input id="form_database_re_install" type="radio" name="action" value="re_install" checked="checked" />
-			<label for="form_database_re_install">Reprendre l'installation</label> <?php echo($sGuiReInstallInformation); ?><br />
-		<?php endif; ?>
+		<table class="form">
+			<tr>
+				<td>
+					<input id="form_database_new_install" type="radio" name="action" value="new_install" <?php echo($sGuiNewInstallChecked); ?> />
+					<label for="form_database_new_install">Installation complète / Réinstallation</label> <?php echo($sGuiNewInstallInformation); ?>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input id="form_database_upgrade" type="radio" name="action" value="upgrade" <?php echo($sGuiUpgradeDisabled); ?> <?php echo($sGuiUpgradeChecked); ?> />
+					<label for="form_database_upgrade">Mise à jour</label> <?php echo($sGuiUpgradeInformation); ?>
+				</td>
+			</tr>
+			<?php if($bNothingToDo == true): ?>
+				<tr>
+					<td>
+						<input id="form_database_nothing" type="radio" name="action" value="nothing" checked="checked" />
+						<label for="form_database_nothing">Ne rien faire</label>
+					</td>
+				</tr>
+			<?php endif; ?>
+			<?php if($bReInstall == true): ?>
+				<tr>
+					<td>
+						<input id="form_database_re_install" type="radio" name="action" value="re_install" checked="checked" />
+						<label for="form_database_re_install">Reprendre l'installation</label> <?php echo($sGuiReInstallInformation); ?>
+					</td>
+				</tr>
+			<?php endif; ?>
+		</table>
 	</fieldset>
-
 	<div>
 		<input type="hidden" name="current_version" value="<?php echo($sCurrentVersion); ?>" />
 
-		<a href="?step=3">Précédent</a>
+		<a href="?step=2">Précédent</a>
 		<input type="submit" value="Installer" />
 	</div>
 </form>
@@ -282,11 +287,8 @@ if($bReInstall == true)
 // Cloture de la page
 //==============================================================================
 
-// ===== Sauvegarde des erreurs sauvegardés =====
-$_SESSION['ERROR_MESSAGE'] = Message::saveToSession();
+// ===== La base de données =====
 
-// ===== Connexion à la base =====
 Database::closeConnection();
 
-// ===== Session =====
-session_write_close();
+?>

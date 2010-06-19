@@ -3,8 +3,10 @@
 // Initialisation de la page
 //==============================================================================
 
-// ===== Fichier de configuration principal =====
-require_once(PATH_CONF_INSTALL."/main.conf.php");
+// ===== Les fichiers de configuration =====
+
+// Le fichier principal
+require_once(PATH_INSTALL_ROOT."/config/main.conf.php");
 
 //==============================================================================
 // Préparation des données
@@ -13,6 +15,8 @@ require_once(PATH_CONF_INSTALL."/main.conf.php");
 //==============================================================================
 // Validation du formulaire
 //==============================================================================
+
+// ===== Vérification des valeurs =====
 
 //==============================================================================
 // Actions du formulaire
@@ -32,10 +36,9 @@ require_once(PATH_CONF_INSTALL."/main.conf.php");
 ?>
 <h2>Fin</h2>
 
-<p>L'installation du Gestionnaire d'élèves est terminée.</p>
+<p>L'installation de l'application est terminée.</p>
 
-<p>Si vous avez déjà des utilisateurs, vous pouvez directement vous rendre sur la <a href="<?php echo(SITE_URL); ?>/">page
-d'accueil de l'application</a>.</p>
-<p>Sinon, avant d'utiliser l'application, vous devrez avant tout la paramétrer.<br />
-Pour cela, connectez-vous avec l'utilisateur 'administrateur' (mot de passe 'admin') et rendez-vous sur la
-<a href="<?php echo(SITE_URL); ?>/admin.php">page d'administration de l'application</a> pour y ajouter de nouveaux utilisateurs.</p>
+<p>Si vous avez déjà des utilisateurs, vous pouvez directement vous rendre sur la <a href="<?php echo(SITE_URL); ?>/">page d'accueil de l'application</a>.</p>
+<p>Sinon, avant d'utiliser l'application, vous devrez avant tout créer de nouveaux utilisateurs.<br />
+Pour cela rendez-vous sur la <a href="<?php echo(SITE_URL); ?>/admin.php">page d'administration</a>.<br />
+<strong>Votre premier utilisateur a comme mot de passe "test".</strong></p>

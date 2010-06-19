@@ -8,6 +8,51 @@
 class Install
 {
 	/**
+	 * Check if the config file can be created or modified.
+	 *
+	 * The returned array contains 2 values :
+	 * - 'EXIST'    => Boolean - Indicate if the file exists
+	 * - 'WRITABLE' => Boolean - Indicate if the file can be created / modified
+	 *
+	 * @author Lionel SAURON
+	 * @version 1.0
+	 * @public
+	 *
+	 * @param $sConfigFileName(string) The filename to test
+	 * @return (array) Result array
+	 */
+	public static function checkConfigFileWritable($sConfigFileName)
+	{
+		$aConfigFile = array
+		(
+			'EXIST'    => false,
+			'WRITABLE' => false,
+		);
+
+		// ===== File exists ? =====
+
+		if(is_file($sConfigFileName) == true)
+		{
+			$aConfigFile['EXIST'] = true;
+		}
+
+		// ===== Can we create or modifie the file ? =====
+
+		// If the file doesn't exits, we need to test if we can write in the folder
+		if($aConfigFile['EXIST'] == false)
+		{
+			$sConfigFileName = dirname($sConfigFileName);
+		}
+
+		if((file_exists($sConfigFileName) == true) && (is_writable($sConfigFileName) == true))
+		{
+			$aConfigFile['WRITABLE'] = true;
+		}
+
+		return $aConfigFile;
+	}
+
+	/**
 	 *
 	 */
 	public static function getAllVersions($sInstallPath)

@@ -3,37 +3,30 @@
 // Initialisation de la page
 //==============================================================================
 
-// ===== Fichier de configuration principal =====
-require_once(PATH_CONF_INSTALL."/main.conf.php");
+// ===== Les fichiers de configuration =====
 
-// ===== Les autres fichiers de configurations =====
+// Le fichier principal
+require_once(PATH_INSTALL_ROOT."/config/main.conf.php");
+
+// Les autres fichiers de configurations
 require_once(PATH_CONFIG."/database.conf.php");
 
-// ===== Les librairies et les classes =====
-require_once(PATH_PHP_LIB."/utils.lib.php");
-require_once(PATH_PHP_LIB."/database.class.php");
-require_once(PATH_PHP_LIB."/formvalidation.class.php");
-require_once(PATH_PHP_LIB."/message.class.php");
+// ===== La base de données =====
 
-require_once(PATH_PHP_LIB."/install.class.php");
+// Le gestionnaire d'erreurs de la base (cf index.php)
+Database::setErrorHandler("nullDatabaseErrorHandler");
 
-// ===== Session =====
-session_name('INSTALL_PAGE');
-session_start();
-
-// ===== Connexion à la base =====
-Database::setErrorHandler("nullDatabaseErrorHandler"); // Le gestionnaires d'erreurs (cf index.php)
-
+// Connexion à la base
 Database::openConnection(DATABASE_LOGIN, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_SERVER);
 
-Database::execute("SET NAMES UTF8"); // On précise à la base qu'on travaille en UTF-8
+// On précise à la base qu'on travaille en UTF-8
+Database::execute("SET NAMES UTF8");
 
 //==============================================================================
 // Préparation des données
 //==============================================================================
 
-// Recherche et trie toutes les versions disponibles ====
-
+// Recherche et trie toutes les versions disponibles
 $aAllVersions = Install::getAllVersions(PATH_ROOT."/install");
 
 //==============================================================================
@@ -227,10 +220,10 @@ $aLinesAdded[] = "--#STEP()";
 
 $aLinesAdded[] = "CREATE TABLE INSTALL" .
 				 " (" .
-				 "  INSTALL_TYPE    VARCHAR(15) NOT NULL," .
-				 "  CURRENT_VERSION VARCHAR(15) NOT NULL," .
-				 "  INSTALL_VERSION VARCHAR(15) NOT NULL," .
-				 "  SCRIPT_VERSION  VARCHAR(15) NOT NULL," .
+				 "  INSTALL_TYPE    VARCHAR(20) NOT NULL," .
+				 "  CURRENT_VERSION VARCHAR(20) NOT NULL," .
+				 "  INSTALL_VERSION VARCHAR(20) NOT NULL," .
+				 "  SCRIPT_VERSION  VARCHAR(20) NOT NULL," .
 				 "  SCRIPT_STEP     INT         NOT NULL" .
 				 " ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
@@ -251,20 +244,94 @@ $aLinesAdded[] = "INSERT INTO INSTALL" .
 				 "  0" .
 				 " );";
 
+// TODO : Enlever l'ajout manuel de la colonne dès que l'on enlève la compatibilité avec la v3.4.0
+
+// Si la version présente en BDD est inférieure à la v3.4.0_dev1
+// alors la BDD ne contient pas la colonne FIRST_INSTALL_VERSION donc on test.
+
+$aTemp = Database::fetchOneRow("SHOW COLUMNS FROM PARAMETRES LIKE 'FIRST_INSTALL_VERSION'");
+if((strtoupper($sAction) == 'UPGRADE') && ($aTemp === false))
+{
+
+	$aLinesAdded[] = <<< _EOS_
+		--#STEP()
+		ALTER TABLE PARAMETRES
+			ADD FIRST_INSTALL_VERSION	VARCHAR(20)	NOT NULL	 FIRST;
+
+		--#STEP(TRANSACTION)
+		UPDATE PARAMETRES
+		SET FIRST_INSTALL_VERSION = CONCAT(VERSION, '_before');
+_EOS_;
+}
+else
+{
+	// Il faut que le nombre de step soit constant pour que la reprise en cas d'erreur fonctionne
+	// Donc ici, les steps qui ne servent à rien.
+
+	$aLinesAdded[] = <<< _EOS_
+		--#STEP()
+		SELECT 1;
+
+		--#STEP(TRANSACTION)
+		SELECT 1;
+_EOS_;
+}
+// Fin de l'ajout manuel
+
 $aLinesAdded[] = $sFileContent;
 
-$aLinesAdded[] = "-- ========================================";
-$aLinesAdded[] = "--#TITLE(Ecriture de la version)";
-$aLinesAdded[] = "--#STEP(TRANSACTION)";
+// Initialisation des variables SQL
+$sSqlInstallVersion = Database::prepareString($sInstallVersion);
+$sSqlInstallUID = Database::prepareString(uniqid(mt_rand()."_", true));
 
-$aLinesAdded[] = "UPDATE PARAMETRES" .
-				 " SET VERSION = ".Database::prepareString($sInstallVersion).";";
+$aLinesAdded[] = <<< _EOS_
+	-- ========================================
+	--#TITLE(Ecriture de la version)
+	--#STEP(TRANSACTION)
 
-$aLinesAdded[] = "-- ========================================";
-$aLinesAdded[] = "--#TITLE(Fin de l'installation)";
-$aLinesAdded[] = "--#STEP()";
+	UPDATE PARAMETRES
+	SET VERSION = {$sSqlInstallVersion};
 
-$aLinesAdded[] = "DROP TABLE INSTALL;";
+	UPDATE PARAMETRES
+	SET FIRST_INSTALL_VERSION = {$sSqlInstallVersion}
+	WHERE FIRST_INSTALL_VERSION = '0.0.0';
+_EOS_;
+
+// TODO : Enlever le test de l'existence de la colonne dès que l'on enlève la compatibilité avec la v3.4.0
+
+// Si la version présente en BDD est inférieure à la v3.4.0_dev1
+// alors la BDD ne contient pas la colonne INSTALL_UID donc on test.
+
+$aTemp = Database::fetchOneRow("SHOW COLUMNS FROM PARAMETRES LIKE 'INSTALL_UID'");
+if($aTemp !== false)
+{
+
+	$aLinesAdded[] = <<< _EOS_
+		--#STEP(TRANSACTION)
+		UPDATE PARAMETRES
+		SET INSTALL_UID = {$sSqlInstallUID}
+		WHERE INSTALL_UID = 'none';
+_EOS_;
+}
+else
+{
+	// Il faut que le nombre de step soit constant pour que la reprise en cas d'erreur fonctionne
+	// Donc ici, les steps qui ne servent à rien.
+
+	$aLinesAdded[] = <<< _EOS_
+		--#STEP(TRANSACTION)
+		SELECT 1;
+_EOS_;
+}
+// Fin de l'ajout manuel
+
+$aLinesAdded[] = <<< _EOS_
+	-- ========================================
+	--#TITLE(Fin de l'installation)
+	--#STEP()
+
+	DROP TABLE INSTALL;
+_EOS_;
 
 $sFileContent = implode("\n", $aLinesAdded);
 
@@ -279,6 +346,8 @@ $sFileContent = null;
 $aInstallResults = array();
 $bDatabaseReady = true;
 
+$nAllStepCount = 0;
+
 // On initialise le tableau de résultat
 foreach($aInstallOperations as $aOperation)
 {
@@ -291,6 +360,16 @@ foreach($aInstallOperations as $aOperation)
 		'STEP_DONE'    => 0,							// Nombre d'étapes réalisées dans l'opération
 		'STEP_IGNORED' => 0								// Nombre d'étapes réalisées dans l'opération
 	);
+
+	$nAllStepCount += $aOperation['STEPS_COUNT'];
+}
+
+// Si on utilise wamp sur une clef USB, les requêtes prennent du temps.
+// Sous windows, le temps passé à l'excution de la requête est décompté du temps d'éxecution
+// Donc pour windows, on rajoute 5 sec par requête au temps d'éxécution.
+if(substr_compare(PHP_OS, "WIN", 0, 3, true) == 0)
+{
+	set_time_limit(ini_get('max_execution_time') + ($nAllStepCount * 5));
 }
 
 // On execute
