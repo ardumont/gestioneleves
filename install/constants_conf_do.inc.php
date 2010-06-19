@@ -52,7 +52,7 @@ copy(PATH_CONFIG."/export.sample.conf.php", PATH_CONFIG."/export.conf.php");
 
 // ===== Traitement final du changement de version =====
 
-$nDateVersion = filemtime(PATH_PAGES."/home.inc.php");
+$nDateVersion = filemtime(PATH_PAGES."/release_notes.inc.php");
 
 $sQuery = <<< _EOQ_
     UPDATE PARAMETRES
