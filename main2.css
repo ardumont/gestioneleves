@@ -8,7 +8,8 @@
 #struct_main table.list, 
 #struct_main table.list_tree, 
 #struct_main table.formulaire,
-#struct_main table.info
+#struct_main table.info,
+#struct_main .inline
 {
  	border: 1px solid;
 	border-radius: 8px;

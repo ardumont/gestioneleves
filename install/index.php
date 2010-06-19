@@ -192,6 +192,7 @@ $sAgent = $_SERVER['HTTP_USER_AGENT'];
 
 	<link rel="stylesheet" type="text/css" href="<?php echo URL_INSTALL_ROOT; ?>/default.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="<?php echo URL_INSTALL_ROOT; ?>/main.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="<?php echo URL_INSTALL_ROOT; ?>/main2.css" media="all" />
 	<!--[if gt IE 6]>
 	<link rel="stylesheet" type="text/css" href="<?php echo URL_INSTALL_ROOT; ?>/main-ie.css" media="all" />
 	<![endif]-->
