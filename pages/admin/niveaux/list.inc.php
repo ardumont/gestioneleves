@@ -66,9 +66,7 @@ $aNiveaux = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 	<br />
 	Vous pouvez modifier un niveau en cliquant sur son nom.<br />
 	Vous pouvez également ajouter un niveau en cliquant sur le + en haut à gauche du tableau.
-	<br />&nbsp;
 </div>
-<br /><br />
 
 <?php if($aNiveaux != false): ?>
 <table class="list_tree">

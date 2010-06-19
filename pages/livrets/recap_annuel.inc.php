@@ -135,7 +135,6 @@ ____EOQ;
 	<br />
 	Pour générer une version imprimable, cliquer sur le lien <i>Version imprimable</i> puis, après affichage de
 	la nouvelle page, lancer une impression avec votre imprimante.
-	<br />&nbsp;
 </div>
 
 <form method="post" action="?page=livrets&amp;mode=recap_annuel" name="formulaire_list" id="formulaire_list">

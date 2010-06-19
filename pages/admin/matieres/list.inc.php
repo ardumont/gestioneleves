@@ -113,7 +113,6 @@ $aDomaines = Database::fetchArray($sQuery);
 	<br />
 	Vous pouvez modifier une matière en cliquant sur le nom de la matière.<br />
 	Vous pouvez également ajouter une matière en cliquant sur le + en haut à gauche du tableau.
-	<br />&nbsp;
 </div>
 
 <form method="post" action="?page=matieres" name="formulaire_matiere" id="formulaire_matiere">

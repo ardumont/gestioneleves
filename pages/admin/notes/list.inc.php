@@ -66,7 +66,6 @@ $aNotes = Database::fetchArray($sQuery);
 	Vous ne pouvez pas modifier les notes, ni en ajouter ou en supprimer.<br />
 	En effet, des modules de l'application en dépendent (le calcul des moyennes, l'affichage des livrets, etc...).<br />&nbsp;
 </div>
-<br /><br />
 
 <?php if($aNotes != false): ?>
 <table class="list_tree">

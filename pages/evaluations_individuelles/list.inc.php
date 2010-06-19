@@ -292,8 +292,8 @@ $sEndLink .= ($nOffset != 0) ? "&amp;offset_depart={$nOffsetDep}" : "";
 	Attention, toutefois, si l'élève n'appartient pas à la classe, aucun résultat ne s'affichera.
 	<br />
 	Par ailleurs, si l'affichage dépasse les <?php echo $nOffset; ?> lignes, des liens "précédent" et "suivant" apparaîssent pour afficher les <?php $nOffset; ?> éléments précédents ou suivants.
-	<br />&nbsp;
 </div>
+
 <form method="post" action="?page=evaluations_individuelles" name="formulaire_eval_ind" id="formulaire_eval_ind">
 	<table class="formulaire">
 		<caption>Critères de recherche</caption>

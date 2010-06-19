@@ -77,7 +77,6 @@ $sXMLExemple = htmlentities(utf8_decode($sXMLExemple));
 		</li>
 	</ul>
 </div>
-<br />
 
 <form method="post" action="?page=imports&amp;mode=imports_xml_classe_do" enctype="multipart/form-data">
 	<table class="formulaire">

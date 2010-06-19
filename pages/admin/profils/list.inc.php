@@ -60,8 +60,18 @@ $aProfils = Database::fetchArray($sQuery);
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
-
 <br />
+
+<a href="javascript:void(0);" onclick="showOrHide('help')">Aide</a>
+<div id="help" class="messagebox_info" style="display: none;">
+	Le but est de permettre la création et la gestion des profils des différents utilisateurs de l'application.<br />
+	Pour cela, vous pouvez
+	<ul>
+		<li>ajouter un nouveau profil.</li>
+		<li>éditer un profil existant en modifiant son nom ou ses droits d'accès.</li>
+	</ul>
+</div>
+
 <table class="list_tree">
 	<caption>Liste des profils existants</caption>
 	<thead>

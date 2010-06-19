@@ -100,7 +100,6 @@ $aDepts = Database::fetchArray($sQuery);
 	<br />
 	Vous pouvez modifier une école en cliquant sur son nom.<br />
 	Vous pouvez également ajouter une école en cliquant sur le + en haut à gauche du tableau.
-	<br />&nbsp;
 </div>
 
 <form method="post" action="?page=ecoles" name="formulaire" id="formulaire">

@@ -65,7 +65,6 @@ $aPeriodes = Database::fetchArray($sQuery);
 	<br />
 	Vous pouvez modifier une période en cliquant sur son nom.<br />
 	Vous pouvez également ajouter une période en cliquant sur le + en haut à gauche du tableau.
-	<br />&nbsp;
 </div>
 
 <?php if($aPeriodes != false): ?>

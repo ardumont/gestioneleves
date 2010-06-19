@@ -125,7 +125,6 @@ if($nClasseId != -1 && $nCompetenceId != -1)
 	pour chacun des élèves d'une classe du professeur connecté.<br />
 	Pour cela, sélectionner la compétence et la classe puis
 	cliquer sur le bouton <i>Rechercher</i> pour que la page se rafraîchisse.<br />
-	<br />&nbsp;
 </div>
 
 <form method="post" action="?page=consultations&amp;mode=competences_annuel" name="formulaire" id="formulaire">

@@ -140,7 +140,6 @@ $aMatieres = Database::fetchArray($sQuery);
 	<br />
 	Vous pouvez modifier une compétence en cliquant sur le nom de la compétence.<br />
 	Vous pouvez également ajouter une compétence en cliquant sur le + en haut à gauche du tableau.
-	<br />&nbsp;
 </div>
 
 <form method="post" action="?page=competences" name="formulaire_competence" id="formulaire_competence">

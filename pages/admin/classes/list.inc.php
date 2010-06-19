@@ -123,7 +123,6 @@ $aProfesseurs = Database::fetchArray($sQuery);
 	<br />
 	Vous pouvez modifier une classe en cliquant sur le nom de la classe.<br />
 	Vous pouvez également ajouter une classe en cliquant sur le + en haut à gauche du tableau.
-	<br />&nbsp;
 </div>
 
 <form method="post" action="?page=classes" name="formulaire" id="formulaire">
