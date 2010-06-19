@@ -869,3 +869,124 @@ body.popup_stop_scroll
 {
 	background-color: #999;
 }
+
+
+/*==============================================================================
+|| Suivi du curseur sur les tableaux
+==============================================================================*/
+
+#struct_main table.list_tree tbody tr:hover,
+tr.row0:hover,
+tr.row1:hover,
+.colonne1:hover,
+.colonne2:hover,
+.colonne3:hover,
+.domaine:hover,
+.matiere:hover
+{
+	background-color: #888;
+}
+
+/*==============================================================================
+|| Récapitulatif annuel ou périodique
+==============================================================================*/
+
+table.entete_n tr td
+{
+	border: 1px solid black;
+}
+
+table.display tr td
+{
+	border: 1px solid black;
+	text-align: left;
+}
+
+/* colonne des périodes */
+.colonne1
+{
+	background-color: #A0A0A0;
+	color: white;
+}
+
+.colonne2
+{
+	background-color: #B8B8B8;
+	color: white;
+}
+
+.colonne3
+{
+	background-color: #D0D0D0;
+	color: white;
+}
+
+.domaine
+{
+	font-size: 1.1em;
+	font-weight: bold;
+	background-color: #E0E0E0;
+	color: black;
+}
+
+.matiere
+{
+	font-size: 1em;
+	font-weight: bold;
+	background-color: #F0F0F0;
+	color: black;
+	text-align: left;
+}
+
+/* Legende des notes */
+.A
+{
+	background-color: green;
+	color: white;
+	text-align: center;
+}
+
+.AR
+{
+	background-color: yellow;
+	color: black;
+	text-align: center;
+}
+
+.ECA
+{
+	background-color: orange;
+	color: white;
+	text-align: center;
+}
+
+.NA
+{
+	background-color: red;
+	color: white;
+	text-align: center;
+}
+
+.NE
+{
+	background-color: white;
+	color: black;
+	text-align: center;
+}
+
+/* Alternance de couleurs */
+tr.row0, tr.row1
+{
+	font-size: 1em;
+	color: white;
+}
+
+tr.row0
+{
+	background-color: #3092c4;
+}
+
+tr.row1
+{
+	background-color: #3b9dcc;
+}
