@@ -215,8 +215,27 @@ if($nClasseId != -1 && $nPeriodeId != -1)
 </form>
 
 <?php if($nClasseId != -1 && $nPeriodeId != -1): ?>
+	<table class="formulaire">
+		<caption>Liste des élèves</caption>
+		<!--  Construction du sommaire pour chaque élève -->
+		<?php foreach($aEleves as $i => $oEleve): ?>
+			<tr>
+				<td><?php echo $oEleve['ELEVE_NOM']; ?></td>
+				<td>
+					<a href="#livret_eleve_id_<?php echo $oEleve['ELEVE_ID']; ?>">Livret</a>
+				</td>
+				<td>
+				<?php if($aEvalInds[$i] != false): ?>
+					<a href="#appreciations_eleve_id_<?php echo $oEleve['ELEVE_ID']; ?>">Appréciations</a>
+				<?php endif; ?>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+	</table>
+	<br />
 	<?php foreach($aEleves as $i => $aEleve): ?>
-	<?php if($aEvalInds[$i] != false): ?>
+		<a name="livret_eleve_id_<?php echo $aEleve['ELEVE_ID']; ?>"></a>
+		<?php if($aEvalInds[$i] != false): ?>
 		<table class="formulaire">
 			<caption>Compétences - Cycle <?php echo $aEleveInfo[$i]['CYCLE_NOM']; ?> - Période <?php echo $aPeriodesInfo[$i]['PERIODE_NOM']; ?> - Classe <?php echo $aClassesNiveaux[$i]['CLASSE_NOM']; ?> - Elève <?php echo $aEleveInfo[$i]['ELEVE_NOM']; ?></caption>
 			<tbody>
@@ -280,7 +299,7 @@ if($nClasseId != -1 && $nPeriodeId != -1)
 				</tr>
 				<tr>
 					<td>
-						<br />
+						<a name="appreciations_eleve_id_<?php echo $aEleve['ELEVE_ID']; ?>"></a>
 						Saisir un commentaire pour l'élève '<?php echo $aEleve['ELEVE_NOM']; ?>' :<br />
 						<form id="form_insert_<?php echo $i; ?>">
 							<input type="hidden" name="eleve_id" value="<?php echo $aEleve['ELEVE_ID']; ?>" />
@@ -293,15 +312,10 @@ if($nClasseId != -1 && $nPeriodeId != -1)
 				</tr>
 			</tbody>
 		</table>
-	<?php else: ?>
-	<table class="formulaire">
-		<caption>Informations</caption>
-		<tr>
-			<td>
-				Aucune compétence n'a été évaluée pour l'élève '<?php echo $aEleve['ELEVE_NOM']; ?>' sur cette période.
-			</td>
-		</tr>
-	</table>
-	<?php endif; ?>
+		<?php else: ?>
+		<div class="messagebox_info">
+			Aucune compétence n'a été évaluée pour l'élève '<?php echo $aEleve['ELEVE_NOM']; ?>' sur cette période.
+		</div>
+		<?php endif; ?>
 	<?php endforeach; ?>
 <?php endif; ?>

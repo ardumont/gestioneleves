@@ -188,6 +188,25 @@ if($nClasseId != -1)
 </form>
 
 <?php if($nClasseId != -1): ?>
+	<!-- Sommaire des élèves -->
+	<table class="formulaire">
+		<caption>Liste des élèves</caption>
+		<!--  Construction du sommaire pour chaque élève -->
+		<?php foreach($aEleveInfoArr as $i => $oEleve): ?>
+			<tr>
+				<td><?php echo $oEleve['ELEVE_NOM']; ?></td>
+				<td>
+					<a href="#livret_eleve_id_<?php echo $oEleve['ELEVE_ID']; ?>">Livret</a>
+				</td>
+				<td>
+				<?php if($aEvalIndsArr[$i] != false): ?>
+					<a href="#appreciations_eleve_id_<?php echo $oEleve['ELEVE_ID']; ?>">Appréciations</a>
+				<?php endif; ?>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+	</table>
+	<br />
 	<?php foreach(range(0, count($aEleves) - 1) as $i): ?>
 		<?php
 		$aEleveInfo = $aEleveInfoArr[$i];
@@ -200,8 +219,9 @@ if($nClasseId != -1)
 		$aEvalInds = $aEvalIndsArr[$i];
 		$aNomPrenom = $aNomPrenomArr[$i];
 		$aCommentaires = $aCommentairesArr[$i];
-
-		if($aEvalInds != false): ?>
+		?>
+		<a name="livret_eleve_id_<?php echo $aEleveInfo['ELEVE_ID']; ?>"></a>
+		<?php if($aEvalInds != false): ?>
 		<!-- Affichage du récapitulatif -->
 		<table class="formulaire">
 			<caption>Compétences - Cycle <?php echo $aEleveInfo['CYCLE_NOM']; ?> - Elève <?php echo $aEleveInfo['ELEVE_NOM']; ?></caption>
@@ -282,6 +302,7 @@ if($nClasseId != -1)
 				</tr>
 				<tr><!-- Les appréciations -->
 					<td>
+						<a name="appreciations_eleve_id_<?php echo $aEleveInfo['ELEVE_ID']; ?>"></a>
 						<table>
 							<thead>
 								<tr>
@@ -316,14 +337,9 @@ if($nClasseId != -1)
 			</tbody>
 		</table>
 		<?php else: ?>
-			<table class="formulaire">
-				<caption>Informations</caption>
-				<tr>
-					<td>
-						Aucune compétence n'a été évaluée pour cet élève sur l'année scolaire.
-					</td>
-				</tr>
-			</table>
+			<div class="messagebox_info">
+				Aucune compétence n'a été évaluée pour cet élève sur l'année scolaire.
+			</div>
 		<?php endif; ?>
 	<?php endforeach; ?>
 <?php endif; ?>
