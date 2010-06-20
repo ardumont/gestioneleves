@@ -265,13 +265,8 @@ if($nEleveId != -1)
 		</tbody>
 	</table>
 	<?php else: ?>
-		<table class="formulaire">
-			<caption>Informations</caption>
-			<tr>
-				<td>
-					Aucune compétence n'a été évaluée pour cet élève sur l'année scolaire.
-				</td>
-			</tr>
-		</table>
+		<div class="messagebox_info">
+			Aucune compétence n'a été évaluée pour cet élève sur l'année scolaire.
+		</div>
 	<?php endif; ?>
 <?php endif; ?>

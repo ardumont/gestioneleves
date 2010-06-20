@@ -274,13 +274,8 @@ ____EOQ;
 			</tbody>
 		</table>
 	<?php else: ?>
-	<table class="formulaire">
-		<caption>Informations</caption>
-		<tr>
-			<td>
-				Aucune compétence n'a été évaluée pour cet élève sur cette période.
-			</td>
-		</tr>
-	</table>
+		<div class="messagebox_info">
+			Aucune compétence n'a été évaluée pour cet élève sur cette période.
+		</div>
 	<?php endif; ?>
 <?php endif; ?>
