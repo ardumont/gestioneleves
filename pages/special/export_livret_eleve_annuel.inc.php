@@ -67,6 +67,7 @@ $aDomainesMatieresCompetences = $aRes['DOMAINES_MATIERES_COMPETENCES'];
 $aEvalInds = $aRes['EVAL_INDS'];
 $aNomPrenom = $aRes['NOM_PRENOM'];
 $aCommentaires = $aRes['COMMENTAIRES'];
+$sConseilMaitre = $aRes['COMM_CONSEIL_MAITRES'];
 
 //==============================================================================
 // Preparation de l'affichage
@@ -266,7 +267,7 @@ $sGuiTitle = "Livret d'évaluation";
 					<td colspan="3">Avis du conseil des maîtres de cycle <?php echo $aEleve['CYCLE_NOM']; ?></td>
 				</tr>
 				<tr style="height: 150px;">
-					<td colspan="3"></td>
+					<td colspan="3"><pre><?php echo $sConseilMaitre; ?></pre></td>
 				</tr>
 				<tr>
 					<td>L'enseignant(e)</td>

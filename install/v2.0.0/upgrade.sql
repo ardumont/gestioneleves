@@ -32,14 +32,3 @@ ALTER TABLE `COMMENTAIRES`
   ADD CONSTRAINT `COMMENTAIRES_ibfk_2` FOREIGN KEY (`ID_ELEVE`) REFERENCES `ELEVES` (`ELEVE_ID`) ON DELETE CASCADE,
   ADD CONSTRAINT `COMMENTAIRES_ibfk_3` FOREIGN KEY (`ID_CLASSE`) REFERENCES `CLASSES` (`CLASSE_ID`) ON DELETE CASCADE;
   
--- Ajoute la colonne du profil
---#STEP()
-ALTER TABLE PARAMETRES
- ADD COLUMN `INSTALL_UID`			VARCHAR(50)	NOT NULL	COMMENT 'Unique ID de cette application';
-
--- =============================================================================
---#TITLE(Mise à jour de la table PARAMETRES)
-
---#STEP()
-UPDATE PARAMETRES
-SET INSTALL_UID='none';

@@ -39,14 +39,25 @@ function showOrHide(id)
 function submitAjaxUpdateCommentaire(sIdFormulaire)
 {
 	// Soumission d'une requete POST en asynchrone 
-	$.ajax({
-		  type: 'POST',
-		  url: "ajax.php?page=commentaires&mode=add_or_update",
-		  data:$('#' + sIdFormulaire).serialize()
-//		  success:
-//			  function(data)
-//			  {
-//				  alert("Data Loaded: " + data);
-//			  }
-		});														
+	$.ajax
+	({
+		type: 'POST',
+		url: "ajax.php?page=commentaires&mode=add_or_update",
+		data:$('#' + sIdFormulaire).serialize()
+	});														
 }// fin submitAjaxUpdateCommentaire
+
+/**
+ * Soumission du formulaire en ajax.
+ * @param sIdFormulaire	Id du formulaire
+ */
+function submitAjaxUpdateConseilMaitres(sIdFormulaire)
+{
+	// Soumission d'une requete POST en asynchrone 
+	$.ajax
+	({
+		type: 'POST',
+		url: "ajax.php?page=conseil_maitres&mode=add_or_update",
+		data:$('#' + sIdFormulaire).serialize()
+	});
+}// fin submitAjaxUpdateConseilMaitres

@@ -9,6 +9,19 @@
 		<dl>
 			<dt>
 				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+				v2.1.0
+			</dt>
+			<dd>
+				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Gestion de la saisie de l'avis des maitres dans le récapitulatif annuel.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Report de l'avis des maitres dans le récapitulatif annuel prévu pour l'impression.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Amélioration de la charge graphique.</li>
+				</ul>
+			</dd>
+		</dl>
+		<dl>
+			<dt>
+				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
 				v2.0.0
 			</dt>
 			<dd>

@@ -134,6 +134,7 @@ if($nClasseId != -1)
 		$aEvalIndsArr[$i] = $aRes['EVAL_INDS'];
 		$aNomPrenomArr[$i] = $aRes['NOM_PRENOM'];
 		$aCommentairesArr[$i] = $aRes['COMMENTAIRES'];
+		$aConseilMaitres[$i] = $aRes['COMM_CONSEIL_MAITRES'];
 	}
 }
 
@@ -219,6 +220,7 @@ if($nClasseId != -1)
 		$aEvalInds = $aEvalIndsArr[$i];
 		$aNomPrenom = $aNomPrenomArr[$i];
 		$aCommentaires = $aCommentairesArr[$i];
+		$sConseilMaitres = $aConseilMaitres[$i];
 		?>
 		<a name="livret_eleve_id_<?php echo $aEleveInfo['ELEVE_ID']; ?>"></a>
 		<?php if($aEvalInds != false): ?>
@@ -295,21 +297,11 @@ if($nClasseId != -1)
 						</table>
 					</td>
 				</tr>
-				<tr>
-					<td>
-						Saisir un commentaire pour chaque période pour l'élève '<?php echo $aEleveInfo['ELEVE_NOM']; ?>' :
-					</td>
-				</tr>
 				<tr><!-- Les appréciations -->
 					<td>
 						<a name="appreciations_eleve_id_<?php echo $aEleveInfo['ELEVE_ID']; ?>"></a>
-						<table>
-							<thead>
-								<tr>
-									<th>Période</th>
-									<th>Appréciations</th>
-								</tr>
-							</thead>
+						<h2>Appréciations par période + Avis du conseil des maitres</h2>
+						<table class="list_tree">
 							<tbody>
 								<?php foreach($aPeriodesInfo as $nRow => $aRows): ?>
 									<?php $nClasseId = $aEleveInfo['CLASSE_ID']; ?>
@@ -317,9 +309,10 @@ if($nClasseId != -1)
 									<?php $sPeriodeNom = $aRows['PERIODE_NOM']; ?>
 									<?php $nPeriodId = $aRows['PERIODE_ID']; ?>
 									<?php $sCommentaire = $aCommentaires[$sPeriodeNom]['COMMENTAIRE_VALEUR']; ?>
-								<tr>
+								<tr class="row<?php echo $nRow%2; ?>"><!-- Appréciations sur la période -->
 									<td><?php echo $sPeriodeNom; ?></td>
 									<td>
+										<h3>Appréciation de l'enseignant pour l'élève '<?php echo $aEleveInfo['ELEVE_NOM']; ?>' pour la période '<?php echo $sPeriodeNom; ?>'</h3>
 										<form id="form_insert_<?php echo $nEleveId; ?>_<?php echo $nPeriodId; ?>">
 											<input type="hidden" name="eleve_id" value="<?php echo $nEleveId; ?>" />
 											<input type="hidden" name="periode_id" value="<?php echo $nPeriodId; ?>" />
@@ -330,6 +323,17 @@ if($nClasseId != -1)
 									</td>
 								</tr>
 								<?php endforeach; ?>
+								<tr class="row<?php echo ($nRow+1)%2; ?>"><!-- Avis du conseil des maitres -->
+									<td colspan="2">
+										<h3>Avis du conseil des maitres</h3>
+										<form id="form_insert_conseil_<?php echo $aEleveInfo['CLASSE_ID']; ?>_<?php echo $nEleveId; ?>">
+											<input type="hidden" name="eleve_id" value="<?php echo $nEleveId; ?>" />
+											<input type="hidden" name="classe_id" value="<?php echo $aEleveInfo['CLASSE_ID']; ?>" />
+											<input type="hidden" name="conseil_maitres_hidden" value="<?php echo $sConseilMaitres; ?>" />
+											<textarea name="conseil_maitres" rows="4" cols="50" onblur="submitAjaxUpdateConseilMaitres('form_insert_conseil_<?php echo $aEleveInfo['CLASSE_ID']; ?>_<?php echo $nEleveId; ?>');"><?php echo $sConseilMaitres; ?></textarea>
+										</form>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</td>

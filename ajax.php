@@ -63,7 +63,11 @@ $aMenuPage = array
 	'commentaires' => array(
 		'add_or_update' => "commentaires/add_or_update.inc.php",
 	),
-);
+	// ----- Commentaires -----
+	'conseil_maitres' => array(
+		'add_or_update' => "conseil_maitres/add_or_update.inc.php",
+	),
+	);
 
 //==============================================================================
 // Validation du formulaire

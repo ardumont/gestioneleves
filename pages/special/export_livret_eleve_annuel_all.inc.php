@@ -94,8 +94,7 @@ if($nClasseId != -1)
 		$aEvalIndsArr[$i] = $aRes['EVAL_INDS'];
 		$aNomPrenomArr[$i] = $aRes['NOM_PRENOM'];
 		$aCommentairesArr[$i] = $aRes['COMMENTAIRES'];
-		
-		$aResTmp[] = $aRes;
+		$aConseilMaitresArr[$i] = $aRes['COMM_CONSEIL_MAITRES'];
 	}
 }
 
@@ -133,6 +132,7 @@ $sGuiTitle = "Livret d'évaluation";
 	$aEvalInds = $aEvalIndsArr[$i];
 	$aNomPrenom = $aNomPrenomArr[$i];
 	$aCommentaires = $aCommentairesArr[$i];
+	$sConseilMaitres = $aConseilMaitresArr[$i];
 	?>
 		<!-- Page de présentation -->
 		<div class="page_1">
@@ -310,7 +310,7 @@ $sGuiTitle = "Livret d'évaluation";
 						<td colspan="3">Avis du conseil des maîtres de cycle <?php echo $aEleve['CYCLE_NOM']; ?></td>
 					</tr>
 					<tr style="height: 150px;">
-						<td colspan="3"></td>
+						<td colspan="3"><pre><?php echo $sConseilMaitres; ?></pre></td>
 					</tr>
 					<tr>
 						<td>L'enseignant(e)</td>

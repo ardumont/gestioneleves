@@ -210,10 +210,19 @@ ________EOQ;
 				INNER JOIN PERIODES
 					ON PERIODES.PERIODE_ID = COMMENTAIRES.ID_PERIODE
 			WHERE ID_ELEVE = {$nEleveId}
-			AND ID_CLASSE =  {$aEleve['CLASSE_ID']}
+			AND ID_CLASSE = {$aEleve['CLASSE_ID']}
 ________EOQ;
 		$aCommentaires = Database::fetchArrayWithKey($sQuery, 'PERIODE_NOM');
 
+		// Récupération des commentaires pour chaque période de l'élève
+		$sQuery = <<< ________EOQ
+			SELECT CCM_VALEUR
+			FROM COMM_CONSEIL_MAITRES
+			WHERE ID_ELEVE = {$nEleveId}
+			AND ID_CLASSE = {$aEleve['CLASSE_ID']}
+________EOQ;
+		$sConseilMaitres = Database::fetchOneValue($sQuery);
+		
 		// Lancement du calcul de la moyenne pour la période
 		// Parcours de tous les domaines
 		foreach($aDomainesMatieresCompetences as $sDomaine => $aMatieres)
@@ -289,6 +298,7 @@ ________EOQ;
 		$aRes['EVAL_INDS'] = $aEvalInds;
 		$aRes['NOM_PRENOM'] = $aNomPrenom;
 		$aRes['COMMENTAIRES'] = $aCommentaires;
+		$aRes['COMM_CONSEIL_MAITRES'] = $sConseilMaitres;
 
 		return $aRes;
 	}// fin recap_annuel

@@ -42,7 +42,7 @@ function var_dump_ext($vVar)
  */
 function debug($mVar, $sMsg = "")
 {
-	echo("<div style=\"border: 1px solid red;font-size: 0.9em;\">$sMsg<br />");
+	echo("<div class=\"messagebox_debug\">$sMsg<br />");
 	var_dump_ext($mVar);
 	echo("</div>");
 }// fin debug

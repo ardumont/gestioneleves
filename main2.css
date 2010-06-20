@@ -9,7 +9,8 @@
 #struct_main .list_tree, 
 #struct_main .formulaire,
 #struct_main .info,
-#struct_main .inline
+#struct_main .inline,
+#struct_main .display
 {
  	border: 1px solid;
 	border-radius: 8px;
@@ -17,7 +18,12 @@
 	-webkit-border-radius: 8px;
 }
 
-#struct_main .list_tree caption
+#struct_main table.list caption, 
+#struct_main table.list_tree caption,
+#struct_main table.formulaire caption,
+#struct_main table.info caption,
+#struct_main table.inline caption,
+#struct_main table.display caption
 {
 	border-radius-topleft: 8px;
 	border-radius-topright: 8px;
@@ -25,4 +31,11 @@
 	-moz-border-radius-topright: 8px;
 	-webkit-border-radius-topleft: 8px;
 	-webkit-border-radius-topright: 8px;
+}
+
+.messagebox_debug
+{
+    background: #F5D0A9 url(images/icons/32x32/messagebox_warning.png) no-repeat left top;
+    border: 1px solid orange;
+    color: #000000;
 }
