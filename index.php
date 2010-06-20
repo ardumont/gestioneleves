@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ERROR ^ E_NOTICE);
+
 //=============================================================================
 // Déclarations des gestionnaires d'erreurs
 //=============================================================================
@@ -108,6 +110,7 @@ require_once(PATH_PHP_LIB . "/database.class.php");
 require_once(PATH_PHP_LIB . "/formvalidation.class.php");
 require_once(PATH_PHP_LIB . "/message.class.php");
 require_once(PATH_APP_LIB . "/profilmanager.class.php");
+require_once(PATH_APP_LIB . "/display.lib.php");
 
 require_once(PATH_METIER . "/livret.class.php");
 require_once(PATH_METIER . "/moyenne.class.php");

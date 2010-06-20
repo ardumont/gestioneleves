@@ -3,11 +3,16 @@
 // Préparation des données
 //==============================================================================
 
+// Récupération d'objets cachés
+$sQuery = <<< EOQ
+	SELECT HO_LIBELLE, HO_LIBELLE
+	FROM HIDDEN_OBJECTS
+EOQ;
+$aObjectsToHide = Database::fetchColumn($sQuery);
+
 //==============================================================================
 // Validation du formulaire
 //==============================================================================
-
-// ===== Vérification des valeurs =====
 
 //==============================================================================
 // Actions du formulaire
@@ -42,7 +47,7 @@ $bAdminImportXmlClasse = ProfilManager::hasRight('import_xml_classe');
 //==============================================================================
 ?>
 <h1><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('administration');">Administration</a></h1>
-<div id="administration">
+<div id="administration" <?php echo manage_display_hidden_objects($aObjectsToHide, 'administration'); ?>>
 	<h4>
 		<a href="?page=home">
 			<img src="<?php echo(URL_ICONS_16X16); ?>/home.png" />La page d'accueil
@@ -50,7 +55,7 @@ $bAdminImportXmlClasse = ProfilManager::hasRight('import_xml_classe');
 	</h4>
 	<?php if(ProfilManager::hasRight('admin_profil_list')): ?>
 	<h2><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('administrer');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Administrer</a></h2>
-	<div id="administrer">
+	<div id="administrer" <?php echo manage_display_hidden_objects($aObjectsToHide, 'administrer'); ?>>
 		<h4>
 			<a href="?page=profils">
 				<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Profils
@@ -62,7 +67,7 @@ $bAdminImportXmlClasse = ProfilManager::hasRight('import_xml_classe');
 			 $bAdminCycleList || $bAdminNiveauList || $bAdminDomaineList || $bAdminMatiereList ||
 			 $bAdminCompetenceList || $bAdminNoteList || $bAdminPeriodeList): ?>
 	<h2><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('gestion');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Gestion</a></h2>
-	<div id="gestion">
+	<div id="gestion" <?php echo manage_display_hidden_objects($aObjectsToHide, 'gestion'); ?>>
 		<?php if($bAdminProfList): ?>
 		<h4>
 			<a href="?page=professeurs">
@@ -145,10 +150,10 @@ $bAdminImportXmlClasse = ProfilManager::hasRight('import_xml_classe');
 
 	<?php if($bAdminImportCsvCycle || $bAdminImportXmlCycle || $bAdminImportXmlClasse): ?>
 	<h2><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('imports');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Import</a></h2>
-	<div id="imports">
+	<div id="imports" <?php echo manage_display_hidden_objects($aObjectsToHide, 'imports'); ?>>
 		<?php if($bAdminImportCsvCycle || $bAdminImportXmlCycle): ?>
 		<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('imports_cycle');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Cycles</a></h3>
-		<div id="imports_cycle">
+		<div id="imports_cycle" <?php echo manage_display_hidden_objects($aObjectsToHide, 'imports_cycle'); ?>>
 			<?php if($bAdminImportCsvCycle): ?>
 			<h4>
 				<a href="?page=imports&amp;mode=imports_csv">
@@ -167,7 +172,7 @@ $bAdminImportXmlClasse = ProfilManager::hasRight('import_xml_classe');
 		<?php endif; ?>
 		<?php if($bAdminImportXmlClasse): ?>
 		<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('imports_classe');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Classes</a></h3>
-		<div id="imports_classe">
+		<div id="imports_classe" <?php echo manage_display_hidden_objects($aObjectsToHide, 'imports_classe'); ?>>
 			<h4>
 				<a href="?page=imports&amp;mode=imports_xml_classe">
 					<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Import XML

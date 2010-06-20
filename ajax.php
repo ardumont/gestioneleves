@@ -59,15 +59,21 @@ $aMenuPage = array
 	'contributeurs'	=> "contributeurs.inc.php",
 	'no_rights'		=> "error-rights.inc.php",
 
-	// ----- Commentaires -----
+	// ----- Appréciations du professeur sur une période -----
 	'commentaires' => array(
 		'add_or_update' => "commentaires/add_or_update.inc.php",
 	),
-	// ----- Commentaires -----
+	// ----- Avis du conseil des maitres -----
 	'conseil_maitres' => array(
 		'add_or_update' => "conseil_maitres/add_or_update.inc.php",
 	),
-	);
+
+	// ----- Statut des menus (caché ou non) -----
+	'menu' => array(
+		'add_or_update' => "menu/add_or_update.inc.php",
+	),
+
+);
 
 //==============================================================================
 // Validation du formulaire

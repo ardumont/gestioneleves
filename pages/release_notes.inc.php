@@ -9,6 +9,17 @@
 		<dl>
 			<dt>
 				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+				v2.2.0
+			</dt>
+			<dd>
+				<ul>
+					<li class="evolution_majeure" title="Evolution majeure">Gestion de la mémoire du menu par utilisateur.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Amélioration de la charge graphique.</li>
+					<li class="evolution_majeure" title="Evolution majeure">Amélioration de l'ergonomie.</li>
+				</ul>
+			</dd>
+			<dt>
+				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
 				v2.1.0
 			</dt>
 			<dd>

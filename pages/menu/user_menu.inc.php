@@ -3,11 +3,16 @@
 // Préparation des données
 //==============================================================================
 
+// Récupération d'objets cachés
+$sQuery = <<< EOQ
+	SELECT HO_LIBELLE, HO_LIBELLE
+	FROM HIDDEN_OBJECTS
+EOQ;
+$aObjectsToHide = Database::fetchColumn($sQuery);
+
 //==============================================================================
 // Validation du formulaire
 //==============================================================================
-
-// ===== Vérification des valeurs =====
 
 //==============================================================================
 // Actions du formulaire
@@ -33,7 +38,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 //==============================================================================
 ?>
 <h1><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_identite');">Menu</a></h1>
-<div id="menu_identite">
+<div id="menu_identite" <?php echo manage_display_hidden_objects($aObjectsToHide, 'menu_identite'); ?>>
 <?php if(isset($_SESSION['PROFESSEUR_ID'])): /* utilisateur non connecté */?>
 	<h4>
 		<a href="?page=home">
@@ -43,7 +48,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 	<h5>&nbsp;</h5>
 	<?php if($bAfficheEleveList): ?>
 	<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_eleves');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Elèves</a></h3>
-	<div id="menu_eleves">
+	<div id="menu_eleves" <?php echo manage_display_hidden_objects($aObjectsToHide, 'menu_eleves'); ?>>
 		<h4>
 			<a href="?page=eleves">
 				<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Lister
@@ -54,7 +59,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 	<?php endif; ?>
 	<?php if($bAfficheEvalColList): ?>
 	<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_evaluations_collectives');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Evaluations collectives</a></h3>
-	<div id="menu_evaluations_collectives">
+	<div id="menu_evaluations_collectives" <?php echo manage_display_hidden_objects($aObjectsToHide, 'menu_evaluations_collectives'); ?>>
 		<h4>
 			<a href="?page=evaluations_collectives">
 				<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Lister
@@ -65,7 +70,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 	<?php endif; ?>
 	<?php if($bAfficheEvalIndList): ?>
 	<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_evaluations_individuelles');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Evaluations individuelles</a></h3>
-	<div id="menu_evaluations_individuelles">
+	<div id="menu_evaluations_individuelles" <?php echo manage_display_hidden_objects($aObjectsToHide, 'menu_evaluations_individuelles'); ?>>
 		<h4>
 			<a href="?page=evaluations_individuelles">
 				<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Lister
@@ -76,7 +81,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 	<?php endif; ?>
 	<?php if($bAfficheLivretList): ?>
 	<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_livrets_par_eleves');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Livrets par élève</a></h3>
-	<div id="menu_livrets_par_eleves">
+	<div id="menu_livrets_par_eleves" <?php echo manage_display_hidden_objects($aObjectsToHide, 'menu_livrets_par_eleves'); ?>>
 		<h4>
 			<a href="?page=livrets&amp;mode=recap_period">
 				<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Récapitulatif périodique
@@ -95,7 +100,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 		<h5>&nbsp;</h5>
 	</div>
 	<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_livrets_par_classes');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Livrets par classe</a></h3>
-	<div id="menu_livrets_par_classes">
+	<div id="menu_livrets_par_classes" <?php echo manage_display_hidden_objects($aObjectsToHide, 'menu_livrets_par_classes'); ?>>
 		<h4>
 			<a href="?page=livrets&amp;mode=recap_period_all">
 				<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Récapitulatif périodique
@@ -111,7 +116,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 	<?php endif; ?>
 	<?php if($bAfficheConsultList): ?>
 	<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_consultations');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Consultations</a></h3>
-	<div id="menu_consultations">
+	<div id="menu_consultations" <?php echo manage_display_hidden_objects($aObjectsToHide, 'menu_consultations'); ?>>
 		<h4>
 			<a href="?page=consultations&amp;mode=competences_period">
 				<img src="<?php echo(URL_ICONS_16X16); ?>/blank.png" />Compétences par période
@@ -126,7 +131,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 	</div>
 	<?php endif; ?>
 	<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_aide');"><img src="<?php echo(URL_ICONS_16X16); ?>/hhelp.png" />Aide/Info</a></h3>
-	<div id="menu_aide">
+	<div id="menu_aide" <?php echo manage_display_hidden_objects($aObjectsToHide, 'menu_aide'); ?>>
 		<h4>
 			<a href="?page=contributeurs">
 				<img src="<?php echo(URL_ICONS_16X16); ?>/contributeur.png" />Contributeurs

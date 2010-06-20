@@ -24,12 +24,33 @@ function showOrHideMenu(image_left, image_right)
 }// fin showOrHideMenu
 
 /**
+ * Fonction de mise à jour du menu en bdd.
+ * @param id
+ */
+function updateMenu(id, bIsHidden)
+{
+	// Soumission d'une requete POST en asynchrone pour mettre à jour ou non en bdd son statut 
+	$.ajax
+	({
+		type: 'POST',
+		url: "ajax.php?page=menu&mode=add_or_update",
+		data: "statut_hidden=" + ((bIsHidden == true) ? 'false' : 'true') + '&cle=' + id
+	});
+}// fin updateMenu
+
+/**
  * Montre un bloc d'id 'id' s'il est cache,
  * le cache s'il est visible.
+ * + Mise à jour en bdd des champs.
  */
 function showOrHide(id)
 {
+	// Quel est l'état du menu de gauche
+	var bIsHidden = $('#' + id).is(':hidden');
+	// Cache ou non le menu
 	$('#' + id).toggle('slow');
+	// Met à jour les champs en bdd
+	updateMenu(id, bIsHidden);
 }// fin showOrHide
 
 /**

@@ -86,10 +86,6 @@ EOQ;
 $oForm->readArray('query3', Database::fetchOneRow($sQuery));
 $oForm->testError0('query3.EXIST', 'exist', "L'identifiant de la classe \"{$nClasseId}\" n'est pas valide !");
 
-//==============================================================================
-// Actions du formulaire
-//==============================================================================
-
 // Traitement d'erreur, on s'arrete
 if($oForm->hasError() == true)
 {
@@ -105,7 +101,7 @@ if($sCommentaire != -1 && strcmp($sCommentaire, $sCommentaireHidden) != 0)
 {
 	// Préparation des chaines pour la requete
 	$sCommentaireQuery = Database::prepareString($sCommentaire);
-	
+
 	$sQuery = <<< ____EOQ
 		SELECT COMMENTAIRE_ID
 		FROM COMMENTAIRES
