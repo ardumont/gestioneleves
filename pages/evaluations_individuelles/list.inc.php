@@ -351,16 +351,11 @@ $sEndLink .= ($nOffset != 0) ? "&amp;offset_depart={$nOffsetDep}" : "";
 	</table>
 </form>
 <?php if(count($aEvalInds) <= 0): ?>
-<table class="formulaire">
-	<caption>Informations</caption>
-	<tr>
-		<td>
-			Aucun critère de recherche n'a été saisi ou aucune évaluation individuelle
-			n'a été saisie à ce jour pour ces critères.<br />
-			<a href="?page=evaluations_individuelles&amp;mode=add">Ajouter une évaluation individuelle</a>
-		</td>
-	</tr>
-</table>
+<div class="messagebox_info">
+	Aucun critère de recherche n'a été saisi ou aucune évaluation individuelle
+	n'a été saisie à ce jour pour ces critères.<br />
+	<a href="?page=evaluations_individuelles&amp;mode=add">Ajouter une évaluation individuelle</a>
+</div>
 <?php else: ?>
 <a href="javascript:void(0);" onclick="$('input[type=checkbox]').attr('checked', 'checked');">Sélectionner tout</a>&nbsp;
 <a href="javascript:void(0);" onclick="$('input[type=checkbox]').removeAttr('checked');">Désélectionner tout</a>

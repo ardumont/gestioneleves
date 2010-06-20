@@ -266,13 +266,8 @@ $aMatieres = Database::fetchArray($sQuery);
 		</tbody>
 	</table>
 <?php else: ?>
-<table class="formulaire">
-	<caption>Informations</caption>
-	<tr>
-		<td>
-			Aucun critère de recherche n'a été renseigné ou aucune compétence ne correspond au(x) critère(s) de recherche.<br />
-			<a href="?page=competences&amp;mode=add">Ajouter une compétence</a>
-		</td>
-	</tr>
-</table>
+<div class="messagebox_info">
+	Aucun critère de recherche n'a été renseigné ou aucune compétence ne correspond au(x) critère(s) de recherche.<br />
+	<a href="?page=competences&amp;mode=add">Ajouter une compétence</a>
+</div>
 <?php endif; ?>

@@ -226,14 +226,9 @@ ____EOQ;
 		</table>
 	<?php endif; ?>
 <?php else: ?>
-<table class="formulaire">
-	<caption>Informations</caption>
-	<tr>
-		<td>
-			Aucune classe n'a été renseignée à ce jour.<br />
-			<a href="?page=classes&amp;mode=add">Ajouter une classe</a> puis <br />
-			<a href="index.php?page=eleves&amp;mode=add">Ajouter des élèves</a>
-		</td>
-	</tr>
-</table>
+<div class="messagebox_info">
+	Aucune classe n'a été renseignée à ce jour.<br />
+	<a href="?page=classes&amp;mode=add">Ajouter une classe</a> puis <br />
+	<a href="index.php?page=eleves&amp;mode=add">Ajouter des élèves</a>
+</div>
 <?php endif; ?>

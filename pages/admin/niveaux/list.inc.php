@@ -119,13 +119,8 @@ $aNiveaux = Database::fetchArrayWithKey($sQuery, 'CYCLE_NOM', false);
 	</tbody>
 </table>
 <?php else: ?>
-<table class="formulaire">
-	<caption>Informations</caption>
-	<tr>
-		<td>
-			Aucun niveau n'a été renseigné à ce jour.<br />
-			<a href="?page=niveaux&amp;mode=add">Ajouter un niveau</a>
-		</td>
-	</tr>
-</table>
+<div class="messagebox_info">
+	Aucun niveau n'a été renseigné à ce jour.<br />
+	<a href="?page=niveaux&amp;mode=add">Ajouter un niveau</a>
+</div>
 <?php endif; ?>

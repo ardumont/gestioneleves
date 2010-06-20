@@ -98,13 +98,8 @@ $aCycles = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-<table class="formulaire">
-	<caption>Informations</caption>
-	<tr>
-		<td>
-			Aucun cycle n'a été renseigné à ce jour.<br />
-			<a href="?page=cycles&amp;mode=add">Ajouter un cycle</a>
-		</td>
-	</tr>
-</table>
+<div class="messagebox_info">
+	Aucun cycle n'a été renseigné à ce jour.<br />
+	<a href="?page=cycles&amp;mode=add">Ajouter un cycle</a>
+</div>
 <?php endif; ?>

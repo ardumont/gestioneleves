@@ -154,15 +154,10 @@ $aEvalCols = Database::fetchArray($sQuery);
 </form>
 
 <?php if(count($aEvalCols) <= 0): ?>
-<table class="formulaire">
-	<caption>Informations</caption>
-	<tr>
-		<td>
-			Aucune évaluation collective n'a été saisie à ce jour.<br />
-			<a href="?page=evaluations_collectives&amp;mode=add">Ajouter une évaluation collective</a>
-		</td>
-	</tr>
-</table>
+<div class="messagebox_info">
+	Aucune évaluation collective n'a été saisie à ce jour.<br />
+	<a href="?page=evaluations_collectives&amp;mode=add">Ajouter une évaluation collective</a>
+</div>
 <?php else: ?>
 <table class="list_tree">
 	<caption>Liste des évaluations</caption>

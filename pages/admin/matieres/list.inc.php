@@ -214,17 +214,12 @@ $aDomaines = Database::fetchArray($sQuery);
 		</tbody>
 	</table>
 <?php else: ?>
-<table class="formulaire">
-	<caption>Informations</caption>
-	<tr>
-		<td>
-			<?php if($nCycleId != -1 || $nMatiereId != -1): ?>
-				Aucune matière n'a été renseignée pour ces critères de recherche.<br />
-			<?php else:?>
-				Aucune matière n'a été renseignée à ce jour.<br />
-				<a href="?page=matieres&amp;mode=add">Ajouter une matière</a>
-			<?php endif; ?>
-		</td>
-	</tr>
-</table>
+<div class="messagebox_info">
+	<?php if($nCycleId != -1 || $nMatiereId != -1): ?>
+		Aucune matière n'a été renseignée pour ces critères de recherche.<br />
+	<?php else:?>
+		Aucune matière n'a été renseignée à ce jour.<br />
+		<a href="?page=matieres&amp;mode=add">Ajouter une matière</a>
+	<?php endif; ?>
+</div>
 <?php endif; ?>

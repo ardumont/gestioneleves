@@ -210,13 +210,8 @@ if($nClasseId != -1 && $nCompetenceId != -1)
 		</tbody>
 	</table>
 <?php else: ?>
-<table class="formulaire">
-	<caption>Informations</caption>
-	<tr>
-		<td>
-			Aucun critère de recherche n'a été renseigné ou aucune recherche ne correspond au(x)
-			critère(s) de recherche.<br />
-		</td>
-	</tr>
-</table>
+<div class="messagebox_info">
+	Aucun critère de recherche n'a été renseigné ou aucune recherche ne correspond au(x)
+	critère(s) de recherche.<br />
+</div>
 <?php endif; ?>

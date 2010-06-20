@@ -174,13 +174,8 @@ $aDepts = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-<table class="formulaire">
-	<caption>Informations</caption>
-	<tr>
-		<td>
-			Aucun critère de recherche n'a été renseigné ou aucune école ne correspond au(x) critère(s) de recherche.<br />
-			<a href="?page=ecoles&amp;mode=add">Ajouter une école</a>
-		</td>
-	</tr>
-</table>
+<div class="messagebox_info">
+	Aucun critère de recherche n'a été renseigné ou aucune école ne correspond au(x) critère(s) de recherche.<br />
+	<a href="?page=ecoles&amp;mode=add">Ajouter une école</a>
+</div>
 <?php endif; ?>

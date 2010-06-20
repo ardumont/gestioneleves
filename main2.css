@@ -5,10 +5,10 @@
 	-webkit-border-radius: 5px;	
 }
 
-#struct_main table.list, 
-#struct_main table.list_tree, 
-#struct_main table.formulaire,
-#struct_main table.info,
+#struct_main .list, 
+#struct_main .list_tree, 
+#struct_main .formulaire,
+#struct_main .info,
 #struct_main .inline
 {
  	border: 1px solid;
@@ -17,9 +17,8 @@
 	-webkit-border-radius: 8px;
 }
 
-#struct_main table.list_tree caption
+#struct_main .list_tree caption
 {
- 	border: 0;
 	border-radius-topleft: 8px;
 	border-radius-topright: 8px;
 	-moz-border-radius-topleft: 8px;

@@ -95,13 +95,8 @@ $aNotes = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-<table class="formulaire">
-	<caption>Informations</caption>
-	<tr>
-		<td>
-			Aucune note n'a été renseignée à ce jour.<br />
-			<a href="?page=notes&amp;mode=add">Ajouter une note</a>
-		</td>
-	</tr>
-</table>
+<div class="messagebox_info">
+	Aucune note n'a été renseignée à ce jour.<br />
+	<a href="?page=notes&amp;mode=add">Ajouter une note</a>
+</div>
 <?php endif; ?>

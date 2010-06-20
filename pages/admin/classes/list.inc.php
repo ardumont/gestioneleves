@@ -214,13 +214,8 @@ $aProfesseurs = Database::fetchArray($sQuery);
 	</tbody>
 </table>
 <?php else: ?>
-<table class="formulaire">
-	<caption>Informations</caption>
-	<tr>
-		<td>
-			Aucun critère de recherche n'a été renseigné ou aucune classe ne correspond au(x) critère(s) de recherche.<br />
-			<a href="?page=classes&amp;mode=add">Ajouter une classe</a>
-		</td>
-	</tr>
-</table>
+<div class="messagebox_info">
+	Aucun critère de recherche n'a été renseigné ou aucune classe ne correspond au(x) critère(s) de recherche.<br />
+	<a href="?page=classes&amp;mode=add">Ajouter une classe</a>
+</div>
 <?php endif; ?>
