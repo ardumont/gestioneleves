@@ -32,7 +32,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 // Affichage de la page
 //==============================================================================
 ?>
-<h1><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_identite').toggle('slow');">Menu</a></h1>
+<h1><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_identite');">Menu</a></h1>
 <div id="menu_identite">
 <?php if(isset($_SESSION['PROFESSEUR_ID'])): /* utilisateur non connecté */?>
 	<h4>
@@ -42,7 +42,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 	</h4>
 	<h5>&nbsp;</h5>
 	<?php if($bAfficheEleveList): ?>
-	<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_eleves').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Elèves</a></h3>
+	<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_eleves');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Elèves</a></h3>
 	<div id="menu_eleves">
 		<h4>
 			<a href="?page=eleves">
@@ -53,7 +53,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 	</div>
 	<?php endif; ?>
 	<?php if($bAfficheEvalColList): ?>
-	<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_evaluations_collectives').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Evaluations collectives</a></h3>
+	<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_evaluations_collectives');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Evaluations collectives</a></h3>
 	<div id="menu_evaluations_collectives">
 		<h4>
 			<a href="?page=evaluations_collectives">
@@ -64,7 +64,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 	</div>
 	<?php endif; ?>
 	<?php if($bAfficheEvalIndList): ?>
-	<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_evaluations_individuelles').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Evaluations individuelles</a></h3>
+	<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_evaluations_individuelles');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Evaluations individuelles</a></h3>
 	<div id="menu_evaluations_individuelles">
 		<h4>
 			<a href="?page=evaluations_individuelles">
@@ -75,7 +75,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 	</div>
 	<?php endif; ?>
 	<?php if($bAfficheLivretList): ?>
-	<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_livrets_par_eleves').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Livrets par élève</a></h3>
+	<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_livrets_par_eleves');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Livrets par élève</a></h3>
 	<div id="menu_livrets_par_eleves">
 		<h4>
 			<a href="?page=livrets&amp;mode=recap_period">
@@ -94,7 +94,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 		</h4>
 		<h5>&nbsp;</h5>
 	</div>
-	<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_livrets_par_classes').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Livrets par classe</a></h3>
+	<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_livrets_par_classes');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Livrets par classe</a></h3>
 	<div id="menu_livrets_par_classes">
 		<h4>
 			<a href="?page=livrets&amp;mode=recap_period_all">
@@ -110,7 +110,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 	</div>
 	<?php endif; ?>
 	<?php if($bAfficheConsultList): ?>
-	<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_consultations').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Consultations</a></h3>
+	<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_consultations');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Consultations</a></h3>
 	<div id="menu_consultations">
 		<h4>
 			<a href="?page=consultations&amp;mode=competences_period">
@@ -125,7 +125,7 @@ $bAdminRights        = ProfilManager::hasAdminRight();
 		<h5>&nbsp;</h5>
 	</div>
 	<?php endif; ?>
-	<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#menu_aide').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/hhelp.png" />Aide/Info</a></h3>
+	<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('menu_aide');"><img src="<?php echo(URL_ICONS_16X16); ?>/hhelp.png" />Aide/Info</a></h3>
 	<div id="menu_aide">
 		<h4>
 			<a href="?page=contributeurs">

@@ -41,7 +41,7 @@ $bAdminImportXmlClasse = ProfilManager::hasRight('import_xml_classe');
 // Affichage de la page
 //==============================================================================
 ?>
-<h1><a href="javascript:void(0);" style="color:white;" onclick="$('#administration').toggle('slow');">Administration</a></h1>
+<h1><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('administration');">Administration</a></h1>
 <div id="administration">
 	<h4>
 		<a href="?page=home">
@@ -49,7 +49,7 @@ $bAdminImportXmlClasse = ProfilManager::hasRight('import_xml_classe');
 		</a>
 	</h4>
 	<?php if(ProfilManager::hasRight('admin_profil_list')): ?>
-	<h2><a href="javascript:void(0);" style="color:white;" onclick="$('#administrer').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Administrer</a></h2>
+	<h2><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('administrer');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Administrer</a></h2>
 	<div id="administrer">
 		<h4>
 			<a href="?page=profils">
@@ -61,7 +61,7 @@ $bAdminImportXmlClasse = ProfilManager::hasRight('import_xml_classe');
 	<?php if($bAdminProfList || $bAdminEcoleList || $bAdminClasseList || $bAdminEleveList ||
 			 $bAdminCycleList || $bAdminNiveauList || $bAdminDomaineList || $bAdminMatiereList ||
 			 $bAdminCompetenceList || $bAdminNoteList || $bAdminPeriodeList): ?>
-	<h2><a href="javascript:void(0);" style="color:white;" onclick="$('#gestion').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Gestion</a></h2>
+	<h2><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('gestion');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Gestion</a></h2>
 	<div id="gestion">
 		<?php if($bAdminProfList): ?>
 		<h4>
@@ -144,10 +144,10 @@ $bAdminImportXmlClasse = ProfilManager::hasRight('import_xml_classe');
 	<?php endif; ?>
 
 	<?php if($bAdminImportCsvCycle || $bAdminImportXmlCycle || $bAdminImportXmlClasse): ?>
-	<h2><a href="javascript:void(0);" style="color:white;" onclick="$('#imports').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Import</a></h2>
+	<h2><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('imports');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Import</a></h2>
 	<div id="imports">
 		<?php if($bAdminImportCsvCycle || $bAdminImportXmlCycle): ?>
-		<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#imports_cycle').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Cycles</a></h3>
+		<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('imports_cycle');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Cycles</a></h3>
 		<div id="imports_cycle">
 			<?php if($bAdminImportCsvCycle): ?>
 			<h4>
@@ -166,7 +166,7 @@ $bAdminImportXmlClasse = ProfilManager::hasRight('import_xml_classe');
 		</div>
 		<?php endif; ?>
 		<?php if($bAdminImportXmlClasse): ?>
-		<h3><a href="javascript:void(0);" style="color:white;" onclick="$('#imports_classe').toggle('slow');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Classes</a></h3>
+		<h3><a href="javascript:void(0);" style="color:white;" onclick="showOrHide('imports_classe');"><img src="<?php echo(URL_ICONS_16X16); ?>/admin.png" />Classes</a></h3>
 		<div id="imports_classe">
 			<h4>
 				<a href="?page=imports&amp;mode=imports_xml_classe">
