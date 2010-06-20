@@ -382,7 +382,11 @@ if($bHasAdminRight == false)
 		<?php endif; ?>
 	</div>
 	<div id="struct_main" class="<?php echo($sPageId); ?>">
+		<a name="top"></a>
 		<?php include(PATH_PAGES."/".$sPageName); ?>
+		<div>
+			<a href="#top">Haut de page</a>
+		</div>
 	</div>
 </body>
 </html>

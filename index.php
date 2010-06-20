@@ -378,6 +378,7 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 		<?php endif; ?>
 	</div>
 	<div id="struct_main" class="<?php echo($sPageId); ?>">
+		<a name="top"></a>
 		<?php include(PATH_PAGES . "/" . $sPageName); ?>
 		<div>
 			<a href="#top">Haut de page</a>
