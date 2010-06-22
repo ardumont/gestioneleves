@@ -273,8 +273,9 @@ $sEndLink .= ($nOffset != 0) ? "&amp;offset_depart={$nOffsetDep}" : "";
 //==============================================================================
 // Affichage de la page
 //==============================================================================
+
+echo h1("Liste des évaluations individuelles de l'année courante", $aObjectsToHide);
 ?>
-<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Liste des évaluations individuelles de l'année courante</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">

@@ -103,6 +103,8 @@ if($nEleveId != -1)
 //==============================================================================
 // Affichage de la page
 //==============================================================================
+
+echo h1("Récapitulatif du cycle de l'élève", $aObjectsToHide);
 ?>
 <h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Récapitulatif du cycle de l'élève</h1>
 

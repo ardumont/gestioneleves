@@ -125,6 +125,7 @@ if ($nClasseId != null)
 // Affichage de la page
 //==============================================================================
 
+echo h1("Ajout d'un &eacute;l&egrave;ve", $aObjectsToHide);
 ?>
 <h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Ajout d'un &eacute;l&egrave;ve</h1>
 

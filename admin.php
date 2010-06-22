@@ -360,8 +360,6 @@ if($bHasAdminRight == false)
 	<![endif]-->
 	<!-- JQuery -->
 	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/jquery.js"></script>
-	<!-- fonctions utilitaires de javascript -->
-	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/utils.inc.js"></script>
 	<!-- Utilitaires basés sur JQuery -->
 	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/utils_jquery.inc.js"></script>
 </head>

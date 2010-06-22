@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ERROR ^ E_NOTICE);
+error_reporting(E_ERROR & E_NOTICE);
 
 //=============================================================================
 // Déclarations des gestionnaires d'erreurs
@@ -310,6 +310,15 @@ else
 
 $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 
+// Récupération des objets à cacher dans l'ihm
+$sQuery = <<< EOQ
+	SELECT 
+		HO_LIBELLE
+	FROM HIDDEN_OBJECTS
+EOQ;
+$aObjectsToHide = Database::fetchColumn($sQuery);
+// $aObjectsToHide[Valeur de colonne]
+
 //==============================================================================
 // Affichage de la page
 //==============================================================================
@@ -329,8 +338,6 @@ $sGuiBodyCssClass = ($bNeedInstall == true) ? "popup_stop_scroll" : "";
 	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/jscalendar-1.0/lang/calendar-en.js"></script>
 	<!-- the following script defines the Calendar.setup helper function, which makes adding a calendar a matter of 1 or 2 lines of code. -->
 	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/jscalendar-1.0/calendar-setup.js"></script>
-	<!-- fonctions utilitaires de javascript -->
-	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/utils.inc.js"></script>
 	<!-- JQuery -->
 	<script type="text/javascript" src="<?php echo URL_JAVASCRIPT; ?>/jquery.js"></script>
 	<!-- Utilitaires basés sur JQuery -->

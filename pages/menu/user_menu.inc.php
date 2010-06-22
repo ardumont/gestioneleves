@@ -3,13 +3,6 @@
 // Préparation des données
 //==============================================================================
 
-// Récupération d'objets cachés
-$sQuery = <<< EOQ
-	SELECT HO_LIBELLE, HO_LIBELLE
-	FROM HIDDEN_OBJECTS
-EOQ;
-$aObjectsToHide = Database::fetchColumn($sQuery);
-
 //==============================================================================
 // Validation du formulaire
 //==============================================================================

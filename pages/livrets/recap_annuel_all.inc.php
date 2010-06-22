@@ -141,8 +141,9 @@ if($nClasseId != -1)
 //==============================================================================
 // Affichage de la page
 //==============================================================================
+
+echo h1("Récapitulatif annuel de la classe", $aObjectsToHide);
 ?>
-<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Récapitulatif annuel d'un élève</h1>
 
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">

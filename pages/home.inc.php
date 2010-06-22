@@ -39,7 +39,11 @@ $sGuiTitle = "Bienvenue" . ( ($sUserName != "") ? " {$sUserName}," : "," );
 //==============================================================================
 // Affichage de la page
 //==============================================================================
-if(Message::hasError() == true): ?>
+
+
+if(Message::hasError() == true):
+	echo h1("Erreur lors de l'authentification", $aObjectsToHide);
+?>
 	<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Erreur lors de l'authentification</h1>
 	<ul class="form_error">
 		<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
@@ -49,7 +53,7 @@ if(Message::hasError() == true): ?>
 	<br />
 <?php endif; ?>
 
-<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a><?php echo($sGuiTitle); ?></h1>
+<?php echo h1($sGuiTitle, $aObjectsToHide); ?>
 <p>Voil&agrave; le gestionnaire d'&eacute;valuations de vos joyeux diablotins.</p>
 
 <?php require_once(PATH_PAGES."/release_notes.inc.php"); ?>

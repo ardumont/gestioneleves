@@ -56,8 +56,10 @@ $aEleve = Database::fetchOneRow($sQuery);
 //==============================================================================
 // Affichage de la page
 //==============================================================================
+
+echo h1("Suppression de l'&eacute;l&egrave;ve", $aObjectsToHide);
 ?>
-<h1>Suppression de l'&eacute;l&egrave;ve</h1>
+
 <?php if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>

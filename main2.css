@@ -1,5 +1,4 @@
-#struct_main input, #struct_main select, 
-#struct_main textarea, #struct_main button {
+input, select, textarea, button {
 	border-radius: 5px;
     -moz-border-radius: 5px;
 	-webkit-border-radius: 5px;	
@@ -39,3 +38,6 @@
     border: 1px solid orange;
     color: #000000;
 }
+
+.arrow_left {background: url(images/icons/16x16/arrow_left.png)	no-repeat left center;}
+.arrow_right {background: url(images/icons/16x16/arrow_right.png) no-repeat left center;}

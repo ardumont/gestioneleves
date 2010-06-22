@@ -99,8 +99,9 @@ $aEvalCols = Database::fetchArray($sQuery);
 //==============================================================================
 // Affichage de la page
 //==============================================================================
+
+echo h1("Liste des évaluations collectives", $aObjectsToHide);
 ?>
-<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Liste des évaluations collectives</h1>
 
 <br />
 <?php if(Message::hasError() == true): ?>
