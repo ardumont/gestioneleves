@@ -381,18 +381,18 @@ $aObjectsToHide = Database::fetchColumn($sQuery);
 			<?php require_once(PATH_PAGES."/menu/licence.inc.php"); ?>
 		</div>
 		<?php if(preg_match("/microsoft internet explorer/i", $sAgent) || preg_match("/msie/i", $sAgent)): ?>
-			<div style="text-align:left;color:red;">
-				Ce site est optimisé pour Mozilla Firefox ou tout navigateur respectant <a href="http://www.w3c.org/">les standards web</a> (chromium, chrome, epiphany, icecat, konqueror, opera, seamonkey, etc...).<br />
-				Votre navigateur étant Microsoft Internet Explorer ou l'une de ses moutures, vous risquez de perdre en ergonomie d'utilisation avec cette application.<br />
-			</div>
+		<div style="text-align:left;color:red;">
+			Ce site est optimisé pour Mozilla Firefox ou tout navigateur respectant <a href="http://www.w3c.org/">les standards web</a> (chromium, chrome, epiphany, icecat, konqueror, opera, seamonkey, etc...).<br />
+			Votre navigateur étant Microsoft Internet Explorer ou l'une de ses moutures, vous risquez de perdre en ergonomie d'utilisation avec cette application.<br />
+		</div>
 		<?php endif; ?>
+		<div>
+			<a href="#top">Haut de page</a>
+		</div>
 	</div>
 	<div id="struct_main" class="<?php echo($sPageId); ?>">
 		<a name="top"></a>
 		<?php include(PATH_PAGES . "/" . $sPageName); ?>
-		<div>
-			<a href="#top">Haut de page</a>
-		</div>
 	</div>
 </body>
 </html>
