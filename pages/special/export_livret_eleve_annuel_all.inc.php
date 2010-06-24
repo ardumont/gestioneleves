@@ -265,7 +265,7 @@ $sGuiTitle = "Livret d'évaluation";
 						<?php $sPeriodeNom = $aPeriode['PERIODE_NOM']; ?>
 						<?php $nPeriodId = $aPeriode['PERIODE_ID']; ?>
 						<?php $sCommentaire = $aCommentaires[$sPeriodeNom]['COMMENTAIRE_VALEUR']; ?>
-					<tr style="width: 500px; height: 200px;">
+					<tr style="width: 475px; height: 200px;">
 						<td style="width: 20%"><?php echo $aPeriode['PERIODE_NOM']; ?></td>
 						<td style="width: 80%"><pre><?php echo $sCommentaire; ?>&nbsp;</pre></td>
 					</tr>
