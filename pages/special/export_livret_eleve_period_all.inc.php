@@ -252,7 +252,7 @@ $sGuiTitle = "Livret d'évaluation";
 		</thead>
 		<tfoot></tfoot>
 		<tbody>
-			<tr style="width: 500px; height: 250px;">
+			<tr style="width: 475px; height: 200px;">
 				<td style="width: 20%"><?php echo $aPeriodes[$i]['PERIODE_NOM']; ?></td>
 				<td style="width: 80%"><pre><?php echo $aCommentaires[$i]; ?></pre>&nbsp;</td>
 			</tr>

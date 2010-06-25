@@ -217,7 +217,7 @@ $sGuiTitle = "Livret d'évaluation";
 			<tfoot></tfoot>
 			<tbody>
 				<?php foreach($aPeriodes as $aPeriode): /* Pour chaque période */ ?>
-				<tr style="width: 500px; height: 250px;">
+				<tr style="width: 475px; height: 200px;">
 					<td style="width: 20%"><?php echo $aPeriode['PERIODE_NOM']; ?></td>
 					<td style="width: 80%"><pre><?php echo $aCommentaires[$aClasseNiveau['CLASSE_ID']][$aPeriode['PERIODE_ID']]['COMMENTAIRE_VALEUR']?></pre></td>
 				</tr>
