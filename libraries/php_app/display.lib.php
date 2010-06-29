@@ -24,11 +24,15 @@ function manage_display_hidden_objects($aObjectsToHide, $sNameObject)
  * Page de titre du struct_main.
  * @param $sTitle
  * @param $aObjectsToHide
+ * @return string	Le titre formaté pour la page (incluant le lien permettant de cacher ou non le menu)
  */
 function h1($sTitle, $aObjectsToHide)
 {
+	// Est-ce que le menu de gauche doit être caché
+	$bLeftMenuHidden = in_array('struct_left_panel', $aObjectsToHide);
+
 	// Nom de la classe en fonction de son statut caché ou non
-	$sImg = ($aObjectsToHide == false || in_array('struct_left_panel', $aObjectsToHide) == false) ? "arrow_left.png" : "arrow_right.png";
+	$sImg = ($aObjectsToHide == false || !$bLeftMenuHidden) ? "arrow_left.png" : "arrow_right.png";
 	$sImg = URL_ICONS_16X16 . "/{$sImg}";
 
 	// Calcule le titre de la page 

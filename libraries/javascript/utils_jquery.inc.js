@@ -1,31 +1,4 @@
 /**
- * Cache ou non le menu de gauche
- * @param image_left	Chemin complet jusqu'à l'image de la fleche orientee vers la gauche
- * @param image_right	Chemin complet jusqu'à l'image de la fleche orientee vers la droite
- */
-function showOrHideMenu(image_left, image_right)
-{
-	// Quel est l'état du menu de gauche
-	var bIsHidden = $('#struct_left_panel').is(':hidden');
-	if(bIsHidden == true)// On montre le menu de gauche
-	{
-		// On remontre doucement le menu de gauche
-		$('#struct_left_panel').fadeIn("slow");
-		// On deplace le menu principal
-		$('#struct_main').animate({marginLeft: '210px'}, 'slow');
-		// On modifie l'image du lien
-		$("#img_arrow").attr("src", image_left);
-	} else {// On cache le menu de gauche
-		// On cache doucement le menu de gauche
-		$('#struct_left_panel').fadeOut("slow");
-		// On deplace le menu principal
-		$('#struct_main').animate({marginLeft: '0'}, 'slow');
-		// On modifie l'image du lien
-		$("#img_arrow").attr("src", image_right);
-	}
-}// fin showOrHideMenu
-
-/**
  * Si le menu est affiché, cache le menu de gauche sinon l'affiche.
  * Le statut est enregistré en bdd pour conserver l'état d'affichage au prochain réaffichage de la page. 
  */
@@ -64,10 +37,10 @@ function updateMenu(sId, bIsHidden)
 	// Soumission d'une requete POST en asynchrone pour mettre à jour ou non en bdd son statut 
 	$.ajax
 	({
-		type: 'POST',
-		url: "ajax.php?page=menu&mode=add_or_update",
-		data: "statut_hidden=" + ((bIsHidden == true) ? 'false' : 'true') + '&cle=' + sId
-//		success: function(data) {alert(data);}
+		type: 'POST'
+		,url: "ajax.php?page=menu&mode=add_or_update"
+		,data: "statut_hidden=" + ((bIsHidden == true) ? 'false' : 'true') + '&cle=' + sId
+//		,success: function(data) {alert(data);}
 	});
 }// fin updateMenu
 
