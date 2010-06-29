@@ -41,3 +41,9 @@ input, select, textarea, button {
 
 .arrow_left {background: url(images/icons/16x16/arrow_left.png)	no-repeat left center;}
 .arrow_right {background: url(images/icons/16x16/arrow_right.png) no-repeat left center;}
+
+.struct_main_hidden
+{
+	display: none;
+	margin-left: 0;
+}

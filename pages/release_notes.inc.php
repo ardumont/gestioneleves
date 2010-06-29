@@ -29,8 +29,6 @@
 					<li class="evolution_majeure" title="Evolution majeure">Amélioration de la charge graphique.</li>
 				</ul>
 			</dd>
-		</dl>
-		<dl>
 			<dt>
 				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
 				v2.0.0
