@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ERROR ^ E_NOTICE);
 
 //=============================================================================
 // Gestionnaires d'erreurs
@@ -340,6 +339,16 @@ if($bHasAdminRight == false)
 //==============================================================================
 // Affichage de la page
 //==============================================================================
+
+// Récupération des objets à cacher dans l'ihm
+$sQuery = <<< EOQ
+	SELECT 
+		HO_LIBELLE
+	FROM HIDDEN_OBJECTS
+EOQ;
+$aObjectsToHide = Database::fetchColumn($sQuery);
+// $aObjectsToHide[Valeur de colonne]
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
