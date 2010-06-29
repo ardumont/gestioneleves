@@ -105,10 +105,8 @@ if($nEleveId != -1)
 //==============================================================================
 
 echo h1("Récapitulatif du cycle de l'élève", $aObjectsToHide);
-?>
-<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Récapitulatif du cycle de l'élève</h1>
 
-<?php if(Message::hasError() == true): ?>
+if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
 	<li><?php echo($sErrorMessage); ?></li>

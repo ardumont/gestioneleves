@@ -143,9 +143,8 @@ if($nClasseId != -1)
 //==============================================================================
 
 echo h1("Récapitulatif annuel de la classe", $aObjectsToHide);
-?>
 
-<?php if(Message::hasError() == true): ?>
+if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
 	<li><?php echo($sErrorMessage); ?></li>

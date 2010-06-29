@@ -26,8 +26,9 @@
 //==============================================================================
 // Affichage de la page
 //==============================================================================
+
+echo h1("Les contributeurs", $aObjectsToHide);
 ?>
-<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a><img src="<?php echo(URL_ICONS_16X16); ?>/contributeur.png"/><img src="<?php echo(URL_ICONS_16X16); ?>/head_sep.png"/>Les contributeurs</h1>
 <br />
 
 <h2>L'équipe principale</h2>
