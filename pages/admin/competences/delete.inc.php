@@ -59,9 +59,10 @@ $aCompetence = Database::fetchOneRow($sQuery);
 //==============================================================================
 // Affichage de la page
 //==============================================================================
-?>
-<h1>Suppression de la comp&eacute;tence</h1>
-<?php if(Message::hasError() == true): ?>
+
+echo h1("Suppression de la compétence", $aObjectsToHide);
+
+if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
 	<li><?php echo($sErrorMessage); ?></li>

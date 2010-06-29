@@ -88,10 +88,9 @@ $aClasses = Database::fetchArray($sQuery);
 // Affichage de la page
 //==============================================================================
 
-?>
-<h1><a href="javascript:void(0)" onclick="showOrHideMenu('<?php echo(URL_ICONS_16X16); ?>/arrow_left.png', '<?php echo(URL_ICONS_16X16); ?>/arrow_right.png');"><img id="img_arrow" src="<?php echo(URL_ICONS_16X16); ?>/arrow_left.png" /></a>Ajout d'une classe</h1>
+echo h1("Ajout d'une classe", $aObjectsToHide);
 
-<?php if(Message::hasError() == true): ?>
+if(Message::hasError() == true): ?>
 <ul class="form_error">
 	<?php foreach(Message::getErrorAndClear() as $sErrorMessage): ?>
 	<li><?php echo($sErrorMessage); ?></li>
