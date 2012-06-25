@@ -2,7 +2,7 @@
 
 ##French##
 
-###Introduction##+
+###Introduction###
 
 Le gestionnaire d'élèves est une application web pour les enseignants, pour leur permettre de gérer les élèves, leurs
 notes, les classes, imprimer des livrets, etc...
