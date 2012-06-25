@@ -1,3 +1,6 @@
 .settings
 .project
 .buildpath
+/config/database.conf.php
+/config/export.conf.php
+/config/main.conf.php
