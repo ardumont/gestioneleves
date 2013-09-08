@@ -47,12 +47,14 @@ $sEvalColNom = $oForm->get(null);
 // description de l'evaluation collective
 $sEvalColDescription = $oForm->getValue('EVAL_COL_DESCRIPTION', $_POST, 'is_string', "");
 
-// description de l'evaluation collective
 $oForm->read('EVAL_COL_DATE', $_POST);
 $oForm->testError0(null, 'exist',     "Il manque le champ EVAL_COL_DATE !");
 $oForm->testError0(null, 'blank',     "Il manque la date de l'&eacute;valuation collective !");
 $oForm->testError0(null, 'is_string', "La date de l'&eacute;valuation collective doit &ecirc;tre une cha&icirc;ne de caract&egrave;s !");
 $sEvalColDate = $oForm->get(null);
+
+// description de l'evaluation collective
+$aIdCompetences = isset($_POST['ID_COMPETENCE']) && $_POST['ID_COMPETENCE'] != false ? $_POST['ID_COMPETENCE'] : array();
 
 //==============================================================================
 // Action du formulaire
@@ -77,6 +79,23 @@ switch(strtolower($sAction))
 				$nIdClasse .
 			")";
 		Database::execute($sQuery);
+
+        // recuperer le dernier id de l'evaluation
+        $nIdEvalCol = Database::lastInsertId();
+
+        if ($aIdCompetences != null) {
+            foreach($aIdCompetences as $key => $nIdComp) {
+                $sQuery =
+                    "INSERT INTO EVAL_COMPETENCES (" .
+                    "	ID_EVAL_COL, ID_COMPETENCE" .
+                    ")" .
+                    "VALUES(" .
+                    Database::prepareString($nIdEvalCol) . "," .
+                    Database::prepareString($nIdComp) .
+                    ")";
+                Database::execute($sQuery);
+            }
+        }
 
 		// rechargement de la liste des eleves
 		header("Location: ?page=evaluations_collectives&mode=add");

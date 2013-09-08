@@ -1,0 +1,24 @@
+#+title: TODO
+#+author: Antoine R. Dumont
+
+* DONE 2.0.0 [100%]
+CLOSED: [2013-09-08 dim. 16:44]
+- [X] Gestion de la saisie d'appréciations des professeurs sur les élèves (avec report lors de l'impression du livret).
+- [X] Ajout du rapport annuel de tous les élèves d'une classe + Livret d'impression.
+- [X] Amélioration de l'ergonomie de l'installeur.
+- [X] Amélioration de la charge graphique.
+* DONE 2.1.0 [100%]
+CLOSED: [2013-09-08 dim. 16:44]
+- [X] Gestion de la saisie de l'avis des maitres dans le récapitulatif annuel.
+- [X] Report de l'avis des maitres dans le récapitulatif annuel prévu pour l'impression.
+- [X] Amélioration de la charge graphique.
+* DONE 2.2.0 [100%]
+CLOSED: [2013-09-08 dim. 16:44]
+- [X] Amélioration de la charge graphique.
+- [X] Amélioration de l'ergonomie.
+* IN-PROGRESS 2.3.0 [100%]
+- [X] Pre-select the skills for the collective evaluation
+- [X] Release notes
+* TODO 2.4.0 [%]
+- [ ] Let the cycle open for inter-cycle evaluations
+- [ ] When skill is filled in the individual evaluation, remove from the list.

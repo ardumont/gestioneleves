@@ -19,6 +19,10 @@ if($bHasRight == false)
 // Validation du formulaire
 //==============================================================================
 
+$oForm = new FormValidation();
+
+$nIdNiveau = $oForm->getValue('ID_NIVEAU', $_POST, 'convert_int');
+
 //==============================================================================
 // Actions du formulaire
 //==============================================================================
@@ -26,6 +30,17 @@ if($bHasRight == false)
 //==============================================================================
 // Traitement des donnees
 //==============================================================================
+
+// ===== La liste des niveaux =====
+$sQuery = "SELECT" .
+		  "  NIVEAU_ID, " .
+		  "  NIVEAU_NOM " .
+		  " FROM NIVEAUX " .
+		  " ORDER BY NIVEAU_ID ASC";
+$aNiveaux = Database::fetchColumnWithKey($sQuery);
+// $aNiveaux[NIVEAU_ID] = VALEUR
+
+$nIdNiveau = $nIdNiveau !== null ? $nIdNiveau : array_keys($aNiveaux)[0];
 
 // ===== La liste des classes =====
 $sQuery = "SELECT" .
@@ -65,6 +80,27 @@ $sQuery = "SELECT" .
 $aEvalCols= Database::fetchArray($sQuery);
 // $aEvalCols[][COLONNE] = VALEUR
 
+// ===== La liste des competences =====
+$sQuery = <<< EOQ
+	SELECT
+		COMPETENCE_ID,
+		MATIERE_NOM,
+		COMPETENCE_NOM
+	FROM NIVEAUX
+		INNER JOIN CYCLES
+			ON NIVEAUX.ID_CYCLE = CYCLES.CYCLE_ID
+		INNER JOIN DOMAINES
+			ON CYCLES.CYCLE_ID = DOMAINES.ID_CYCLE
+		INNER JOIN MATIERES
+			ON DOMAINES.DOMAINE_ID = MATIERES.ID_DOMAINE
+		INNER JOIN COMPETENCES
+			ON MATIERES.MATIERE_ID = COMPETENCES.ID_MATIERE
+	WHERE NIVEAUX.NIVEAU_ID = {$nIdNiveau}
+	ORDER BY MATIERE_NOM ASC, COMPETENCE_NOM ASC
+EOQ;
+$aCompetences = Database::fetchArray($sQuery);
+// $aCompetences[][COLONNE] = VALEUR
+
 //==============================================================================
 // Preparation de l'affichage
 //==============================================================================
@@ -99,6 +135,24 @@ echo h1("Ajout d'une &eacute;valuation collective", $aObjectsToHide);
 	<?php die; ?>
 <?php else: ?>
 
+<form method="post" action="?page=evaluations_collectives&amp;mode=add" id="formulaire-eval-niveau">
+	<table class="formulaire">
+		<caption>S&eacute;lectionner le niveau</caption>
+  		<tbody>
+			<tr>
+				<td>Liste des niveaux</td>
+				<td>
+					<select name="ID_NIVEAU" onchange="document.getElementById('formulaire-eval-niveau').submit();">
+						<?php foreach($aNiveaux as $nKey => $sValue): ?>
+							<option value="<?php echo($nKey); ?>"<?php echo ($nKey == $nIdNiveau) ? " selected='selected'" : ''?>><?php echo($sValue); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+         </tbody>
+    </table>
+</form>
+
 <form method="post" action="?page=evaluations_collectives&amp;mode=add_do">
 	<table class="formulaire">
 		<caption>Ajouter une &eacute;valuation collective</caption>
@@ -129,7 +183,18 @@ echo h1("Ajout d'une &eacute;valuation collective", $aObjectsToHide);
 			</tr>
 			<tr>
 				<td>Description</td>
-				<td><textarea cols="50" rows="10" name="EVAL_COL_DESCRIPTION"></textarea></td>
+				<td><textarea cols="50" rows="5" name="EVAL_COL_DESCRIPTION"></textarea></td>
+			</tr>
+			<tr>
+				<td>Comp&eacute;tences</td>
+				<td>
+					<select multiple="multiple" size="5" name="ID_COMPETENCE[]">
+						<?php foreach($aCompetences as $aCompetence): ?>
+							<?php $bInArray = in_array($aCompetence['COMPETENCE_ID'], $aCompetences); ?>
+							<option value="<?php echo($aCompetence['COMPETENCE_ID']); ?>"<?php echo $bInArray ? ' selected="selected"': ''; ?>><?php echo($aCompetence['MATIERE_NOM'] . " - " .$aCompetence['COMPETENCE_NOM']); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td>Date (format : jj/mm/AAAA)</td>
