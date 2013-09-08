@@ -38,9 +38,9 @@ $sQuery = "SELECT" .
 		  " FROM NIVEAUX " .
 		  " ORDER BY NIVEAU_ID ASC";
 $aNiveaux = Database::fetchColumnWithKey($sQuery);
-// $aNiveaux[][COLONNE] = VALEUR
+// $aNiveaux[NIVEAU_ID] = VALEUR
 
-$nIdNiveau = $nIdNiveau == null ? $aNiveaux[0] : $nIdNiveau;
+$nIdNiveau = $nIdNiveau !== null ? $nIdNiveau : array_keys($aNiveaux)[0];
 
 // ===== La liste des classes =====
 $sQuery = "SELECT" .
