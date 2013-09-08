@@ -9,6 +9,15 @@
 		<dl>
 			<dt>
 				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
+				v2.3.0
+			</dt>
+			<dd>
+				<ul>
+                     <li class="evolution_majeure" title="Evolution majeure">Professeur choisit les comp&eacute;tences &agrave; &eacute;valuer lors de la cr&eacute;ation de l'&eacute;valuation collective.</li>
+				</ul>
+			</dd>
+			<dt>
+				<img src="<?php echo(URL_ICONS_8X8); ?>/fold_off.gif" alt="[-]" title="Cacher" onclick="showOrHideVersion(this)" />&nbsp;
 				v2.2.0
 			</dt>
 			<dd>
